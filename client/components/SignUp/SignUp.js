@@ -5,34 +5,43 @@ import {
   TextInput,
   StyleSheet
 } from 'react-native';
+import DropDownPicker from 'react-native-dropdown-picker';
+
 
 
 export default class SignUp extends React.Component {
+  
   state = {
-   type:'' , firstName:'',  username: '', password: '', email: '', phone_number: ''
+   type:'service seeker' , firstName:'', lastName:'',  userName: '', password: '', email: '', phone_number: '', 
   }
+
   onChangeText = (key, val) => {
     this.setState({ [key]: val })
   }
-  signUp = async () => {
-    const { username, password, email, phone_number } = this.state
-    try {
-      // here place your signup logic
-      console.log('user successfully signed up!: ', success)
-    } catch (err) {
-      console.log('error signing up: ', err)
-    }
-  }
- 
   render() {
     return (
       <View style={styles.container}>
+
+            <TextInput
+          style={styles.input}
+          placeholder='FirstName'
+          autoCapitalize="none"
+          placeholderTextColor='white'
+          onChangeText={val => this.onChangeText('firstName', val)}
+        />
+            <TextInput
+          style={styles.input}
+          placeholder='LastName'
+          autoCapitalize="none"
+          placeholderTextColor='white'
+          onChangeText={val => this.onChangeText('lastName', val)}
+        />
         <TextInput
           style={styles.input}
           placeholder='Username'
           autoCapitalize="none"
           placeholderTextColor='white'
-          onChangeText={val => this.onChangeText('username', val)}
+          onChangeText={val => this.onChangeText('userName', val)}
         />
         <TextInput
           style={styles.input}
@@ -58,7 +67,6 @@ export default class SignUp extends React.Component {
         />
         <Button
           title='Sign Up'
-          onPress={this.signUp}
         />
       </View>
     )
@@ -81,5 +89,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  dropDown : {
+    backgroundColor: 'red',
+    justifyContent: 'flex-start',
+    height: 40
   }
 })
+
+
+
+
