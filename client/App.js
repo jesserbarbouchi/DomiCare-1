@@ -1,14 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Login from './components/login.js'
+import React from 'react'
+import Router from "./router.js"
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   return (
-  <>
-   <Login/>
-  </>
-     
-  
+    <NavigationContainer>
+      <Router  />
+    </NavigationContainer>
   );
 }
 
