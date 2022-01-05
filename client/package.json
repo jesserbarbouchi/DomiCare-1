@@ -17,11 +17,6 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
-<<<<<<< HEAD
-    "react-native-material-dropdown": "^0.11.1",
-    "react-native-profile-picture": "^1.0.0",
-    "react-native-safe-area-context": "^3.3.2",
-=======
 
     "react-native-material-dropdown": "^0.11.1",
     "react-native-profile-picture": "^1.0.0",
@@ -30,9 +25,7 @@
   
     "react-native-safe-area-context": "^3.3.2",
 
->>>>>>> 23087425c515f4f41e797e620188250a3e57aca1
     "react-native-screens": "~3.10.1",
-    "react-native-select-dropdown": "^1.6.0",
     "react-native-web": "0.17.1",
     "react-navigation-stack": "^2.10.4",
     "react-router-native": "^6.2.1"
