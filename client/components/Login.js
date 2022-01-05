@@ -18,7 +18,6 @@ export default function Login() {
     const [password, setPassword] = useState("");
 
     return (
-        <NativeRouter>
               <View style={styles.container}>
             <StatusBar style="auto" />
             <View style={styles.inputView}>
@@ -41,9 +40,8 @@ export default function Login() {
             </View>
 
             <TouchableOpacity>
-                <Link to="/SignUp" >
                 <Text style={styles.forgot_button}>Create new account</Text>
-                </Link>
+               
                
             </TouchableOpacity>
 
@@ -55,7 +53,7 @@ export default function Login() {
                 <Text style={styles.loginText}>LOGIN</Text>
             </TouchableOpacity>
         </View>
-        </NativeRouter>
+      
       
     );
 }
