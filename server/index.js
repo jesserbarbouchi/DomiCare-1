@@ -3,6 +3,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
+const Equipements = require("./routers/Equipements.js")
 require("dotenv").config();
 
 /********************* Database *********************/
@@ -15,7 +16,7 @@ connection.once("open", () => {
 });
 
 /********************** Routes **********************/
-
+app.use("/Equipements", Equipements);
 /**************** Listening Requests ****************/
 const Port = process.env.PORT;
 app.listen(Port, function (req, res) {

@@ -5,6 +5,7 @@ import EquipementsFeed from './components/EquipementsFeed.js'
 import Home from './components/Home.js'
 import Login from './components/Login.js'
 import SignUp from './components/SignUp.js'
+import ServiceProviderList from './components/ServiceProviderList.js'
 
 const Stack = createNativeStackNavigator()
 const Router = () => {
@@ -15,6 +16,7 @@ const Router = () => {
       <Stack.Screen name="EquipementsFeed" component={EquipementsFeed} />
       <Stack.Screen name="Login" component={Login}/>
       <Stack.Screen name="SignUp" component={SignUp}/>
+      <Stack.Screen name="ServiceProviderList" component={ServiceProviderList}/>
     </Stack.Navigator>
   )
 }
