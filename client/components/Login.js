@@ -1,4 +1,4 @@
-
+import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 
@@ -16,7 +16,7 @@ import {
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const navigation = useNavigation()
     return (
               <View style={styles.container}>
             <StatusBar style="auto" />
@@ -40,7 +40,7 @@ export default function Login() {
             </View>
 
             <TouchableOpacity>
-                <Text style={styles.forgot_button}>Create new account</Text>
+                <Text style={styles.forgot_button} onPress={()=>navigation.navigate('SignUp')}>Create new account</Text>
                
                
             </TouchableOpacity>
@@ -50,7 +50,7 @@ export default function Login() {
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.loginBtn}>
-                <Text style={styles.loginText}>LOGIN</Text>
+                <Text style={styles.loginText} >LOGIN</Text>
             </TouchableOpacity>
         </View>
       
