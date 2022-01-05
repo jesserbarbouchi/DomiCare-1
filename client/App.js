@@ -1,35 +1,21 @@
-import React, { Component } from 'react'
-import { SafeAreaView, StyleSheet, TextInput } from "react-native";
+import React from 'react'
+import Router from "./router.js"
+import {StyleSheet}from 'react-native'
+import { NavigationContainer } from '@react-navigation/native';
 
-const UselessTextInput = () => {
-  const [text, onChangeText] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
-
+export default function App() {
   return (
-    <SafeAreaView>
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeText}
-        value={text}
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeNumber}
-        value={number}
-        placeholder="useless placeholder"
-        keyboardType="numeric"
-      />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Router  />
+    </NavigationContainer>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
+  container: {
+    flex: 1,
+    backgroundColor: 'red',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
-
-export default UselessTextInput;
