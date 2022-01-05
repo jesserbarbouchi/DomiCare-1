@@ -1,20 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import ServiceProviderList from './components/ServiceProviderList.js'
+import React from 'react'
+import Router from "./router.js"
+import {StyleSheet}from 'react-native'
 
-
-
- 
-
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   return (
-  <>
-      
-      <ServiceProviderList/>
-  </>
-     
-  
+    <NavigationContainer>
+      <Router  />
+    </NavigationContainer>
   );
 }
 

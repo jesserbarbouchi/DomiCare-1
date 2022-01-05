@@ -1,46 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View, textInput,Button,Alert,Image } from 'react-native';
+import { StyleSheet, Text, View, textInput,Button,Alert,Image,ScrollView,FlatList } from 'react-native';
 import sProvider from "./dummy.js"
-// import { Dropdown } from 'react-native-material-dropdown';
-import SelectDropdown from 'react-native-select-dropdown'
-
-const cities = [
-    'Tunis',
-    'Ariana',
-    'Ben arous',
-    'Manouba',
-    'Sousse',
-    'Sfax',
-    'Gabes',
-    'Médenine',
-    'Mahdia',
-    'Béja',
-    'Bizerte',
-    'Gafsa',
-    'Jendouba',
-    'Kairouan',
-    'Kasserine',
-    'Kef',
-    'Monastir',
-    'Nabeul',
-    'Sidi Bouzid',
-    'Siliana',
-    'Tataouine',
-    'Tozeur',
-    'Zaghouan',
-    'Kébili',
-  ]
 
 class ServiceProviderList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
           
-            sProvider: sProvider
+            sProvider: sProvider,
+            selectedCity:''
         }
+        this.filterData=this.filterData.bind(this)
     }
-    // componentDidMount() {
-    //     return fetch("/serviceProviders")
+
+    // getServiceProviders() {
+    //     fetch("/serviceProviders")
     //         .then((response) => {
     //             console.log(response)
                
@@ -52,16 +26,83 @@ class ServiceProviderList extends React.Component {
                 
             
     //     })
+        
+    // }
+    // onChange(e) {
+    //     this.setState({selectedCity:e.target.value})
+    // }
+
+    filterData(city) {
+       
+       
+        const FiltredData = this.state.sProvider.filter((item) => {
+                
+                return item.city === city
+              
+        })
+            this.setState({
+            sProvider:  FiltredData
+            });
+          }
+  
+
+    // componentDidMount() {
+    //     this.getServiceProviders()
+    //     // this.filterData()
     // }
 
 
 
     render() {
      
-        let services = this.state.sProvider.map((servicep, key) => {
+    
+        return (
+            
+            <View style={styles.container}>
+            
+           
+           
+                <View style={styles.services}>
+                    
+                    <h1>{ this.state.selectedCity}</h1>
+                    <select  onChange={(e)=>this.filterData(e.target.value) }>
+                        <option> Ariana</option>
+                        <option>Tunis </option>
+                        <option> Ben arous</option>
+                        <option> Sousse</option>
+                        <option> Monastir </option>
+                        <option> Sfax </option>
+                        <option> Sidi bouzid</option>
+                        <option> Mannouba</option>
+                        <option> Jendouba </option>
+                        <option>Kairouan </option>
+                        <option> Tozeur</option>
+                        <option>Tataouine </option>
+                        <option> Zaghouan</option>
+                        <option>Kef </option>
+                        <option>Beja </option>
+                        <option>Mahdia </option>
+                        <option>Gafsa </option>
+                        <option> Gasserine</option>
+                        <option>Nabeul </option>
+                        <option>Siliana </option>
+                        <option>Kebili </option>
+                        <option>Medenin </option>
+                        <option> Gabes</option>
+                        <option>Benzart </option>
+                    </select>
+                   
+                   
+                   
+                    
+
+            
+                </View>
+                
+                 {this.state.sProvider.map((servicep, key) => {
             
             
-            return <View key={key} style={styles.sprovider}>
+            return  <View key={key} style={styles.sprovider}>
                   
       
                 <Text> {servicep.userName}</Text>
@@ -70,54 +111,37 @@ class ServiceProviderList extends React.Component {
                 <Image image = {servicep.picture}   style={{width: 300, height: 200}}/>
                 <Text> {servicep.description}</Text>
                 <Text> {servicep.rating}</Text>
-                <Button
-        title="Ask for service"
-        onPress={() => Alert.alert('Simple Button pressed')}
-      />
+                <Button title="Ask for service" onPress={() => Alert.alert('Simple Button pressed')} />
     
             </View>
-        })
-        return (
-            
-           
-           
-            <View style={styles.services}>
-                 <SelectDropdown
-	data={cities}
-	onSelect={(selectedCity, index) => {
-		console.log(selectedCity, index)
-	}}
-	buttonTextAfterSelection={(selectedCity, index) => {
-		
-		return selectedCity
-	}}
-	rowTextForSelection={(City, index) => {
+        })}
 
-		return City
-	}}
-                />
-                {services}
-            
+                
             
             </View>
-            
-            
         )
         
     }
   
 }
 const styles = StyleSheet.create({
-    sprovider:{
-
-    },
-    services: {
-        flex: 1,
-        backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
+    // container: {
+    //     flex: 1,
+    //     backgroundColor: 'white',
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
         
-    }
+    // },
+    // sprovider:{
+
+    // },
+    // services: {
+    //     flex: 1,
+    //     backgroundColor: 'white',
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+        
+    // },
 
   });
 
