@@ -1,6 +1,7 @@
 
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
+import { NativeRouter, Link } from "react-router-native";
 
 
 import {

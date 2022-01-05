@@ -62,20 +62,7 @@ class ServiceProviderList extends React.Component {
             
             
             return <View key={key} style={styles.sprovider}>
-                   <SelectDropdown
-	data={cities}
-	onSelect={(selectedCity, index) => {
-		console.log(selectedCity, index)
-	}}
-	buttonTextAfterSelection={(selectedCity, index) => {
-		
-		return selectedCity
-	}}
-	rowTextForSelection={(City, index) => {
-
-		return City
-	}}
-/>
+                  
       
                 <Text> {servicep.userName}</Text>
                 <Text> {servicep.speciality}</Text>
@@ -94,7 +81,25 @@ class ServiceProviderList extends React.Component {
             
            
            
-            <View style={styles.services}>{services}</View>
+            <View style={styles.services}>
+                 <SelectDropdown
+	data={cities}
+	onSelect={(selectedCity, index) => {
+		console.log(selectedCity, index)
+	}}
+	buttonTextAfterSelection={(selectedCity, index) => {
+		
+		return selectedCity
+	}}
+	rowTextForSelection={(City, index) => {
+
+		return City
+	}}
+                />
+                {services}
+            
+            
+            </View>
             
             
         )
