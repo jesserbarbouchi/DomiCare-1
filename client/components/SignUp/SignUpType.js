@@ -3,7 +3,7 @@ import { Button , Radio, Center, NativeBaseProvider } from "native-base"
 import { useNavigation } from "@react-navigation/native";
 
 export default () => {
-    const [value, setValue] = React.useState("service seeker")
+    const [value, setValue] = React.useState("user type")
     const navigation = useNavigation()
 
   return (
@@ -17,17 +17,17 @@ export default () => {
         setValue(nextValue)
       }}
     >
-      <Radio value="service seeker"  size="lg" my={1}>
+      <Radio value='SignUpServiceSeeker'  size="lg" my={1}>
       service seeker
       </Radio>
-      <Radio value="service provider"  size="lg" my={1}>
+      <Radio value='SignUpServiceProvider'  size="lg" my={1}>
       service provider
       </Radio>
-      <Radio value="equipement provider"  size="lg" my={1}>
-      equipement provider
+      <Radio value='SignUpEquipementsProvider'  size="lg" my={1}>
+      equipements provider
       </Radio>
     </Radio.Group>
-    <Button onPress={()=>navigation.navigate('SignUp')}>Next</Button>
+    <Button onPress={()=>navigation.navigate(`${value}`)}>Next</Button>
       </Center>
     </NativeBaseProvider>
   )

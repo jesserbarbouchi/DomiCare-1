@@ -9,6 +9,8 @@ const Home = () => {
       <Text>This is the Home page</Text>
       <Button title="Go to Equipements Feed" onPress={()=>navigation.navigate("EquipementsFeed")} />
       <Button title="Go to Login" onPress={()=>navigation.navigate("Login")} />
+      <Button title="Forum" onPress={()=>navigation.navigate("Forum")} />
+      
     </View>
   )
 }
