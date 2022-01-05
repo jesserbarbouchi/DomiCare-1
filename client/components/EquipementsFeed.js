@@ -2,32 +2,7 @@ import React, { useState } from 'react'
 import { View, Text,StyleSheet,ScrollView,Image,FlatList } from 'react-native'
 import SelectDropdown from 'react-native-select-dropdown'
 import items from "./Equipements.js"
-const cities = [
-  'Tunis',
-  'Ariana',
-  'Ben arous',
-  'Manouba',
-  'Sousse',
-  'Sfax',
-  'Gabes',
-  'Médenine',
-  'Mahdia',
-  'Béja',
-  'Bizerte',
-  'Gafsa',
-  'Jendouba',
-  'Kairouan',
-  'Kasserine',
-  'Kef',
-  'Monastir',
-  'Nabeul',
-  'Sidi Bouzid',
-  'Siliana',
-  'Tataouine',
-  'Tozeur',
-  'Zaghouan',
-  'Kébili',
-]
+
  class EquipementsFeed extends React.Component {
   constructor(props) {
     super(props);
@@ -39,7 +14,6 @@ const cities = [
     }
     this.cityFilter=this.cityFilter.bind(this)
     this.onChangeCity=this.onChangeCity.bind(this)
-    this.onChangeHandler=this.onChangeHandler.bind(this)
     this.filterData=this.filterData.bind(this)
   }
   onChangeCity(e){
@@ -81,48 +55,47 @@ const cities = [
    })
         })
       }
-      onChangeHandler(myCity){
-        return items
-      }
-      filterData(city){
-        this.state.items.filter(item=>{
-          city===item.city
+   
+      filterData(city) {
+        const FiltredData = this.state.items.filter((item) => {
+          return item.city === city   
         })
-        this.setState({items:city})
-      }
+            this.setState({
+            items:  FiltredData
+            });
+          }
   render() {
     return (
       <View style={styles.container} >
-       <Text>
-<select size="1" onPress={this.filterData} >
-        <option value="">City</option>
-        <option value="Tunis">Tunis</option>
-        <option value="Ariana">Ariana</option>
-        <option value="Ben arous">Ben arous</option>
-        <option value="Manouba">Manouba</option>
-        <option value="Sousse">Sousse</option>
-        <option value="Sfax">Sfax</option>
-        <option value="Gabes">Gabes</option>
-        <option value="Médenine">Médenine</option>
-        <option value="Mahdia">Mahdia</option>
-        <option value="Béja">Béja</option>
-        <option value="Bizerte">Bizerte</option>
-        <option value="Gafsa">Gafsa</option>
-        <option value="Jendouba">Jendouba</option>
-        <option value="Kairouan">Kairouan</option>
-        <option value="Kasserine">Kasserine</option>
-        <option value="Kef">Le Kef</option>
-        <option value="Monastir">Monastir</option>
-        <option value="Nabeul">Nabeul</option>
-        <option value="Sidi Bouzid">Sidi Bouzid</option>
-        <option value="Siliana">Siliana</option>
-        <option value="Tataouine">Tataouine</option>
-        <option value="Tozeur">Tozeur</option>
-        <option value="Zaghouan">Zaghouan</option>
-        <option value="Zaghouan">Zaghouan</option>
-        <option value="Kébili">Kébili</option>
-      </select>
-      </Text>
+       <View>
+       <h1>{ this.state.city}</h1>
+                    <select  onChange={(e)=>this.filterData(e.target.value) }>
+                        <option>Ariana</option>
+                        <option>Tunis</option>
+                        <option>Ben arous</option>
+                        <option>Sousse</option>
+                        <option> Monastir</option>
+                        <option>Sfax</option>
+                        <option>Sidi bouzid</option>
+                        <option>Mannouba</option>
+                        <option> Jendouba</option>
+                        <option>Kairouan </option>
+                        <option> Tozeur</option>
+                        <option>Tataouine</option>
+                        <option>Zaghouan</option>
+                        <option>Kef</option>
+                        <option>Beja</option>
+                        <option>Mahdia</option>
+                        <option>Gafsa</option>
+                        <option> Gasserine</option>
+                        <option>Nabeul</option>
+                        <option>Siliana</option>
+                        <option>Kebili</option>
+                        <option>Medenin</option>
+                        <option> Gabes</option>
+                        <option>Benzart</option>
+                    </select>
+      </View>
       <ScrollView>
       { this.state.items.map((item,index)=>(
           <View key={index} style={styles.item} >
