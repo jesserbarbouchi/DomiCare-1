@@ -9,6 +9,7 @@ import SignUpServiceProvider from "./components/SignUp/SignUpServiceProvider.js"
 import SignUpEquipementsProvider from "./components/SignUp/SignUpEquipementsProvider.js";
 import SignUpType from "./components/SignUp/SignUpType.js";
 import ForumPost from "./components/ForumPost.js";
+import ServiceProviderList from './components/ServiceProviderList.js';
 
 const Stack = createNativeStackNavigator();
 const Router = () => {
@@ -24,8 +25,10 @@ const Router = () => {
             <Stack.Screen name="SignUpType" component={SignUpType} options={{headerShown: false}} />
             <Stack.Screen name="Forum" component={Forum} />
             <Stack.Screen name="ForumPost" component={ForumPost} />
+            <Stack.Screen name="ServiceProviderList" component={ServiceProviderList} />
         </Stack.Navigator>
     );
 };
+
 
 export default Router;
