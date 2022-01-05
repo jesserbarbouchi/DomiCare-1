@@ -16,7 +16,7 @@ connection.once("open", () => {
 });
 
 /********************** Routes **********************/
-app.use("/Equipements", Equipements);
+app.use("/", Equipements);
 /**************** Listening Requests ****************/
 const Port = process.env.PORT;
 app.listen(Port, function (req, res) {

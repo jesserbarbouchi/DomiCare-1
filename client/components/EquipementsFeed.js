@@ -40,6 +40,7 @@ const cities = [
     this.cityFilter=this.cityFilter.bind(this)
     this.onChangeCity=this.onChangeCity.bind(this)
     this.onChangeHandler=this.onChangeHandler.bind(this)
+    this.filterData=this.filterData.bind(this)
   }
   onChangeCity(e){
     console.log("city",e,e.target.value);
@@ -83,12 +84,45 @@ const cities = [
       onChangeHandler(myCity){
         return items
       }
+      filterData(city){
+        this.state.items.filter(item=>{
+          city===item.city
+        })
+        this.setState({items:city})
+      }
   render() {
     return (
       <View style={styles.container} >
-        <SelectDropdown
-	data={this.state.items}
-/>
+       <Text>
+<select size="1" onPress={this.filterData} >
+        <option value="">City</option>
+        <option value="Tunis">Tunis</option>
+        <option value="Ariana">Ariana</option>
+        <option value="Ben arous">Ben arous</option>
+        <option value="Manouba">Manouba</option>
+        <option value="Sousse">Sousse</option>
+        <option value="Sfax">Sfax</option>
+        <option value="Gabes">Gabes</option>
+        <option value="Médenine">Médenine</option>
+        <option value="Mahdia">Mahdia</option>
+        <option value="Béja">Béja</option>
+        <option value="Bizerte">Bizerte</option>
+        <option value="Gafsa">Gafsa</option>
+        <option value="Jendouba">Jendouba</option>
+        <option value="Kairouan">Kairouan</option>
+        <option value="Kasserine">Kasserine</option>
+        <option value="Kef">Le Kef</option>
+        <option value="Monastir">Monastir</option>
+        <option value="Nabeul">Nabeul</option>
+        <option value="Sidi Bouzid">Sidi Bouzid</option>
+        <option value="Siliana">Siliana</option>
+        <option value="Tataouine">Tataouine</option>
+        <option value="Tozeur">Tozeur</option>
+        <option value="Zaghouan">Zaghouan</option>
+        <option value="Zaghouan">Zaghouan</option>
+        <option value="Kébili">Kébili</option>
+      </select>
+      </Text>
       <ScrollView>
       { this.state.items.map((item,index)=>(
           <View key={index} style={styles.item} >

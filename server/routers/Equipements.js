@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const EquipementsController = require("../controllers/Equipements");
 
-router.route("/:EquipementsId")
-  .get(EquipementsController.find_One) 
+router.route("/Equipements")
+  .get(EquipementsController.find) 
 //   .put(EquipementsController.update_One) 
 //   .delete(EquipementsController.remove_One)  
 
