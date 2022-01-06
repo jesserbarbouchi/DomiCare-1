@@ -1,105 +1,99 @@
 
-import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-import { NativeRouter, Link } from "react-router-native";
 
-
+import * as React from "react"
+import { useNavigation } from "@react-navigation/native";
 import {
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    TextInput,
-    Button,
-    TouchableOpacity,
-} from "react-native";
+  Box,
+  Text,
+  Heading,
+  VStack,
+  FormControl,
+  Input,
+  Link,
+  Button,
+  HStack,
+  Center,
+  NativeBaseProvider,
+} from "native-base"
 
-export default function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
 
-    return (
-              <View style={styles.container}>
-            <StatusBar style="auto" />
-            <View style={styles.inputView}>
-                <TextInput
-                    style={styles.TextInput}
-                    placeholder="Email."
-                    placeholderTextColor="#003f5c"
-                    onChangeText={(email) => setEmail(email)}
-                />
-            </View>
+export default () => {
+    const navigation = useNavigation()
+  return (
+    <NativeBaseProvider>
+      <Center flex={1} px="3">
+      <Box safeArea p="2" py="8" w="90%" maxW="290">
+      <Heading
+        size="lg"
+        fontWeight="600"
+        color="coolGray.800"
+        _dark={{
+          color: "warmGray.50",
+        }}
+      >
+        Welcome
+      </Heading>
+      <Heading
+        mt="1"
+        _dark={{
+          color: "warmGray.200",
+        }}
+        color="coolGray.600"
+        fontWeight="medium"
+        size="xs"
+      >
+        Sign in to continue!
+      </Heading>
 
-            <View style={styles.inputView}>
-                <TextInput
-                    style={styles.TextInput}
-                    placeholder="Password."
-                    placeholderTextColor="#003f5c"
-                    secureTextEntry={true}
-                    onChangeText={(password) => setPassword(password)}
-                />
-            </View>
+      <VStack space={3} mt="5">
+        <FormControl>
+          <FormControl.Label>Email ID</FormControl.Label>
+          <Input />
+        </FormControl>
+        <FormControl>
+          <FormControl.Label>Password</FormControl.Label>
+          <Input type="password" />
+          <Link
+            _text={{
+              fontSize: "xs",
+              fontWeight: "500",
+              color: "indigo.500",
+            }}
+            alignSelf="flex-end"
+            mt="1"
+          >
+            Forget Password?
+          </Link>
+        </FormControl>
+        <Button mt="2" colorScheme="indigo">
+          Sign in
+        </Button>
+        <HStack mt="6" justifyContent="center">
+          <Text
+            fontSize="sm"
+            color="coolGray.600"
+            _dark={{
+              color: "warmGray.200",
+            }}
+          >
+            I'm a new user.{" "}
+          </Text>
+          <Link
+            _text={{
+              color: "indigo.500",
+              fontWeight: "medium",
+              fontSize: "sm",
+            }}
+            onPress={()=>navigation.navigate('SignUpType')}
+          >
+            Sign Up
+          </Link>
+        </HStack>
+      </VStack>
+    </Box>
+      </Center>
+    </NativeBaseProvider>
+  )
 
-            <TouchableOpacity>
-                <Text style={styles.forgot_button}>Create new account</Text>
-               
-               
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-                <Text style={styles.forgot_button}>Forgot Password?</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.loginBtn}>
-                <Text style={styles.loginText}>LOGIN</Text>
-            </TouchableOpacity>
-        </View>
-      
-      
-    );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-
-    image: {
-        marginBottom: 40,
-    },
-
-    inputView: {
-        backgroundColor: "#4ACCF8",
-        borderRadius: 30,
-        width: "70%",
-        height: 45,
-        marginBottom: 20,
-
-        alignItems: "center",
-    },
-
-    TextInput: {
-        height: 50,
-        flex: 1,
-        padding: 10,
-        marginLeft: 20,
-    },
-
-    forgot_button: {
-        height: 30,
-        marginBottom: 30,
-    },
-
-    loginBtn: {
-        width: "80%",
-        borderRadius: 25,
-        height: 50,
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: 40,
-        backgroundColor: "#3CACD1",
-    },
-});
