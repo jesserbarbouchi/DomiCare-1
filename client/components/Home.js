@@ -8,6 +8,8 @@ const Home = () => {
     <View>
       <Text>This is the Home page</Text>
       <Button title="Go to Equipements Feed" onPress={()=>navigation.navigate("EquipementsFeed")} />
+      <Button title="Forum" onPress={()=>navigation.navigate("Forum")} />
+      
     </View>
   )
 }
