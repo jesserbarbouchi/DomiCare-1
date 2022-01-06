@@ -65,7 +65,7 @@ export default () => {
             Forget Password?
           </Link>
         </FormControl>
-        <Button mt="2" colorScheme="indigo">
+        <Button mt="2" colorScheme="cyan">
           Sign in
         </Button>
         <HStack mt="6" justifyContent="center">
