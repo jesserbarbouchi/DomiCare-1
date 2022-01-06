@@ -11,7 +11,7 @@ const Home = () => {
       
      
       
-      <Button title="Service Providers" onPress={()=>navigation.navigate("ServiceProviderList")} />
+      <Button title="Service Providers" onPress={()=>navigation.navigate("serviceProvidersList")} />
     
       <Button title="Forum" onPress={()=>navigation.navigate("Forum")} />
       
