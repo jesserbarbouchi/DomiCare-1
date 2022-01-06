@@ -4,7 +4,7 @@ import React from 'react'
 import EquipementsFeed from './components/EquipementsFeed.js'
 import Forum from './components/Forum.js'
 import Home from './components/Home.js'
-import ServiceProviderList from './components/serviceProviderList.js'
+import ServiceProviderList from './components/ServiceProviderList.js'
 import ForumPost from './components/ForumPost.js'
 
 

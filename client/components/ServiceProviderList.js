@@ -59,12 +59,7 @@ class ServiceProviderList extends React.Component {
         return (
             
             <View style={styles.container}>
-            
-           
-           
                 <View style={styles.services}>
-                    
-                    <h1>{ this.state.selectedCity}</h1>
                     <select  onChange={(e)=>this.filterData(e.target.value) }>
                         <option> Ariana</option>
                         <option>Tunis </option>
