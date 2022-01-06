@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const Equipement = mongoose.model(
   "Equipement",
   new mongoose.Schema({
@@ -25,7 +24,7 @@ const Equipement = mongoose.model(
       type: String,
     },
     ownerId: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "ServiceProvider",
     },
     city: { String },

@@ -1,4 +1,4 @@
-var mongoose = require("mongoose");
+var mongoose = Require("mongoose");
 var AdminsSchema=mongoose.Schema(
     {
         userName : {
