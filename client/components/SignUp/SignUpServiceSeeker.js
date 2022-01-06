@@ -12,7 +12,29 @@ import {
 } from "native-base"
 
 
+
 export default () => {
+  const [formData, setData] = React.useState({});
+  const [errors, setErrors] = React.useState({});
+  
+  const validate = () => {
+    if (formData.name === undefined) {
+      setErrors({
+        ...errors,
+        name: 'Name is required',
+      });
+      return false;
+    } else if (formData.name.length < 3) {
+      setErrors({
+        ...errors,
+        name: 'Name is too short',
+      });
+      return false;
+    }
+    return true;
+  };
+  
+  
   return (
     <NativeBaseProvider>
       <Center flex={1} px="3">
@@ -39,37 +61,56 @@ export default () => {
         Sign up to continue!
       </Heading>
       <VStack space={3} mt="5">
-      <FormControl>
+        
+      <FormControl isRequired>
           <FormControl.Label>FirstName</FormControl.Label>
-          <Input />
+          <Input    onChangeText={(value) => setData({ ...formData, firstName: value })}/>
         </FormControl>
-        <FormControl>
+        
+        
+        <FormControl isRequired>
           <FormControl.Label>LastName</FormControl.Label>
-          <Input />
+          <Input    onChangeText={(value) => setData({ ...formData, lastName: value })}/>
         </FormControl>
-        <FormControl>
+        
+        
+        <FormControl isRequired>
           <FormControl.Label>Username</FormControl.Label>
-          <Input />
+          <Input    onChangeText={(value) => setData({ ...formData, userName: value })} />
         </FormControl>
-        <FormControl>
-          <FormControl.Label>Phone Number</FormControl.Label>
-          <Input />
+        
+        
+        <FormControl >
+          <FormControl.Label    >Phone Number</FormControl.Label>
+          <Input onChangeText={(value) => setData({ ...formData, phoneNumber: value })}/>
         </FormControl>
-        <FormControl>
-          <FormControl.Label>Email</FormControl.Label>
-          <Input />
+        
+        
+        <FormControl isRequired>
+          <FormControl.Label >Email</FormControl.Label>
+          <Input onChangeText={(value) => setData({ ...formData, email: value })} />
         </FormControl>
-        <FormControl>
+        
+        
+        <FormControl isRequired>
           <FormControl.Label>Password</FormControl.Label>
-          <Input  type="password" />
+          <Input  type="password" onChangeText={(value) => setData({ ...formData, password: value })}/>
+          <FormControl.HelperText _text={{fontSize: 'xs'}}>
+          Name should contain atleast 3 character.
+        </FormControl.HelperText>
+        <FormControl.ErrorMessage _text={{fontSize: 'xs'}}>Error Name</FormControl.ErrorMessage>
         </FormControl>
-        <FormControl>
+        
+        
+        <FormControl isRequired>
           <FormControl.Label>Confirm Password</FormControl.Label>
           <Input type="password" />
         </FormControl>
-        <Button mt="2" colorScheme="indigo">
+        
+        
+        <Button mt="2" colorScheme="indigo" onPress={()=>validate()}>
           Sign up
-        </Button>
+        </Button >
       </VStack>
     </Box>
       </Center>
