@@ -1,44 +1,51 @@
 import React, { useState } from "react";
-import { View, Picker, StyleSheet, Button,ScrollView, Alert, Image, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Button,ScrollView, Alert, Image, Text, TouchableOpacity } from "react-native";
 import sProvider from "./dummy.js"
+import { Picker } from '@react-native-picker/picker';
+import axios from 'axios'
 
 const serviceProvidersList = () => {
-    const [selectedValue, setSelectedValue] = useState("Aryana");
-    const [selectedGender, setSelectedGender] = useState("Male");
+    const [selectedValue, setSelectedValue] = useState("");
+    const [selectedgender, setSelectedGender] = useState("");
     const [ServiceProviders,setSProviders]=useState(sProvider);
     
     
-    // getServiceProviders() {
-    //     fetch("/serviceProviders")
-    //         .then((response) => {
-    //             console.log(response)
+    const getServiceProviders=()=> {
+        axios.get("/serviceProvidersList")
+            .then((response) => {
+                console.log(response)
                
-    //                  this.setState({
-    //                      sProvider:response.data
-    //                     })
+                     this.setState({
+                         sProvider:response.data
+                        })
                         
-    //                 .catch(error=>console.log(error))
+                    .catch(error=>console.log(error))
                 
             
-    //     })
+        })
         
-    // }
+    }
   
 
   const filterData = (city, gender) => {
-    console.log(gender)
 
        
        
     const FiltredData = sProvider.filter((item) => {
-      if (city === item.city) {
+      if (city!==""&& gender !== "") {
 
-        return item.city === city
+        return item.city === city &&item.gender === gender
       }
-      else  if (gender === item.gender) {
-          return item.gender === gender
+       else if (gender === "" && city !== "") {
+          return item.city === city
         
       }
+      else if (city === "" && gender !== "") {
+        return item.gender === gender
+      
+    }
+
+      
     })
       
 
@@ -67,15 +74,15 @@ const serviceProvidersList = () => {
           style={{ height: 50, width: 150 }}
           onValueChange={(cityValue, cityIndex) => {
             setSelectedValue(cityValue)
-            filterData(cityValue)
+            filterData(cityValue,selectedgender)
           }}
         >
-          
+          <Picker.Item label="select city" value="" />
         <Picker.Item label="Ariana" value="Ariana" />
         <Picker.Item label="Ben Arous" value="Ben Arous" />
         <Picker.Item label="Tunis" value="Tunis" />
         <Picker.Item label="Sousse" value="Sousse" />
-        <Picker.Item label="monastir" value="monastir" />
+        <Picker.Item label="Monastir" value="Monastir" />
         <Picker.Item label="Sfax" value="Sfax" />
         <Picker.Item label="Beja" value="Beja" />
         <Picker.Item label="Benzart" value="Benzart" />
@@ -101,16 +108,16 @@ const serviceProvidersList = () => {
       <View style = {styles.gender}>
           
           <Picker
-              selectedGender={selectedGender}
+              selectedgender={selectedgender}
               
               style={{ height: 50, width: 150 }}
               onValueChange={(genderValue, genderIndex) => {
                 setSelectedGender(genderValue)
-              
-                filterData(genderValue)
+                console.log(genderValue)
+                filterData(selectedValue,genderValue)
               }}
             >
-              
+              <Picker.Item label="select gender" value="" />
             <Picker.Item label="Male" value="Male" />
             <Picker.Item label="Female" value="Female" />
 
