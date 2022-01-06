@@ -11,30 +11,28 @@ import {
   NativeBaseProvider,
 } from "native-base"
 
+const [formData, setData] = React.useState({});
+const [errors, setErrors] = React.useState({});
 
+const validate = () => {
+  if (formData.name === undefined) {
+    setErrors({
+      ...errors,
+      name: 'Name is required',
+    });
+    return false;
+  } else if (formData.name.length < 3) {
+    setErrors({
+      ...errors,
+      name: 'Name is too short',
+    });
+    return false;
+  }
+  return true;
+};
+const  onSubmit = () => {
+ 
 
-export default () => {
-  const [formData, setData] = React.useState({});
-  const [errors, setErrors] = React.useState({});
-  
-  const validate = () => {
-    if (formData.name === undefined) {
-      setErrors({
-        ...errors,
-        name: 'Name is required',
-      });
-      return false;
-    } else if (formData.name.length < 3) {
-      setErrors({
-        ...errors,
-        name: 'Name is too short',
-      });
-      return false;
-    }
-    return true;
-  };
-  
-  
   return (
     <NativeBaseProvider>
       <Center flex={1} px="3">
