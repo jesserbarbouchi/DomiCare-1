@@ -15,6 +15,7 @@ function BuildingAFormExample() {
     const [errors, setErrors] = React.useState({});
     const validate = () => {
         let validation = true;
+        let passwordValid = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
         const expression =
             /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
 
@@ -22,11 +23,18 @@ function BuildingAFormExample() {
         if (formData.password === undefined) {
             errors.password = "Password is required";
             validation = false;
-        } else if (
+        }
+     
+        else if (
             formData.password !== "undefined" &&
             formData.confirmPassword !== "undefined"
-        ) {
-            if (formData.password != formData.confirmPassword) {
+        ) 
+        {
+          if (!passwordValid.test(String(formData.password))){
+            errors.password = "Password Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character";
+            validation = false;
+          }
+           else if (passwordValid.test(String(formData.password)) && formData.password != formData.confirmPassword) {
                 validation = false;
                 errors["password"] = "Passwords don't match.";
             }
@@ -49,7 +57,11 @@ function BuildingAFormExample() {
             errors.lastName = "Last name is required";
             validation = false;
         }
-
+     
+        if (formData.phoneNumber === undefined) {
+          errors.phoneNumber = "Phone Number is required";
+          validation = false;
+      }
         setErrors(errors);
         return validation;
     };
@@ -116,13 +128,20 @@ function BuildingAFormExample() {
                     )}
                 </FormControl>
 
-                <FormControl>
+                <FormControl isRequired isInvalid={"phoneNumber" in errors}>
                     <FormControl.Label>Phone Number</FormControl.Label>
                     <Input
                         onChangeText={(value) =>
                             setData({ ...formData, phoneNumber: value })
                         }
                     />
+                     {"phoneNumber" in errors ? (
+                        <FormControl.ErrorMessage>
+                            {errors.phoneNumber}
+                        </FormControl.ErrorMessage>
+                    ) : (
+                        ""
+                    )}
                 </FormControl>
 
                 <FormControl isRequired isInvalid={"email" in errors}>
