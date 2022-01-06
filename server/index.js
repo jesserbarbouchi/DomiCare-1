@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const app = express();
 const Equipements = require("./routers/Equipements.js")
 require("dotenv").config();
+var cors = require("cors");
 
 /********************* Database *********************/
 
@@ -15,10 +16,14 @@ connection.once("open", () => {
     console.log("Connected Database Successfully");
 });
 
+
+
 /********************** Routes **********************/
-app.use("/", Equipements);
+app.use(cors());
+
+app.use("/Equipements", Equipements);
 /**************** Listening Requests ****************/
-const Port = process.env.PORT;
+const Port = process.env.PORT
 app.listen(Port, function (req, res) {
     console.log(`Server is started on port ${Port}`);
 });

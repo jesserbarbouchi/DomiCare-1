@@ -8,14 +8,15 @@ import Login from './components/Login.js'
 import SignUp from './components/SignUp.js'
 import ServiceProviderList from './components/ServiceProviderList.js'
 import ForumPost from './components/ForumPost.js'
-
-
+import testComp from './components/testComp.js'
+import fetchD from './components/EquipementsFeed.js'
 
 const Stack = createNativeStackNavigator()
 const Router = () => {
   return (
     //create your routes here
     <Stack.Navigator>
+  
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="EquipementsFeed" component={EquipementsFeed} />
       <Stack.Screen name="Login" component={Login}/>
@@ -23,6 +24,8 @@ const Router = () => {
       <Stack.Screen name="ServiceProviderList" component={ServiceProviderList}/>
       <Stack.Screen name="Forum" component={Forum} /> 
       <Stack.Screen name="ForumPost" component={ForumPost} /> 
+      <Stack.Screen name="fetchD" component={fetchD} />
+      <Stack.Screen name="testComp" component={testComp} />
     </Stack.Navigator>
   )
 }
