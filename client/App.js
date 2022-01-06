@@ -2,6 +2,7 @@ import React from 'react'
 import Footer from "./components/footer.js"
 import Router from "./router.js"
 import {StyleSheet}from 'react-native'
+
 import { NavigationContainer } from '@react-navigation/native';
 import { Calendar } from 'react-native-calendario';
 
