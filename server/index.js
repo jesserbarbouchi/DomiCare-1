@@ -4,7 +4,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const Equipements = require("./routers/Equipements.js")
+const ServiceSeeker = require("./routers/ServiceSeeker.js")
 require("dotenv").config();
+var cors = require("cors");
+app.use(cors())
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 /********************* Database *********************/
 
@@ -17,6 +22,7 @@ connection.once("open", () => {
 
 /********************** Routes **********************/
 app.use("/", Equipements);
+app.use("/ServiceSeeker", ServiceSeeker);
 /**************** Listening Requests ****************/
 const Port = process.env.PORT;
 app.listen(Port, function (req, res) {
