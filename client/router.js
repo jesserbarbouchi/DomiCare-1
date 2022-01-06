@@ -11,6 +11,7 @@ import SignUpType from "./components/SignUp/SignUpType.js";
 import ForumPost from "./components/ForumPost.js";
 import ServiceProviderList from './components/ServiceProviderList.js';
 
+
 const Stack = createNativeStackNavigator();
 const Router = () => {
     return (
@@ -29,6 +30,7 @@ const Router = () => {
         </Stack.Navigator>
     );
 };
+
 
 
 export default Router;
