@@ -12,6 +12,7 @@ import ForumPost from "./components/ForumPost.js";
 import serviceProvidersList from './components/serviceProvidersList.js';
 
 
+
 const Stack = createNativeStackNavigator();
 const Router = () => {
     return (
@@ -26,7 +27,9 @@ const Router = () => {
             <Stack.Screen name="SignUpType" component={SignUpType} options={{headerShown: false}} />
             <Stack.Screen name="Forum" component={Forum} />
             <Stack.Screen name="ForumPost" component={ForumPost} />
+
             <Stack.Screen name="serviceProvidersList" component={serviceProvidersList} />
+
         </Stack.Navigator>
     );
 };
