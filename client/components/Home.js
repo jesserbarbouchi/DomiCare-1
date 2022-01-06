@@ -1,8 +1,9 @@
-import { useNavigation } from '@react-navigation/native'
-import React from 'react'
-import { View, Text, Button } from 'react-native'
+import { useNavigation } from "@react-navigation/native";
+import React from "react";
+import { View, Text, Button } from "react-native";
 
 const Home = () => {
+
   const navigation = useNavigation()
   var goToLogin = ()=>{
     navigation.navigate("Login")
@@ -30,4 +31,18 @@ const Home = () => {
   )
 }
 
-export default Home
+
+            <Button
+                title="Service Providers"
+                onPress={() => navigation.navigate("ServiceProviderList")}
+            />
+
+            <Button
+                title="Forum"
+                onPress={() => navigation.navigate("Forum")}
+            />
+        </View>
+    );
+};
+
+export default Home;
