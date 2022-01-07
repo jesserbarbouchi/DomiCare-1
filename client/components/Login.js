@@ -22,6 +22,7 @@ function Login (){
     
     const validate =() =>{
       let validation = true;
+      let errors = {};
       if (formData.email === undefined) {
         errors.email = "email is required";
         validation = false;
@@ -30,15 +31,32 @@ function Login (){
         errors.password = "Password is required";
         validation = false;
     }
+    setErrors(errors);
+    return validation;
     };
     
     const post = () =>{
-      console.log('aaa')
+      axios.post('http://localhost:3000/auth/Login',{formData} ).then((response)=>{
+        let errors={}
+        const data = response.data
+        if(response.data === 'Your email and password do not match'){
+            errors["email"]= 'Your email and password do not match !';
+            setErrors(errors);
+        }
+        else  navigation.navigate('Home', {userData : data})
+         }).catch((err)=>{
+        console.log(err)
+         })
     };
+    
     const onSubmit =()=>{
-      console.log('aaa')
-
+      validate()
+      ?(
+        post()
+      )
+      : console.log("Validation Failed");
     };
+    
         return (
             <NativeBaseProvider>
               <Center flex={1} px="3">
@@ -66,17 +84,32 @@ function Login (){
               </Heading>
         
               <VStack space={3} mt="5">
-                <FormControl>
+                <FormControl isRequired isInvalid={"email" in errors }>
                   <FormControl.Label>Email </FormControl.Label>
                   <Input    onChangeText={(value) =>
                                     setData({ ...formData, email: value })
                                 }/>
+                                {"email" in errors ? (
+                        <FormControl.ErrorMessage>
+                            {errors.email}
+                        </FormControl.ErrorMessage>
+                    ) : (
+                        ""
+                    )}
                 </FormControl>
-                <FormControl>
+                
+                <FormControl isRequired isInvalid={"password" in errors }>
                   <FormControl.Label>Password</FormControl.Label>
                   <Input    onChangeText={(value) =>
                                     setData({ ...formData, password: value })
                                 } type="password" />
+                                {"password" in errors ? (
+                        <FormControl.ErrorMessage>
+                            {errors.password}
+                        </FormControl.ErrorMessage>
+                    ) : (
+                        ""
+                    )}
                   <Link
                     _text={{
                       fontSize: "xs",
@@ -89,7 +122,7 @@ function Login (){
                     Forget Password?
                   </Link>
                 </FormControl>
-                <Button mt="2" colorScheme="cyan">
+                <Button mt="2" colorScheme="cyan" onPress={onSubmit}>
                   Sign in
                 </Button>
                 <HStack mt="6" justifyContent="center">
