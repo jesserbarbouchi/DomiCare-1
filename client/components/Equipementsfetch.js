@@ -1,9 +1,9 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios'
-import { View, Text,StyleSheet,SafeAreaView,ScrollView,Image, Button } from 'react-native'
+import { View, StyleSheet, Button,ScrollView, Alert, Image, Text, TouchableOpacity } from 'react-native'
 import items from "./Equipements.js"
 
-const EquipementsFeed = () => {
+const Equipementsfetch = () => {
   const [Equipements,setEquipements] = useState([])
   const [myCity,setCity]=useState("")
   const [fetch,setFetch]=useState("")
@@ -117,4 +117,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default EquipementsFeed
+export default Equipementsfetch

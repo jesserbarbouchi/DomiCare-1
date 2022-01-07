@@ -8,7 +8,7 @@ import items from "./Equipements.js"
   constructor(props) {
     super(props);
     this.state = {
-        items:[],
+        items:items,
         result:[],
         city:"",
         delivery:"",
@@ -49,9 +49,7 @@ import items from "./Equipements.js"
         })
       }
       cityFilter(city){
-        var x=[]
-        var y=this.state.items;
-        x=this.state.items.filter(ele=>{
+       const x=this.state.items.filter(ele=>{
           if(city!==""){
             if(ele.city===city){
               return ele
@@ -68,15 +66,16 @@ import items from "./Equipements.js"
       filterData(city) {
         // var FiltredData =[]
         const FiltredData = this.state.items.filter((item) => {
-          return item.city === city   
+          if(city!==""){
+            if(item.city===city){return item}
+        } else{return item}
         })
             this.setState({
             items:  FiltredData
             });
           }
           fetchData(){
-            useEffect(()=>{
-              axios.get("http://localhost:19006/Equipements")
+              fetch("http://localhost:3000/Equipements")
               .then(response=>{
                 console.log("response",response);
                 this.setState({
@@ -86,7 +85,6 @@ import items from "./Equipements.js"
               .catch(error=>{
                 console.log("error",error);
               })
-            },[])
           } 
           // fetchData(){
           //   axios.get('http://localhost:19006/Equipements')
@@ -128,7 +126,7 @@ import items from "./Equipements.js"
       <View style={styles.container} >
        <View>
        <h1>{ this.state.city}</h1>
-                    <select  onChange={(e)=>this.filterData(e.target.value) } size="1">
+                    <select  onClick={(e)=>this.filterData(e.target.value) } size="1">
                     <option value="" defaultValue>City</option>
                         <option>Ariana</option>
                         <option>Tunis</option>

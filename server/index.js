@@ -6,6 +6,7 @@ const app = express();
 const Equipements = require("./routers/Equipements.js")
 require("dotenv").config();
 var cors = require("cors");
+app.use(cors());
 
 /********************* Database *********************/
 
@@ -19,7 +20,6 @@ connection.once("open", () => {
 
 
 /********************** Routes **********************/
-app.use(cors());
 
 app.use("/Equipements", Equipements);
 /**************** Listening Requests ****************/
