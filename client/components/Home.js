@@ -17,7 +17,7 @@ const Home = ({route,navigation}) => {
             <Text>This is the Home page</Text>
             <Button
                 title="Go to Equipements Feed"
-                onPress={() => navigation.navigate("EquipementsFeed")}
+                onPress={() => navigation.navigate("Equipementsfetch")}
             />
             <Button title="Go to Login" onPress={goToLogin} />
             <Button
