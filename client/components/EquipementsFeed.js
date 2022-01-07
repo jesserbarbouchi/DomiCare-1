@@ -1,27 +1,116 @@
 import React, { useState } from 'react'
 import { View, Text,StyleSheet,ScrollView,Image,FlatList } from 'react-native'
+import SelectDropdown from 'react-native-select-dropdown'
+import items from "./Equipements.js"
 
-const EquipementsFeed = () => {
-  const [data,setData] = useState([
-    { id:1, name: 'Oxygéne machine', price: '1000dt',picture:"https://img.joomcdn.net/1c77be34506edd60a9d0d6f1a0813b8d9dba0d54_1024_1024.jpeg"},
-    { id:2, name: 'Oxygéne machine2', price: '500dt',picture:"https://medeor.de/dateien/Non-Profit-Pharmaceuticals/Medical-supplies-and-devices/Medizintechnik/Oxygen-concentrators/action-medeor-oxygen-concentrator-JAY-5BW-Web.jpg"},
-    { id:3, name: 'Oxygéne machine3', price: '150dt',picture:"https://cdn.manomano.com/images/images_products/13848936/P/23574848_1.jpg"}
-  ])
-  return (
+ class EquipementsFeed extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        items:items,
+        result:[],
+        city:"",
+
+    }
+    this.cityFilter=this.cityFilter.bind(this)
+    this.onChangeCity=this.onChangeCity.bind(this)
+    this.filterData=this.filterData.bind(this)
+  }
+  onChangeCity(e){
+    console.log("city",e,e.target.value);
+    this.setState({
+      city:e.target.value
+    })
+  }
+  myFilter(small,big){
+        console.log("hi");
+        var x = []
+        var y = this.state.items
+        x=y.filter(ele=>{
+          if((small.price!=="") && (big.price!=="")){
+            if(ele.price>=small.price && ele.price<=big.price){
+              return ele
+            }
+            else {return ele}
+          }
+        })
+        
+        this.state.result=x
+        this.setState({items:x
+        })
+      }
+      cityFilter(test){
+        var x=[]
+        var y=this.state.items;
+        x=y.filter(ele=>{
+          if(test.city!==""){
+            if(test.city===ele.city){
+              return ele
+            }
+          }
+          else{return ele}
+          this.state.result=x
+   this.setState({
+     items:x
+   })
+        })
+      }
+   
+      filterData(city) {
+        const FiltredData = this.state.items.filter((item) => {
+          return item.city === city   
+        })
+            this.setState({
+            items:  FiltredData
+            });
+          }
+  render() {
+    return (
       <View style={styles.container} >
+       <View>
+       <h1>{ this.state.city}</h1>
+                    <select  onChange={(e)=>this.filterData(e.target.value) }>
+                        <option>Ariana</option>
+                        <option>Tunis</option>
+                        <option>Ben arous</option>
+                        <option>Sousse</option>
+                        <option> Monastir</option>
+                        <option>Sfax</option>
+                        <option>Sidi bouzid</option>
+                        <option>Mannouba</option>
+                        <option> Jendouba</option>
+                        <option>Kairouan </option>
+                        <option> Tozeur</option>
+                        <option>Tataouine</option>
+                        <option>Zaghouan</option>
+                        <option>Kef</option>
+                        <option>Beja</option>
+                        <option>Mahdia</option>
+                        <option>Gafsa</option>
+                        <option> Gasserine</option>
+                        <option>Nabeul</option>
+                        <option>Siliana</option>
+                        <option>Kebili</option>
+                        <option>Medenin</option>
+                        <option> Gabes</option>
+                        <option>Benzart</option>
+                    </select>
+      </View>
       <ScrollView>
-      { data.map((item,index)=>{
-        return(
+      { this.state.items.map((item,index)=>(
           <View key={index} style={styles.item} >
             <Image style={styles.cardImage} source={{uri:item.picture}} />
             <Text>Equipement name : {item.name}</Text>
             <Text>Price : {item.price}</Text>
+            <Text>Description : {item.description}</Text>
+            <Text>City : {item.city}</Text>
+            <Text>Delivery : {item.delivery}</Text>
           </View>
-        )
-      }) }
+        )) }
       </ScrollView>
       </View>
-  )
+    )
+  }
 }
 const styles = StyleSheet.create({
   container: {
@@ -41,6 +130,75 @@ const styles = StyleSheet.create({
   }
 })
 export default EquipementsFeed
+
+
+
+
+
+
+// const EquipementsFeed = () => {
+//   const [data,setData] = useState([
+//     { id:1, name: 'Oxygéne machine', price: '1000dt',picture:"https://img.joomcdn.net/1c77be34506edd60a9d0d6f1a0813b8d9dba0d54_1024_1024.jpeg"},
+//     { id:2, name: 'Oxygéne machine2', price: '500dt',picture:"https://medeor.de/dateien/Non-Profit-Pharmaceuticals/Medical-supplies-and-devices/Medizintechnik/Oxygen-concentrators/action-medeor-oxygen-concentrator-JAY-5BW-Web.jpg"},
+//     { id:3, name: 'Oxygéne machine3', price: '150dt',picture:"https://cdn.manomano.com/images/images_products/13848936/P/23574848_1.jpg"},
+//     { id:4, name: 'Oxygéne machine3', price: '190dt',picture:"https://m.media-amazon.com/images/I/6127GLu7xaS._AC_SX425_.jpg"}
+//   ])
+//   var [result,setResult]= useState([])
+//   var myFilter=(small,big)=>{
+//     console.log("hi");
+//     var x = []
+//     var y = data
+//     data.filter(ele=>{
+//       if((small.price!=="") && (big.price!=="")){
+//         if(ele.price>=small.price && ele.price<=big.price){
+//           return ele
+//         }
+//         else {return ele}
+//       }
+//     })
+    
+//     result=x
+//     y=x
+//   }
+//   return (
+//       <View style={styles.container} >
+//       <ScrollView>
+//       { data.map((item,index)=>{
+//         return(
+//           <View key={index} style={styles.item} >
+//             <Image style={styles.cardImage} source={{uri:item.picture}} />
+//             <Text>Equipement name : {item.name}</Text>
+//             <Text>Price : {item.price}</Text>
+//           </View>
+//         )
+//       }) }
+//       </ScrollView>
+//       </View>
+//   )
+// }
+// const styles = StyleSheet.create({
+//   container: {
+//     flex:1,
+//     backgroundColor:'#fff',
+//     paddingTop:40,
+//     paddingHorizontal:20
+//   },item:{
+//     marginTop:24,
+//     padding: 30,
+//     backgroundColor: 'pink',
+//     fontSize:24
+//   },cardImage:{
+//     width:'50%',
+//     height:100,
+//     resizeMode:'cover'
+//   }
+// })
+// export default EquipementsFeed
+
+
+
+
+
 {/* <View style={styles.container} >
 <ScrollView>
 { data.map((item,index)=>{
