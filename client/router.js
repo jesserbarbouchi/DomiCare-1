@@ -9,8 +9,8 @@ import SignUpServiceProvider from "./components/SignUp/SignUpServiceProvider.js"
 import SignUpEquipementsProvider from "./components/SignUp/SignUpEquipementsProvider.js";
 import SignUpType from "./components/SignUp/SignUpType.js";
 import ForumPost from "./components/ForumPost.js";
-import serviceProvidersList from "./components/ServiceProviderList.js";
-// import fetchD from "./components/fetchD.js"
+import serviceProvidersList from './components/ServiceProviderList.js';
+
 
 
 const Stack = createNativeStackNavigator();
