@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const app = express();
 const Equipements = require("./routers/Equipements.js");
 const ServiceSeeker = require("./routers/ServiceSeeker.js");
+const serviceProvidersList = require("./routers/serviceProvidersList.js")
 const auth = require("./routers/auth-routes");
 require("dotenv").config();
 var cors = require("cors");
@@ -23,10 +24,11 @@ connection.once("open", () => {
 
 /********************** Routes **********************/
 app.use("/", Equipements);
+app.use("/serviceProvidersList",serviceProvidersList)
 app.use("/ServiceSeeker", ServiceSeeker);
 app.use("/auth", auth);
 /**************** Listening Requests ****************/
-const Port = process.env.PORT;
+const Port = process.env.PORT||3000;
 app.listen(Port, function (req, res) {
     console.log(`Server is started on port ${Port}`);
 });
