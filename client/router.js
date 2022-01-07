@@ -29,9 +29,9 @@ const Router = () => {
             <Stack.Screen name="SignUpType" component={SignUpType} options={{headerShown: false}} />
             <Stack.Screen name="Forum" component={Forum} />
             <Stack.Screen name="ForumPost" component={ForumPost} />
-            <Stack.Screen name="ServiceProviderList" component={ServiceProviderList} />
-            <Stack.Screen name="AddBlog" component={AddBlog} />
-            <Stack.Screen name='forum2' component={Forum2}/>
+
+            <Stack.Screen name="serviceProvidersList" component={serviceProvidersList} />
+
         </Stack.Navigator>
     );
 };
