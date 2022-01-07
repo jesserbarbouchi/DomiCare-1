@@ -1,9 +1,13 @@
 var mongoose = require("mongoose");
 var ServiceProviderSchema=mongoose.Schema(
-    {
+  {
+      
        type: {
         type: String,
-       },
+    },
+    userName: {
+      type: String,
+    },
         firstName: {
           type: String,
         },
@@ -53,7 +57,10 @@ var ServiceProviderSchema=mongoose.Schema(
           type: Date,
           immutable: true,
           default: () => Date.now(),
-        },
+    },
+    rating: {
+          type: String
+        }
       },
     
 )
