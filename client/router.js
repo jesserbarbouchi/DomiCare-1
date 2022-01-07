@@ -14,6 +14,7 @@ import shareservice from './components/shareService.js';
 import AddBlog from "./components/AddBlog.js";
 import Forum2 from "./components/Forum2.js"
 import ServiceProviderProfile from "./components/ServiceProviderProfile.js"
+import Equipmentsfetch from "./components/Equipementsfetch.js"
 
 
 
@@ -23,7 +24,7 @@ const Router = () => {
         //create your routes here
         <Stack.Navigator>
             <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="EquipementsFeed" component={EquipementsFeed} />
+            <Stack.Screen name="Equipementsfetch" component={Equipmentsfetch} />
             <Stack.Screen name="SignUpServiceSeeker" component={SignUpServiceSeeker} options={{headerShown: false}} />
             <Stack.Screen name="SignUpServiceProvider" component={SignUpServiceProvider} options={{headerShown: false}} />
             <Stack.Screen name="SignUpEquipementsProvider" component={SignUpEquipementsProvider} options={{headerShown: false}} />
