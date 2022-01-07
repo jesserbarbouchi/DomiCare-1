@@ -3,8 +3,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
-const Equipements = require("./routers/Equipements.js")
-const ServiceSeeker = require("./routers/ServiceSeeker.js")
+const Equipements = require("./routers/Equipements.js");
+const ServiceSeeker = require("./routers/ServiceSeeker.js");
+const auth = require("./routers/auth-routes");
 require("dotenv").config();
 var cors = require("cors");
 app.use(cors())
@@ -23,6 +24,7 @@ connection.once("open", () => {
 /********************** Routes **********************/
 app.use("/", Equipements);
 app.use("/ServiceSeeker", ServiceSeeker);
+app.use("/auth", auth);
 /**************** Listening Requests ****************/
 const Port = process.env.PORT;
 app.listen(Port, function (req, res) {
