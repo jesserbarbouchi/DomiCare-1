@@ -47,7 +47,7 @@ export default () => {
 
       <VStack space={3} mt="5">
         <FormControl>
-          <FormControl.Label>Email ID</FormControl.Label>
+          <FormControl.Label>Email </FormControl.Label>
           <Input />
         </FormControl>
         <FormControl>
@@ -65,7 +65,7 @@ export default () => {
             Forget Password?
           </Link>
         </FormControl>
-        <Button mt="2" colorScheme="indigo">
+        <Button mt="2" colorScheme="cyan">
           Sign in
         </Button>
         <HStack mt="6" justifyContent="center">
@@ -96,4 +96,3 @@ export default () => {
   )
 
 }
-

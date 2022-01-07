@@ -4,7 +4,7 @@ const Posts = mongoose.model(
   "Posts",
   new mongoose.Schema({
     ownerId: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "ServiceSeeker",
     },
     createdAt: {
