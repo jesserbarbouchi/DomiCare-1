@@ -9,9 +9,9 @@ import SignUpServiceProvider from "./components/SignUp/SignUpServiceProvider.js"
 import SignUpEquipementsProvider from "./components/SignUp/SignUpEquipementsProvider.js";
 import SignUpType from "./components/SignUp/SignUpType.js";
 import ForumPost from "./components/ForumPost.js";
-import ServiceProviderList from './components/ServiceProviderList.js';
+import serviceProvidersList from './components/serviceProvidersList.js';
 import AddBlog from "./components/AddBlog.js";
-import Forum2 from "./components/forum2.js"
+import Forum2 from "./components/Forum2.js"
 
 
 
@@ -28,7 +28,9 @@ const Router = () => {
             <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
             <Stack.Screen name="SignUpType" component={SignUpType} options={{headerShown: false}} />
             <Stack.Screen name="Forum" component={Forum} />
+            <Stack.Screen name="Forum2" component={Forum2} />
             <Stack.Screen name="ForumPost" component={ForumPost} />
+            <Stack.Screen name="AddBlog" component={AddBlog} />
 
             <Stack.Screen name="serviceProvidersList" component={serviceProvidersList} />
 
