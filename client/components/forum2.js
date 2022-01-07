@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, StyleSheet, ScrollView, Button } from "react-native";
+import { RefreshControl, SafeAreaView,View, StyleSheet, ScrollView, Button } from "react-native";
 import {
   IconButton, Icon, Avatar,
   Box,
@@ -15,6 +15,13 @@ import {
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons"
 export const Forum2 = () => {
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+
   const navigation = useNavigation();
   const [subjects, setData] = useState([
     {
@@ -49,13 +56,18 @@ export const Forum2 = () => {
     },
   ]);
   return (
+    
     <View>
-      
-      
-      
-     
-     <ScrollView>
-   
+       <SafeAreaView style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.scrollView}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
+      >
         {subjects.map((item, key) => {
           return (
             <Box
@@ -148,7 +160,10 @@ export const Forum2 = () => {
             </Box>
           );
         })}
+        
       </ScrollView>
+    </SafeAreaView>
+      
       <IconButton
       onPress={() => navigation.navigate("AddBlog")}
       icon={<Icon as={MaterialIcons} name="post-add" />}
@@ -168,6 +183,17 @@ export const Forum2 = () => {
     </View>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  scrollView: {
+    flex: 1,
+    backgroundColor: 'pink',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
 export default () => {
   return (
