@@ -46,6 +46,7 @@ export default () => {
       <Center flex={1} px="3">
         <>
           <Modal
+            maxW="100%"
             isOpen={modalVisible}
             onClose={() => setModalVisible(false)}
             initialFocusRef={initialRef}
@@ -126,7 +127,9 @@ export default () => {
             }}
           >
             <Box>
+              
               <AspectRatio w="100%" ratio={16 / 9}>
+                
                 <Image
                   source={{
                     uri: "https://www.prnfunding.com/wp-content/uploads/2018/03/nursing.jpg",
@@ -135,7 +138,7 @@ export default () => {
                 />
               </AspectRatio>
               <Center
-                bg="violet.500"
+                bg="blue.500"
                 _dark={{
                   bg: "violet.400",
                 }}
@@ -152,64 +155,6 @@ export default () => {
                 You will shine with Domi Care
               </Center>
             </Box>
-            <Stack p="4" space={3}>
-              <Stack space={2}>
-                <Heading size="md" ml="-1">
-                  My dear Homie Care
-                </Heading>
-                <Text
-                  fontSize="xs"
-                  _light={{
-                    color: "violet.500",
-                  }}
-                  _dark={{
-                    color: "violet.400",
-                  }}
-                  fontWeight="500"
-                  ml="-0.5"
-                  mt="-1"
-                >
-                  <HStack
-                    mx={{
-                      base: "auto",
-                      md: "0",
-                    }}
-                    space={2}
-                  >
-                    <Avatar
-                      bg="amber.500"
-                      source={{
-                        uri: "https://alpha.nativebase.io/img/native-base-icon.png",
-                      }}
-                    >
-                      RM
-                      <Avatar.Badge bg="green.500" />
-                    </Avatar>
-                  </HStack>
-                  {"     "}. REZGUI Mohamed
-                </Text>
-              </Stack>
-              <Text fontWeight="400">
-                my Dear you cane here share your server with the easy way just
-                check your information carefully when you fill them all you need
-                to do is click (share you servce here) and start to fill
-              </Text>
-              <HStack
-                alignItems="center"
-                space={4}
-                justifyContent="space-between"
-              >
-                <HStack alignItems="center">
-                  <Button variant="outline"
-                    onPress={() => {
-                      setModalVisible(!modalVisible);
-                    }}
-                  >
-                    share you servce here
-                  </Button>
-                </HStack>
-              </HStack>
-            </Stack>
             <Collapse isOpen={showF}>
               <Alert w="100%" status="error">
                 <VStack space={1} flexShrink={1} w="100%">
@@ -291,6 +236,65 @@ export default () => {
                 </VStack>
               </Alert>
             </Collapse>
+            <Stack p="4" space={3}>
+              <Stack space={2}>
+                <Heading size="md" ml="-1">
+                  My dear Homie Care
+                </Heading>
+                <Text
+                  fontSize="xs"
+                  _light={{
+                    color: "violet.500",
+                  }}
+                  _dark={{
+                    color: "violet.400",
+                  }}
+                  fontWeight="500"
+                  ml="-0.5"
+                  mt="-1"
+                >
+                  <HStack
+                    mx={{
+                      base: "auto",
+                      md: "0",
+                    }}
+                    space={2}
+                  >
+                    <Avatar
+                      bg="amber.500"
+                      source={{
+                        uri: "https://alpha.nativebase.io/img/native-base-icon.png",
+                      }}
+                    >
+                      RM
+                      <Avatar.Badge bg="green.500" />
+                    </Avatar>
+                  </HStack>
+                  {"     "}. REZGUI Mohamed
+                </Text>
+              </Stack>
+              <Text fontWeight="400">
+                my Dear you can here share your service with the easy way just
+                check your information carefully when you fill them all you need
+                to do is click (share you servce here) and start to fill
+              </Text>
+              <HStack
+                alignItems="center"
+                space={4}
+                justifyContent="space-between"
+              >
+                <HStack alignItems="center">
+                  <Button variant="outline"
+                    onPress={() => {
+                      setModalVisible(!modalVisible);
+                    }}
+                  >
+                    share you service here
+                  </Button>
+                </HStack>
+              </HStack>
+            </Stack>
+            
           </Box>
         </>
       </Center>
