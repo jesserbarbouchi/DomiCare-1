@@ -9,7 +9,9 @@ import SignUpServiceProvider from "./components/SignUp/SignUpServiceProvider.js"
 import SignUpEquipementsProvider from "./components/SignUp/SignUpEquipementsProvider.js";
 import SignUpType from "./components/SignUp/SignUpType.js";
 import ForumPost from "./components/ForumPost.js";
-import serviceProvidersList from './components/ServiceProviderList.js';
+import ServiceProviderList from './components/ServiceProviderList.js';
+import AddBlog from "./components/AddBlog.js";
+import Forum2 from "./components/forum2.js"
 
 
 
