@@ -15,7 +15,8 @@ import items from "./Equipements.js"
         price:0,
         picture:"",
         description:"",
-        name:""
+        name:"",
+        data:[]
     }
     this.cityFilter=this.cityFilter.bind(this)
     this.onChangeCity=this.onChangeCity.bind(this)
@@ -29,6 +30,14 @@ import items from "./Equipements.js"
     console.log("city",e,e.target.value);
     this.setState({
       city:e.target.value
+    })
+  }
+  apihandler(){
+    const url = "http://localhost:3000/Equipements"
+    fetch(url).then((res)=>res.json())
+    .then((resJson)=>{
+      console.log(resJson);
+      this.setState({data:resJson})
     })
   }
   myFilter(small,big){
@@ -122,6 +131,7 @@ import items from "./Equipements.js"
           //   })
           // }
   render() {
+    const {data} = this.state
     return (
       <View style={styles.container} >
        <View>
@@ -155,7 +165,7 @@ import items from "./Equipements.js"
                     </select>
       </View>
       <ScrollView>
-      { this.state.items.map((item,index)=>(
+      { data.map((item,index)=>(
           <View key={index} style={styles.item} >
             <Image style={styles.cardImage} source={{uri:item.picture}} />
             <Text>Equipement name : {item.name}</Text>
@@ -166,7 +176,7 @@ import items from "./Equipements.js"
           </View>
         )) }
       </ScrollView>
-      <Button onPress={this.fetchData}>click me!</Button>
+      <Button onPress={this.apihandler}>click me!</Button>
       </View>
     )
   }

@@ -9,18 +9,17 @@ import SignUpServiceProvider from "./components/SignUp/SignUpServiceProvider.js"
 import SignUpEquipementsProvider from "./components/SignUp/SignUpEquipementsProvider.js";
 import SignUpType from "./components/SignUp/SignUpType.js";
 import ForumPost from "./components/ForumPost.js";
-import serviceProvidersList from './components/ServiceProviderList.js';
-
-
+import serviceProvidersList from './components/serviceProvidersList.js';
+import Equipmentsfetch from "./components/Equipementsfetch.js"
+import fetchD from "./components/fetchD.js"
 
 const Stack = createNativeStackNavigator();
 const Router = () => {
     return (
         //create your routes here
         <Stack.Navigator>
-             {/* <Stack.Screen name="fetchD" component={fetchD} /> */}
             <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="EquipementsFeed" component={EquipementsFeed} />
+            <Stack.Screen name="Equipementsfetch" component={Equipmentsfetch} />
             <Stack.Screen name="SignUpServiceSeeker" component={SignUpServiceSeeker} options={{headerShown: false}} />
             <Stack.Screen name="SignUpServiceProvider" component={SignUpServiceProvider} options={{headerShown: false}} />
             <Stack.Screen name="SignUpEquipementsProvider" component={SignUpEquipementsProvider} options={{headerShown: false}} />

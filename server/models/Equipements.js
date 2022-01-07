@@ -18,7 +18,7 @@ const Equipement = mongoose.model(
       type: String
     },
     price: {
-      type: Number
+      type: String
     },
     picture: {
       type: String
