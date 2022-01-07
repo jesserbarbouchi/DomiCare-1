@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { View, StyleSheet, Button,ScrollView, Alert,Picker, Image, Text, TouchableOpacity } from "react-native";
 import sProvider from "./dummy.js"
 // import { Picker } from '@react-native-picker/picker';
@@ -13,24 +13,26 @@ import { Rating, AirbnbRating } from 'react-native-ratings';
 const serviceProvidersList = () => {
     const [selectedValue, setSelectedValue] = useState("");
     const [selectedgender, setSelectedGender] = useState("");
-    const [ServiceProviders,setSProviders]=useState(sProvider);
+    const [ServiceProviders,setSProviders]=useState([]);
     
-    
-    const getServiceProviders=()=> {
-        axios.get("/serviceProvidersList")
-            .then((response) => {
-                console.log(response)
+  useEffect(() => {
+      
+    })
+  //   const getServiceProviders=()=> {
+  //       axios.get("/serviceProvidersList")
+  //           .then((response) => {
+  //               console.log(response)
                
-                     this.setState({
-                         sProvider:response.data
-                        })
+  //                    this.setState({
+  //                        sProvider:response.data
+  //                       })
                         
-                    .catch(error=>console.log(error))
+  //                   .catch(error=>console.log(error))
                 
             
-        })
+  //       })
         
-  }
+  // }
   const ratingCompleted=(rating)=> {
     console.log("Rating is: " + rating)
   }
@@ -159,8 +161,13 @@ const serviceProvidersList = () => {
                   
 
 
-                                  <Button title="Ask for service" onPress={() => Alert.alert('Simple Button pressed')} />
-
+              <Button title="Ask for service" onPress={() => Alert.alert('Simple Button pressed')} />
+              button1Style={{
+            height: 25,
+            width: 70,
+            borderRadius: 50,
+            backgroundColor: "#070d59"
+          }}
                 </View>
               );
             })}
@@ -211,7 +218,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 5,
     // fontWeight: "bold",
-    fontFamily: "Cochin",
+  
     fontStyle: 'italic'
   },
   

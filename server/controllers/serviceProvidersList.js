@@ -11,15 +11,18 @@ module.exports = {
 		}
 	},
 	create_service_provider: async (req, res) => {
+
+		
+		
 		try {
 			const { userName, speciality, city, gender, picture, services } = req.body
-			const service_provider = new ServiceProvider({
+			const service_provider = await  ServiceProvider.create({
 				userName, speciality, city, gender, picture, services
 			
 				
 			})
-			const doc = await ServiceProvider.save();
-			res.status(200).send(ServiceProvider);
+			// const doc = await ServiceProvider.save();
+			res.status(200).send(service_provider);
 		}
 		catch (error) {
 			console.log(error)

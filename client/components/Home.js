@@ -7,9 +7,7 @@ const Home = () => {
     var goToLogin = () => {
         navigation.navigate("Login");
     };
-    var goToServiceProviderList = () => {
-        navigation.navigate("ServiceProviderList");
-    };
+   
     return (
         <View>
             <Text>This is the Home page</Text>
@@ -22,11 +20,18 @@ const Home = () => {
                 title="Service Providers"
                 onPress={() => navigation.navigate("serviceProvidersList")}
             />
+             <Button
+                title="ServiceProviderProfile"
+                onPress={() => navigation.navigate("ServiceProviderProfile")}
+            />
+
+            
             <Button
                 title="Forum"
                 onPress={() => navigation.navigate("Forum")}
             />
-            <Button title="Forum2" onPress={()=>navigation.navigate("Forum2")} /> 
+            <Button title="Forum2" onPress={() => navigation.navigate("Forum2")} /> 
+            
         </View>
     );
 };
