@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Button,ScrollView, Alert, Image, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Button,ScrollView, Alert,Picker, Image, Text, TouchableOpacity } from "react-native";
 import sProvider from "./dummy.js"
-import { Picker } from '@react-native-picker/picker';
+// import { Picker } from '@react-native-picker/picker';
 import axios from 'axios'
+// import { Avatar } from 'react-native-paper';
+import { Card, Icon } from 'react-native-elements';
+import { Rating, AirbnbRating } from 'react-native-ratings';
+
+
+
 
 const serviceProvidersList = () => {
     const [selectedValue, setSelectedValue] = useState("");
@@ -10,21 +16,24 @@ const serviceProvidersList = () => {
     const [ServiceProviders,setSProviders]=useState(sProvider);
     
     
-    const getServiceProviders=()=> {
-        axios.get("/serviceProvidersList")
-            .then((response) => {
-                console.log(response)
+  //   const getServiceProviders=()=> {
+  //       axios.get("/serviceProvidersList")
+  //           .then((response) => {
+  //               console.log(response)
                
-                     this.setState({
-                         sProvider:response.data
-                        })
+  //                    this.setState({
+  //                        sProvider:response.data
+  //                       })
                         
-                    .catch(error=>console.log(error))
+  //                   .catch(error=>console.log(error))
                 
             
-        })
+  //       })
         
-    }
+  // }
+  const ratingCompleted=(rating)=> {
+    console.log("Rating is: " + rating)
+  }
   
 
   const filterData = (city, gender) => {
@@ -36,6 +45,7 @@ const serviceProvidersList = () => {
 
         return item.city === city &&item.gender === gender
       }
+      
        else if (gender === "" && city !== "") {
           return item.city === city
         
@@ -43,7 +53,8 @@ const serviceProvidersList = () => {
       else if (city === "" && gender !== "") {
         return item.gender === gender
       
-    }
+      }
+      else{return item.city && item.gender}
 
       
     })
@@ -124,44 +135,40 @@ const serviceProvidersList = () => {
             </Picker>
       </View>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
-      <View style={styles.sProvider}>
       <ScrollView>
-          {ServiceProviders.map((servicep, key) => {
-            
-            
-            return ( <View key={key} style={styles.sprovider}>
+        <View style={styles.container}>
+          <Card style={styles.card}>
+         
+            <Card.Title>Service Providers</Card.Title>
+            <Card.Divider />
+            {ServiceProviders.map((u, i) => {
+              return (
+                <View key={i} style={styles.user}>
+                  <Image
+                    style={styles.image}
+                    resizeMode="cover"
+                    source={{ uri: u.picture }}
+                  />
+                  <Text style = {styles.name}> Username : { u.userName}</Text>
+                  <Text style = {styles.name}> Position : {u.speciality}</Text>
+                  <Text style = {styles.name}> City : {u.city}</Text>
+                  <Text style = {styles.name}> Gender : {u.gender}</Text>
+                  <Text style = {styles.name}> Services : {u.services}</Text>
+               
+                  <AirbnbRating style={styles.airbnbRating} />
                   
-      
-              <Text> {servicep.userName}</Text>
-              <Image style={styles.imageProfile} source={{ uri: servicep.picture }} />
 
-                <Text> {servicep.speciality}</Text>
-                <Text> {servicep.city}</Text>
-                <Text> {servicep.gender}</Text>
-                <Text> {servicep.description}</Text>
-                {/* <Text> {servicep.rating}</Text> */}
-                <Button title="Ask for service" onPress={() => Alert.alert('Simple Button pressed')} />
-    
-            </View>
-          )})}
 
-</ScrollView>
-          </View>
+                                  <Button title="Ask for service" onPress={() => Alert.alert('Simple Button pressed')} />
+
+                </View>
+              );
+            })}
+              
+          </Card>
+        </View>
+        </ScrollView>
+     
     </View>
   );
 }
@@ -170,8 +177,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 40,
-    alignItems: "center"
-    },
+    alignItems: "center",
+    
+  },
+  
     imageProfile:{
         width:'10%',
             height: '50%',
@@ -183,7 +192,31 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     
-  }
+  },
+  user: {
+    flexDirection: 'column',
+    marginBottom: 50,
+  },
+
+  image: {
+    width: 70,
+    height: 70,
+    marginRight: 10,
+  },
+  airbnbRating: {
+    marginRight: 20
+    
+  },
+  name: {
+    fontSize: 20,
+    marginTop: 5,
+    // fontWeight: "bold",
+    fontFamily: "Cochin",
+    fontStyle: 'italic'
+  },
+  
 });
+
+
 
 export default serviceProvidersList;

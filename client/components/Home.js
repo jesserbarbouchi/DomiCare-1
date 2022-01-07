@@ -20,13 +20,17 @@ const Home = () => {
             <Button title="Go to Login" onPress={goToLogin} />
             <Button
                 title="Service Providers"
-                onPress={() => navigation.navigate("ServiceProviderList")}
+                onPress={() => navigation.navigate("serviceProvidersList")}
             />
             <Button
                 title="Forum"
                 onPress={() => navigation.navigate("Forum")}
             />
-            <Button title="forum2" onPress={()=>navigation.navigate("forum2")} /> 
+             <Button
+                title="share service"
+                onPress={() => navigation.navigate("shareservice")}
+            />
+            <Button title="Forum2" onPress={()=>navigation.navigate("Forum2")} /> 
         </View>
     );
 };
