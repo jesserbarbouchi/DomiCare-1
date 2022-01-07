@@ -17,8 +17,8 @@ const ForumPost = (props) => {
       <Text> {singlepost.likesCount} Likes</Text>
       <Button title="Like" onPress={() => navigation.navigate("Forum")} />
       <Button title="comment" onPress={() => navigation.navigate("Forum")} />
-      {singlepost.comments.map((comment,i)=>{
-          return <View>
+      {singlepost.comments.map((comment,key)=>{
+          return <View key={key}>
       <Text> {comment.By} </Text>
       <Text> {comment.Body} </Text>
       <Text> {comment.createdAt} </Text>
@@ -29,9 +29,6 @@ const ForumPost = (props) => {
       </View>
       }
       )}
-      
-      
-      
     </View>
   );
 };

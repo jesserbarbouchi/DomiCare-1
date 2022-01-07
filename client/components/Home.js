@@ -26,6 +26,7 @@ const Home = () => {
                 title="Forum"
                 onPress={() => navigation.navigate("Forum")}
             />
+            <Button title="forum2" onPress={()=>navigation.navigate("forum2")} /> 
         </View>
     );
 };
