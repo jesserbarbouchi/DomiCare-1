@@ -53,10 +53,8 @@ module.exports={
        },
        
     EPSignUp: (req,res)=>{
-        console.log(req.body.formData)
         var data=req.body.formData
-        
-            ServiceSeeker.findOne({email : data.email })
+            ServiceProvider.findOne({email : data.email })
             .then((user)=>{
                 if(user){
                     res.send ('email address already exists')
@@ -71,6 +69,7 @@ module.exports={
                           
                         const passwordHash = bcrypt.hashSync('data.password', 10);
                         var obj ={
+                            type : 'serviceProvider',
                             firstName : data.firstName,
                             lastName : data.lastName ,
                             email : data.email ,
