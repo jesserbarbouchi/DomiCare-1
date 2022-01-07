@@ -12,6 +12,7 @@ const Equipementsfetch = () => {
   const [itemsList,setitemList]=useState(items);
   const [Equipements,setEquipements] = useState([])
   const [myData,setmyData]=useState([])
+  
   useEffect(()=>{
     axios.get('http://localhost:3000/Equipements')
     .then(res=>{
@@ -70,32 +71,29 @@ const ascendingSort = (eve) => {
     if(item.price<500 && item.price>0){
       return item.price 
     }
-    setEquipements(asc)
   })
-  
+  setEquipements(asc)
 }
 else if(eve==="more then 500"){
   asc = Equipements.filter((item)=>{
     if(item.price>=500 && item.price<=1000){
       return item.price
     }
-    setEquipements(asc)
   })
+  setEquipements(asc)
+
 }
 else if(eve==="more then 1000"){
   asc = Equipements.filter((item)=>{
     if(item.price>1000){
       return item.price
     }
-    setEquipements(asc)
   })
+  setEquipements(asc)
 }
 else if (eve===""){
-  
     setEquipements(myData)
-  
 }
-setEquipements(asc)
 
 };
 var filterData=(city)=> {
