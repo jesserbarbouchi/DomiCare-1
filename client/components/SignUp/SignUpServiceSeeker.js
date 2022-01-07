@@ -9,6 +9,8 @@ import {
     Input,
     NativeBaseProvider,
     Center,
+    KeyboardAvoidingView,
+    ScrollView,
 } from "native-base";
 
 function SignUp() {
@@ -73,7 +75,7 @@ function SignUp() {
     };
     
     const post=()=>{
-      axios.post('http://localhost:3000/ServiceSeeker/SignUp',{formData} ).then(({data})=>{
+      axios.post('http://localhost:3000/auth/serviceSeekerSignUp',{formData} ).then(({data})=>{
         console.log('data:', {data} )
          }).catch((err)=>{
         console.log(err)
@@ -89,7 +91,16 @@ function SignUp() {
     };
 
     return (
-        <Box safeArea p="2" w="90%" maxW="290" py="8">
+      <ScrollView
+      showsVerticalScrollIndicator={false}
+      _contentContainerStyle={{
+        px: "20px",
+        mb: "4",
+        minW: "80",
+      }}
+    >
+     
+        <Box safeArea p="2" w="120%" maxW="300" py="8">
             <Heading
                 size="lg"
                 color="coolGray.800"
@@ -111,6 +122,7 @@ function SignUp() {
             >
                 Sign up to continue!
             </Heading>
+ 
             <VStack space={3} mt="5">
                 <FormControl isRequired isInvalid={"firstName" in errors}>
                     <FormControl.Label>First name</FormControl.Label>
@@ -230,9 +242,13 @@ function SignUp() {
                     Submit
                 </Button>
             </VStack>
+            
         </Box>
+        </ScrollView>
+ 
     );
 }
+
 export default function () {
     return (
         <NativeBaseProvider>
