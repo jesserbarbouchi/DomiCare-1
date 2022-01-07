@@ -4,8 +4,8 @@ const ServiceProvider = require('../models/ServiceProvider.js')
 module.exports = {
     find_all_serviceProviders: async (req, res) => {
 		try {
-			const tools = await ServiceProvider.find()
-			res.send(ServiceProvider);
+			const serviceP = await ServiceProvider.find()
+			res.send(serviceP);
 		} catch (err) {
 			res.send(err);
 		}

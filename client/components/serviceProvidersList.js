@@ -13,57 +13,67 @@ import { Rating, AirbnbRating } from 'react-native-ratings';
 const serviceProvidersList = () => {
     const [selectedValue, setSelectedValue] = useState("");
     const [selectedgender, setSelectedGender] = useState("");
-    const [ServiceProviders,setSProviders]=useState([]);
+  const [ServiceProviders, setSProviders] = useState([]);
+  const [Data,setData]=useState([]);
     
-  useEffect(() => {
+    useEffect(async() => {
       
-    })
-  //   const getServiceProviders=()=> {
-  //       axios.get("/serviceProvidersList")
-  //           .then((response) => {
-  //               console.log(response)
-               
-  //                    this.setState({
-  //                        sProvider:response.data
-  //                       })
-                        
-  //                   .catch(error=>console.log(error))
-                
-            
-  //       })
-        
-  // }
+        try {
+          const result = await axios.get("http://192.168.11.22:3000/serviceProvidersList/serviceProvidersList")
+          setSProviders(result.data)
+          setData(result.data)
+          console.log(result.data)
+        }
+        catch (error) {
+          console.log(error)
+        }
+      
+    
+  
+      
+    },[])
+
   const ratingCompleted=(rating)=> {
     console.log("Rating is: " + rating)
   }
   
 
   const filterData = (city, gender) => {
-
+     let FiltredData
+    if (city!==""&& gender !== ""){
        
-       
-    const FiltredData = sProvider.filter((item) => {
-      if (city!==""&& gender !== "") {
-
-        return item.city === city &&item.gender === gender
-      }
+     FiltredData = ServiceProviders.filter((item) => {
       
-       else if (gender === "" && city !== "") {
-          return item.city === city
+
+        return item.city === city && item.gender === gender
+     })
+     setSProviders(FiltredData)
+    }
+      
+    else if (gender === "" && city !== "") {
+      
+      FiltredData = ServiceProviders.filter((item) => {
+        return item.city === city
         
-      }
-      else if (city === "" && gender !== "") {
+      })
+      setSProviders(FiltredData)
+    }
+    else if (city === "" && gender !== "") {
+      
+      FiltredData = ServiceProviders.filter((item) => {
         return item.gender === gender
       
-      }
-      else{return item.city && item.gender}
+      })
+      setSProviders(FiltredData)
+    }
+      else{setSProviders(Data)}
 
       
-    })
+    }
       
 
-    setSProviders(FiltredData)
-  }
+    
+  
   
 
   
@@ -149,7 +159,7 @@ const serviceProvidersList = () => {
                   <Image
                     style={styles.image}
                     resizeMode="cover"
-                    source={{ uri: u.picture }}
+                    source={{ uri: "https://i.pinimg.com/originals/6e/ff/53/6eff53e82b80fb5dd7614d5ba054f144.jpg" }}
                   />
                   <Text style = {styles.name}> Username : { u.userName}</Text>
                   <Text style = {styles.name}> Position : {u.speciality}</Text>
@@ -162,12 +172,7 @@ const serviceProvidersList = () => {
 
 
               <Button title="Ask for service" onPress={() => Alert.alert('Simple Button pressed')} />
-              button1Style={{
-            height: 25,
-            width: 70,
-            borderRadius: 50,
-            backgroundColor: "#070d59"
-          }}
+         
                 </View>
               );
             })}
@@ -188,13 +193,7 @@ const styles = StyleSheet.create({
     
   },
   
-    imageProfile:{
-        width:'10%',
-            height: '50%',
-        borderRadius:10
-            
-           
-  },
+   
   sProvider: {
     flex: 1,
     paddingTop: 20,
@@ -206,9 +205,13 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    width: 70,
-    height: 70,
+   
+borderRadius:100,
+    width: 90,
+    height: 90,
     marginRight: 10,
+   
+
   },
   airbnbRating: {
     marginRight: 20
