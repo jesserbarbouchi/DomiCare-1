@@ -2,8 +2,7 @@ import React,{useState, useEffect} from 'react'
 import axios from 'axios'
 import { View, StyleSheet, Button,ScrollView, Alert, Image, Text, TouchableOpacity } from 'react-native'
 import items from "./Equipements.js"
-import { Picker } from '@react-native-picker/picker';
-
+import {Picker} from "@react-native-picker/picker"
 
 const Equipementsfetch = () => {
   const [selectedValue, setSelectedValue] = useState("");
@@ -12,7 +11,7 @@ const Equipementsfetch = () => {
   const [itemsList,setitemList]=useState(items);
   const [Equipements,setEquipements] = useState([])
   const [myData,setmyData]=useState([])
-  
+
   useEffect(()=>{
     axios.get('http://localhost:3000/Equipements')
     .then(res=>{
