@@ -4,6 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const Equipements = require("./routers/Equipements.js")
+const serviceProvidersList = require("./routers/serviceProvidersList.js")
 const ServiceSeeker = require("./routers/ServiceSeeker.js")
 const ServiceProvider =  require("./routers/ServiceProvider")
 require("dotenv").config();
@@ -23,10 +24,11 @@ connection.once("open", () => {
 
 /********************** Routes **********************/
 app.use("/", Equipements);
+app.use("/serviceProvidersList",serviceProvidersList)
 app.use("/ServiceSeeker", ServiceSeeker);
 app.use("/ServiceProvider", ServiceProvider);
 /**************** Listening Requests ****************/
-const Port = process.env.PORT;
+const Port = process.env.PORT||3000;
 app.listen(Port, function (req, res) {
     console.log(`Server is started on port ${Port}`);
 });
