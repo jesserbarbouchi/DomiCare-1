@@ -10,14 +10,10 @@ import SignUpEquipementsProvider from "./components/SignUp/SignUpEquipementsProv
 import SignUpType from "./components/SignUp/SignUpType.js";
 import ForumPost from "./components/ForumPost.js";
 import ServiceProviderList from './components/ServiceProviderList.js';
+import AddBlog from "./components/AddBlog.js";
+import Forum2 from "./components/forum2.js"
 
-import { createNativeStackNavigator} from '@react-navigation/native-stack'
-import React from 'react'
-import EquipementsFeed from './components/EquipementsFeed.js'
-import Forum from './components/Forum.js'
-import Home from './components/Home.js'
-import ServiceProviderList from './components/ServiceProviderList.js'
-import ForumPost from './components/ForumPost.js'
+
 
 const Stack = createNativeStackNavigator();
 const Router = () => {
@@ -34,6 +30,8 @@ const Router = () => {
             <Stack.Screen name="Forum" component={Forum} />
             <Stack.Screen name="ForumPost" component={ForumPost} />
             <Stack.Screen name="ServiceProviderList" component={ServiceProviderList} />
+            <Stack.Screen name="AddBlog" component={AddBlog} />
+            <Stack.Screen name='forum2' component={Forum2}/>
         </Stack.Navigator>
     );
 };
