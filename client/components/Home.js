@@ -20,7 +20,7 @@ const Home = () => {
             <Button title="Go to Login" onPress={goToLogin} />
             <Button
                 title="Service Providers"
-                onPress={() => navigation.navigate("ServiceProviderList")}
+                onPress={() => navigation.navigate("serviceProvidersList")}
             />
             <Button
                 title="Forum"
