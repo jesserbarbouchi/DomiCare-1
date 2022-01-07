@@ -46,6 +46,7 @@ export default () => {
       <Center flex={1} px="3">
         <>
           <Modal
+            maxW="100%"
             isOpen={modalVisible}
             onClose={() => setModalVisible(false)}
             initialFocusRef={initialRef}
