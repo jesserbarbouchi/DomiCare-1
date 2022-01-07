@@ -16,21 +16,21 @@ const serviceProvidersList = () => {
     const [ServiceProviders,setSProviders]=useState(sProvider);
     
     
-    const getServiceProviders=()=> {
-        axios.get("/serviceProvidersList")
-            .then((response) => {
-                console.log(response)
+  //   const getServiceProviders=()=> {
+  //       axios.get("/serviceProvidersList")
+  //           .then((response) => {
+  //               console.log(response)
                
-                     this.setState({
-                         sProvider:response.data
-                        })
+  //                    this.setState({
+  //                        sProvider:response.data
+  //                       })
                         
-                    .catch(error=>console.log(error))
+  //                   .catch(error=>console.log(error))
                 
             
-        })
+  //       })
         
-  }
+  // }
   const ratingCompleted=(rating)=> {
     console.log("Rating is: " + rating)
   }

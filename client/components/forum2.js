@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { RefreshControl, SafeAreaView,View, StyleSheet, ScrollView, Button } from "react-native";
 import {
@@ -17,10 +18,11 @@ import { MaterialIcons } from "@expo/vector-icons"
 export const Forum2 = () => {
   const [refreshing, setRefreshing] = React.useState(false);
 
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
-  }, []);
+
+  // const onRefresh = React.useCallback(() => {
+  //   setRefreshing(true);
+  //   wait(2000).then(() => setRefreshing(false));
+  // }, []);
 
   const navigation = useNavigation();
   const [subjects, setData] = useState([
@@ -55,18 +57,22 @@ export const Forum2 = () => {
       comments: [],
     },
   ]);
+   useEffect(async () => {
+    const result = await axios('http://192.168.11.15:3000/savepost/savepost');
+    setData(result.data);
+  }, []);
   return (
     
     <View>
        <SafeAreaView style={styles.container}>
       <ScrollView
-        contentContainerStyle={styles.scrollView}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-          />
-        }
+        // contentContainerStyle={styles.scrollView}
+        // // refreshControl={
+        // //   <RefreshControl
+        // //     refreshing={refreshing}
+        // //     onRefresh={onRefresh}
+        // //   />
+        // // }
       >
         {subjects.map((item, key) => {
           return (
@@ -133,10 +139,10 @@ export const Forum2 = () => {
                     ml="-0.5"
                     mt="-1"
                   >
-                    {item.ownerName}
+                    {item.owner}
                   </Text>
                 </Stack>
-                <Text fontWeight="400">{item.text}</Text>
+                <Text fontWeight="400">{item.content}</Text>
                 <HStack
                   alignItems="center"
                   space={4}
@@ -153,6 +159,11 @@ export const Forum2 = () => {
                       {item.createdAt}
                       {item.likesCount} Likes
                       {item.numberOfComments} Comments
+                      <Button  title='continue reading' backgroundColor='white'
+                      onPress={() => navigation.navigate("ForumPost", item)}
+                      >
+                        
+                      </Button>
                     </Text>
                   </HStack>
                 </HStack>

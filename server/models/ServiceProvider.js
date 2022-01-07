@@ -58,9 +58,6 @@ var ServiceProviderSchema=mongoose.Schema(
           immutable: true,
           default: () => Date.now(),
     },
-    rating: {
-          type: String
-        }
       },
     
 )
