@@ -274,7 +274,7 @@ export default () => {
                 </Text>
               </Stack>
               <Text fontWeight="400">
-                my Dear you cane here share your server with the easy way just
+                my Dear you can here share your service with the easy way just
                 check your information carefully when you fill them all you need
                 to do is click (share you servce here) and start to fill
               </Text>
@@ -289,7 +289,7 @@ export default () => {
                       setModalVisible(!modalVisible);
                     }}
                   >
-                    share you servce here
+                    share you service here
                   </Button>
                 </HStack>
               </HStack>
