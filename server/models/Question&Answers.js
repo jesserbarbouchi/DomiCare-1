@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 const QuestAns = mongoose.model(
   "QuestAns",
   new mongoose.Schema({
-    ownerId: {
-      type: Schema.Types.ObjectId,
-      ref: "ServiceSeeker",
+    owner: {
+     
+      type: String,
     },
     createdAt: {
       type: Date,
