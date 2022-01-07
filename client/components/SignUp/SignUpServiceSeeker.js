@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios';
 import {
     Box,
     Heading,
@@ -13,9 +14,7 @@ import {
 function SignUp() {
     const [formData, setData] = React.useState({});
     const [errors, setErrors] = React.useState({});
-    // const post=()=>{
-      
-    // };
+ 
     const validate = () => {
         let validation = true;
         let passwordValid = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
@@ -69,12 +68,23 @@ function SignUp() {
           validation = false;
       }
         setErrors(errors);
+
         return validation;
+    };
+    
+    const post=()=>{
+      axios.post('http://localhost:3000/ServiceSeeker/SignUp',{formData} ).then(({data})=>{
+        console.log('data:', {data} )
+         }).catch((err)=>{
+        console.log(err)
+         })
     };
 
     const onSubmit = () => {
         validate()
-            ? console.log("Submitted")
+            ?(
+              post()
+            )
             : console.log("Validation Failed");
     };
 
