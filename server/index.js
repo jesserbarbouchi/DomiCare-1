@@ -24,8 +24,10 @@ connection.once("open", () => {
     console.log("Connected Database Successfully");
 });
 
+
+
 /********************** Routes **********************/
-app.use("/", Equipements);
+app.use("/Equipements", Equipements);
 app.use("/serviceProvidersList",serviceProvidersList)
 app.use("/ServiceSeeker", ServiceSeeker);
 app.use("/savepost",QuestAns)
