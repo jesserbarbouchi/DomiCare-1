@@ -3,7 +3,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
-const Equipements = require("./routers/Equipements.js");
+const QuestAns = require("./routers/Question&Answer")
+const Equipements = require("./routers/Equipements.js")
 const ServiceSeeker = require("./routers/ServiceSeeker.js");
 const serviceProvidersList = require("./routers/serviceProvidersList.js")
 const auth = require("./routers/auth-routes");
@@ -27,6 +28,7 @@ connection.once("open", () => {
 app.use("/", Equipements);
 app.use("/serviceProvidersList",serviceProvidersList)
 app.use("/ServiceSeeker", ServiceSeeker);
+app.use("/savepost",QuestAns)
 app.use("/auth", auth);
 app.use("/ServiceProvider", ServiceProvider);
 /**************** Listening Requests ****************/
