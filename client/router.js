@@ -38,7 +38,7 @@ const Router = () => {
             <Stack.Screen name="serviceProvidersList" component={serviceProvidersList} />
             <Stack.Screen name="ServiceProviderProfile" component={ServiceProviderProfile} />
             <Stack.Screen name="shareservice" component={shareservice} />
-
+        
         </Stack.Navigator>
     );
 };
