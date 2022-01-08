@@ -9,8 +9,8 @@ import SignUpServiceProvider from "./components/SignUp/SignUpServiceProvider.js"
 import SignUpEquipementsProvider from "./components/SignUp/SignUpEquipementsProvider.js";
 import SignUpType from "./components/SignUp/SignUpType.js";
 import ForumPost from "./components/ForumPost.js";
-import serviceProvidersList from './components/ServiceProviderList.js';
-
+import serviceProvidersList from './components/serviceProvidersList.js';
+import shareservice from './components/shareService.js';
 
 
 const Stack = createNativeStackNavigator();
@@ -27,7 +27,7 @@ const Router = () => {
             <Stack.Screen name="SignUpType" component={SignUpType} options={{headerShown: false}} />
             <Stack.Screen name="Forum" component={Forum} />
             <Stack.Screen name="ForumPost" component={ForumPost} />
-
+            <Stack.Screen name="shareservice" component={shareservice} />
             <Stack.Screen name="serviceProvidersList" component={serviceProvidersList} />
 
         </Stack.Navigator>
