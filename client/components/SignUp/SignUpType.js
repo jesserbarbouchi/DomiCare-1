@@ -18,13 +18,13 @@ export default () => {
       }}
     >
       <Radio value='SignUpServiceSeeker'  size="lg" my={1}>
-      service seeker
+      Service seeker
       </Radio>
       <Radio value='SignUpServiceProvider'  size="lg" my={1}>
-      service provider
+      Service provider
       </Radio>
       <Radio value='SignUpEquipementsProvider'  size="lg" my={1}>
-      equipements provider
+      Equipements provider
       </Radio>
     </Radio.Group>
     <Button onPress={()=>navigation.navigate(`${value}`)}>Next</Button>

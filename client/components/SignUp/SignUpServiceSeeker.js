@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios';
+import { useNavigation } from "@react-navigation/native";
 import {
     Box,
     Heading,
@@ -9,12 +10,19 @@ import {
     Input,
     NativeBaseProvider,
     Center,
+    ScrollView,
+    InputGroup,
+    InputLeftAddon,
+    useDisclose,
+    Modal,
 } from "native-base";
+
 
 function SignUp() {
     const [formData, setData] = React.useState({});
-    const [errors, setErrors] = React.useState({});
- 
+    const [errors,  setErrors] = React.useState({});
+    const navigation = useNavigation();
+    const { isOpen, onOpen, onClose } = useDisclose()
     const validate = () => {
         let validation = true;
         let passwordValid = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
@@ -66,30 +74,65 @@ function SignUp() {
         if (formData.phoneNumber === undefined) {
           errors.phoneNumber = "Phone Number is required";
           validation = false;
-      }
+        }
+      else if (!typeof formData.phoneNumber === "number") {
+          console.log(formData.phoneNumber)
+        errors.phoneNumber = "Invalid Phone Number ";
+        validation = false;
+    }
         setErrors(errors);
 
         return validation;
     };
     
     const post=()=>{
-      axios.post('http://localhost:3000/ServiceSeeker/SignUp',{formData} ).then(({data})=>{
-        console.log('data:', {data} )
+      axios.post('http://localhost:3000/auth/SSSignUp',{formData} ).then((response)=>{
+        let errors={}
+        if(response.data === 'email address already exists'){
+            errors["email"]= 'email address already exists';
+            setErrors(errors);
+        }
+        else if (response.data === 'Username already exists') {
+            errors["userName"]= 'Username already exists';
+            setErrors(errors);
+        }
+        else  navigation.navigate('Login')
          }).catch((err)=>{
         console.log(err)
          })
     };
 
     const onSubmit = () => {
-        validate()
-            ?(
-              post()
-            )
-            : console.log("Validation Failed");
+        if(validate()){
+            onOpen()
+           setTimeout(() => {
+            post()
+           }, 2000);  
+        }
+            else console.log("Validation Failed");
     };
 
     return (
-        <Box safeArea p="2" w="90%" maxW="290" py="8">
+      <ScrollView
+      showsVerticalScrollIndicator={false}
+      _contentContainerStyle={{
+        px: "20px",
+        mb: "4",
+        minW: "80",
+      }}
+    >
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal.Content>
+          <Modal.Header fontSize="4xl" fontWeight="bold">
+            Congratulation
+          </Modal.Header>
+          <Modal.Body>
+            you have successfully registered
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
+      
+        <Box safeArea p="2" w="120%" maxW="300" py="8">
             <Heading
                 size="lg"
                 color="coolGray.800"
@@ -111,6 +154,7 @@ function SignUp() {
             >
                 Sign up to continue!
             </Heading>
+ 
             <VStack space={3} mt="5">
                 <FormControl isRequired isInvalid={"firstName" in errors}>
                     <FormControl.Label>First name</FormControl.Label>
@@ -162,11 +206,29 @@ function SignUp() {
 
                 <FormControl isRequired isInvalid={"phoneNumber" in errors}>
                     <FormControl.Label>Phone Number</FormControl.Label>
+                    <InputGroup
+        w={{
+          base: "100%",
+          lg: "100%",
+        }}
+      >
+        <InputLeftAddon children={'+216'} 
+        w={{
+            base: "20%",
+            lg: "100%",
+          }}/>
                     <Input
+                        w={{
+                            base: "80%",
+                            lg: "100%",
+                          }}
                         onChangeText={(value) =>
                             setData({ ...formData, phoneNumber: value })
                         }
                     />
+
+      </InputGroup>
+
                      {"phoneNumber" in errors ? (
                         <FormControl.ErrorMessage>
                             {errors.phoneNumber}
@@ -175,10 +237,11 @@ function SignUp() {
                         ""
                     )}
                 </FormControl>
-
-                <FormControl isRequired isInvalid={"email" in errors}>
+                
+   
+                <FormControl isRequired isInvalid={"email" in errors }>
                     <FormControl.Label>Email</FormControl.Label>
-                    <Input
+                    <Input 
                         onChangeText={(value) =>
                             setData({ ...formData, email: value })
                         }
@@ -200,12 +263,15 @@ function SignUp() {
                             setData({ ...formData, password: value })
                         }
                     />
+                    
                     {"password" in errors ? (
                         <FormControl.ErrorMessage>
                             {errors.password}
                         </FormControl.ErrorMessage>
                     ) : (
-                        ""
+                        <FormControl.HelperText _text={{fontSize: 'xs'}}>
+                        Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character
+        </FormControl.HelperText>
                     )}
                 </FormControl>
 
@@ -230,9 +296,13 @@ function SignUp() {
                     Submit
                 </Button>
             </VStack>
+            
         </Box>
+        </ScrollView>
+ 
     );
 }
+
 export default function () {
     return (
         <NativeBaseProvider>
