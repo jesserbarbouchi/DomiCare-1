@@ -3,31 +3,31 @@ const Equipement = mongoose.model(
   "Equipement",
   new mongoose.Schema({
     name: {
-      type: String,
+      type: String
     },
     reference: {
-      type: String,
+      type: String
     },
     description: {
-      type: String,
+      type: String
     },
     delivery: {
-      type: String,
+      type: String
     },
     transactionType: {
-      type: String,
+      type: String
     },
     price: {
-      type: Number,
+      type: String
     },
     picture: {
-      type: String,
+      type: String
     },
     ownerId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "ServiceProvider",
+      ref: "ServiceProvider"
     },
-    city: { String },
+    city: { String }
   })
 );
 module.exports = Equipement;
