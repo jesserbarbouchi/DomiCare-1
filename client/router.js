@@ -10,8 +10,11 @@ import SignUpEquipementsProvider from "./components/SignUp/SignUpEquipementsProv
 import SignUpType from "./components/SignUp/SignUpType.js";
 import ForumPost from "./components/ForumPost.js";
 import serviceProvidersList from './components/serviceProvidersList.js';
+import shareservice from './components/shareService.js';
 import AddBlog from "./components/AddBlog.js";
 import Forum2 from "./components/Forum2.js"
+import ServiceProviderProfile from "./components/ServiceProviderProfile.js"
+import Equipmentsfetch from "./components/Equipementsfetch.js"
 
 
 
@@ -21,7 +24,7 @@ const Router = () => {
         //create your routes here
         <Stack.Navigator>
             <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="EquipementsFeed" component={EquipementsFeed} />
+            <Stack.Screen name="Equipementsfetch" component={Equipmentsfetch} />
             <Stack.Screen name="SignUpServiceSeeker" component={SignUpServiceSeeker} options={{headerShown: false}} />
             <Stack.Screen name="SignUpServiceProvider" component={SignUpServiceProvider} options={{headerShown: false}} />
             <Stack.Screen name="SignUpEquipementsProvider" component={SignUpEquipementsProvider} options={{headerShown: false}} />
@@ -33,6 +36,8 @@ const Router = () => {
             <Stack.Screen name="AddBlog" component={AddBlog} />
 
             <Stack.Screen name="serviceProvidersList" component={serviceProvidersList} />
+            <Stack.Screen name="ServiceProviderProfile" component={ServiceProviderProfile} />
+            <Stack.Screen name="shareservice" component={shareservice} />
 
         </Stack.Navigator>
     );

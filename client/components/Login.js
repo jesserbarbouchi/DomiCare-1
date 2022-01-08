@@ -47,7 +47,7 @@ export default () => {
 
       <VStack space={3} mt="5">
         <FormControl>
-          <FormControl.Label>Email ID</FormControl.Label>
+          <FormControl.Label>Email </FormControl.Label>
           <Input />
         </FormControl>
         <FormControl>
@@ -96,4 +96,3 @@ export default () => {
   )
 
 }
-
