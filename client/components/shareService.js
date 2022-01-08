@@ -31,7 +31,7 @@ export default () => {
   const finalRef = React.useRef(null);
   const post = () => {
     setData({ ...formData, type: "HCSP" });
-    Axios.post("http://localhost:3000/ServiceProvider/shareservice", {
+    Axios.post("http://192.168.11.15:3000/ServiceProvider/shareservice", {
       formData,
     })
       .then(() => {

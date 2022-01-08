@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from "react";
+require("dotenv").config();
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { RefreshControl, SafeAreaView,View, StyleSheet, ScrollView, Button } from "react-native";

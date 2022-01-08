@@ -36,7 +36,7 @@ function Login (){
     };
     
     const post = () =>{
-      axios.post('http://localhost:3000/auth/Login',{formData} ).then((response)=>{
+      axios.post('http://192.168.11.15:3000/auth/Login',{formData} ).then((response)=>{
         let errors={}
         const data = response.data
         if(response.data === 'Your email and password do not match'){
