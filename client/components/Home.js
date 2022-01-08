@@ -1,13 +1,19 @@
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Text, Button } from "react-native";
 
-const Home = () => {
-    const navigation = useNavigation();
+const Home = ({route,navigation}) => {
     var goToLogin = () => {
         navigation.navigate("Login");
     };
-   
+
+    var goToServiceProviderList = () => {
+        navigation.navigate("ServiceProviderList");
+    };
+    
+    const  userData = route.params;
+    console.log('params :' ,userData)
+    
+
     return (
         <View>
             <Text>This is the Home page</Text>
