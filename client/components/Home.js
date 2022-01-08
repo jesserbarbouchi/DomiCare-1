@@ -5,6 +5,7 @@ const Home = ({route,navigation}) => {
     var goToLogin = () => {
         navigation.navigate("Login");
     };
+
     var goToServiceProviderList = () => {
         navigation.navigate("ServiceProviderList");
     };
@@ -12,6 +13,7 @@ const Home = ({route,navigation}) => {
     const  userData = route.params;
     console.log('params :' ,userData)
     
+
     return (
         <View>
             <Text>This is the Home page</Text>
@@ -24,6 +26,12 @@ const Home = ({route,navigation}) => {
                 title="Service Providers"
                 onPress={() => navigation.navigate("serviceProvidersList")}
             />
+             <Button
+                title="ServiceProviderProfile"
+                onPress={() => navigation.navigate("ServiceProviderProfile")}
+            />
+
+            
             <Button
                 title="Forum"
                 onPress={() => navigation.navigate("Forum")}
