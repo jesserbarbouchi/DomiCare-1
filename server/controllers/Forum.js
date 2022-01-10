@@ -2,6 +2,7 @@ const QuestAns = require("../models/Question&Answers");
 
 module.exports = {
   create_One: async (req, res, next) => {
+    console.log(req.body)
     const { owner,
       title,
       content,
@@ -73,5 +74,33 @@ module.exports = {
     } catch (error) {
       next(error);
     }
+  },
+  like_One: async (req, res, next) => {
+    console.log("request", req.body);
+    if(req.body.action==='inc')
+   { 
+     try {
+       
+      const Quest = await QuestAns.findOneAndUpdate(
+        { _id: req.body._id },{$push : {participants: req.body._id}},
+        {  safe: true, upsert: true});
+      console.log(res)
+      res.status(200).json(Quest);
+    } catch (error) {
+      next(error);
+    }
+  }
+  else if(req.body.action==='inc'){
+    try {
+      const Quest = await QuestAns.findByIdAndUpdate(
+        { _id: req.body._id },
+        { $pull: { participants: req.body._id } },
+        {  safe: true, upsert: true}
+      );
+      res.status(200).json(Quest);
+    } catch (error) {
+      next(error);
+    }
+  }
   }
 };

@@ -3,13 +3,17 @@ import { useNavigation } from "@react-navigation/native";
 import { View, Text, Button } from "react-native";
 import { TextArea, Center, NativeBaseProvider } from "native-base"
 import axios from "axios";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CredentialsContext } from './Authentification/CredentialsContext.js';
 
 const AddBlog = (props) => {
-  const [post,setpost]= useState('')
+ 
+  const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
+  const  userData = storedCredentials.userData;
+  const [post,setpost]= useState({})
 
      const SavePost=(post)=>{
-        axios.post('http://192.168.11.15:3000/savepost/savepost',{post}).then((err,res)=>{
+        axios.post('http://192.168.11.112:3000/savepost/savepost',{post}).then((err,res)=>{
           if(err){
             console.log(err)
           }
@@ -18,16 +22,15 @@ const AddBlog = (props) => {
             navigation.navigate("Forum")}
           })
         }
-
   return (
     <View>
         <TextArea
       h={500}
       placeholder="Text Area Placeholder"
       w={400}
-      onChange={(e)=>setpost(e.target.value)}
+      onChange={(e)=>setpost({owner:userData,postData:e.target.value})}
     />
-      <Button title="Post" onPress={() => SavePost({content:post,owner:'Firas',title:'dummy subject',likesCount:0,comments:[],type:"Quest"})} />  
+      <Button title="Post" onPress={() => SavePost(post)} />  
     </View>
   );
 };

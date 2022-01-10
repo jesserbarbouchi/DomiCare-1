@@ -1,4 +1,6 @@
 import React, { useState,useEffect } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CredentialsContext } from './Authentification/CredentialsContext.js';
 
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
@@ -6,20 +8,14 @@ import { RefreshControl, SafeAreaView,View, StyleSheet, ScrollView, Button } fro
 import {IconButton, Icon, Avatar,Box,Heading,AspectRatio,Image,Text,Center,HStack,Stack,NativeBaseProvider} from "native-base";
 import { MaterialIcons } from "@expo/vector-icons"
 export const Forum2 = (props) => {
-  const [refreshing, setRefreshing] = React.useState(false);
-
-
-  // const onRefresh = React.useCallback(() => {
-  //   setRefreshing(true);
-  //   wait(2000).then(() => setRefreshing(false));
-  // }, []);
-
-  const navigation = useNavigation();
+const navigation = useNavigation();
+  
   const [subjects, setData] = useState([]);
    useEffect(async () => {
-    const result = await axios('http://192.168.11.15:3000/savepost/savepost');
+    const result = await axios('http://192.168.11.112:3000/savepost/savepost');
     setData(result.data);
   }, []);
+  
   return (
     
     <View>
@@ -125,7 +121,7 @@ export const Forum2 = (props) => {
     </SafeAreaView>
       
       <IconButton
-      onPress={() => navigation.navigate("AddBlog",props.route.params)}
+      onPress={() => navigation.navigate("AddBlog")}
       icon={<Icon as={MaterialIcons} name="post-add" />}
       borderRadius="full"
       _icon={{
