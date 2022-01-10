@@ -7,13 +7,19 @@ import {
   Text,
   View,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput,
+  Button
 } from 'react-native';
 
-const EquipementsProviderProfile = () => {
+const EquipementsProviderProfile = ({navigation}) => {
   const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
   const  userData = storedCredentials;
   console.log("userData:",userData);
+  console.log(userData.userData._id);
+  var editprofile = () => {
+    navigation.navigate("EditProfile");
+};
     return (
       <View style={styles.container}>
           <View style={styles.header}></View>
@@ -27,7 +33,8 @@ const EquipementsProviderProfile = () => {
               <Text style={styles.description}>{userData.userData.gender}</Text>
               <Text style={styles.description}>{userData.userData.dateOfBirth}</Text>
               <TouchableOpacity style={styles.buttonContainer}>
-                <Text>Update</Text>  
+                <Text onPress={editprofile}>Update</Text>  
+                <Button onPress={editprofile} >Update</Button>
               </TouchableOpacity>
             </View>
         </View>
