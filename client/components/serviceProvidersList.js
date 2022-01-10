@@ -70,19 +70,7 @@ const serviceProvidersList = () => {
 
       
     }
-      
-
     
-  
-  
-
-  
-  
-
-    // componentDidMount() {
-    //     this.getServiceProviders()
-    //     // this.filterData()
-    // }
     
 
 
@@ -165,7 +153,7 @@ const serviceProvidersList = () => {
                   <Text style = {styles.name}> Position : {u.speciality}</Text>
                   <Text style = {styles.name}> City : {u.city}</Text>
                   <Text style = {styles.name}> Gender : {u.gender}</Text>
-                  <Text style = {styles.name}> Services : {u.services}</Text>
+                  <Text style = {styles.name}> Services : {u.content}</Text>
                
                   <AirbnbRating style={styles.airbnbRating} />
                   

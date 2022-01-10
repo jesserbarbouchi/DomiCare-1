@@ -4,6 +4,8 @@ const serviceProvidersListController = require("../controllers/serviceProvidersL
 
 router.route("/serviceProvidersList")
   .get(serviceProvidersListController.find_all_serviceProviders) 
+  router.route("/serviceProvidersList")
+  .get(serviceProvidersListController.find_all_sp) 
 router.route("/serviceProvidersList")
   .post(serviceProvidersListController.create_service_provider)
 

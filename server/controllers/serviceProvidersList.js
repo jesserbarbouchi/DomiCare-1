@@ -1,4 +1,5 @@
-const ServiceProvider = require('../models/ServiceProvider.js')
+const ServiceProvider  = require('../models/Posts')
+const sp = require ("../models/ServiceProvider.js")
 
 
 module.exports = {
@@ -15,20 +16,28 @@ module.exports = {
 		
 		
 		try {
-			const { userName, speciality, city, gender, picture, services } = req.body
-			const service_provider = await  ServiceProvider.create({
-				userName, speciality, city, gender, picture, services
+			const { userName, speciality, city, gender, picture, content } = req.body
+			const service_provider = await ServiceProvider.create({
+				userName, speciality, city, gender, picture, content
 			
 				
 			})
-			// const doc = await ServiceProvider.save();
 			res.status(200).send(service_provider);
 		}
 		catch (error) {
 			console.log(error)
 		}
 		
-	}
+		
+	},
+	find_all_sp: async (req, res) => {
+		try {
+			const serviceP = await sp.find()
+			res.send(serviceP);
+		} catch (err) {
+			res.send(err);
+		}
+	},
 
 
 
