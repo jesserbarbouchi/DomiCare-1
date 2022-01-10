@@ -1,22 +1,11 @@
 import React, { useState,useEffect } from "react";
-require("dotenv").config();
+
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { RefreshControl, SafeAreaView,View, StyleSheet, ScrollView, Button } from "react-native";
-import {
-  IconButton, Icon, Avatar,
-  Box,
-  Heading,
-  AspectRatio,
-  Image,
-  Text,
-  Center,
-  HStack,
-  Stack,
-  NativeBaseProvider,
-} from "native-base";
+import {IconButton, Icon, Avatar,Box,Heading,AspectRatio,Image,Text,Center,HStack,Stack,NativeBaseProvider} from "native-base";
 import { MaterialIcons } from "@expo/vector-icons"
-export const Forum2 = () => {
+export const Forum2 = (props) => {
   const [refreshing, setRefreshing] = React.useState(false);
 
 
@@ -26,38 +15,7 @@ export const Forum2 = () => {
   // }, []);
 
   const navigation = useNavigation();
-  const [subjects, setData] = useState([
-    {
-      ownerName: "user",
-      title: "Oxygéne machine",
-      createdAt: "04-01-2022",
-      text: "bla bala blaaa blaaa bla",
-      numberOfComments: 23,
-      likesCount: 10,
-      comments: [
-        { By: "lofi", body: "nice", createdAt: "04-01-2022", likes: 4 },
-        { By: "sick", body: "bullshit", createdAt: "04-01-2022", likes: 5 },
-      ],
-    },
-    {
-      ownerName: "user2",
-      title: "Oxygéne machine",
-      createdAt: "04-01-2022",
-      text: "bla bala blaaa blaaa bla",
-      numberOfComments: 23,
-      likesCount: 10,
-      comments: [],
-    },
-    {
-      ownerName: "user3",
-      title: "Oxygéne machine",
-      createdAt: "04-01-2022",
-      text: "bla bala blaaa blaaa bla",
-      numberOfComments: 23,
-      likesCount: 10,
-      comments: [],
-    },
-  ]);
+  const [subjects, setData] = useState([]);
    useEffect(async () => {
     const result = await axios('http://192.168.11.15:3000/savepost/savepost');
     setData(result.data);
@@ -162,8 +120,7 @@ export const Forum2 = () => {
                       {item.numberOfComments} Comments
                       <Button  title='continue reading' backgroundColor='white'
                       onPress={() => navigation.navigate("ForumPost", item)}
-                      >
-                        
+                      >  
                       </Button>
                     </Text>
                   </HStack>
@@ -171,13 +128,12 @@ export const Forum2 = () => {
               </Stack>
             </Box>
           );
-        })}
-        
+        })} 
       </ScrollView>
     </SafeAreaView>
       
       <IconButton
-      onPress={() => navigation.navigate("AddBlog")}
+      onPress={() => navigation.navigate("AddBlog",props.route.params)}
       icon={<Icon as={MaterialIcons} name="post-add" />}
       borderRadius="full"
       _icon={{

@@ -47,8 +47,6 @@ const Equipementsfetch = () => {
 //     return item.city}
     
 //     })
-    
-    
 //       }
 const availability = (eve)=>{
   var ava
@@ -136,20 +134,7 @@ var filterData=(city)=> {
        
       }
       
-    //  var cityFilter=(city)=>{
-    //     var x=[]
-    //     var y=Equipements
-    //     x=y.filter(ele=>{
-    //       if(city!==""){
-    //         if(ele.city===city){
-    //           return ele
-    //         }
-    //         else{return ele}
-    //       }
-          
-  //  setEquipements(x)
-  //       })
-  //     }
+
   return (
     <View style={styles.container}>
     <View style = {styles.cities}>
@@ -216,9 +201,7 @@ var filterData=(city)=> {
     <View style={styles.sProvider}>
     <ScrollView>
         {Equipements.map((item, key) => {
-          
-          
-          return ( <View key={key} style={styles.itemVue}>
+           return ( <View key={key} style={styles.itemVue}>
             <Image style={styles.cardImage} source={{uri:item.picture}} />
             <Text>Equipement name : {item.name}</Text>
             <Text>Price : {item.price}</Text>
@@ -226,8 +209,6 @@ var filterData=(city)=> {
             <Text>City : {item.city}</Text>
             <Text>Delivery : {item.delivery}</Text>
             {item.availability===true?<Text>Available</Text>:<Text>Not Available</Text>}
-              {/* <Button title="Ask for service" onPress={apihandler} /> */}
-  
           </View>
         )})}
 
