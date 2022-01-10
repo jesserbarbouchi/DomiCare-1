@@ -24,15 +24,7 @@ export const Forum2 = (props) => {
     
     <View>
        <SafeAreaView style={styles.container}>
-      <ScrollView
-        // contentContainerStyle={styles.scrollView}
-        // // refreshControl={
-        // //   <RefreshControl
-        // //     refreshing={refreshing}
-        // //     onRefresh={onRefresh}
-        // //   />
-        // // }
-      >
+      <ScrollView>
         {subjects.map((item, key) => {
           return (
             <Box
