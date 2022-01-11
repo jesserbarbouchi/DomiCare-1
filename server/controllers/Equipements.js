@@ -35,7 +35,7 @@ module.exports = {
             // the server will try the following
             const Equipements = await Equipement
                  .findById(req.params.EquipementsId)
-
+                    console.log("req.params.EquipementsId",req.params.EquipementsId);
             res.status(200).json(Equipements);
        } catch (error) {
             next(error);

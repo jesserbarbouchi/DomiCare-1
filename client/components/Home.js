@@ -6,7 +6,7 @@ import { CredentialsContext } from './Authentification/CredentialsContext.js';
 const Home = ({navigation}) => {
     const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
     const  userData = storedCredentials;
-
+    console.log("userData:",userData);
 
     var goToServiceProviderList = () => {
         navigation.navigate("ServiceProviderList");
@@ -40,9 +40,19 @@ const Home = ({navigation}) => {
                         <Button title="Login"  onPress={() => navigation.navigate("Login")} />
                        </>
                   }
-                
+                     {
+                       storedCredentials ?
+                       <>
+                         < Button
+                title="My profile"
+                onPress={() => navigation.navigate("EquipementsProviderProfile")}
+                 />
+                       </>
+                       : <>
+                        
+                       </>
+                  }
                   <Button
-                  
                       title="Service Providers"
                       onPress={() => navigation.navigate("serviceProvidersList")}
                   />

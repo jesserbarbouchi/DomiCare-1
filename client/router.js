@@ -18,6 +18,8 @@ import Equipmentsfetch from "./components/Equipementsfetch.js";
 import { NavigationContainer } from "@react-navigation/native";
 import ResetPassword  from "./components/Authentification/ResetPassword.js";
 import NewPassword  from "./components/Authentification/NewPassword.js";
+import EquipementsProviderProfile from "./components/EquipementsProviderProfile.js"
+import EditProfile from "./components/EditProfile.js"
 
 const Stack = createNativeStackNavigator();
 const Router = () => {
@@ -29,6 +31,8 @@ const Router = () => {
                     name="Equipementsfetch"
                     component={Equipmentsfetch}
                 />
+                <Stack.Screen name="EquipementsProviderProfile" component={EquipementsProviderProfile} />
+                <Stack.Screen name="EditProfile" component={EditProfile} />
                 <Stack.Screen name="Forum" component={Forum} />
                 <Stack.Screen name="Forum2" component={Forum2} />
                 <Stack.Screen name="ForumPost" component={ForumPost} />
