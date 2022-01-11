@@ -15,14 +15,47 @@ import AddBlog from "./components/AddBlog.js";
 import Forum2 from "./components/forum2.js";
 import ServiceProviderProfile from "./components/ServiceProviderProfile.js";
 import Equipmentsfetch from "./components/Equipementsfetch.js";
-import { NavigationContainer } from "@react-navigation/native";
-import ResetPassword  from "./components/Authentification/ResetPassword.js";
-import NewPassword  from "./components/Authentification/NewPassword.js";
 
+import VerificationCode from "./components/Authentification/VerificationCode.js";
+import ForgetPassword from "./components/Authentification/ForgetPassword.js";
+import ResetPassword from "./components/Authentification/ResetPassword.js";
+import { NavigationContainer } from "@react-navigation/native";
+import { IPAdress } from "@env";
 const Stack = createNativeStackNavigator();
 const Router = () => {
+    const linking = {
+        screens: {
+            ResetPassword: {
+                path: "ResetPassword/:code/:email",
+                parse: {
+                    code: (code) => code.replace(/^@/, ""),
+                    email: (email) => email.replace(/^@/, ""),
+                },
+                stringify: {
+                    code: (code) => `@{code}`,
+                    email: (email) => `@{email}`,
+                },
+            },
+            VerificationCode: {
+                path: "VerificationCode/:code/:email",
+                parse: {
+                    
+                    email: (email) => "",
+                    code: (code) =>  "",
+                },
+                stringify: {
+                    code: (code) => "",
+                    email: (email) => "",
+                },
+            },
+        },
+    };
+
     return (
-        <NavigationContainer>
+        <NavigationContainer
+            linking={linking}
+            fallback={<Text>Loading...</Text>}
+        >
             <Stack.Navigator>
                 <Stack.Screen name="Home" component={Home} />
                 <Stack.Screen
@@ -43,23 +76,17 @@ const Router = () => {
                 />
                 <Stack.Screen name="shareservice" component={shareservice} />
 
+                <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen
-                    name="Login"
-                    component={Login}
+                    name="ForgetPassword"
+                    component={ForgetPassword}
                 />
-                    <Stack.Screen
-                    name="ResetPassword"
-                    component={ResetPassword }
-                />
-                    <Stack.Screen
-                    name="NewPassword"
-                    component={NewPassword }
-                />
+                <Stack.Screen name="ResetPassword" component={ResetPassword} />
                 <Stack.Screen
-                    name="SignUpAs"
-                    component={SignUpType}
-                    
+                    name="VerificationCode"
+                    component={VerificationCode}
                 />
+                <Stack.Screen name="SignUpAs" component={SignUpType} />
                 <Stack.Screen
                     name="SignUpServiceSeeker"
                     component={SignUpServiceSeeker}
@@ -67,18 +94,14 @@ const Router = () => {
                 <Stack.Screen
                     name="SignUpServiceProvider"
                     component={SignUpServiceProvider}
-                    
                 />
                 <Stack.Screen
                     name="SignUpEquipementsProvider"
                     component={SignUpEquipementsProvider}
-             
                 />
             </Stack.Navigator>
         </NavigationContainer>
     );
 };
-
-
 
 export default Router;
