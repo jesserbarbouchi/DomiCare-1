@@ -9,6 +9,7 @@ const ServiceSeeker = require("./routers/ServiceSeeker.js");
 const serviceProvidersList = require("./routers/serviceProvidersList.js")
 const auth = require("./routers/auth-routes");
 const ServiceProvider =  require("./routers/ServiceProvider")
+const ServiceProviderProfile =  require("./routers/ServiceProviderProfile")
 require("dotenv").config();
 var cors = require("cors");
 app.use(cors())

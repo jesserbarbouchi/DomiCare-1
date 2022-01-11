@@ -1,16 +1,39 @@
-const ServiceProvider  = require('../models/Posts')
-const sp = require ("../models/ServiceProvider.js")
+const ServiceProvider  = require("../models/ServiceProvider.js")
+const sp = require ('../models/Posts.js')
+
 
 
 module.exports = {
-    find_all_serviceProviders: async (req, res) => {
+	find_all_serviceProviders: async (req, res) => {
+		
 		try {
-			const serviceP = await ServiceProvider.find()
+			const serviceP = await ServiceProvider.find({ type: "serviceProvider" }).populate('posts')
+			console.log(res)
+			
+			
 			res.send(serviceP);
 		} catch (err) {
 			res.send(err);
 		}
 	},
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
 	create_service_provider: async (req, res) => {
 
 		

@@ -13,11 +13,11 @@ import serviceProvidersList from "./components/serviceProvidersList.js";
 import shareservice from "./components/shareService.js";
 import AddBlog from "./components/AddBlog.js";
 import Forum2 from "./components/forum2.js";
-import ServiceProviderProfile from "./components/ServiceProviderProfile.js";
 import Equipmentsfetch from "./components/Equipementsfetch.js";
 import { NavigationContainer } from "@react-navigation/native";
 import ResetPassword  from "./components/Authentification/ResetPassword.js";
 import NewPassword  from "./components/Authentification/NewPassword.js";
+import SeekerRequest  from "./components/SeekerRequest.js";
 
 const Stack = createNativeStackNavigator();
 const Router = () => {
@@ -37,10 +37,7 @@ const Router = () => {
                     name="serviceProvidersList"
                     component={serviceProvidersList}
                 />
-                <Stack.Screen
-                    name="ServiceProviderProfile"
-                    component={ServiceProviderProfile}
-                />
+              
                 <Stack.Screen name="shareservice" component={shareservice} />
 
                 <Stack.Screen
@@ -74,6 +71,16 @@ const Router = () => {
                     component={SignUpEquipementsProvider}
              
                 />
+                  <Stack.Screen
+                    name="SeekerRequest"
+                    component={SeekerRequest}
+             
+                />
+
+
+
+
+                
             </Stack.Navigator>
         </NavigationContainer>
     );
