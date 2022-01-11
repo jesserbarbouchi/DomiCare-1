@@ -1,5 +1,6 @@
 {
   "expo": {
+    "scheme": "DomiCare",
     "name": "DomiCare",
     "slug": "DomiCare",
     "version": "1.0.0",

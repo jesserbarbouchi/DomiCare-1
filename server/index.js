@@ -9,7 +9,8 @@ const ServiceSeeker = require("./routers/ServiceSeeker.js");
 const serviceProvidersList = require("./routers/serviceProvidersList.js")
 const auth = require("./routers/auth-routes");
 const ServiceProvider =  require("./routers/ServiceProvider")
-const ServiceProviderProfile =  require("./routers/ServiceProviderProfile")
+const ServiceProviderProfile = require("./routers/users.js")
+
 require("dotenv").config();
 var cors = require("cors");
 app.use(cors())
@@ -34,6 +35,7 @@ app.use("/ServiceSeeker", ServiceSeeker);
 app.use("/savepost",QuestAns)
 app.use("/auth", auth);
 app.use("/ServiceProvider", ServiceProvider);
+app.use("/editprofile",ServiceProviderProfile);
 /**************** Listening Requests ****************/
 const Port = process.env.PORT||3000;
 app.listen(Port, function (req, res) {
