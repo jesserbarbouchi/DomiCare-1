@@ -14,15 +14,20 @@ const serviceProvidersList = () => {
     const [selectedValue, setSelectedValue] = useState("");
     const [selectedgender, setSelectedGender] = useState("");
   const [ServiceProviders, setSProviders] = useState([]);
+  const [serviceP,setServiceP]=useState([])
   const [Data,setData]=useState([]);
     
     useEffect(async() => {
       
         try {
-          const result = await axios.get("http://192.168.11.22:3000/serviceProvidersList/serviceProvidersList")
+          const result = await axios.get("http://192.168.11.151:3000/serviceProvidersList/serviceProvidersList")
           setSProviders(result.data)
           setData(result.data)
           console.log(result.data)
+          // const res = await axios.get("http://192.168.11.151:3000/ServiceProvider/shareservice")
+          // setServiceP(res.data)
+          // console.log(res.data)
+          
         }
         catch (error) {
           console.log(error)
@@ -149,7 +154,8 @@ const serviceProvidersList = () => {
                     resizeMode="cover"
                     source={{ uri: "https://i.pinimg.com/originals/6e/ff/53/6eff53e82b80fb5dd7614d5ba054f144.jpg" }}
                   />
-                  <Text style = {styles.name}> Username : { u.userName}</Text>
+                  <Text style = {styles.name}> firstName : { u.firstName}</Text>
+                  <Text style = {styles.name}> lastName : { u.lastName}</Text>
                   <Text style = {styles.name}> Position : {u.speciality}</Text>
                   <Text style = {styles.name}> City : {u.city}</Text>
                   <Text style = {styles.name}> Gender : {u.gender}</Text>
