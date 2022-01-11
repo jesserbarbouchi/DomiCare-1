@@ -1,7 +1,8 @@
-import React from 'react'
+import React ,{useState,useEffect} from 'react'
 // import { View, Text , Image , Button , StyleSheet } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './Authentification/CredentialsContext.js';
+import axios from 'axios'
 import {
   StyleSheet,
   Text,
@@ -13,25 +14,37 @@ import {
 } from 'react-native';
 
 const EquipementsProviderProfile = ({navigation}) => {
+  const [formData, setData] = React.useState({});
   const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
   const  userData = storedCredentials;
   console.log("userData:",userData);
   console.log(userData.userData._id);
+  useEffect(() => {
+    axios.get(`http://localhost:3000/editprofile/fetch/${userData.userData._id}`)
+        .then(res => {
+          console.log("res in useEffect",res);
+          setData(res.data) 
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}, []);
   var editprofile = () => {
     navigation.navigate("EditProfile");
 };
+
     return (
       <View style={styles.container}>
           <View style={styles.header}></View>
           <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
           <View style={styles.body}>
             <View style={styles.bodyContent}>
-              <Text style={styles.name}>{userData.userData.firstName} {userData.userData.lastName}</Text>
-              <Text style={styles.info}>{userData.userData.city}/{userData.userData.adress}</Text>
-              <Text style={styles.description}>My Email: {userData.userData.email}</Text>
-              <Text style={styles.description}>My Contact: {userData.userData.phoneNumber}</Text>
-              <Text style={styles.description}>{userData.userData.gender}</Text>
-              <Text style={styles.description}>{userData.userData.dateOfBirth}</Text>
+              <Text style={styles.name}>{formData.firstName} {formData.lastName}</Text>
+              <Text style={styles.info}>{formData.city}/{formData.adress}</Text>
+              <Text style={styles.description}>My Email: {formData.email}</Text>
+              <Text style={styles.description}>My Contact: {formData.phoneNumber}</Text>
+              <Text style={styles.description}>{formData.gender}</Text>
+              <Text style={styles.description}>{formData.dateOfBirth}</Text>
               <TouchableOpacity style={styles.buttonContainer}>
                 <Text onPress={editprofile}>Update</Text>  
                 <Button onPress={editprofile} >Update</Button>

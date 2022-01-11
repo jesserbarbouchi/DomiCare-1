@@ -1,72 +1,91 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import { View, Text,TextInput,Button } from 'react-native'
 import {Picker} from "@react-native-picker/picker"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './Authentification/CredentialsContext.js';
 import axios from 'axios'
 
-const EditProfile = () => {
+const EditProfile = ({navigation}) => {
   const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
   const  userData = storedCredentials;
   const {firstName,lastName,phoneNumber,email,adress,city,gender,dateOfBirth}=userData.userData
   const [selectedValue, setSelectedValue] = useState("");
-  const [firstname,setfirstname]=useState(firstName)
-  const [lastname,setlastname]=useState(lastName)
-  const [Email,setemail]=useState(email)
-  const [address,setaddress]=useState("")
-  const [Gender,setgender]=useState("")
-  const [DateOfBirth,setdateOfBirth]=useState("")
-  const [PhoneNumber,setphoneNumber]=useState(0)
+  const [formData, setData] = React.useState({});
   console.log("userData:",userData);
   console.log({firstName,lastName,phoneNumber,email,adress,city});
+
+  useEffect(() => {
+    axios.get(`http://localhost:3000/editprofile/fetch/${userData.userData._id}`)
+        .then(res => {
+          console.log("res in useEffect",res);
+          // console.log("res in useEffect2",res.json());
+          // console.log("getbyid",res.data);
+          // console.log("formadata",{...formData,res});
+          setData(res.data)
+            // setData({user})
+            // console.log(user);  
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}, []);
+var profile = () => {
+  navigation.navigate("EquipementsProviderProfile")
+};
   const submit = () =>{
-    axios.put(`http://localhost:3000/editprofile/${userData.userData._id}`,{firstName,lastName,phoneNumber,email,adress,city,gender,dateOfBirth})
+    axios.put(`http://localhost:3000/editprofile/${userData.userData._id}`,{formData})
     .then(res=>{
       console.log("res",res);
+      var user = res.data
+      setData({...formData,lastName:res.data.lastName,firstName:user.firstName})
+      // console.log("formData",formData);
+      // console.log(res.data.adress);
+      // console.log(res.data.firstName);
+      // console.log(res.data.lastName);
+      // console.log({...formData,firstName:formData.firstName});
+      // console.log(formData.firstName);
     })
+    .then(()=>{setTimeout(() => profile(),1000)})
     .catch(error=>{console.log(error);})
   }
-  var change=(e)=>{
-    console.log("e.target.value",e.target.value);
-    setfirstname(e.target.value)
-  }
+ 
   return (
     <View>
       <Text>Edit Profile</Text>
       <View>
       <TextInput style={{height: 20,width:150,justifyContent: 'center',flexDirection: 'row',display: 'flex',alignItems: 'center'}}
         placeholder="Change your first name"
-        onChangeText={(e)=>setfirstname(e.target.value),console.log("firstname",firstname)}
-        defaultValue={firstName} />
+        onChangeText={(value)=>setData({...formData,firstName:value})}
+        defaultValue={formData.firstName} />
           <TextInput style={{height: 20,width:150,justifyContent: 'center',flexDirection: 'row',display: 'flex',alignItems: 'center'}}
         placeholder="Change your last name"
-        onChangeText={change}
-        defaultValue={lastName} />
+        onChangeText={(value)=>setData({...formData,lastName:value})}
+        defaultValue={formData.lastName} />
           <TextInput style={{height: 20,width:150,justifyContent: 'center',flexDirection: 'row',display: 'flex',alignItems: 'center'}}
         placeholder="Change your email"
-        // onChangeText={}
-        defaultValue={email} />
+        onChangeText={(value)=>setData({...formData,email:value})}
+        defaultValue={formData.email} />
           <TextInput style={{height: 20,width:150,justifyContent: 'center',flexDirection: 'row',display: 'flex',alignItems: 'center'}}
         placeholder="Change your address"
-        // onChangeText={}
-        defaultValue={adress} />
+        onChangeText={(value)=>setData({...formData,adress:value})}
+        defaultValue={formData.adress} />
           <TextInput style={{height: 20,width:150,justifyContent: 'center',flexDirection: 'row',display: 'flex',alignItems: 'center'}}
         placeholder="Change your phone number"
-        // onChangeText={}
-        defaultValue={phoneNumber} />
+        onChangeText={(value)=>setData({...formData,phoneNumber:value})}
+        defaultValue={formData.phoneNumber} />
          <TextInput style={{height: 20,width:150,justifyContent: 'center',flexDirection: 'row',display: 'flex',alignItems: 'center'}}
-        placeholder="Change your phone number"
-        // onChangeText={}
-        defaultValue={gender} />
+        placeholder="Change your Gendeer"
+        onChangeText={(value)=>setData({...formData,gender:value})}
+        defaultValue={formData.gender} />
          <TextInput style={{height: 20,width:150,justifyContent: 'center',flexDirection: 'row',display: 'flex',alignItems: 'center'}}
-        placeholder="Change your phone number"
-        // onChangeText={}
-        defaultValue={dateOfBirth} />
+        placeholder="Change your Date Of Birth"
+        onChangeText={(value)=>setData({...formData,dateOfBirth:value})}
+        defaultValue={formData.dateOfBirth} />
         <Picker
         selectedValue={selectedValue}
         style={{ height: 50, width: 150 }}
         onValueChange={(cityValue, cityIndex) => {
-          setSelectedValue(cityValue)
+          setData({...formData,city:cityValue})
         }}
       >
         <Picker.Item label="select city" value=""/>
