@@ -6,6 +6,8 @@ router.route("/savepost")
     .get(QuestAns.find_All)
   .post(QuestAns.create_One) 
   .put(QuestAns.like_One)
+router.route("/findpost")
+.get(QuestAns.find_One)
  
 
 module.exports = router;

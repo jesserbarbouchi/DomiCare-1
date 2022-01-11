@@ -35,9 +35,9 @@ module.exports = {
     }
   },
   find_One: async (req, res, next) => {
-    console.log("event/events ",req.body)
+    
     try {
-      const eventsFound = await QuestAns.find({ city: req.body.city });
+      const postFound = await QuestAns.find({ _id: req.body._id });
       console.log(eventsFound)
       res.status(200).json(eventsFound);
     } catch (error) {
@@ -76,29 +76,29 @@ module.exports = {
     }
   },
   like_One: async (req, res, next) => {
-    console.log("request", req.body);
+    
     if(req.body.action==='inc')
-   { 
+    
+   { console.log('inc')
      try {
        
       const Quest = await QuestAns.findOneAndUpdate(
-        { _id: req.body._id },{$push : {participants: req.body._id}},
-        {  safe: true, upsert: true});
-      console.log(res)
+        { _id: req.body.postid },{"$push" : {"participants": req.body.userid}});
+      
       res.status(200).json(Quest);
     } catch (error) {
+      console.log(err)
       next(error);
     }
   }
-  else if(req.body.action==='inc'){
+  else if(req.body.action==='déc'){
+    console.log('dec')
     try {
       const Quest = await QuestAns.findByIdAndUpdate(
-        { _id: req.body._id },
-        { $pull: { participants: req.body._id } },
-        {  safe: true, upsert: true}
-      );
+        { _id: req.body.postid },{"$pull": {"participants": req.body.userid}});
       res.status(200).json(Quest);
     } catch (error) {
+      console.log(err)
       next(error);
     }
   }
