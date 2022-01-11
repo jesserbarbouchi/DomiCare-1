@@ -15,7 +15,8 @@ import AddBlog from "./components/AddBlog.js";
 import Forum2 from "./components/forum2.js";
 import ServiceProviderProfile from "./components/ServiceProviderProfile.js";
 import Equipmentsfetch from "./components/Equipementsfetch.js";
-
+import EquipementsProviderProfile from "./components/EquipementsProviderProfile.js"
+import EditProfile from "./components/EditProfile.js"
 import VerificationCode from "./components/Authentification/VerificationCode.js";
 import ForgetPassword from "./components/Authentification/ForgetPassword.js";
 import ResetPassword from "./components/Authentification/ResetPassword.js";
@@ -62,6 +63,8 @@ const Router = () => {
                     name="Equipementsfetch"
                     component={Equipmentsfetch}
                 />
+                <Stack.Screen name="EquipementsProviderProfile" component={EquipementsProviderProfile} />
+                <Stack.Screen name="EditProfile" component={EditProfile} />
                 <Stack.Screen name="Forum" component={Forum} />
                 <Stack.Screen name="Forum2" component={Forum2} />
                 <Stack.Screen name="ForumPost" component={ForumPost} />
