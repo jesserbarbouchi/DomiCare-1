@@ -13,14 +13,30 @@ import {
     ScrollView,
     InputGroup,
     InputLeftAddon,
-    Icon,
+    useDisclose,
+    Modal,
 } from "native-base";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CredentialsContext } from './CredentialsContext.js';
 
 function SignUp() {
     const [formData, setData] = React.useState({});
     const [errors,  setErrors] = React.useState({});
-    const navigation = useNavigation()
+    const navigation = useNavigation();
+    const { isOpen, onOpen, onClose } = useDisclose()
+    
+    const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
+    const persistLogin =(credentials)=>{
+        AsyncStorage
+        .setItem('domicareCredentials', JSON.stringify(credentials))
+        .then(()=>{
+          setStoredCredentials(credentials);
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+      }
+    
     const validate = () => {
         let validation = true;
         let passwordValid = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
@@ -83,9 +99,11 @@ function SignUp() {
         return validation;
     };
     
+    
     const post=()=>{
       axios.post('http://localhost:3000/auth/SSSignUp',{formData} ).then((response)=>{
-        let errors={}
+        let errors={};
+        const data = response.data;
         if(response.data === 'email address already exists'){
             errors["email"]= 'email address already exists';
             setErrors(errors);
@@ -94,18 +112,23 @@ function SignUp() {
             errors["userName"]= 'Username already exists';
             setErrors(errors);
         }
-        else  navigation.navigate('Login')
+        else{
+            persistLogin({userData : data});
+            navigation.navigate('Home');
+        }  
          }).catch((err)=>{
         console.log(err)
          })
     };
 
     const onSubmit = () => {
-        validate()
-            ?(
-              post()
-            )
-            : console.log("Validation Failed");
+        if(validate()){
+            onOpen()
+           setTimeout(() => {
+            post()
+           }, 2000);  
+        }
+            else console.log("Validation Failed");
     };
 
     return (
@@ -117,7 +140,17 @@ function SignUp() {
         minW: "80",
       }}
     >
-     
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal.Content>
+          <Modal.Header fontSize="4xl" fontWeight="bold">
+            Congratulation
+          </Modal.Header>
+          <Modal.Body>
+            you have successfully registered
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
+      
         <Box safeArea p="2" w="120%" maxW="300" py="8">
             <Heading
                 size="lg"
