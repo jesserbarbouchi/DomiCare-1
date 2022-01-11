@@ -1,6 +1,7 @@
 import React from "react";
 import axios from 'axios';
 import { useNavigation } from "@react-navigation/native";
+import {IPAdress} from "@env"
 import {
     Box,
     Heading,
@@ -16,12 +17,25 @@ import {
     useDisclose,
     Modal,
 } from "native-base";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CredentialsContext } from './CredentialsContext.js';
 
-
+  
 function SignUp() {
+    const navigation = useNavigation()
     const [formData, setData] = React.useState({});
     const [errors,  setErrors] = React.useState({});
-    const navigation = useNavigation()
+    const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
+const persistLogin =(credentials)=>{
+    AsyncStorage
+    .setItem('domicareCredentials', JSON.stringify(credentials))
+    .then(()=>{
+      setStoredCredentials(credentials);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
     const { isOpen, onOpen, onClose } = useDisclose()
     const validate = () => {
         let validation = true;
@@ -82,8 +96,9 @@ function SignUp() {
     };
     
     const post=()=>{
-      axios.post('http://localhost:3000/auth/EPSignUp',{formData} ).then((response)=>{
-        let errors={}
+      axios.post(`http://${IPAdress}:3000/auth/SPSignUp`,{formData} ).then((response)=>{
+        let errors={};
+        const data = response.data;
         if(response.data === 'email address already exists'){
             errors["email"]= 'email address already exists';
             setErrors(errors);
@@ -92,7 +107,10 @@ function SignUp() {
             errors["userName"]= 'Username already exists';
             setErrors(errors);
         }
-        else  navigation.navigate('Login')
+        else {
+            persistLogin({userData : data});
+            navigation.navigate('Home');
+        }
          }).catch((err)=>{
         console.log(err)
          })
