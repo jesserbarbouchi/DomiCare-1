@@ -12,16 +12,18 @@ const navigation = useNavigation();
   
   const [subjects, setData] = useState([]);
    useEffect(async () => {
-    const result = await axios('http://192.168.11.112:3000/savepost/savepost');
+    const result = await axios('http://192.168.11.151:3000/savepost/savepost');
     setData(result.data);
+    
   }, []);
-  
+  console.log('sub',subjects)
   return (
     
     <View>
        <SafeAreaView style={styles.container}>
       <ScrollView>
-        {subjects.map((item, key) => {
+        {
+        subjects.map((item, key) => {
           return (
             <Box
               key={key}
@@ -104,8 +106,9 @@ const navigation = useNavigation();
                       fontWeight="400"
                     >
                       {item.createdAt}
-                      {item.likesCount} Likes
+                      
                       {item.numberOfComments} Comments
+                      {item.participants.length} Likes
                       <Button  title='continue reading' backgroundColor='white'
                       onPress={() => navigation.navigate("ForumPost", item)}
                       >  

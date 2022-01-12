@@ -35,11 +35,13 @@ module.exports = {
     }
   },
   find_One: async (req, res, next) => {
-    
+
+    console.log(req.params.id)
     try {
-      const postFound = await QuestAns.find({ _id: req.body._id });
-      console.log(eventsFound)
-      res.status(200).json(eventsFound);
+      
+      const postFound = await QuestAns.findById({ _id: req.params.id });
+      console.log(postFound)
+      res.status(200).json(postFound);
     } catch (error) {
       next(error);
     }
@@ -83,23 +85,23 @@ module.exports = {
      try {
        
       const Quest = await QuestAns.findOneAndUpdate(
-        { _id: req.body.postid },{"$push" : {"participants": req.body.userid}});
+        { _id: req.body.postid },{"$push" : {"participants": req.body.userid}},{$inc: {"likesCount":1}});
       
       res.status(200).json(Quest);
     } catch (error) {
       console.log(err)
-      next(error);
+      next();
     }
   }
   else if(req.body.action==='déc'){
     console.log('dec')
     try {
       const Quest = await QuestAns.findByIdAndUpdate(
-        { _id: req.body.postid },{"$pull": {"participants": req.body.userid}});
+        { _id: req.body.postid },{"$pull": {"participants": req.body.userid}},{$inc: {"likesCount":-1}});
       res.status(200).json(Quest);
     } catch (error) {
       console.log(err)
-      next(error);
+      next();
     }
   }
   }

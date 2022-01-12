@@ -13,7 +13,7 @@ const AddBlog = (props) => {
   const [post,setpost]= useState({})
 
      const SavePost=(post)=>{
-        axios.post('http://192.168.11.112:3000/savepost/savepost',{post}).then((err,res)=>{
+        axios.post('http://192.168.11.151:3000/savepost/savepost',{post}).then((err,res)=>{
           if(err){
             console.log(err)
           }

@@ -6,29 +6,23 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './Authentification/CredentialsContext.js';
 
 const ForumPost = (props) => {
- 
-  useEffect( () => {
-      axios.get('http://192.168.11.112:3000/findpost/findpost',{_id:props.route.params},(err,res)=>{
-        if(err){
-          console.log(err)
-        }
-        else{
-          setpost(result.data);
-          setData(result.data.participants)
-        }
-      });
-    
-    
-  }, []);
+  console.log("params",props.route.params)
+  useEffect( async() => {
+    const _id=props.route.params._id
+     const post =await axios.get(`http://192.168.11.151:3000/savepost/findpost/${_id}`)
+       
+          setpost(post.data);
+        },[])
+     
   const navigation = useNavigation();
-  const [singlepost,setpost] = useState(props.route.params);
+  const [singlepost,setpost] = useState({});
   const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
   const  userData = storedCredentials.userData;
  
-  const [Likes, setLike] = useState(singlepost.participants.length);
-  const participants=singlepost.participants
- 
+  const [Likes, setLike] = useState(0);
   
+ 
+  console.log('init',singlepost)
 
   const Like=()=>{
     
@@ -36,22 +30,21 @@ const ForumPost = (props) => {
     const userid=userData._id
     const postid=singlepost._id
     let action=''
-    console.log('here',singlepost)
+    
     var index=singlepost.participants.indexOf(userid)
     if(index==-1){
-      participants.push(userid)
-      setLike(c=>c+1)
+      
+      
       action='déc'
       }
     
     else{
-      participants.splice(index,1)
-      setLike(c=>c-1)
+      
       action='inc'
     }
     console.log('hello')
     
-    axios.put('http://192.168.11.112:3000/savepost/savepost',{userid,postid,action}).then((err,res)=>{
+    axios.put('http://192.168.11.151:3000/savepost/savepost',{userid,postid,action}).then((err,res)=>{
         if(err){
           console.log('err',err)
         }
@@ -75,9 +68,11 @@ const ForumPost = (props) => {
       <Text> {singlepost.title}</Text>
       <Text> By:{singlepost.owner}</Text>
       <Text>Posted At : {singlepost.createdAt}</Text>
-      <Text>Posted At : {singlepost.content}</Text>
-      <Text> {Likes} Likes</Text>
+      <Text> {singlepost.content}</Text>
+      <Text>{singlepost.likesCount}  Likes</Text>
       <Button title="Like" onPress={() => Like()} />
+
+      
       <Button title="comment" onPress={() => navigation.navigate("Forum")} />
       {/* {singlepost.comments.map((comment,key)=>{
           return <View key={key}>

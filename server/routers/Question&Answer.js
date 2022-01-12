@@ -6,7 +6,7 @@ router.route("/savepost")
     .get(QuestAns.find_All)
   .post(QuestAns.create_One) 
   .put(QuestAns.like_One)
-router.route("/findpost")
+router.route("/findpost/:id")
 .get(QuestAns.find_One)
  
 
