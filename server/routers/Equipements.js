@@ -8,6 +8,12 @@ router.route("/")
 //   .put(EquipementsController.update_One) 
 //   .delete(EquipementsController.remove_One)  
 router.route("/:equipementsId")
-  .get(EquipementsController.find_One) 
+  .get(EquipementsController.findOne) 
+
+router.route("/saveEquip")
+  .post(EquipementsController.create_One)
+
+router.route("/findEquip")
+      .get(EquipementsController.findOne)
 
 module.exports = router;
