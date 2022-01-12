@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import Router from "./router.js";
 import {StyleSheet}from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-
 import AppLoading from 'expo-app-loading';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './components/Authentification/CredentialsContext.js';
+import {firebaseConfig} from "@env";
+import * as firebase from "firebase";
+firebase.initializeApp(firebaseConfig);
 
 export default function App() {
   const [appReady, setAppReady]= useState(false);

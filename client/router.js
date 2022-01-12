@@ -21,7 +21,6 @@ import VerificationCode from "./components/Authentification/VerificationCode.js"
 import ForgetPassword from "./components/Authentification/ForgetPassword.js";
 import ResetPassword from "./components/Authentification/ResetPassword.js";
 import { NavigationContainer } from "@react-navigation/native";
-import { IPAdress } from "@env";
 const Stack = createNativeStackNavigator();
 const Router = () => {
     const linking = {

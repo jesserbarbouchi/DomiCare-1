@@ -1,7 +1,6 @@
 import React from "react"
-import { Button , Radio, Center, NativeBaseProvider } from "native-base"
+import { Button , Center, NativeBaseProvider , Heading,Box,CheckIcon,Select,} from "native-base"
 import { useNavigation } from "@react-navigation/native";
-
 export default () => {
     const [value, setValue] = React.useState("user type")
     const navigation = useNavigation()
@@ -9,26 +8,39 @@ export default () => {
   return (
     <NativeBaseProvider>
       <Center flex={1} px="3">
-      <Radio.Group
-      name="myRadioGroup"
-      accessibilityLabel="user type"
-      value={value}
-      onChange={(nextValue) => {
-        setValue(nextValue)
-      }}
-    >
-   
-      <Radio value='SignUpServiceSeeker'  size="lg" my={1}>
-      Service seeker
-      </Radio>
-      <Radio value='SignUpServiceProvider'  size="lg" my={1}>
-      Service provider
-      </Radio>
-      <Radio value='SignUpEquipementsProvider'  size="lg" my={1}>
-      Equipements provider
-      </Radio>
-    </Radio.Group>
-    <Button onPress={()=>navigation.navigate(`${value}`)}>Next</Button>
+      <Box safeArea p="2" py="8" w="120%" maxW="300" >
+            <Heading
+                size="md"
+                fontWeight="300"
+                color="coolGray.800"
+                _dark={{
+                  color: "warmGray.50",
+                }}
+              >
+                Signup as :
+              </Heading>
+      
+    {/* <VStack alignItems="center" space={4}> */}
+      <Select
+        selectedValue={value}
+        minWidth="200"
+        accessibilityLabel="Choose Service"
+        placeholder="Choose Service"
+        
+        _selectedItem={{
+          bg: "teal.600",
+          endIcon: <CheckIcon size="5" />,
+        }}
+        mt={1}
+        onValueChange={(itemValue) => setValue(itemValue)}
+      >
+        <Select.Item  label="Service seeker" value="SignUpServiceSeeker" />
+        <Select.Item label="Service provider" value="SignUpServiceProvider" />
+        <Select.Item label="Equipements provider" value="SignUpEquipementsProvider" />
+      </Select>
+    {/* </VStack> */}
+    <Button mt="1" width={'30%'} left={'30%'} colorScheme="teal" onPress={()=>navigation.navigate(`${value}`)}>Next</Button>
+    </Box>
       </Center>
     </NativeBaseProvider>
   )
