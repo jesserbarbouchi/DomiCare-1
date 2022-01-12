@@ -1,39 +1,40 @@
-import React, { useState, useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  Button,
-  ScrollView,
-  Alert,
-  Picker,
-  Image,
-  Text,
-  TouchableOpacity,
-} from "react-native";
-import sProvider from "./dummy.js";
-// import { Picker } from '@react-native-picker/picker';
-import axios from "axios";
+import React, { useState,useEffect } from "react";
+import { View, StyleSheet, Button,ScrollView, Alert,Picker, Image, Text, TouchableOpacity } from "react-native";
+import sProvider from "./dummy.js"
+import axios from 'axios'
 // import { Avatar } from 'react-native-paper';
-import { Card, Icon } from "react-native-elements";
-import { Rating, AirbnbRating } from "react-native-ratings";
-const serviceProvidersList = () => {
-  const [selectedValue, setSelectedValue] = useState("");
-  const [selectedgender, setSelectedGender] = useState("");
-  const [ServiceProviders, setSProviders] = useState([]);
-  const [Data, setData] = useState([]);
+import { Card, Icon } from 'react-native-elements';
+import { Rating, AirbnbRating } from 'react-native-ratings';
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-  useEffect(async () => {
-    try {
-      const result = await axios.get(
-        "http://192.168.11.22:3000/serviceProvidersList/serviceProvidersList"
-      );
-      setSProviders(result.data);
-      setData(result.data);
-      console.log(result.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+
+
+
+const serviceProvidersList = ({navigation}) => {
+    const [selectedValue, setSelectedValue] = useState("");
+    const [selectedgender, setSelectedGender] = useState("");
+  const [ServiceProviders, setSProviders] = useState([]);
+  const [Data,setData]=useState([]);
+    
+    useEffect(async() => {
+      
+        try {
+          const result = await axios.get("http://192.168.11.151:3000/serviceProvidersList/serviceProvidersList")
+          setSProviders(result.data)
+          setData(result.data)
+          console.log(result.data)
+
+          
+        }
+        catch (error) {
+          console.log(error)
+        }
+      
+    
+  
+      
+    },[])
 
   const ratingCompleted = (rating) => {
     console.log("Rating is: " + rating);
@@ -59,7 +60,9 @@ const serviceProvidersList = () => {
     } else {
       setSProviders(Data);
     }
-  };
+    
+  }
+
 
   // componentDidMount() {
   //     this.getServiceProviders()
@@ -136,18 +139,20 @@ const serviceProvidersList = () => {
                       uri: "https://i.pinimg.com/originals/6e/ff/53/6eff53e82b80fb5dd7614d5ba054f144.jpg",
                     }}
                   />
-                  <Text style={styles.name}> Username : {u.userName}</Text>
-                  <Text style={styles.name}> Position : {u.speciality}</Text>
-                  <Text style={styles.name}> City : {u.city}</Text>
-                  <Text style={styles.name}> Gender : {u.gender}</Text>
-                  <Text style={styles.name}> Services : {u.services}</Text>
+                  <Text style = {styles.name}> firstName : { u.firstName}</Text>
+                  <Text style = {styles.name}> lastName : { u.lastName}</Text>
+                  <Text style = {styles.name}> Position : {u.speciality}</Text>
+                  <Text style = {styles.name}> City : {u.city}</Text>
+                  <Text style = {styles.name}> Gender : {u.gender}</Text>
+                  <Text style = {styles.name}> Services : {u.posts}</Text>
+               
+                  <AirbnbRating style={styles.airbnbRating} />
+                  
 
                   <AirbnbRating style={styles.airbnbRating} />
 
-                  <Button
-                    title="Ask for service"
-                    onPress={() => Alert.alert("Simple Button pressed")}
-                  />
+              <Button title="Ask for service" onPress={() =>navigation.navigate('SeekerRequest')} />
+         
                 </View>
               );
             })}

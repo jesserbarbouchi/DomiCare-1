@@ -1,5 +1,4 @@
 import React,{useState, useEffect} from 'react'
-import { Picker } from '@react-native-picker/picker';
 import { View, Text,StyleSheet,SafeAreaView,ScrollView,Image, Button } from 'react-native'
 import items from "./Equipements.js"
 
