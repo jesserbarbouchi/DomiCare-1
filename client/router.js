@@ -56,7 +56,6 @@ const Router = () => {
     return (
         <NavigationContainer
             linking={linking}
-            
         >
             <Stack.Navigator>
                 <Stack.Screen name="Home" component={Home} />
