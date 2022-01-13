@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import EquipementsFeed from "./components/EquipementsFeed.js";
-import Forum from "./components/Forum.js";
+
 import Home from "./components/Home.js";
 import Login from "./components/Authentification/Login.js";
 import SignUpServiceSeeker from "./components/Authentification/SignUpServiceSeeker.js";
@@ -65,7 +65,6 @@ const Router = () => {
                 />
                 <Stack.Screen name="EquipementsProviderProfile" component={EquipementsProviderProfile} />
                 <Stack.Screen name="EditProfile" component={EditProfile} />
-                <Stack.Screen name="Forum" component={Forum} />
                 <Stack.Screen name="Forum2" component={Forum2} />
                 <Stack.Screen name="ForumPost" component={ForumPost} />
                 <Stack.Screen name="AddBlog" component={AddBlog} />
@@ -113,5 +112,4 @@ const Router = () => {
         </NavigationContainer>
     );
 };
-
 export default Router;
