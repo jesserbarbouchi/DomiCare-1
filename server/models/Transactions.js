@@ -7,10 +7,12 @@ const Transactions = mongoose.model(
       type: mongoose.Schema.Types.ObjectId,
       ref: "ServiceSeeker",
     },
+    
     receiverId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "ServiceProvider",
     },
+    address: {type: String },
     
     createdAt: {
       type: Date,
@@ -37,7 +39,7 @@ const Transactions = mongoose.model(
       type: String,
     },
 
-    adress: { String },
+  
   })
 );
 module.exports = Transactions;

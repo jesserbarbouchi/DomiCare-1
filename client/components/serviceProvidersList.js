@@ -20,7 +20,7 @@ const serviceProvidersList = ({navigation}) => {
     useEffect(async() => {
       
         try {
-          const result = await axios.get("http://192.168.1.191:3000/serviceProvidersList/serviceProvidersList")
+          const result = await axios.get("http://192.168.11.163:3000/serviceProvidersList/serviceProvidersList")
           setSProviders(result.data)
           setData(result.data)
           console.log(result.data)
@@ -150,7 +150,6 @@ const serviceProvidersList = ({navigation}) => {
                   <AirbnbRating style={styles.airbnbRating} />
                   
 
-                  <AirbnbRating style={styles.airbnbRating} />
 
               <Button title="Ask for service" onPress={() =>navigation.navigate('SeekerRequest',u._id)} />
          

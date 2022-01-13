@@ -2,12 +2,9 @@
 import * as React from 'react';
 import { TextInput } from 'react-native-paper';
 import axios from 'axios';
-import ServiceProvider from '../../server/controllers/ServiceProvider';
-import { View, StyleSheet, Button, ScrollView, Alert, Picker, Image, Text, TouchableOpacity } from "react-native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { View, Button,} from "react-native";
 import { CredentialsContext } from './Authentification/CredentialsContext.js';
 import Swal from 'sweetalert2'
-
 import {useNavigation} from "@react-navigation/native"
 
 
@@ -17,11 +14,12 @@ const  userData = storedCredentials.userData;
   const navigation = useNavigation()
   const receiverId = props.route.params
   const [text, setText] = React.useState('');
+  const [address, setAddress] = React.useState('');
   const senderId = userData._id
   const post=()=>{
-    axios.post(`http://localhost:3000/SeekerRequest/SeekerRequest/`, { text,receiverId,senderId })
+    axios.post(`http://localhost:3000/SeekerRequest/SeekerRequest/`, { text,address,receiverId,senderId })
       .then(res => console.log(res)).catch(err => console.log(id))
-    console.log(text)
+    console.log(text,address)
   }
   const onSubmit = () => { 
     post()
@@ -43,6 +41,12 @@ const  userData = storedCredentials.userData;
       
         onChangeText={text => setText(text)}
         value={text}
+      />
+      <TextInput
+      label="Write your address here..."
+      
+        onChangeText={address => setAddress(address)}
+        value={address}
       />
       <Button
  onPress={onSubmit}
