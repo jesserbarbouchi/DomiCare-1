@@ -99,6 +99,7 @@ module.exports = {
     
     SPSignUp: (req, res) => {
         var data = req.body.formData;
+        console.log(req.body.formData)
         ServiceProvider.findOne({ email: data.email.toLowerCase() })
             .then((user) => {
                 if (user) {
@@ -125,6 +126,7 @@ module.exports = {
                                     gender: "",
                                     dateOfBirth: "",
                                     picture: "",
+                                    certificate : data.certificate
                                 };
                                 ServiceProvider.create(obj)
                                     .then((user) => res.send(user))
