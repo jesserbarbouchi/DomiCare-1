@@ -1,6 +1,7 @@
 import React from "react";
 import axios from 'axios';
 import { useNavigation } from "@react-navigation/native";
+import {IPAdress} from "@env"
 import {
     Box,
     Heading,
@@ -95,7 +96,7 @@ const persistLogin =(credentials)=>{
     };
     
     const post=()=>{
-      axios.post('http://localhost:3000/auth/SPSignUp',{formData} ).then((response)=>{
+      axios.post(`http://${IPAdress}:3000/auth/SPSignUp`,{formData} ).then((response)=>{
         let errors={};
         const data = response.data;
         if(response.data === 'email address already exists'){
