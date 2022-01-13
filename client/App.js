@@ -4,9 +4,10 @@ import {StyleSheet}from 'react-native';
 import AppLoading from 'expo-app-loading';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './components/Authentification/CredentialsContext.js';
-import {firebaseConfig} from "@env";
-import * as firebase from "firebase";
-firebase.initializeApp(firebaseConfig);
+
+
+
+
 
 export default function App() {
   const [appReady, setAppReady]= useState(false);
@@ -35,6 +36,7 @@ export default function App() {
   }
   
   return (
+
     <CredentialsContext.Provider value={{storedCredentials, setStoredCredentials}}>
       
    
@@ -42,7 +44,7 @@ export default function App() {
   
     
     </CredentialsContext.Provider>
- 
+
 
   );
 }

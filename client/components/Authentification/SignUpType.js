@@ -1,10 +1,14 @@
 import React from "react"
 import { Button , Center, NativeBaseProvider , Heading,Box,CheckIcon,Select,} from "native-base"
 import { useNavigation } from "@react-navigation/native";
+
+
 export default () => {
-    const [value, setValue] = React.useState("user type")
+    const [value, setValue] = React.useState("")
     const navigation = useNavigation()
 
+   
+    
   return (
     <NativeBaseProvider>
       <Center flex={1} px="3">
@@ -20,9 +24,8 @@ export default () => {
                 Signup as :
               </Heading>
       
-    {/* <VStack alignItems="center" space={4}> */}
       <Select
-        selectedValue={value}
+        selectedValue={value }
         minWidth="200"
         accessibilityLabel="Choose Service"
         placeholder="Choose Service"
@@ -32,14 +35,14 @@ export default () => {
           endIcon: <CheckIcon size="5" />,
         }}
         mt={1}
-        onValueChange={(itemValue) => setValue(itemValue)}
+        onValueChange={(value) => setValue(value)}
       >
         <Select.Item  label="Service seeker" value="SignUpServiceSeeker" />
         <Select.Item label="Service provider" value="SignUpServiceProvider" />
         <Select.Item label="Equipements provider" value="SignUpEquipementsProvider" />
       </Select>
-    {/* </VStack> */}
     <Button mt="1" width={'30%'} left={'30%'} colorScheme="teal" onPress={()=>navigation.navigate(`${value}`)}>Next</Button>
+    
     </Box>
       </Center>
     </NativeBaseProvider>

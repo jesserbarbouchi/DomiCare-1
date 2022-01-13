@@ -13,7 +13,6 @@ import serviceProvidersList from "./components/serviceProvidersList.js";
 import shareservice from "./components/shareService.js";
 import AddBlog from "./components/AddBlog.js";
 import Forum2 from "./components/forum2.js";
-import ServiceProviderProfile from "./components/ServiceProviderProfile.js";
 import Equipmentsfetch from "./components/Equipementsfetch.js";
 import EquipementsProviderProfile from "./components/EquipementsProviderProfile.js"
 import EditProfile from "./components/EditProfile.js"
@@ -21,6 +20,9 @@ import VerificationCode from "./components/Authentification/VerificationCode.js"
 import ForgetPassword from "./components/Authentification/ForgetPassword.js";
 import ResetPassword from "./components/Authentification/ResetPassword.js";
 import { NavigationContainer } from "@react-navigation/native";
+import SeekerRequest  from "./components/SeekerRequest.js";
+
+import { IPAdress } from "@env";
 const Stack = createNativeStackNavigator();
 const Router = () => {
     const linking = {
@@ -54,7 +56,6 @@ const Router = () => {
     return (
         <NavigationContainer
             linking={linking}
-            fallback={<Text>Loading...</Text>}
         >
             <Stack.Navigator>
                 <Stack.Screen name="Home" component={Home} />
@@ -72,10 +73,7 @@ const Router = () => {
                     name="serviceProvidersList"
                     component={serviceProvidersList}
                 />
-                <Stack.Screen
-                    name="ServiceProviderProfile"
-                    component={ServiceProviderProfile}
-                />
+              
                 <Stack.Screen name="shareservice" component={shareservice} />
 
                 <Stack.Screen name="Login" component={Login} />
@@ -101,6 +99,16 @@ const Router = () => {
                     name="SignUpEquipementsProvider"
                     component={SignUpEquipementsProvider}
                 />
+                  <Stack.Screen
+                    name="SeekerRequest"
+                    component={SeekerRequest}
+             
+                />
+
+
+
+
+                
             </Stack.Navigator>
         </NavigationContainer>
     );
