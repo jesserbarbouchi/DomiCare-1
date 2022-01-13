@@ -20,7 +20,6 @@ import VerificationCode from "./components/Authentification/VerificationCode.js"
 import ForgetPassword from "./components/Authentification/ForgetPassword.js";
 import ResetPassword from "./components/Authentification/ResetPassword.js";
 import { NavigationContainer } from "@react-navigation/native";
-
 import SeekerRequest  from "./components/SeekerRequest.js";
 
 import { IPAdress } from "@env";
@@ -57,7 +56,6 @@ const Router = () => {
     return (
         <NavigationContainer
             linking={linking}
-            
         >
             <Stack.Navigator>
                 <Stack.Screen name="Home" component={Home} />

@@ -312,7 +312,7 @@ function SignUp() {
                     )}
                 </FormControl>
 
-                <Button onPress={onSubmit} mt="5" colorScheme="cyan">
+                <Button onPress={onSubmit} mt="5" colorScheme="teal">
                     Submit
                 </Button>
             </VStack>
