@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import Router from "./router.js";
 import {StyleSheet}from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-
 import AppLoading from 'expo-app-loading';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './components/Authentification/CredentialsContext.js';
+
+
+
+
 
 export default function App() {
   const [appReady, setAppReady]= useState(false);
@@ -34,6 +36,7 @@ export default function App() {
   }
   
   return (
+
     <CredentialsContext.Provider value={{storedCredentials, setStoredCredentials}}>
       
    
@@ -41,7 +44,7 @@ export default function App() {
   
     
     </CredentialsContext.Provider>
- 
+
 
   );
 }

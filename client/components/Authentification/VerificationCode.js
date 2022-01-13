@@ -94,7 +94,7 @@ function VerificationCode (){
                     )}
                 </FormControl>
 
-                <Button mt="2" colorScheme="cyan" onPress={onSubmit}>
+                <Button mt="2" colorScheme="teal" onPress={onSubmit}>
                   validate
                 </Button>
                
