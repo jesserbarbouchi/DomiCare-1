@@ -20,7 +20,7 @@ import VerificationCode from "./components/Authentification/VerificationCode.js"
 import ForgetPassword from "./components/Authentification/ForgetPassword.js";
 import ResetPassword from "./components/Authentification/ResetPassword.js";
 import { NavigationContainer } from "@react-navigation/native";
-import NewPassword  from "./components/Authentification/NewPassword.js";
+
 import SeekerRequest  from "./components/SeekerRequest.js";
 
 import { IPAdress } from "@env";

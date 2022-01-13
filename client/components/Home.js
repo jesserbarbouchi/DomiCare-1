@@ -5,10 +5,8 @@ import { CredentialsContext } from './Authentification/CredentialsContext.js';
 
 const Home = ({navigation}) => {
     const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
-    const  userData = storedCredentials.userData;
+    const  userData = storedCredentials;
     
-
-   
    
     
     const clearLogin = () => {
