@@ -141,7 +141,7 @@ function ResetPassword (){
                     )}
                 </FormControl>
 
-                <Button mt="2" colorScheme="cyan" onPress={onSubmit}>
+                <Button mt="2" colorScheme="teal" onPress={onSubmit}>
                   Reset my Password
                 </Button>
                
