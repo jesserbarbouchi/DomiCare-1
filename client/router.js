@@ -21,6 +21,7 @@ import EquipementsProviderProfile from "./components/EquipementsProviderProfile.
 import EditProfile from "./components/EditProfile.js"
 import userEquipements from "./components/userEquipements.js"
 
+
 const Stack = createNativeStackNavigator();
 const Router = () => {
     return (

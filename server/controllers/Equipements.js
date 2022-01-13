@@ -82,7 +82,28 @@ module.exports = {
        else res.send('user not found')
      })
      .catch((err)=> console.log(err))
- }
+ },delete_One:
+ async (req, res, next) => {
+     try {
+          console.log("\nRequesting the server to delete a specific user from the database ...\n");
+          console.log("req.params.userId222",req.params.ownerId);
+          console.log("{_id:req.params.userId}",{ownerId:req.params.ownerId});
+          // the server will try the following
+          const removedEquip = await Equipement
+               .findByIdAndRemove(req.params.ownerId)
+          res.send(removedEquip)
+     } catch (error) {
+          next(error)
+     }
+},delete_one:
+async function deleteProductById(req, res, next) {
+     console.log("req.params.33333",req.params.ownerId);
+          console.log("{_id:req.params.44444}",{ownerId:req.params.ownerId});
+     Equipement.findOneAndDelete(req.params.ownerId)
+       .then(res.send("it worked"))
+       .catch(err => next(err));
+   }
+     
 //   find_One: async (req, res, next) => {
 //        try {
 //             console.log("\nRequesting the server to give me a specific user from the database ...\n");

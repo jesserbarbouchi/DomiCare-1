@@ -3,6 +3,8 @@ import {Picker} from "@react-native-picker/picker"
 import axios from 'axios'
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './Authentification/CredentialsContext.js';
+import Swal from "sweetalert2"
+// import Modal from "react-native-modals";
 import {
   StyleSheet,
   Text,
@@ -22,22 +24,41 @@ const userEquipements = ({navigation}) => {
   const [selectedAvailability, setSelectedAvailability] = useState("");
   const [selectedValue, setSelectedValue] = useState("");
   const [clicked,setClicked]=useState(false);
+  const [clicked2,setClicked2]=useState(false);
   const [formData, setData] = React.useState({});
   const [myData, setmyData] = React.useState([]);
   const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
   const  userData = storedCredentials;
   // console.log("userData:",userData);
   // console.log(userData.userData._id);
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 useEffect(()=>{
   axios.get(`http://localhost:3000/Equipements/${userData.userData._id}`)
   .then(res => {
     // console.log("equipement id",res);
     setmyData(res.data) 
+    console.log("res.data",res.data);
   })
   .catch(err => {
       console.log(err);
   })
 }, []);
+
+const fetchData=()=>{
+  axios.get(`http://localhost:3000/Equipements/${userData.userData._id}`)
+  .then(res => {
+    // console.log("equipement id",res);
+    setmyData(res.data) 
+    console.log("res.data",res.data);
+  })
+  .catch(err => {
+      console.log(err);
+  })
+}
 
 const saveEquipement = ()=>{
   console.log("ownerId",formData.ownerId);
@@ -51,6 +72,61 @@ const saveEquipement = ()=>{
   .then(()=>profile())
   .catch(error=>console.log(error))
 }
+const myDelete =()=>{
+  console.log("ownerId",formData.ownerId);
+  axios.delete(`http://localhost:3000/Equipements/${myData.ownerId}`)
+  .catch(error=>{console.log(error)})
+}
+// const popUp=()=>{
+//   return( <Modal isVisible={isModalVisible}>
+//     <View style={{ flex: 1 }}>
+//       <Text>Hello!</Text>
+//       <Button title="Hide modal" onPress={!isModalVisible} />
+//     </View>
+//   </Modal>)
+// }
+const myAlert=()=>{
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger'
+  },
+  buttonsStyling: false
+})
+
+swalWithBootstrapButtons.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Yes, delete it!',
+  cancelButtonText: 'No, cancel!',
+  reverseButtons: true
+}).then((result) => {
+  if (result.isConfirmed) {
+    myDelete()
+    swalWithBootstrapButtons.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+    .then(()=>setTimeout(profile(),2000))
+  } else if (
+    /* Read more about handling dismissals below */
+    
+    result.dismiss === Swal.DismissReason.cancel
+    .then(()=>profile())
+    .then(()=>fetchData())
+  ) {
+    swalWithBootstrapButtons.fire(
+      'Cancelled',
+      'Your imaginary file is safe :)',
+      'error'
+    )
+  }
+})
+}
+
 var profile = () => {
   navigation.navigate("EquipementsProviderProfile")
 };
@@ -60,9 +136,11 @@ var profile = () => {
       <View>
       <Button onPress={()=>setClicked(true)}>Add Equipement</Button>
       <View style={styles.sProvider}>
-    
+        
           {myData.map((item, key) => {
+            
             return ( <View key={key} style={styles.itemVue}>
+              <Button onPress={myAlert} >Delete</Button>
               <Image style={styles.cardImage} source={{uri:item.picture}} />
               <Text>Equipement name : {item.name}</Text>
               <Text>Price : {item.price}</Text>
@@ -188,7 +266,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
   },
-  container: {
+  box: {
     flex:1,
     backgroundColor:'#fff',
     paddingTop:40,
