@@ -1,38 +1,75 @@
-import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import * as React from "react";
 import { View, Text, Button } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CredentialsContext } from './Authentification/CredentialsContext.js';
 
-const Home = () => {
-    const navigation = useNavigation();
-    var goToLogin = () => {
-        navigation.navigate("Login");
-    };
-    var goToServiceProviderList = () => {
-        navigation.navigate("ServiceProviderList");
-    };
+const Home = ({navigation}) => {
+    const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
+    const  userData = storedCredentials;
+    
+   
+    
+    const clearLogin = () => {
+        AsyncStorage
+        .removeItem('domicareCredentials')
+        .then(()=>{
+            setStoredCredentials("");
+        })
+        .catch((error)=> console.log(error))
+    }
+
     return (
-        <View>
-            <Text>This is the Home page</Text>
-            <Button
-                title="Go to Equipements Feed"
-                onPress={() => navigation.navigate("EquipementsFeed")}
-            />
-            <Button title="Go to Login" onPress={goToLogin} />
-            <Button
-                title="Service Providers"
-                onPress={() => navigation.navigate("serviceProvidersList")}
-            />
-            <Button
-                title="Forum"
-                onPress={() => navigation.navigate("Forum")}
-            />
-             <Button
-                title="share service"
-                onPress={() => navigation.navigate("shareservice")}
-            />
-            <Button title="Forum2" onPress={()=>navigation.navigate("Forum2")} /> 
-        </View>
+        <CredentialsContext.Consumer>
+             {({storedCredentials})=>(
+                  <View>
+                  <Text>This is the Home page</Text>
+                  <Button
+                      title="Go to Equipements Feed"
+                      onPress={() => navigation.navigate("Equipementsfetch")}
+                  />
+                  {
+                       storedCredentials ?
+                       <>
+                         <Button title="Logout" onPress={clearLogin} />
+                       </>
+                       : <>
+                        <Button title="Login"  onPress={() => navigation.navigate("Login")} />
+                       </>
+                  }
+                     {
+                       storedCredentials ?
+                       <>
+                         < Button
+                title="My profile"
+                onPress={() => navigation.navigate("EquipementsProviderProfile")}
+                 />
+                       </>
+                       : <>
+                        
+                       </>
+                  }
+                  <Button
+                      title="Service Providers"
+                      onPress={() => navigation.navigate("serviceProvidersList")}
+                  />
+                   <Button
+                      title="ServiceProviderProfile"
+                      onPress={() => navigation.navigate("ServiceProviderProfile")}
+                  />
+      
+                  
+                   <Button
+                      title="share service"
+                      onPress={() => navigation.navigate("shareservice")}
+                  />
+                  <Button title="Forum2" onPress={()=>navigation.navigate("Forum2",userData)} /> 
+              </View>
+             )}
+            
+        </CredentialsContext.Consumer>
+       
     );
 };
+
 
 export default Home;

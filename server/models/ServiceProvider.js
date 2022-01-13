@@ -35,9 +35,9 @@ var ServiceProviderSchema=mongoose.Schema(
         speciality:{
           type: String,
         },
-        services: {
-          type: String,
-        },
+    posts: 
+      [{ type: mongoose.Schema.Types.ObjectId, ref: 'Posts' }],
+        
         availability: {
           type: Date,
         },

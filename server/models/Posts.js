@@ -5,7 +5,7 @@ const Posts = mongoose.model(
   new mongoose.Schema({
     ownerId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "ServiceSeeker",
+      ref: "ServiceProvider",
     },
     createdAt: {
       type: Date,
@@ -16,7 +16,7 @@ const Posts = mongoose.model(
       type: String,
     },
     content: {
-      type: String,
+      type: String
     },
     city: {
       type: String,
