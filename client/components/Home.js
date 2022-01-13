@@ -6,10 +6,7 @@ import { CredentialsContext } from './Authentification/CredentialsContext.js';
 const Home = ({navigation}) => {
     const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
     const  userData = storedCredentials;
-
-    var goToServiceProviderList = () => {
-        navigation.navigate("ServiceProviderList");
-    };
+    
    
     
     const clearLogin = () => {
@@ -61,15 +58,11 @@ const Home = ({navigation}) => {
                   />
       
                   
-                  <Button
-                      title="Forum"
-                      onPress={() => navigation.navigate("Forum")}
-                  />
                    <Button
                       title="share service"
                       onPress={() => navigation.navigate("shareservice")}
                   />
-                  <Button title="Forum2" onPress={()=>navigation.navigate("Forum2")} /> 
+                  <Button title="Forum2" onPress={()=>navigation.navigate("Forum2",userData)} /> 
               </View>
              )}
             
@@ -77,5 +70,6 @@ const Home = ({navigation}) => {
        
     );
 };
+
 
 export default Home;
