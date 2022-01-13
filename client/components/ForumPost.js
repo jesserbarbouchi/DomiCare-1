@@ -20,6 +20,7 @@ const ForumPost = (props) => {
   const { storedCredentials, setStoredCredentials } =
     React.useContext(CredentialsContext);
   const userData = storedCredentials.userData;
+  console.log('user',userData)
   console.log("params", props.route.params);
   useEffect( () => {
     
@@ -29,15 +30,29 @@ const ForumPost = (props) => {
       const post = await axios.get(
         `http://${IPAdress}:3000/savepost/findpost/${_id}`
       );
+      const com = await axios.get(
+        `http://${IPAdress}:3000/savepost/findcomments/${_id}`
+      );
       
       setpost(post.data);
       setparticipants(post.data.participants);
-      setcomments(post.data.comments)
+      setcomments(com.data)
      
     }
     fetch()
    
   }, []);
+  const Comment=async()=>{
+    const _id = props.route.params._id;
+    console.log('hello')
+    const comment = await axios.post(`http://${IPAdress}:3000/savepost/savepost`, {
+      owner:{_id:userData._id,name:userData.firstName},
+      postId:singlepost._id,
+      content:value,
+      type:'comment'
+    });
+
+  }
 
   console.log(singlepost.participants);
 
@@ -81,10 +96,10 @@ const ForumPost = (props) => {
       <Button title="comment" onPress={() => navigation.navigate("Forum")} />
       {comments.map((comment,key)=>{
           return <View key={key}>
-      <Text> {comment.By} </Text>
-      <Text> {comment.Body} </Text>
+      <Text> {comment.name} </Text>
+      <Text> {comment.content} </Text>
       <Text> {comment.createdAt} </Text>
-      <Text> {comment.likes} </Text>
+      <Text> {comment.likesCount} </Text>
       <Button title="Like" onPress={() => Like()} />
       <Button title="comment" onPress={() => navigation.navigate("Forum")} />
     
@@ -93,47 +108,18 @@ const ForumPost = (props) => {
       )}
       <NativeBaseProvider>
       <Center flex={1} px="3">
-     {/* <Input
-      value={value}
-      w={{
-        base: "75%",
-        md: "25%",
-      }}
-      onChange={handleChange}
-      placeholder="Value Controlled Input"
-    /> */}
+ 
     <Input value={value} variant="rounded" placeholder="Round"  onChange={handleChange} w={{
         base: "75%",
         md: "25%",
-      }}/>
+      }}
+      InputRightElement={
+        <Button size="xs" rounded="none" w="1/6" h="full" title="Submit"onPress={()=>Comment()}>
+         
+        </Button>
+      }/>
     </Center>
-    <IconButton
-      icon={<Icon as={Entypo} name="emoji-happy" />}
-      borderRadius="full"
-      _icon={{
-        color: "orange.500",
-        size: "md",
-      }}
-      _hover={{
-        bg: "orange.600:alpha.20",
-      }}
-      _pressed={{
-        bg: "orange.600:alpha.20",
-        _icon: {
-          name: "emoji-flirt",
-        },
-        _ios: {
-          _icon: {
-            size: "2xl",
-          },
-        },
-      }}
-      _ios={{
-        _icon: {
-          size: "2xl",
-        },
-      }}
-    />
+    
     </NativeBaseProvider>
     </View>
   );

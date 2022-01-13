@@ -21,6 +21,7 @@ import ForgetPassword from "./components/Authentification/ForgetPassword.js";
 import ResetPassword from "./components/Authentification/ResetPassword.js";
 import { NavigationContainer } from "@react-navigation/native";
 import SeekerRequest  from "./components/SeekerRequest.js";
+// import Test from "./components/Collapsibles.js";
 
 import { IPAdress } from "@env";
 const Stack = createNativeStackNavigator();
@@ -103,6 +104,11 @@ const Router = () => {
                     component={SeekerRequest}
              
                 />
+                {/* <Stack.Screen
+                    name="Test"
+                    component={Test}
+             
+                /> */}
 
 
 
@@ -111,5 +117,6 @@ const Router = () => {
             </Stack.Navigator>
         </NavigationContainer>
     );
+    
 };
 export default Router;
