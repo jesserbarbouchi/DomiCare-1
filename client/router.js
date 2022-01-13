@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import EquipementsFeed from "./components/EquipementsFeed.js";
-import Forum from "./components/Forum.js";
+
 import Home from "./components/Home.js";
 import Login from "./components/Authentification/Login.js";
 import SignUpServiceSeeker from "./components/Authentification/SignUpServiceSeeker.js";
@@ -20,7 +20,6 @@ import VerificationCode from "./components/Authentification/VerificationCode.js"
 import ForgetPassword from "./components/Authentification/ForgetPassword.js";
 import ResetPassword from "./components/Authentification/ResetPassword.js";
 import { NavigationContainer } from "@react-navigation/native";
-import NewPassword  from "./components/Authentification/NewPassword.js";
 import SeekerRequest  from "./components/SeekerRequest.js";
 
 import { IPAdress } from "@env";
@@ -57,7 +56,7 @@ const Router = () => {
     return (
         <NavigationContainer
             linking={linking}
-            fallback={<Text>Loading...</Text>}
+            
         >
             <Stack.Navigator>
                 <Stack.Screen name="Home" component={Home} />
@@ -67,7 +66,6 @@ const Router = () => {
                 />
                 <Stack.Screen name="EquipementsProviderProfile" component={EquipementsProviderProfile} />
                 <Stack.Screen name="EditProfile" component={EditProfile} />
-                <Stack.Screen name="Forum" component={Forum} />
                 <Stack.Screen name="Forum2" component={Forum2} />
                 <Stack.Screen name="ForumPost" component={ForumPost} />
                 <Stack.Screen name="AddBlog" component={AddBlog} />
@@ -115,5 +113,4 @@ const Router = () => {
         </NavigationContainer>
     );
 };
-
 export default Router;
