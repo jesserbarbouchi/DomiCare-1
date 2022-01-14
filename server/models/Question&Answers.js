@@ -3,6 +3,9 @@ const mongoose = require("mongoose");
 const QuestAns = mongoose.model(
   "QuestAns",
   new mongoose.Schema({
+    postId:{
+      type:String
+    },
     owner: { 
       type: Object,
     },
@@ -19,10 +22,7 @@ const QuestAns = mongoose.model(
     },
     likesCount: {
       type: Number,
-      default:0
-    },
-    DislikesCount: {
-      type: Number,
+      default:0  
     },
     participants:{
       type:Array ,default:[]

@@ -2,21 +2,25 @@ const mongoose = require("mongoose");
 
 const Transactions = mongoose.model(
   "Transactions",
-  new mongoose.Schema({
+  mongoose.Schema({
     senderId: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "ServiceSeeker",
     },
-    postId: {
-      type: Schema.Types.ObjectId,
-      ref: "ServiceSeeker",
+    receiverId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ServiceProvider",
     },
+    
     createdAt: {
       type: Date,
       immutable: true,
       default: () => Date.now(),
     },
     status: {
+      type: String,
+    },
+    details: {
       type: String,
     },
     rating: {
