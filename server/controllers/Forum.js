@@ -2,16 +2,20 @@ const QuestAns = require("../models/Question&Answers");
 
 module.exports = {
   create_One: async (req, res, next) => {
-    console.log(req.body)
-    const { owner,
+    console.log('hello')
+    const { 
+      postId,
+      owner,
       title,
       content,
       likesCount,
       comments,
       type} =
       req.body;
+    
     try {
       const Quest = await QuestAns.create({
+        postId,
         owner,
         title,
         content,
@@ -19,23 +23,34 @@ module.exports = {
         comments,
         type
       });
-
+      console.log('res',Quest)
       res.status(200).json(Quest);
-    } catch (error) {
+    } 
+    
+    catch (error) {
       next(error);
     }
   },
   find_All: async (req, res, next) => {
     try {
-      const Quests = await QuestAns.find({}).sort({createdAt: -1}).exec();
+      const Quests = await QuestAns.find({type:"Quest"}).sort({createdAt: -1}).exec();
          
       res.status(200).json(Quests);
     } catch (error) {
       next(error);
     }
   },
+  find_All_Comments: async (req, res, next) => {
+    try {
+      console.log(req.params.id)
+      const com = await QuestAns.find({ postId : req.params.id}).exec();
+         console.log("com",com)
+      res.status(200).json(com);
+    } catch (error) {
+      next(error);
+    }
+  },
   find_One: async (req, res, next) => {
-
     console.log(req.params.id)
     try {
       
@@ -85,23 +100,23 @@ module.exports = {
      try {
        
       const Quest = await QuestAns.findOneAndUpdate(
-        { _id: req.body.postid },{"$push" : {"participants": req.body.userid}},{$inc: {"likesCount":1}});
+        { _id: req.body.postid },{"$push" : {"participants": req.body.userid}},{new : true});
       
       res.status(200).json(Quest);
     } catch (error) {
       console.log(err)
-      next();
+      // next(error);
     }
   }
   else if(req.body.action==='déc'){
     console.log('dec')
     try {
       const Quest = await QuestAns.findByIdAndUpdate(
-        { _id: req.body.postid },{"$pull": {"participants": req.body.userid}},{$inc: {"likesCount":-1}});
+        { _id: req.body.postid },{"$pull": {"participants": req.body.userid}},{new : true});
       res.status(200).json(Quest);
     } catch (error) {
       console.log(err)
-      next();
+      // next(error);
     }
   }
   }
