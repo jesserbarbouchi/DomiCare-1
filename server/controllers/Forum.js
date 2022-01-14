@@ -23,7 +23,7 @@ module.exports = {
         comments,
         type
       });
-      
+      console.log('res',Quest)
       res.status(200).json(Quest);
     } 
     
@@ -33,9 +33,19 @@ module.exports = {
   },
   find_All: async (req, res, next) => {
     try {
-      const Quests = await QuestAns.find({_id: req.params.id}).sort({createdAt: -1}).exec();
+      const Quests = await QuestAns.find({type:"Quest"}).sort({createdAt: -1}).exec();
          
       res.status(200).json(Quests);
+    } catch (error) {
+      next(error);
+    }
+  },
+  find_All_Comments: async (req, res, next) => {
+    try {
+      console.log(req.params.id)
+      const com = await QuestAns.find({ postId : req.params.id}).exec();
+         console.log("com",com)
+      res.status(200).json(com);
     } catch (error) {
       next(error);
     }

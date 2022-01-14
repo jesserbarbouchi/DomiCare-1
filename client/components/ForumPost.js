@@ -17,11 +17,11 @@ const ForumPost = (props) => {
   const [singlepost, setpost] = useState({});
   const [participants, setparticipants] = useState([]);
   const[comments,setcomments] = useState([])
+  const[newcomment,setnewcomment] = useState({})
   const { storedCredentials, setStoredCredentials } =
     React.useContext(CredentialsContext);
   const userData = storedCredentials.userData;
-  console.log('user',userData)
-  console.log("params", props.route.params);
+ 
   useEffect( () => {
     
     const fetch=async()=>{
@@ -33,7 +33,7 @@ const ForumPost = (props) => {
       const com = await axios.get(
         `http://${IPAdress}:3000/savepost/findcomments/${_id}`
       );
-      
+      console.log('com',com.data)
       setpost(post.data);
       setparticipants(post.data.participants);
       setcomments(com.data)
@@ -43,20 +43,26 @@ const ForumPost = (props) => {
    
   }, []);
   const Comment=async()=>{
+    console.log('edtfrhyui')
     const _id = props.route.params._id;
-    console.log('hello')
+    
     const comment = await axios.post(`http://${IPAdress}:3000/savepost/savepost`, {
       owner:{_id:userData._id,name:userData.firstName},
       postId:singlepost._id,
       content:value,
       type:'comment'
     });
+    const recom = await axios.get(
+      `http://${IPAdress}:3000/savepost/findcomments/${_id}`
+    );
 
+ setcomments(recom.data)
   }
 
-  console.log(singlepost.participants);
+ 
 
   const Like = async () => {
+
     const userid = userData._id;
     const postid = singlepost._id;
     let action = "";
@@ -66,13 +72,12 @@ const ForumPost = (props) => {
     } else {
       action = "déc";
     }
-
     const post = await axios.put(`http://${IPAdress}:3000/savepost/savepost`, {
       userid,
       postid,
       action,
     });
-    console.log('post',post.data.comments)
+    
     setpost(post.data);
     setparticipants(post.data.participants);
   };
