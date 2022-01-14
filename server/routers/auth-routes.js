@@ -10,5 +10,12 @@ router.route("/SSSignUp")
   .post(authController.SPSignUp) 
   router.route("/Login")
   .post(authController.Login) 
-
+  router.route("/ForgetPassword")
+  .post(authController.ForgetPassword)
+  router.route("/FetchCodeVerification/:email")
+  .get(authController.FetchCodeVerification)
+  router.route("/DeleteCodeVerification/:email")
+  .delete(authController.DeleteCodeVerification)
+  router.route("/ResetPassword")
+  .post(authController.ResetPassword)
 module.exports = router;

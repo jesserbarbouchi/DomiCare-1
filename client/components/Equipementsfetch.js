@@ -1,8 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios'
-import { View, StyleSheet, Button,ScrollView, Alert, Image, Text, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Button,ScrollView, Alert, Image, Text, TouchableOpacity,Picker } from 'react-native'
 import items from "./Equipements.js"
-import {Picker} from "@react-native-picker/picker"
 
 const Equipementsfetch = () => {
   const [selectedValue, setSelectedValue] = useState("");
@@ -13,7 +12,7 @@ const Equipementsfetch = () => {
   const [myData,setmyData]=useState([])
 
   useEffect(()=>{
-    axios.get('http://localhost:3000/Equipements')
+    axios.get('http://192.168.11.15:3000/Equipements')
     .then(res=>{
       // console.log("res",res);
       // console.log("res.data",res.data);
@@ -47,8 +46,6 @@ const Equipementsfetch = () => {
 //     return item.city}
     
 //     })
-    
-    
 //       }
 const availability = (eve)=>{
   var ava
@@ -136,20 +133,7 @@ var filterData=(city)=> {
        
       }
       
-    //  var cityFilter=(city)=>{
-    //     var x=[]
-    //     var y=Equipements
-    //     x=y.filter(ele=>{
-    //       if(city!==""){
-    //         if(ele.city===city){
-    //           return ele
-    //         }
-    //         else{return ele}
-    //       }
-          
-  //  setEquipements(x)
-  //       })
-  //     }
+
   return (
     <View style={styles.container}>
     <View style = {styles.cities}>
@@ -216,9 +200,7 @@ var filterData=(city)=> {
     <View style={styles.sProvider}>
     <ScrollView>
         {Equipements.map((item, key) => {
-          
-          
-          return ( <View key={key} style={styles.itemVue}>
+           return ( <View key={key} style={styles.itemVue}>
             <Image style={styles.cardImage} source={{uri:item.picture}} />
             <Text>Equipement name : {item.name}</Text>
             <Text>Price : {item.price}</Text>

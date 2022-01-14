@@ -1,5 +1,7 @@
-/node_modules
+node_modules/
 package-lock.json
+.firebase_config
+.env
 .expo/
 dist/
 npm-debug.*

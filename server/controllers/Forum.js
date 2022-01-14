@@ -2,15 +2,20 @@ const QuestAns = require("../models/Question&Answers");
 
 module.exports = {
   create_One: async (req, res, next) => {
-    const { owner,
+    console.log('hello')
+    const { 
+      postId,
+      owner,
       title,
       content,
       likesCount,
       comments,
       type} =
       req.body;
+    
     try {
       const Quest = await QuestAns.create({
+        postId,
         owner,
         title,
         content,
@@ -18,27 +23,40 @@ module.exports = {
         comments,
         type
       });
-
+      console.log('res',Quest)
       res.status(200).json(Quest);
-    } catch (error) {
+    } 
+    
+    catch (error) {
       next(error);
     }
   },
   find_All: async (req, res, next) => {
     try {
-      const Quests = await QuestAns.find({}).sort({createdAt: -1}).exec();
+      const Quests = await QuestAns.find({type:"Quest"}).sort({createdAt: -1}).exec();
          
       res.status(200).json(Quests);
     } catch (error) {
       next(error);
     }
   },
-  find_One: async (req, res, next) => {
-    console.log("event/events ",req.body)
+  find_All_Comments: async (req, res, next) => {
     try {
-      const eventsFound = await QuestAns.find({ city: req.body.city });
-      console.log(eventsFound)
-      res.status(200).json(eventsFound);
+      console.log(req.params.id)
+      const com = await QuestAns.find({ postId : req.params.id}).exec();
+         console.log("com",com)
+      res.status(200).json(com);
+    } catch (error) {
+      next(error);
+    }
+  },
+  find_One: async (req, res, next) => {
+    console.log(req.params.id)
+    try {
+      
+      const postFound = await QuestAns.findById({ _id: req.params.id });
+      console.log(postFound)
+      res.status(200).json(postFound);
     } catch (error) {
       next(error);
     }
@@ -73,5 +91,33 @@ module.exports = {
     } catch (error) {
       next(error);
     }
+  },
+  like_One: async (req, res, next) => {
+    
+    if(req.body.action==='inc')
+    
+   { console.log('inc')
+     try {
+       
+      const Quest = await QuestAns.findOneAndUpdate(
+        { _id: req.body.postid },{"$push" : {"participants": req.body.userid}},{new : true});
+      
+      res.status(200).json(Quest);
+    } catch (error) {
+      console.log(err)
+      // next(error);
+    }
+  }
+  else if(req.body.action==='déc'){
+    console.log('dec')
+    try {
+      const Quest = await QuestAns.findByIdAndUpdate(
+        { _id: req.body.postid },{"$pull": {"participants": req.body.userid}},{new : true});
+      res.status(200).json(Quest);
+    } catch (error) {
+      console.log(err)
+      // next(error);
+    }
+  }
   }
 };

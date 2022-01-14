@@ -1,6 +1,7 @@
 import * as React from "react";
 import axios from 'axios';
 import { useNavigation } from "@react-navigation/native";
+import {IPAdress} from "@env";
 import {
   Box,
   Text,
@@ -13,6 +14,7 @@ import {
   HStack,
   Center,
   NativeBaseProvider,
+  extendTheme,
 } from "native-base"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './CredentialsContext.js';
@@ -48,9 +50,8 @@ function Login (){
     setErrors(errors);
     return validation;
     };
-    
     const post = () =>{
-      axios.post('http://localhost:3000/auth/Login',{formData} ).then((response)=>{
+      axios.post(`http://${IPAdress}:3000/auth/Login`,{formData} ).then((response)=>{
         let errors={}
         const data = response.data
         if(response.data === 'Your email and password do not match'){
@@ -76,7 +77,7 @@ function Login (){
     };
     
         return (
-            <NativeBaseProvider>
+            <NativeBaseProvider >
               <Center flex={1} px="3">
               <Box safeArea p="2" py="8" w="120%" maxW="300">
               <Heading
@@ -136,12 +137,14 @@ function Login (){
                     }}
                     alignSelf="flex-end"
                     mt="1"
-                    onPress={()=>navigation.navigate('ResetPassword')}
+                    onPress={()=>navigation.navigate('ForgetPassword')}
                   >
                     Forget Password?
                   </Link>
                 </FormControl>
-                <Button mt="2" colorScheme="cyan" onPress={onSubmit}>
+                <Button mt="2" 
+                colorScheme="teal"
+                 onPress={onSubmit}>
                   Sign in
                 </Button>
                 <HStack mt="6" justifyContent="center">
@@ -171,6 +174,7 @@ function Login (){
             </NativeBaseProvider>
           )
 }
+
 
 export default function () {
     return (
