@@ -83,10 +83,10 @@ const Router = () => {
       </DrawerContentScrollView>
     )
   }}>
-                 {/* <Drawer.Screen
+                 <Drawer.Screen
                     name="Home"
                     component={Home}
-                /> */}
+                />
                 <Drawer.Screen
                     name="Equipementsfetch"
                     component={Equipmentsfetch}
@@ -108,21 +108,21 @@ const Router = () => {
                     name="ForgetPassword"
                     component={ForgetPassword}
                 />
-                <Drawer.Screen name="ResetPassword" component={ResetPassword} />
-                <Drawer.Screen
+                <Drawer.Group name="ResetPassword" component={ResetPassword} />
+                <Drawer.Group
                     name="VerificationCode"
                     component={VerificationCode}
                 />
                 <Drawer.Screen name="SignUpAs" component={SignUpType} />
-                <Drawer.Screen
+                <Drawer.Group
                     name="SignUpServiceSeeker"
                     component={SignUpServiceSeeker}
                 />
-                <Drawer.Screen
+                <Drawer.Group
                     name="SignUpServiceProvider"
                     component={SignUpServiceProvider}
                 />
-                <Drawer.Screen
+                <Drawer.Group
                     name="SignUpEquipementsProvider"
                     component={SignUpEquipementsProvider}
                 />

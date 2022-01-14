@@ -3,7 +3,7 @@ import Axios from "axios";
 import Swal from "sweetalert2";
 import {
   TextArea,
-  Box,
+  
   Heading,
   Text,
   HStack,
@@ -81,7 +81,7 @@ export default () => {
                 </Text>
                 <TextArea
                   h={20}
-                  placeholder="Text Area Placeholder"
+                  placeholder="Report describe here"
                   isInvalid
                   w={{
                     base: "100%",
