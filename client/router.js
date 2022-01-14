@@ -20,7 +20,7 @@ import ResetPassword  from "./components/Authentification/ResetPassword.js";
 import EquipementsProviderProfile from "./components/EquipementsProviderProfile.js"
 import EditProfile from "./components/EditProfile.js"
 import userEquipements from "./components/userEquipements.js"
-
+import EditEquipement from "./components/EditEquipement.js"
 
 const Stack = createNativeStackNavigator();
 const Router = () => {
@@ -32,6 +32,7 @@ const Router = () => {
                     name="Equipementsfetch"
                     component={Equipmentsfetch}
                 />
+                <Stack.Screen name="Edit Equipement" component={EditEquipement} />
                 <Stack.Screen name="EquipementsProviderProfile" component={EquipementsProviderProfile} />
                 <Stack.Screen name="userEquipements" component={userEquipements} />
                 <Stack.Screen name="EditProfile" component={EditProfile} />

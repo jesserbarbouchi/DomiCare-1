@@ -1,9 +1,11 @@
 import React ,{useState,useEffect} from 'react'
 import {Picker} from "@react-native-picker/picker"
 import axios from 'axios'
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './Authentification/CredentialsContext.js';
 import { Avatar, Card, Title, Paragraph,LeftContent } from 'react-native-paper';
 import Swal from "sweetalert2"
+// import Modal from "react-native-modals";
 import {
   StyleSheet,
   Text,
@@ -15,7 +17,7 @@ import {
   Button
 } from 'react-native';
 
-const userEquipements = ({navigation}) => {
+const TestEquip = ({navigation}) => {
   const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
   const [selectedtype, setSelectedtype] = useState("");
@@ -35,32 +37,17 @@ const userEquipements = ({navigation}) => {
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
-  
 useEffect(()=>{
   axios.get(`http://localhost:3000/Equipements/${userData.userData._id}`)
   .then(res => {
     // console.log("equipement id",res);
     setmyData(res.data) 
     console.log("res.data",res.data);
-    
   })
   .catch(err => {
       console.log(err);
   })
 }, []);
-
-const getEquip =()=>{
-  axios.get(`http://localhost:3000/Equipements/equip/${formData._id}`)
-  .then(res => {
-    // console.log("equipement id",res);
-    // setmyData(res.data) 
-    console.log("getEquip",res.data);
-  })
-  .then(()=>EditEquip())
-  .catch(err => {
-      console.log(err);
-  })
-}
 
 const fetchData=()=>{
   axios.get(`http://localhost:3000/Equipements/${userData.userData._id}`)
@@ -91,7 +78,14 @@ const myDelete =()=>{
   axios.delete(`http://localhost:3000/Equipements/${myData.ownerId}`)
   .catch(error=>{console.log(error)})
 }
-
+// const popUp=()=>{
+//   return( <Modal isVisible={isModalVisible}>
+//     <View style={{ flex: 1 }}>
+//       <Text>Hello!</Text>
+//       <Button title="Hide modal" onPress={!isModalVisible} />
+//     </View>
+//   </Modal>)
+// }
 const myAlert=()=>{
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
@@ -134,10 +128,6 @@ swalWithBootstrapButtons.fire({
 })
 }
 
-var EditEquip=()=>{
-  navigation.navigate("Edit Equipement")
-}
-
 var profile = () => {
   navigation.navigate("EquipementsProviderProfile")
 };
@@ -150,8 +140,8 @@ var profile = () => {
         
           {myData.map((item, key) => {
             
-            return ( <View key={key}>
-               <Card  >
+            return ( <View >
+               <Card key={key} >
     <Card.Cover source={{uri:item.picture}}  />
     <Card.Content>
       <Title>Product : {item.name}</Title>
@@ -165,7 +155,6 @@ var profile = () => {
 
     <Card.Actions>
       <Button onPress={myAlert}>Delete</Button>
-      <Button onPress={getEquip} >Update</Button>
     </Card.Actions>
   </Card>
             </View>
@@ -307,4 +296,4 @@ itemVue:{
 });
 
 
-export default userEquipements
+export default TestEquip
