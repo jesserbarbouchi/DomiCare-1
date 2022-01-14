@@ -6,8 +6,7 @@ import { CredentialsContext } from './Authentification/CredentialsContext.js';
 const Home = ({navigation}) => {
     const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
     const  userData = storedCredentials;
-    
-   
+   console.log('homePage :', userData)
     
     const clearLogin = () => {
         AsyncStorage

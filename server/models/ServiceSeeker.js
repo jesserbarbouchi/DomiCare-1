@@ -1,6 +1,10 @@
 var mongoose = require("mongoose");
 var ServiceSeekerSchema=mongoose.Schema(
     {
+      type: {
+        type: String,
+        default : 'serviceSeeker'
+      },
         firstName: {
           type: String,
         },
@@ -17,7 +21,7 @@ var ServiceSeekerSchema=mongoose.Schema(
           type: String,
         },
         adress:{
-          type:String, 
+          type:String,
          },
         city: {
           type: String,
@@ -34,13 +38,20 @@ var ServiceSeekerSchema=mongoose.Schema(
         picture: {
           type: String,
         },
+        banned : {
+          type : Boolean ,
+          default : false
+        },
+        verified : {
+          type : Boolean ,
+          default : false
+        },
         createdAt: {
           type: Date,
           immutable: true,
           default: () => Date.now(),
         },
       },
-    
 )
 const ServiceSeeker = mongoose.model("ServiceSeeker", ServiceSeekerSchema);
 module.exports =  ServiceSeeker

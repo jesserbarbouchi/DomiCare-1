@@ -14,16 +14,21 @@ import {
   HStack,
   Center,
   NativeBaseProvider,
-  extendTheme,
+  Divider,
+  useDisclose,
+    Modal,
 } from "native-base"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './CredentialsContext.js';
+import * as Google from 'expo-google-app-auth'
 
 function Login (){
     const navigation = useNavigation()
     const [formData, setData] = React.useState({});
     const [errors,  setErrors] = React.useState({});
-    const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
+    const [googleSubmitting , setGoogleSubmitting]= React.useState(false);
+    const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext);
+    const { isOpen, onOpen, onClose } = useDisclose()
 
     const persistLogin =(credentials)=>{
       AsyncStorage
@@ -67,6 +72,47 @@ function Login (){
         console.log(err)
          })
     };
+
+    
+    const handleGoogleSignin = () =>{
+      const config ={
+        iosClientId: '477279958073-g64kmtrrh5ut8hbv0ctbggiumiklpgid.apps.googleusercontent.com',
+        androidClientId :  '477279958073-ld24gig53t7i6lo9q4p42ga2ecsg6qvl.apps.googleusercontent.com',
+        scopes : ['profile', 'email']
+      }
+      Google 
+      .logInAsync(config)
+      .then((result)=>{
+        const {type, user}= result
+        if (type== 'success'){
+           const email=user.email
+          axios.post(`http://192.168.11.249:3000/auth/GoogleLogin`, {email} )
+              .then((response)=>{
+            const data = response.data
+            console.log('test google login :', data)
+            if (response.data === 'you need to SignUp'){
+              onOpen()
+              setTimeout(() => {
+                navigation.navigate('SignUpAs')
+                onClose()
+              }, 2000);  
+            } else {
+              persistLogin({userData : data});
+               navigation.navigate('Home')
+
+            }
+
+            })
+              .catch((err)=> console.log(err))
+          
+        } else {
+          console.log('Google signin was cancelled');
+        }
+      })
+      .catch((error)=>{
+        console.log(error)
+      } )
+    }
     
     const onSubmit =()=>{
       validate()
@@ -79,6 +125,15 @@ function Login (){
         return (
             <NativeBaseProvider >
               <Center flex={1} px="3">
+              <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal.Content>
+          <Modal.Header fontSize="4xl" fontWeight="bold">
+          user not registered!    </Modal.Header>
+          <Modal.Body>
+          you will be redirected  to the signup page 
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
               <Box safeArea p="2" py="8" w="120%" maxW="300">
               <Heading
                 size="lg"
@@ -147,6 +202,16 @@ function Login (){
                  onPress={onSubmit}>
                   Sign in
                 </Button>
+                
+                <Divider my={2} />
+                <Button mt="4" 
+                colorScheme="teal"
+                onPress={handleGoogleSignin}
+                 >
+                     
+                  Sign in with Google
+                </Button>
+               
                 <HStack mt="6" justifyContent="center">
                   <Text
                     fontSize="sm"
