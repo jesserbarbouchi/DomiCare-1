@@ -1,7 +1,10 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator , DrawerContentScrollView,
+    DrawerItemList,
+    DrawerItem} from '@react-navigation/drawer';
 import React from "react";
 import EquipementsFeed from "./components/EquipementsFeed.js";
-import Report from "./components/report.js"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CredentialsContext } from './components/Authentification/CredentialsContext.js';
 import Home from "./components/Home.js";
 import Login from "./components/Authentification/Login.js";
 import SignUpServiceSeeker from "./components/Authentification/SignUpServiceSeeker.js";
@@ -21,10 +24,25 @@ import ForgetPassword from "./components/Authentification/ForgetPassword.js";
 import ResetPassword from "./components/Authentification/ResetPassword.js";
 import { NavigationContainer } from "@react-navigation/native";
 import SeekerRequest  from "./components/SeekerRequest.js";
+import Report from "./components/report.js"
 
 import { IPAdress } from "@env";
-const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 const Router = () => {
+    const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
+    const  userData = storedCredentials;
+    
+   
+    
+    const clearLogin = () => {
+        AsyncStorage
+        .removeItem('domicareCredentials')
+        .then(()=>{
+            setStoredCredentials("");
+        })
+        .catch((error)=> console.log(error))
+    }
+
     const linking = {
         screens: {
             ResetPassword: {
@@ -57,63 +75,76 @@ const Router = () => {
         <NavigationContainer
             linking={linking}
         >
-            <Stack.Navigator>
-                <Stack.Screen name="Home" component={Home} />
-                <Stack.Screen
+           <Drawer.Navigator  drawerContent={props => {
+    return (
+      <DrawerContentScrollView {...props}>
+        <DrawerItemList {...props} />
+        <DrawerItem label="Logout" onPress={clearLogin} />
+      </DrawerContentScrollView>
+    )
+  }}>
+                 {/* <Drawer.Screen
+                    name="Home"
+                    component={Home}
+                /> */}
+                <Drawer.Screen
                     name="Equipementsfetch"
                     component={Equipmentsfetch}
                 />
-                <Stack.Screen name="EquipementsProviderProfile" component={EquipementsProviderProfile} />
-                <Stack.Screen name="EditProfile" component={EditProfile} />
-                <Stack.Screen name="Forum2" component={Forum2} />
-                <Stack.Screen name="ForumPost" component={ForumPost} />
-                <Stack.Screen name="AddBlog" component={AddBlog} />
-                <Stack.Screen
+                <Drawer.Screen name="EquipementsProviderProfile" component={EquipementsProviderProfile} />
+                <Drawer.Group name="EditProfile" component={EditProfile} />
+                <Drawer.Screen name="Forum2" component={Forum2} />
+                <Drawer.Screen name="ForumPost" component={ForumPost} />
+                <Drawer.Screen name="AddBlog" component={AddBlog} />
+                <Drawer.Screen
                     name="serviceProvidersList"
                     component={serviceProvidersList}
                 />
               
-                <Stack.Screen name="shareservice" component={shareservice} />
+                <Drawer.Screen name="shareservice" component={shareservice} />
 
-                <Stack.Screen name="Login" component={Login} />
-                <Stack.Screen
+                <Drawer.Screen name="Login" component={Login} />
+                <Drawer.Screen
                     name="ForgetPassword"
                     component={ForgetPassword}
                 />
-                <Stack.Screen name="ResetPassword" component={ResetPassword} />
-                <Stack.Screen
+                <Drawer.Screen name="ResetPassword" component={ResetPassword} />
+                <Drawer.Screen
                     name="VerificationCode"
                     component={VerificationCode}
                 />
-                <Stack.Screen name="SignUpAs" component={SignUpType} />
-                <Stack.Screen
+                <Drawer.Screen name="SignUpAs" component={SignUpType} />
+                <Drawer.Screen
                     name="SignUpServiceSeeker"
                     component={SignUpServiceSeeker}
                 />
-                <Stack.Screen
+                <Drawer.Screen
                     name="SignUpServiceProvider"
                     component={SignUpServiceProvider}
                 />
-                <Stack.Screen
+                <Drawer.Screen
                     name="SignUpEquipementsProvider"
                     component={SignUpEquipementsProvider}
                 />
-                  <Stack.Screen
+                  <Drawer.Screen
                     name="SeekerRequest"
                     component={SeekerRequest}
              
                 />
-                   <Stack.Screen
+                 <Drawer.Screen
                     name="Report"
                     component={Report}
              
                 />
-
-
+                {/* <Drawer.Screen
+                    name="SeekerRequest"
+                    component={null}
+                    onPress={clearLogin}
+                /> */}
 
 
                 
-            </Stack.Navigator>
+            </Drawer.Navigator>
         </NavigationContainer>
     );
 };
