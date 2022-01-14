@@ -145,10 +145,9 @@ const persistLogin =(credentials)=>{
 
     const onSubmit = () => {
         if(validate()){
-            onOpen()
-           setTimeout(() => {
+          
             post()
-           }, 2000);  
+       
         }
             else console.log("Validation Failed");
     };

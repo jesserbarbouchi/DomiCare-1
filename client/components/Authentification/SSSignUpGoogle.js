@@ -64,7 +64,7 @@ function SSSignUpGoogle (){
           picture : route.params.picture,
           phoneNumber : formData.phoneNumber
         }
-        axios.post(`http://192.168.11.249:3000/auth/SSSignUpGoogle`,{obj} )
+        axios.post(`http://${IPAdress}:3000/auth/SSSignUpGoogle`,{obj} )
         .then((res)=>{
           console.log(res.data)
           if(res.data === 'email already exists'){

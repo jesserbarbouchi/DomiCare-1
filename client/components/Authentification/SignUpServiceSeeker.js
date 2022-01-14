@@ -148,11 +148,9 @@ function SignUp() {
 
     const onSubmit = () => {
         if(validate()){
-            onOpen()
-           setTimeout(() => {
+         
             post()
-            onClose()
-           }, 2000);  
+         
         }
             else console.log("Validation Failed");
     };

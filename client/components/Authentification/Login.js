@@ -86,7 +86,7 @@ function Login (){
         const {type, user}= result
         if (type== 'success'){
            const email=user.email
-          axios.post(`http://192.168.11.249:3000/auth/GoogleLogin`, {email} )
+          axios.post(`http://${IPAdress}:3000/auth/GoogleLogin`, {email} )
               .then((response)=>{
             const data = response.data
             console.log('test google login :', data)
