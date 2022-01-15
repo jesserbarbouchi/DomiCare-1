@@ -1,8 +1,8 @@
 {
   "expo": {
-    "scheme": "DomiCare",
-    "name": "DomiCare",
-    "slug": "DomiCare",
+    "scheme": "domicare",
+    "name": "domicare",
+    "slug": "domicare",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

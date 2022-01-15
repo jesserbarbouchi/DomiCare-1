@@ -12,7 +12,7 @@ import ForumPost from "./components/ForumPost.js";
 import serviceProvidersList from "./components/serviceProvidersList.js";
 import shareservice from "./components/shareService.js";
 import AddBlog from "./components/AddBlog.js";
-import Forum2 from "./components/Forum2.js";
+import Forum2 from "./components/forum2.js";
 import Equipmentsfetch from "./components/Equipementsfetch.js";
 import EquipementsProviderProfile from "./components/EquipementsProviderProfile.js"
 import EditProfile from "./components/EditProfile.js"
@@ -25,7 +25,7 @@ import EPSignUpGoogle from "./components/Authentification/EPSignUpGoogle.js";
 import ResetPassword from "./components/Authentification/ResetPassword.js";
 import { NavigationContainer } from "@react-navigation/native";
 import SeekerRequest  from "./components/SeekerRequest.js";
-// import Test from "./components/Collapsibles.js";
+import HomeScreen from "./components/HomeScreen.js"
 
 const Stack = createNativeStackNavigator();
 const Router = () => {
@@ -62,7 +62,8 @@ const Router = () => {
             linking={linking}
         >
             <Stack.Navigator>
-                <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="HomeScreen" component={HomeScreen} />
+            <Stack.Screen name="Home" component={Home} />
                 <Stack.Screen
                     name="Equipementsfetch"
                     component={Equipmentsfetch}
