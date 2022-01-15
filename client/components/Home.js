@@ -40,6 +40,7 @@ const HomeScreen = ({ navigation }) => {
     };
 
     return (
+
         <ScrollView style={styles.container}>
             <View style={styles.sliderContainer}>
                 <Swiper
@@ -187,6 +188,7 @@ const HomeScreen = ({ navigation }) => {
                 )}
             </View>
         </ScrollView>
+
     );
 };
 
