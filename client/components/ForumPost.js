@@ -1,37 +1,48 @@
-import React, { useState, useEffect, useRef  } from "react";
-import { PrivateValueStore, useNavigation } from "@react-navigation/native";
-import { StyleSheet,View, Text, Button, Image ,SafeAreaView ,ScrollView,TextInput } from "react-native";
-import { Input, Center, NativeBaseProvider ,IconButton, Icon} from "native-base"
-import { Entypo } from "@expo/vector-icons"
-import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CredentialsContext } from "./Authentification/CredentialsContext.js";
-import { IPAdress } from "@env";
-import Collapsible from 'react-native-collapsible';
+import React, { useState, useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  SafeAreaView,
+  ScrollView,
+  Pressable,
+} from "react-native";
+import {
+  Input,
+  NativeBaseProvider,
+  Image,
+  Box,
+  Stack,
+  VStack,
+} from "native-base";
 
+import axios from "axios";
+
+import { CredentialsContext } from "./Authentification/CredentialsContext.js";
+import moment from "moment";
 
 const ForumPost = (props) => {
-  const [value, setValue] = React.useState("")
+  const [value, setValue] = React.useState("");
   const [shouldShow, setShouldShow] = useState(false);
-  const [shouldshow, setshouldshow] = useState(false)
-  
-  const handleChange = (event) => { console.log(value) 
-    return(setValue(event.target.value))}
+  const [shouldshow, setshouldshow] = useState(false);
+
+  const handleChange = (event) => {
+    console.log(value);
+    return setValue(event.target.value);
+  };
   const navigation = useNavigation();
   const [singlepost, setpost] = useState({});
   const [participants, setparticipants] = useState([]);
-  const[comments,setcomments] = useState([])
-  const[subcomment,setsubcomment] = useState({})
-  const[focus,setfocus]=useState(false)
+  const [comments, setcomments] = useState([]);
+  const [subcomment, setsubcomment] = useState({});
   const { storedCredentials, setStoredCredentials } =
     React.useContext(CredentialsContext);
   const userData = storedCredentials.userData;
-  
-  useEffect( () => {
-    
-    const fetch=async()=>{
-      
 
+  useEffect(() => {
+    const fetch = async () => {
       const _id = props.route.params._id;
       const post = await axios.get(
         `http://192.168.11.73:3000/savepost/findpost/${_id}`
@@ -41,46 +52,47 @@ const ForumPost = (props) => {
       );
       setpost(post.data);
       setparticipants(post.data.participants);
-      setcomments(com.data)
-     
-    }
-    fetch()
-   
+      setcomments(com.data);
+    };
+    fetch();
   }, []);
-  const Comment=async()=>{
-    
+  const Comment = async () => {
     const _id = props.route.params._id;
-    
-    const comment = await axios.post(`http://192.168.11.73:3000/savepost/savepost`, {
-      owner:{_id:userData._id,name:userData.firstName},
-      postId:singlepost._id,
-      content:value,
-      type:'comment'
-    });
+
+    const comment = await axios.post(
+      `http://192.168.11.73:3000/savepost/savepost`,
+      {
+        owner: { _id: userData._id, name: userData.firstName },
+        postId: singlepost._id,
+        content: value,
+        type: "comment",
+      }
+    );
     const recom = await axios.get(
       `http://192.168.11.73:3000/savepost/findcomments/${_id}`
     );
 
- setcomments(recom.data)
-  }
-  const replyto =async()=>{
-    const id=subcomment
+    setcomments(recom.data);
+  };
+  const replyto = async () => {
+    const id = subcomment;
+    const date = moment().startOf("hour").fromNow();
     const reply = await axios.post(`http://192.168.11.73:3000/savepost/reply`, {
-      rep:{owner:{_id:userData._id,name:userData.firstName},
-      commentid:id,
-      content:value}
+      rep: {
+        owner: { _id: userData._id, name: userData.firstName },
+        commentid: id,
+        content: value,
+        createdAt: date,
+      },
     });
     const _id = props.route.params._id;
     const recomm = await axios.get(
       `http://192.168.11.73:3000/savepost/findcomments/${_id}`
     );
-    setcomments(recomm.data)
-  }
-
- 
+    setcomments(recomm.data);
+  };
 
   const Like = async () => {
-
     const userid = userData._id;
     const postid = singlepost._id;
     let action = "";
@@ -90,136 +102,176 @@ const ForumPost = (props) => {
     } else {
       action = "déc";
     }
-    const post = await axios.put(`http://192.168.11.73:3000/savepost/savepost`, {
-      userid,
-      postid,
-      action,
-    });
-    
+    const post = await axios.put(
+      `http://192.168.11.73:3000/savepost/savepost`,
+      {
+        userid,
+        postid,
+        action,
+      }
+    );
+
     setpost(post.data);
     setparticipants(post.data.participants);
   };
 
   return (
-    
     <NativeBaseProvider>
-    
-      <Image
-        source={{
-          uri: "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg",
-        }}
-        alt="image"
-      />
-
       <Text> {singlepost.title}</Text>
-      <Text> By:{singlepost.owner}</Text>
+      <Box>
+        <VStack space="2.5" mt="4">
+          <Stack direction="row" mb="2.5" mt="1.5" space={0.5}>
+            <Image
+              size={30}
+              alt="fallback text"
+              borderRadius={100}
+              source={{
+                uri: "https://-page-icon.png",
+              }}
+              fallbackSource={{
+                uri: "https://www.w3schools.com/css/img_lights.jpg",
+              }}
+            />
+            <Text> By:{singlepost.owner}</Text>
+          </Stack>
+        </VStack>
+      </Box>
+
       <Text>Posted At : {singlepost.createdAt}</Text>
       <Text> {singlepost.content}</Text>
       <Text> {participants.length}Likes</Text>
-      <Button title="Like" onPress={() => Like()} />
-
-      <Button title="comment"
-          onPress={() => setShouldShow(!shouldShow)}
-     />
+      <Box>
+        <VStack space="2.5" mt="4">
+          <Stack direction="row" mb="2.5" mt="1.5" space={0.5}>
+            <Pressable style={styless.button}>
+              <Text style={styless.text}></Text>
+            </Pressable>
+            <Pressable style={styless.button} onPress={() => Like()}>
+              <Text style={styless.text}>Like</Text>
+            </Pressable>
+            <Pressable
+              style={styless.button}
+              onPress={() => setShouldShow(!shouldShow)}
+            >
+              <Text style={styless.text}>Comment</Text>
+            </Pressable>
+          </Stack>
+        </VStack>
+      </Box>
       {shouldShow ? (
-         <Input  value={value} variant="rounded" placeholder="Round"  onChange={handleChange} w={{
-          width:500,
-          md: "25%",
-        }}
-        
-        
-        InputRightElement={
-          <Button size="xs" rounded="none" w="1/6" h="full" title="Submit" onPress={()=>Comment()}>
-           
-          </Button>
-        }/>
-        ) : null}
-    <View >
-     <View style={{height: 600, width: 500}}>  
-  
-    <SafeAreaView>
-   
-    <ScrollView>
-    <View>
-      
-      {comments.map((comment,key)=>{
-        return(
-          
-          
-          <View key={key} >
-        
-          
-      <Text > {comment.name} </Text>
-      <Text> {comment.content} </Text>
-      <Text> {comment.createdAt} </Text>
-      <Text> {comment.likesCount} </Text>
-      
-      <Button title="Reply"
-          onPress={() => {setshouldshow(!shouldshow)
-             setsubcomment(comment._id)}}
-     />
-     {comment.comments.map((reply,key)=>{
-        return(
-          
-          
-          <View key={key} >
-        
-          
-      <Text > {reply.owner.name} </Text>
-      <Text> {reply.content} </Text>
-    
-      
-      </View>
-      
-     
-     )}
-     )}
-      {shouldshow ? (
-         <Input  value={value} variant="rounded" placeholder="..."  onChange={handleChange} w={{
-          width:500,
-          md: "25%",
-        }}
-        
-        
-        InputRightElement={
-          <Button  size="xs" rounded="none" w="1/6" h="full" title="Submit" onPress={()=>replyto()}>
-           
-          </Button>
-        }/>
-        ) : null}
-    
-      
-      </View>
-      
-     
-     )}
-     )}
-     </View>
-       </ScrollView>
-       </SafeAreaView>
-      
-    
+        <Input
+          value={value}
+          variant="rounded"
+          placeholder="Round"
+          onChange={handleChange}
+          w={{
+            width: 500,
+            md: "25%",
+          }}
+          InputRightElement={
+            <Button
+              size="xs"
+              rounded="none"
+              w="1/6"
+              h="full"
+              title="Submit"
+              onPress={() => Comment()}
+            ></Button>
+          }
+        />
+      ) : null}
+
+      <View>
+        <View style={{ height: 600, width: 500 }}>
+          <SafeAreaView>
+            <ScrollView>
+              <View>
+                {comments.map((comment, key) => {
+                  return (
+                    <View key={key}>
+                      <Text> {comment.name} </Text>
+                      <Text> {comment.content} </Text>
+                      <Text> {comment.createdAt} </Text>
+                      {/* <Text> {comment.likesCount} </Text> */}
+                      <Box>
+                        <VStack space="2.5" mt="4">
+                          <Stack direction="row" mb="2.5" mt="1.5" space={0.5}>
+                            <Pressable style={styless.button}>
+                              <Text style={styless.text}></Text>
+                            </Pressable>
+
+                            <Pressable
+                              style={styless.button}
+                              onPress={() => {
+                                setshouldshow(!shouldshow);
+                                setsubcomment(comment._id);
+                              }}
+                            >
+                              <Text style={styless.text}>Reply</Text>
+                            </Pressable>
+                          </Stack>
+                        </VStack>
+                      </Box>
+                      {comment.comments.map((reply, key) => {
+                        return (
+                          <View key={key}>
+                            <Text> {reply.owner.name} </Text>
+                            <Text> {reply.content} </Text>
+                            <Text> {reply.createdAt} </Text>
+                          </View>
+                        );
+                      })}
+                      {shouldshow ? (
+                        <Input
+                          value={value}
+                          variant="rounded"
+                          placeholder="..."
+                          onChange={handleChange}
+                          w={{
+                            width: 500,
+                            md: "25%",
+                          }}
+                          InputRightElement={
+                            <Button
+                              size="xs"
+                              rounded="none"
+                              w="1/6"
+                              h="full"
+                              title="Submit"
+                              onPress={() => replyto()}
+                            ></Button>
+                          }
+                        />
+                      ) : null}
+                    </View>
+                  );
+                })}
+              </View>
+            </ScrollView>
+          </SafeAreaView>
         </View>
-  </View>  
-      
-    
- 
-    
-   
-    
-    
+      </View>
     </NativeBaseProvider>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  scrollView: {
-    flex: 1,
-    backgroundColor: "pink",
+
+const styless = StyleSheet.create({
+  button: {
     alignItems: "center",
     justifyContent: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: "transparent",
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: "bold",
+    letterSpacing: 0.25,
+    color: "blue",
   },
 });
+
 export default ForumPost;
