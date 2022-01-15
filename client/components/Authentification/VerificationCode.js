@@ -1,7 +1,7 @@
 import * as React from "react";
 import axios from 'axios';
 import { useNavigation, useRoute } from "@react-navigation/native";
-import {IPAdress} from "@env";
+// import {IPAdress} from "@env";
 
 
 import {
@@ -50,13 +50,13 @@ function VerificationCode (){
     
     const surf=()=>{
       const fetchedEmail = route.params.email
-      axios.delete(`http://${IPAdress}:3000/auth/DeleteCodeVerification/${fetchedEmail}`)
+      axios.delete(`http://localhost:3000/auth/DeleteCodeVerification/${fetchedEmail}`)
       .catch((err)=>console.log(err))
     }
     
     React.useEffect(()=>{
       const fetchedEmail = route.params.email
-      axios.get(`http://${IPAdress}:3000/auth/FetchCodeVerification/${fetchedEmail}`)
+      axios.get(`http://localhost:3000/auth/FetchCodeVerification/${fetchedEmail}`)
       .then((res)=>
        setData({ ...formData, Hash_code: res.data.code })
       )

@@ -25,7 +25,7 @@ import userEquipements from "./components/userEquipements.js"
 import EditEquipement from "./components/EditEquipement.js"
 // import Test from "./components/Collapsibles.js";
 
-import { IPAdress } from "@env";
+// import { IPAdress } from "@env";
 const Stack = createNativeStackNavigator();
 const Router = () => {
     const linking = {
