@@ -8,6 +8,8 @@ router.route("/savepost")
   .put(QuestAns.like_One)
 router.route("/findpost/:id")
 .get(QuestAns.find_One)
+router.route("/findcomments/:id")
+.get(QuestAns.find_All_Comments)
  
 
 module.exports = router;
