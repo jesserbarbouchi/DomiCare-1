@@ -41,7 +41,7 @@ const  userData = storedCredentials.userData;
   const post = () => {
    
 
-    axios.post(`http://192.168.1.15:3000/SeekerRequest/SeekerRequest/`, {text,address,Prescription,receiverId,senderId })
+    axios.post(`http://192.168.11.73:3000/SeekerRequest/SeekerRequest/`, {text,address,Prescription,receiverId,senderId })
       .then(res => console.log(res)).catch(err => console.log(id))
     console.log('hello',text,address,Prescription)
   }

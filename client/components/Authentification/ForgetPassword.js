@@ -32,8 +32,8 @@ function ResetPassword (){
     return validation;
     };
     
-    const post = () => {
-      axios.post(`http://192.168.1.15:3000/auth/ForgetPassword`,{formData} ).then((response)=>{
+    const post = () =>{
+      axios.post(`http://192.168.11.73:3000/auth/ForgetPassword`,{formData} ).then((response)=>{
         let errors={}
         let data = response.data
         if(data === "Email address doesn't exist"){

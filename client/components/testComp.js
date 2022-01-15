@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { View, Text,StyleSheet,SafeAreaView,FlatList,ActivityIndicator } from 'react-native'
-const myUrl='http://localhost:19006/equipements/'
+const myUrl='http://192.168.161.210:19006/equipements/'
 
 const testComp = () => {
 const [isLoading,setLoading] =useState(true)

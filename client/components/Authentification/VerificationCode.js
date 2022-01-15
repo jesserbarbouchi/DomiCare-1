@@ -50,13 +50,13 @@ function VerificationCode (){
     
     const surf=()=>{
       const fetchedEmail = route.params.email
-      axios.delete(`http://192.168.1.15:3000/auth/DeleteCodeVerification/${fetchedEmail}`)
+      axios.delete(`http://192.168.11.73:3000/auth/DeleteCodeVerification/${fetchedEmail}`)
       .catch((err)=>console.log(err))
     }
     
     React.useEffect(()=>{
       const fetchedEmail = route.params.email
-      axios.get(`http://192.168.1.15:3000/auth/FetchCodeVerification/${fetchedEmail}`)
+      axios.get(`http://192.168.11.73:3000/auth/FetchCodeVerification/${fetchedEmail}`)
       .then((res)=>
        setData({ ...formData, Hash_code: res.data.code })
       )
