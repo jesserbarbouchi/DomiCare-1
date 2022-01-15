@@ -24,8 +24,8 @@ const ForumPost = (props) => {
   const[subcomment,setsubcomment] = useState({})
   const[focus,setfocus]=useState(false)
   const { storedCredentials, setStoredCredentials } =
-    React.useContext(CredentialsContext);
-  const userData = storedCredentials.userData;
+  React.useContext(CredentialsContext);
+  const userData = storedCredentials;
   
   useEffect( () => {
     
