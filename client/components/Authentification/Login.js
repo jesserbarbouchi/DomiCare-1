@@ -1,7 +1,7 @@
 import * as React from "react";
 import axios from 'axios';
 import { useNavigation } from "@react-navigation/native";
-import {IPAdress} from "@env";
+// import {IPAdress} from "@env";
 import {
   Box,
   Text,
@@ -56,7 +56,7 @@ function Login (){
     return validation;
     };
     const post = () =>{
-      axios.post(`http://192.168.11.73:3000/auth/Login`,{formData} ).then((response)=>{
+      axios.post(`http://localhost:3000/auth/Login`,{formData} ).then((response)=>{
         let errors={}
         const data = response.data
         if(response.data === 'Your email and password do not match'){

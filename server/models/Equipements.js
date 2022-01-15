@@ -23,11 +23,13 @@ const Equipement = mongoose.model(
     picture: {
       type: String
     },
+    availability: {
+      type: String},
     ownerId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "ServiceProvider"
     },
-    city: { String }
+    city: { type: String }
   })
 );
 module.exports = Equipement;
