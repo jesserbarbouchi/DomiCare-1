@@ -6,6 +6,140 @@ const { nodemailer } = require("../helpers/nodemailer");
 const serverEmail = process.env.serverEmail;
 
 module.exports = {
+    GoogleLogin:(req,res)=>{
+        const data = req.body
+        ServiceProvider.findOne({email:data.email})
+        .then((user)=>{
+            if(user){
+                res.send(user)
+            }
+            else{
+                ServiceSeeker.findOne({email:data.email})
+                .then((user)=>{
+                    if(user){
+                        res.send(user)
+                    } else {
+                       res.send('you need to SignUp')
+                    }
+                })
+                .catch((err)=>console.log(err))
+            }
+        })
+        .catch((err)=>console.log(err))
+    },
+    
+    SPGoogleSignUp:(req,res)=>{
+        const data = req.body.obj
+        ServiceSeeker.findOne({email:data.email})
+        .then((user)=>{
+            if(user){
+                res.send('email already exists')
+            }
+            else {
+                ServiceProvider.findOne({email:data.email})
+                .then((user)=>{
+                    if(user){
+                        res.send('email already exists')
+                    } else {
+                       
+                          var obj = {
+                              email :  data.email,
+                              firstName : data.firstName,
+                              lastName : data.lastName,
+                              userName : data.userName,
+                              picture : data.picture,
+                              city: '',
+                              phoneNumber:data.phoneNumber,
+                              gender:'',
+                              dateOfBirth:'',
+                              verified: true,
+                              certificate: data.certificate,
+                              city: data.city,
+                              type: 'serviceProvider'
+                          }
+                          ServiceProvider.create(obj)
+                                .then((user)=>{
+                                res.send(user)})
+                                .catch((err)=> console.log(err))
+                    }
+                })
+            }
+        })
+        .catch((err)=> console.log(err))
+    },
+    SSGoogleSignUp:(req,res)=>{
+        const data = req.body.obj
+        ServiceProvider.findOne({email:data.email})
+        .then((user)=>{
+            if(user){
+                res.send('email already exists')
+            }
+            else {
+                ServiceSeeker.findOne({email:data.email})
+                .then((user)=>{
+                    if(user){
+                        res.send('email already exists')
+                    } else {
+                       
+                          var obj = {
+                              email :  data.email,
+                              firstName : data.firstName,
+                              lastName : data.lastName,
+                              userName : data.userName,
+                              picture : data.picture,
+                              city: '',
+                              phoneNumber:data.phoneNumber,
+                              gender:'',
+                              dateOfBirth:'',
+                              verified: true
+                          }
+                          ServiceSeeker.create(obj)
+                                .then((user)=>{
+                                res.send(user)})
+                                .catch((err)=> console.log(err))
+                    }
+                })
+            }
+        })
+        .catch((err)=> console.log(err))
+    },
+    EPGoogleSignUp:(req,res)=>{
+        const data = req.body.obj
+        ServiceSeeker.findOne({email:data.email})
+        .then((user)=>{
+            if(user){
+                res.send('email already exists')
+            }
+            else {
+                ServiceProvider.findOne({email:data.email})
+                .then((user)=>{
+                    if(user){
+                        res.send('email already exists')
+                    } else {
+                       
+                          var obj = {
+                              email :  data.email,
+                              firstName : data.firstName,
+                              lastName : data.lastName,
+                              userName : data.userName,
+                              picture : data.picture,
+                              city: '',
+                              phoneNumber:data.phoneNumber,
+                              gender:'',
+                              dateOfBirth:'',
+                              verified: true,
+                              type: 'equipementsProvider',
+                          }
+                          ServiceProvider.create(obj)
+                                .then((user)=>{
+                                res.send(user)})
+                                .catch((err)=> console.log(err))
+                    }
+                })
+            }
+        })
+        .catch((err)=> console.log(err))
+    },
     SSSignUp: (req, res) => {
         var data = req.body.formData;
 
@@ -99,7 +233,6 @@ module.exports = {
     
     SPSignUp: (req, res) => {
         var data = req.body.formData;
-        console.log(req.body.formData)
         ServiceProvider.findOne({ email: data.email.toLowerCase() })
             .then((user) => {
                 if (user) {
@@ -121,7 +254,7 @@ module.exports = {
                                     email: data.email.toLowerCase(),
                                     password: passwordHash,
                                     adress: "",
-                                    city: "",
+                                    city: data.city,
                                     phoneNumber: data.phoneNumber,
                                     gender: "",
                                     dateOfBirth: "",

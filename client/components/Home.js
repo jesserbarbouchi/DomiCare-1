@@ -6,8 +6,7 @@ import { CredentialsContext } from './Authentification/CredentialsContext.js';
 const Home = ({navigation}) => {
     const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
     const  userData = storedCredentials;
-    
-   
+   console.log('homePage :', userData)
     
     const clearLogin = () => {
         AsyncStorage
@@ -63,6 +62,7 @@ const Home = ({navigation}) => {
                       onPress={() => navigation.navigate("shareservice")}
                   />
                   <Button title="Forum2" onPress={()=>navigation.navigate("Forum2",userData)} /> 
+                  <Button title="Report" onPress={()=>navigation.navigate("Report",userData)} /> 
                   {/* <Button title="Test" onPress={()=>navigation.navigate("Test",userData)} />  */}
               </View>
              )}

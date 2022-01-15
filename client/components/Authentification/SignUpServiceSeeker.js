@@ -16,10 +16,11 @@ import {
     InputLeftAddon,
     useDisclose,
     Modal,
+    Divider
 } from "native-base";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './CredentialsContext.js';
-
+import * as Google from 'expo-google-app-auth';
 function SignUp() {
     const [formData, setData] = React.useState({});
     const [errors,  setErrors] = React.useState({});
@@ -100,9 +101,32 @@ function SignUp() {
         return validation;
     };
     
+    const handleGoogleSignup = () =>{
+        const config ={
+          iosClientId: '477279958073-g64kmtrrh5ut8hbv0ctbggiumiklpgid.apps.googleusercontent.com',
+          androidClientId :  '477279958073-ld24gig53t7i6lo9q4p42ga2ecsg6qvl.apps.googleusercontent.com',
+          scopes : ['profile', 'email']
+        }
+        Google 
+        .logInAsync(config)
+        .then((result)=>{
+          const {type, user}= result
+          if (type== 'success'){
+                navigation.navigate('SSSignUpGoogle',{email:user.email,firstName : user.givenName,
+                    lastName : user.familyName,
+                    userName : user.name,
+                    picture : user.photoUrl})
+          } else {
+            console.log('Google signup was cancelled');
+          }
+        })
+        .catch((error)=>{
+          console.log(error)
+        } )
+      }
     
     const post=()=>{
-      axios.post(`http://${IPAdress}:3000/auth/SSSignUp`,{formData} ).then((response)=>{
+      axios.post(`http://192.168.11.73:3000/auth/SSSignUp`,{formData} ).then((response)=>{
         let errors={};
         const data = response.data;
         if(response.data === 'email address already exists'){
@@ -124,10 +148,9 @@ function SignUp() {
 
     const onSubmit = () => {
         if(validate()){
-            onOpen()
-           setTimeout(() => {
+         
             post()
-           }, 2000);  
+         
         }
             else console.log("Validation Failed");
     };
@@ -176,6 +199,16 @@ function SignUp() {
             </Heading>
  
             <VStack space={3} mt="5">
+            <Divider my={2} />
+                <Button mt="4" 
+                colorScheme="teal"
+                onPress={handleGoogleSignup}
+                 >
+                     
+                  Sign up with Google
+                </Button>
+                <Divider my={2} />
+                
                 <FormControl isRequired isInvalid={"firstName" in errors}>
                     <FormControl.Label>First name</FormControl.Label>
                     <Input
