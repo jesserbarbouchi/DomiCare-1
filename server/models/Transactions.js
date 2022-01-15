@@ -35,7 +35,7 @@ const Transactions = mongoose.model(
       type: Date,
     },
 
-    prescription_img: {
+    Prescription: {
       type: String,
     },
 

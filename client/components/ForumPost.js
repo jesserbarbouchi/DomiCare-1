@@ -20,7 +20,7 @@ const ForumPost = (props) => {
       
       const _id = props.route.params._id;
       const post = await axios.get(
-        `http://${IPAdress}:3000/savepost/findpost/${_id}`
+        `http://192.168.1.15:3000/savepost/findpost/${_id}`
       );
       
       setpost(post.data);
@@ -43,7 +43,7 @@ const ForumPost = (props) => {
       action = "déc";
     }
 
-    const post = await axios.put(`http://${IPAdress}:3000/savepost/savepost`, {
+    const post = await axios.put(`http://192.168.1.15:3000/savepost/savepost`, {
       userid,
       postid,
       action,

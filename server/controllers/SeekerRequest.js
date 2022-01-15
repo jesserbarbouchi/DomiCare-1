@@ -7,9 +7,10 @@ module.exports = {
     send_request: async (req, res) => {
         try {
           
-            const demand = await Transactions.create({ details: req.body.text ,address:req.body.address,receiverId:req.body.receiverId,senderId:req.body.senderId})
+            const demand = await Transactions.create({ details: req.body.text ,Prescription:req.body.Prescription,address:req.body.address,receiverId:req.body.receiverId,senderId:req.body.senderId})
            
             console.log(demand.senderId)
+            console.log(demand.picture)
             res.send("request sended");
            
 

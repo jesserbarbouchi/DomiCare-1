@@ -15,7 +15,7 @@ const AddBlog = (props) => {
 
   const SavePost = (post) => {
     axios
-      .post(`http://${IPAdress}:3000/savepost/savepost`, { post })
+      .post(`http://192.168.1.15:3000/savepost/savepost`, { post })
       .then((err, res) => {
         if (err) {
           console.log(err);

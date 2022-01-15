@@ -12,7 +12,7 @@ const Equipementsfetch = () => {
   const [myData,setmyData]=useState([])
 
   useEffect(()=>{
-    axios.get('http://192.168.11.15:3000/Equipements')
+    axios.get('http://192.168.1.15:3000/Equipements')
     .then(res=>{
       console.log("res",res);
       console.log("res.data",res.data);
@@ -105,7 +105,7 @@ var filterData=(city)=> {
  } 
     }
       var apihandler=()=>{
-        const url = "http://localhost:3000/Equipements"
+        const url = "http://192.168.1.15:3000/Equipements"
         fetch(url).then((res)=>res.json())
         .then((resJson)=>{
           console.log("resJson",resJson);
