@@ -18,12 +18,15 @@ import EquipementsProviderProfile from "./components/EquipementsProviderProfile.
 import EditProfile from "./components/EditProfile.js"
 import VerificationCode from "./components/Authentification/VerificationCode.js";
 import ForgetPassword from "./components/Authentification/ForgetPassword.js";
+import SSSignUpGoogle from "./components/Authentification/SSSignUpGoogle.js";
+import SPSignUpGoogle from "./components/Authentification/SPSignUpGoogle.js";
+import EPSignUpGoogle from "./components/Authentification/EPSignUpGoogle.js";
+
 import ResetPassword from "./components/Authentification/ResetPassword.js";
 import { NavigationContainer } from "@react-navigation/native";
 import SeekerRequest  from "./components/SeekerRequest.js";
 // import Test from "./components/Collapsibles.js";
 
-import { IPAdress } from "@env";
 const Stack = createNativeStackNavigator();
 const Router = () => {
     const linking = {
@@ -86,6 +89,19 @@ const Router = () => {
                     name="VerificationCode"
                     component={VerificationCode}
                 />
+                 <Stack.Screen
+                    name="SSSignUpGoogle"
+                    component={SSSignUpGoogle}
+                />
+                  <Stack.Screen
+                    name="SPSignUpGoogle"
+                    component={SPSignUpGoogle}
+                />
+                   <Stack.Screen
+                    name="EPSignUpGoogle"
+                    component={EPSignUpGoogle}
+                />
+           
                 <Stack.Screen name="SignUpAs" component={SignUpType} />
                 <Stack.Screen
                     name="SignUpServiceSeeker"
