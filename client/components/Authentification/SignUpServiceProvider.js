@@ -1,5 +1,11 @@
 import React from "react";
 import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
+import {IPAdress} from "@env";
+import * as ImagePicker from "expo-image-picker";
+import { Ionicons } from "@expo/vector-icons";
+import { storage } from "../../.firebase_config.js";
+
 import {
     Box,
     Heading,
@@ -9,14 +15,86 @@ import {
     Input,
     NativeBaseProvider,
     Center,
-    KeyboardAvoidingView,
     ScrollView,
+    InputGroup,
+    InputLeftAddon,
+    useDisclose,
+    Modal,
+    Icon,
+    Image,
+    Spinner,
 } from "native-base";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { CredentialsContext } from "./CredentialsContext.js";
 
 function SignUp() {
+    const navigation = useNavigation();
     const [formData, setData] = React.useState({});
     const [errors, setErrors] = React.useState({});
+    const [file, setFile] = React.useState("");
+    const [uploading, setUploading] = React.useState(false);
+    const { storedCredentials, setStoredCredentials } =
+        React.useContext(CredentialsContext);
 
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        const picked =  "file:///" + result.uri.split("file:/").join("");
+
+        if (!result.cancelled) {
+            setFile(picked);
+            uploadFile();
+        }
+    };
+
+    const uploadFile = async () => {
+        const blob = await new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                resolve(xhr.response);
+            };
+            xhr.onerror = function () {
+                reject(new TypeError("Network request failed"));
+            };
+            xhr.responseType = "blob";
+            xhr.open("GET", file, true);
+            xhr.send(null);
+        });
+        const ref = storage.ref().child(new Date().toISOString());
+        const snapshot = ref.put(blob);
+        snapshot.on(
+            storage.TaskEvent,
+            () => {
+                setUploading(true);
+            },
+            (error) => {
+                setUploading(false);
+                console.log(error);
+                return;
+            },
+            () => {
+                snapshot.snapshot.ref.getDownloadURL().then((url) => {
+                    setUploading(false);
+                    setData({ ...formData, certificate: url })
+                });
+            }
+        );
+    };
+
+    const persistLogin = (credentials) => {
+        AsyncStorage.setItem("domicareCredentials", JSON.stringify(credentials))
+            .then(() => {
+                setStoredCredentials(credentials);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+    const { isOpen, onOpen, onClose } = useDisclose();
     const validate = () => {
         let validation = true;
         let passwordValid =
@@ -25,6 +103,10 @@ function SignUp() {
             /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
 
         let errors = {};
+        if (formData.certificate === undefined) {
+            errors.password = "certificate is required";
+            validation = false;
+        }
         if (formData.password === undefined) {
             errors.password = "Password is required";
             validation = false;
@@ -66,17 +148,31 @@ function SignUp() {
         if (formData.phoneNumber === undefined) {
             errors.phoneNumber = "Phone Number is required";
             validation = false;
+        } else if (!typeof formData.phoneNumber === "number") {
+            console.log(formData.phoneNumber);
+            errors.phoneNumber = "Invalid Phone Number ";
+            validation = false;
         }
         setErrors(errors);
-
         return validation;
     };
 
     const post = () => {
         axios
-            .post("http://localhost:3000/ServiceSeeker/SignUp", { formData })
-            .then(({ data }) => {
-                console.log("data:", { data });
+            .post(`http://${IPAdress}:3000/auth/SPSignUp`, { formData })
+            .then((response) => {
+                let errors = {};
+                const data = response.data;
+                if (response.data === "email address already exists") {
+                    errors["email"] = "email address already exists";
+                    setErrors(errors);
+                } else if (response.data === "Username already exists") {
+                    errors["userName"] = "Username already exists";
+                    setErrors(errors);
+                } else {
+                    persistLogin({ userData: data });
+                    navigation.navigate("Home");
+                }
             })
             .catch((err) => {
                 console.log(err);
@@ -84,7 +180,10 @@ function SignUp() {
     };
 
     const onSubmit = () => {
-        validate() ? post() : console.log("Validation Failed");
+        if (validate()) {
+                post()
+           
+        } else console.log("Validation Failed");
     };
 
     return (
@@ -96,6 +195,15 @@ function SignUp() {
                 minW: "80",
             }}
         >
+            <Modal isOpen={isOpen} onClose={onClose}>
+                <Modal.Content>
+                    <Modal.Header fontSize="4xl" fontWeight="bold">
+                        Congratulation
+                    </Modal.Header>
+                    <Modal.Body>you have successfully registered</Modal.Body>
+                </Modal.Content>
+            </Modal>
+
             <Box safeArea p="2" w="120%" maxW="300" py="8">
                 <Heading
                     size="lg"
@@ -154,11 +262,30 @@ function SignUp() {
 
                     <FormControl isRequired isInvalid={"phoneNumber" in errors}>
                         <FormControl.Label>Phone Number</FormControl.Label>
-                        <Input
-                            onChangeText={(value) =>
-                                setData({ ...formData, phoneNumber: value })
-                            }
-                        />
+                        <InputGroup
+                            w={{
+                                base: "100%",
+                                lg: "100%",
+                            }}
+                        >
+                            <InputLeftAddon
+                                children={"+216"}
+                                w={{
+                                    base: "20%",
+                                    lg: "100%",
+                                }}
+                            />
+                            <Input
+                                w={{
+                                    base: "80%",
+                                    lg: "100%",
+                                }}
+                                onChangeText={(value) =>
+                                    setData({ ...formData, phoneNumber: value })
+                                }
+                            />
+                        </InputGroup>
+
                         {"phoneNumber" in errors ? (
                             <FormControl.ErrorMessage>
                                 {errors.phoneNumber}
@@ -192,12 +319,17 @@ function SignUp() {
                                 setData({ ...formData, password: value })
                             }
                         />
+
                         {"password" in errors ? (
                             <FormControl.ErrorMessage>
                                 {errors.password}
                             </FormControl.ErrorMessage>
                         ) : (
-                            ""
+                            <FormControl.HelperText _text={{ fontSize: "xs" }}>
+                                Must Contain 8 Characters, One Uppercase, One
+                                Lowercase, One Number and one special case
+                                Character
+                            </FormControl.HelperText>
                         )}
                     </FormControl>
 
@@ -217,8 +349,36 @@ function SignUp() {
                             ""
                         )}
                     </FormControl>
+                    <FormControl isRequired isInvalid={"certificate" in errors}>
+                        <FormControl.Label>Certificate</FormControl.Label>
+                        {!uploading ? (
+                            <Button
+                                onPress={pickImage}
+                                colorScheme="teal"
+                                leftIcon={
+                                    <Icon
+                                        as={Ionicons}
+                                        name="cloud-upload-outline"
+                                        size="sm"
+                                    />
+                                }
+                            >
+                                Upload
+                            </Button>
+                        ) : (
+                            <Spinner />
+                        )}
 
-                    <Button onPress={onSubmit} mt="5" colorScheme="cyan">
+                        {"certificate" in errors ? (
+                            <FormControl.ErrorMessage>
+                                {errors.certificate}
+                            </FormControl.ErrorMessage>
+                        ) : (
+                            ""
+                        )}
+                    </FormControl>
+
+                    <Button onPress={onSubmit} mt="5" colorScheme="teal">
                         Submit
                     </Button>
                 </VStack>

@@ -1,16 +1,51 @@
-import React from 'react'
-import Router from "./router.js"
-import {StyleSheet}from 'react-native'
+import 'react-native-gesture-handler';
+import React, {useState} from 'react';
+import Router from "./routerMenu.js";
+import {StyleSheet}from 'react-native';
+import AppLoading from 'expo-app-loading';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CredentialsContext } from './components/Authentification/CredentialsContext.js';
 
-import { NavigationContainer } from '@react-navigation/native';
+
+
 
 
 export default function App() {
+  const [appReady, setAppReady]= useState(false);
+  const [storedCredentials, setStoredCredentials]= useState("")
+  const checkLoginCredentials = ()=>{
+    AsyncStorage
+     .getItem('domicareCredentials')
+     .then((result)=>{
+       if(result !== null){
+         setStoredCredentials(JSON.parse(result));
+       } else {
+         setStoredCredentials(null);
+       }
+     })
+     .catch(err => console.log(err));
+  }
+  if(!appReady){
+    return (
+      <AppLoading
+      startAsync={checkLoginCredentials}
+      onFinish={()=> setAppReady(true)}
+      onError={console.warn}
+      />
+  
+    )
+  }
+  
   return (
 
-    <NavigationContainer>
+    <CredentialsContext.Provider value={{storedCredentials, setStoredCredentials}}>
+      
+   
       <Router  />
-    </NavigationContainer>
+  
+    
+    </CredentialsContext.Provider>
+
 
   );
 }

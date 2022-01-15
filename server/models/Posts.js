@@ -3,7 +3,11 @@ const mongoose = require("mongoose");
 const Posts = mongoose.model(
   "Posts",
   new mongoose.Schema({
-    ownerId: {
+    serviceProvider_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ServiceProvider",
+    },
+    serviceSeeker_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "ServiceSeeker",
     },
@@ -16,7 +20,7 @@ const Posts = mongoose.model(
       type: String,
     },
     content: {
-      type: String,
+      type: String
     },
     city: {
       type: String,

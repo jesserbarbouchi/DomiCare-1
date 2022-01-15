@@ -3,9 +3,11 @@ const mongoose = require("mongoose");
 const QuestAns = mongoose.model(
   "QuestAns",
   new mongoose.Schema({
-    owner: {
-     
-      type: String,
+    postId:{
+      type:String
+    },
+    owner: { 
+      type: Object,
     },
     createdAt: {
       type: Date,
@@ -20,9 +22,10 @@ const QuestAns = mongoose.model(
     },
     likesCount: {
       type: Number,
+      default:0  
     },
-    DislikesCount: {
-      type: Number,
+    participants:{
+      type:Array ,default:[]
     },
     comments: {
       type: Array,

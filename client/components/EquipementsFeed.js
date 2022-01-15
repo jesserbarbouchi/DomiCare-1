@@ -1,75 +1,61 @@
-import React, { useState } from 'react'
-import { View, Text,StyleSheet,ScrollView,Image,FlatList } from 'react-native'
-import SelectDropdown from 'react-native-select-dropdown'
+import React,{useState, useEffect} from 'react'
+import { View, Text,StyleSheet,SafeAreaView,ScrollView,Image, Button } from 'react-native'
 import items from "./Equipements.js"
 
- class EquipementsFeed extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-        items:items,
-        result:[],
-        city:"",
-
+const EquipementsFeed = () => {
+  const [Equipements,setEquipements] = useState([])
+  const [myCity,setCity]=useState("")
+  const [fetch,setFetch]=useState("")
+  // useEffect(()=>{
+  //   axios.get('http://localhost:3000/Equipements')
+  //   .then(res=>{
+  //     console.log("res",res);
+  //     console.log("res.data",res.data);
+  //     setEquipements(res.data)
+  //     setFetch(res.data)
+  //   })
+  //   .catch(error=>{console.log(error);})
+  // },[])
+ var filterData=(city)=> {
+  
+    const FiltredData = items.filter((item) => {
+      if(city!==""){
+      return item.city === city 
     }
-    this.cityFilter=this.cityFilter.bind(this)
-    this.onChangeCity=this.onChangeCity.bind(this)
-    this.filterData=this.filterData.bind(this)
-  }
-  onChangeCity(e){
-    console.log("city",e,e.target.value);
-    this.setState({
-      city:e.target.value
+    else{console.log("im in")
+    return item.city}
     })
-  }
-  myFilter(small,big){
-        console.log("hi");
-        var x = []
-        var y = this.state.items
-        x=y.filter(ele=>{
-          if((small.price!=="") && (big.price!=="")){
-            if(ele.price>=small.price && ele.price<=big.price){
-              return ele
-            }
-            else {return ele}
-          }
-        })
-        
-        this.state.result=x
-        this.setState({items:x
-        })
+    setEquipements(FiltredData)
+    
       }
-      cityFilter(test){
-        var x=[]
-        var y=this.state.items;
-        x=y.filter(ele=>{
-          if(test.city!==""){
-            if(test.city===ele.city){
-              return ele
-            }
-          }
-          else{return ele}
-          this.state.result=x
-   this.setState({
-     items:x
-   })
-        })
+  var cityOnChange=(e)=>{
+        console.log("e",e.target.value);
+        setCity(e.target.value)
       }
-   
-      filterData(city) {
-        const FiltredData = this.state.items.filter((item) => {
-          return item.city === city   
-        })
-            this.setState({
-            items:  FiltredData
-            });
-          }
-  render() {
-    return (
-      <View style={styles.container} >
+  var search=()=>{
+        filterData()
+       
+      }
+    //  var cityFilter=(city)=>{
+    //     var x=[]
+    //     var y=Equipements
+    //     x=y.filter(ele=>{
+    //       if(city!==""){
+    //         if(ele.city===city){
+    //           return ele
+    //         }
+    //         else{return ele}
+    //       }
+          
+  //  setEquipements(x)
+  //       })
+  //     }
+  return (
+    <SafeAreaView style={styles.container} >
+      <Button onPress={search} >Button</Button>
        <View>
-       <h1>{ this.state.city}</h1>
-                    <select  onChange={(e)=>this.filterData(e.target.value) }>
+                    <select  onChange={(e)=>filterData(e.target.value)}>
+                    <option value="" defaultValue>City</option>
                         <option>Ariana</option>
                         <option>Tunis</option>
                         <option>Ben arous</option>
@@ -96,8 +82,8 @@ import items from "./Equipements.js"
                         <option>Benzart</option>
                     </select>
       </View>
-      <ScrollView>
-      { this.state.items.map((item,index)=>(
+       <ScrollView>
+      { Equipements.map((item,index)=>(
           <View key={index} style={styles.item} >
             <Image style={styles.cardImage} source={{uri:item.picture}} />
             <Text>Equipement name : {item.name}</Text>
@@ -108,10 +94,10 @@ import items from "./Equipements.js"
           </View>
         )) }
       </ScrollView>
-      </View>
-    )
-  }
+    </SafeAreaView>
+  )
 }
+
 const styles = StyleSheet.create({
   container: {
     flex:1,
@@ -129,98 +115,5 @@ const styles = StyleSheet.create({
     resizeMode:'cover'
   }
 })
+
 export default EquipementsFeed
-
-
-
-
-
-
-// const EquipementsFeed = () => {
-//   const [data,setData] = useState([
-//     { id:1, name: 'Oxygéne machine', price: '1000dt',picture:"https://img.joomcdn.net/1c77be34506edd60a9d0d6f1a0813b8d9dba0d54_1024_1024.jpeg"},
-//     { id:2, name: 'Oxygéne machine2', price: '500dt',picture:"https://medeor.de/dateien/Non-Profit-Pharmaceuticals/Medical-supplies-and-devices/Medizintechnik/Oxygen-concentrators/action-medeor-oxygen-concentrator-JAY-5BW-Web.jpg"},
-//     { id:3, name: 'Oxygéne machine3', price: '150dt',picture:"https://cdn.manomano.com/images/images_products/13848936/P/23574848_1.jpg"},
-//     { id:4, name: 'Oxygéne machine3', price: '190dt',picture:"https://m.media-amazon.com/images/I/6127GLu7xaS._AC_SX425_.jpg"}
-//   ])
-//   var [result,setResult]= useState([])
-//   var myFilter=(small,big)=>{
-//     console.log("hi");
-//     var x = []
-//     var y = data
-//     data.filter(ele=>{
-//       if((small.price!=="") && (big.price!=="")){
-//         if(ele.price>=small.price && ele.price<=big.price){
-//           return ele
-//         }
-//         else {return ele}
-//       }
-//     })
-    
-//     result=x
-//     y=x
-//   }
-//   return (
-//       <View style={styles.container} >
-//       <ScrollView>
-//       { data.map((item,index)=>{
-//         return(
-//           <View key={index} style={styles.item} >
-//             <Image style={styles.cardImage} source={{uri:item.picture}} />
-//             <Text>Equipement name : {item.name}</Text>
-//             <Text>Price : {item.price}</Text>
-//           </View>
-//         )
-//       }) }
-//       </ScrollView>
-//       </View>
-//   )
-// }
-// const styles = StyleSheet.create({
-//   container: {
-//     flex:1,
-//     backgroundColor:'#fff',
-//     paddingTop:40,
-//     paddingHorizontal:20
-//   },item:{
-//     marginTop:24,
-//     padding: 30,
-//     backgroundColor: 'pink',
-//     fontSize:24
-//   },cardImage:{
-//     width:'50%',
-//     height:100,
-//     resizeMode:'cover'
-//   }
-// })
-// export default EquipementsFeed
-
-
-
-
-
-{/* <View style={styles.container} >
-<ScrollView>
-{ data.map((item,index)=>{
-  return(
-    <View key={index} style={styles.item} >
-      <Text>{item.name}</Text>
-      <Text>{item.price}</Text>
-      <Image source={{url:item.picture}} />
-    </View>
-  )
-}) }
-</ScrollView>
-</View> */}
-
-{/* <View style={styles.container} >
-<FlatList 
-keyExtractor={(item)=>item.id}
-data={data}
-renderItem={({item})=>(
-  <Text>{item.name}</Text>
-
-
-)}
-/>
-</View> */}
