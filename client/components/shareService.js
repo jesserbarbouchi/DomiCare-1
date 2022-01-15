@@ -38,8 +38,12 @@ export default () => {
     var reqS=formData
     reqS.type='HCSP'
     
-    console.log(reqS);
-    Axios.post("http://localhost:3000/ServiceProvider/shareservice/", {reqS,_id:userData._id})
+
+    setData({ ...formData, type: "HCSP" });
+    Axios.post("http://192.168.1.15:3000/ServiceProvider/shareservice/", {
+      formData,_id:userData._id
+    })
+
       .then(() => {
         setShowS(true);
       })

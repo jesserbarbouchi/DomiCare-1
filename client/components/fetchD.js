@@ -33,7 +33,7 @@ import items from "./Equipements.js"
     })
   }
   apihandler(){
-    const url = "http://localhost:3000/Equipements"
+    const url = "http://192.168.1.15:3000/Equipements"
     fetch(url).then((res)=>res.json())
     .then((resJson)=>{
       console.log(resJson);
@@ -84,7 +84,7 @@ import items from "./Equipements.js"
             });
           }
           fetchData(){
-              fetch("http://localhost:3000/Equipements")
+              fetch("http://192.168.1.15:3000/Equipements")
               .then(response=>{
                 console.log("response",response);
                 this.setState({
