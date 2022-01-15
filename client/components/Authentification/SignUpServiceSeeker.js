@@ -126,7 +126,7 @@ function SignUp() {
       }
     
     const post=()=>{
-      axios.post(`http://${IPAdress}:3000/auth/SSSignUp`,{formData} ).then((response)=>{
+      axios.post(`http://192.168.11.73:3000/auth/SSSignUp`,{formData} ).then((response)=>{
         let errors={};
         const data = response.data;
         if(response.data === 'email address already exists'){

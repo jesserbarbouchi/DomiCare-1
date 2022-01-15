@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import EquipementsFeed from "./components/EquipementsFeed.js";
-
+import Report from "./components/report.js"
 import Home from "./components/Home.js";
 import Login from "./components/Authentification/Login.js";
 import SignUpServiceSeeker from "./components/Authentification/SignUpServiceSeeker.js";
@@ -120,6 +120,11 @@ const Router = () => {
                   <Stack.Screen
                     name="SeekerRequest"
                     component={SeekerRequest}
+             
+                />
+                   <Stack.Screen
+                    name="Report"
+                    component={Report}
              
                 />
                 {/* <Stack.Screen
