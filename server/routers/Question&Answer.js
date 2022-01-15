@@ -10,9 +10,9 @@ router.route("/findpost/:id")
 .get(QuestAns.find_One)
 router.route("/findcomments/:id")
 .get(QuestAns.find_All_Comments)
-router.route("/Fetch")
-.get(QuestAns.fetchQuestions)
+
 router.route("/reply")
  .post(QuestAns.Reply)
+
 
 module.exports = router;

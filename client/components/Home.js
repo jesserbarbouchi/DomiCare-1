@@ -6,6 +6,9 @@ import {
     StyleSheet,
     TouchableOpacity,
     ScrollView,
+
+    Dimensions
+
 } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -39,6 +42,7 @@ const HomeScreen = ({ navigation }) => {
     };
 
     return (
+
         <ScrollView style={styles.container}>
             <View style={styles.sliderContainer}>
                 <Swiper
@@ -186,6 +190,7 @@ const HomeScreen = ({ navigation }) => {
                 )}
             </View>
         </ScrollView>
+
     );
 };
 
