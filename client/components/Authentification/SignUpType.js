@@ -4,7 +4,9 @@ import { useNavigation } from "@react-navigation/native";
 
 
 export default () => {
-    const [value, setValue] = React.useState("")
+    const [value, setValue] = React.useState("Service Seeker")
+    const [formData, setData] = React.useState({});
+
     const navigation = useNavigation()
 
    
@@ -25,23 +27,23 @@ export default () => {
               </Heading>
       
       <Select
-        selectedValue={value }
+        selectedValue={formData.type || ''}
         minWidth="200"
         accessibilityLabel="Choose Service"
-        placeholder="Choose Service"
-        
         _selectedItem={{
           bg: "teal.600",
           endIcon: <CheckIcon size="5" />,
         }}
         mt={1}
-        onValueChange={(value) => setValue(value)}
+        onValueChange={(itemValue) => {
+          setData({ ...formData, type: itemValue })
+        }}
       >
-        <Select.Item  label="Service seeker" value="SignUpServiceSeeker" />
-        <Select.Item label="Service provider" value="SignUpServiceProvider" />
-        <Select.Item label="Equipements provider" value="SignUpEquipementsProvider" />
+        <Select.Item  key={1} label="Service Seeker" value="SignUpServiceSeeker" />
+        <Select.Item key={2} label="Service Provider" value="SignUpServiceProvider" />
+        <Select.Item key={3} label="Equipements Provider" value="SignUpEquipementsProvider" />
       </Select>
-    <Button mt="1" width={'30%'} left={'30%'} colorScheme="teal" onPress={()=>navigation.navigate(`${value}`)}>Next</Button>
+    <Button mt="1" width={'30%'} left={'30%'} colorScheme="teal" onPress={()=>navigation.navigate(`${formData.type}`)}>Next</Button>
     
     </Box>
       </Center>
