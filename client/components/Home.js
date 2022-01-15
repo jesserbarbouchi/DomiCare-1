@@ -62,6 +62,7 @@ const Home = ({navigation}) => {
                       onPress={() => navigation.navigate("shareservice")}
                   />
                   <Button title="Forum2" onPress={()=>navigation.navigate("Forum2",userData)} /> 
+                  <Button title="Report" onPress={()=>navigation.navigate("Report",userData)} /> 
                   {/* <Button title="Test" onPress={()=>navigation.navigate("Test",userData)} />  */}
               </View>
              )}

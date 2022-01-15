@@ -35,11 +35,11 @@ export default () => {
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
   const post = () => {
+    var reqS=formData
+    reqS.type='HCSP'
     
-    setData({ ...formData, type: "HCSP" });
-    Axios.post("http://localhost:3000/ServiceProvider/shareservice/", {
-      formData,_id:userData._id
-    })
+    console.log(reqS);
+    Axios.post("http://localhost:3000/ServiceProvider/shareservice/", {reqS,_id:userData._id})
       .then(() => {
         setShowS(true);
       })
@@ -47,6 +47,8 @@ export default () => {
         setShowF(true);
       });
   };
+    
+  
   return (
     <NativeBaseProvider>
       <Center flex={1} px="3">
