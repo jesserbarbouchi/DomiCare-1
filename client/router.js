@@ -25,6 +25,9 @@ import EPSignUpGoogle from "./components/Authentification/EPSignUpGoogle.js";
 import ResetPassword from "./components/Authentification/ResetPassword.js";
 import { NavigationContainer } from "@react-navigation/native";
 import SeekerRequest  from "./components/SeekerRequest.js";
+import userEquipements from "./components/userEquipements.js"
+import EditEquipement from "./components/EditEquipement.js"
+// import Test from "./components/Collapsibles.js";
 import HomeScreen from "./components/HomeScreen.js"
 
 const Stack = createNativeStackNavigator();
@@ -69,7 +72,9 @@ const Router = () => {
                     name="Equipementsfetch"
                     component={Equipmentsfetch}
                 />
+                <Stack.Screen name="Edit Equipement" component={EditEquipement} />
                 <Stack.Screen name="EquipementsProviderProfile" component={EquipementsProviderProfile} />
+                <Stack.Screen name="userEquipements" component={userEquipements} />
                 <Stack.Screen name="EditProfile" component={EditProfile} />
                 <Stack.Screen name="Forum2" component={Forum2} />
                 <Stack.Screen name="ForumPost" component={ForumPost} />

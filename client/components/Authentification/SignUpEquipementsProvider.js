@@ -1,7 +1,7 @@
 import React from "react";
 import axios from 'axios';
 import { useNavigation } from "@react-navigation/native";
-import {IPAdress} from "@env";
+// import {IPAdress} from "@env";
 import * as Google from 'expo-google-app-auth';
 import {
     Box,

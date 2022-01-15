@@ -1,7 +1,7 @@
 import * as React from "react";
 import axios from 'axios';
 import { useNavigation, useRoute } from "@react-navigation/native";
-import {IPAdress} from "@env";
+// import {IPAdress} from "@env";
 
 
 import {

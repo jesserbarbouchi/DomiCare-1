@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigation, useRoute } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './CredentialsContext.js';
-import {IPAdress} from "@env";
+// import {IPAdress} from "@env";
 
 import {
   Box,

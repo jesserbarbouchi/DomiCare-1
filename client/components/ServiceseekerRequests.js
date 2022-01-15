@@ -8,7 +8,7 @@ const ServiceSeekerRequests = () => {
     useEffect(async() => {
       
         try {
-          const result = await axios.get("http://192.168.1.15:3000/ServiceSeekerRequests/ServiceSeekerRequests")
+          const result = await axios.get("http://192.168.11.73:3000/ServiceSeekerRequests/ServiceSeekerRequests")
           setSProviders(result.data)
           setData(result.data)
           console.log(result.data)

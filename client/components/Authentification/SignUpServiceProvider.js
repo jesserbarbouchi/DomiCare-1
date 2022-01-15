@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
-import {IPAdress} from "@env";
+// import {IPAdress} from "@env";
 import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
 import { storage } from "../../.firebase_config.js";

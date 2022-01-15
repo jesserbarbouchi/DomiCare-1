@@ -212,9 +212,9 @@ const ForumPost = (props) => {
                           </Stack>
                         </VStack>
                       </Box>
-                      {comment.comments.map((reply, key) => {
+                      {comment.comments.map((reply,index) => {
                         return (
-                          <View key={key}>
+                          <View key={index}>
                             <Text> {reply.owner.name} </Text>
                             <Text> {reply.content} </Text>
                             <Text> {reply.createdAt} </Text>

@@ -32,8 +32,8 @@ const HomeScreen = ({ navigation }) => {
     const profileType = () => {
         if (!storedCredentials) {
             return;
-        } else if (storedCredentials.type === "serviceProvider") {
-            navigation.navigate("ServiceProviderProfile");
+        // } else if (storedCredentials.type === "serviceProvider") {
+        //     navigation.navigate("ServiceProviderProfile");
         } else if (storedCredentials.type === "equipementsProvider") {
             navigation.navigate("EquipementsProviderProfile");
         } else return;

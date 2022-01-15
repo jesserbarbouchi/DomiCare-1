@@ -22,11 +22,13 @@ import Forum2 from "./components/forum2.js";
 import Equipmentsfetch from "./components/Equipementsfetch.js";
 import EquipementsProviderProfile from "./components/EquipementsProviderProfile.js";
 import EditProfile from "./components/EditProfile.js";
+import EditEquipement from "./components/EditEquipement.js"
 import VerificationCode from "./components/Authentification/VerificationCode.js";
 import ForgetPassword from "./components/Authentification/ForgetPassword.js";
 import ResetPassword from "./components/Authentification/ResetPassword.js";
 import { NavigationContainer } from "@react-navigation/native";
 import SeekerRequest from "./components/SeekerRequest.js";
+import userEquipements from "./components/userEquipements";
 import Report from "./components/report.js";
 
 import { IPAdress } from "@env";
@@ -99,6 +101,16 @@ const Router = () => {
           name="EditProfile"
           component={EditProfile}
         />
+        <Drawer.Screen
+          options={{
+            drawerLabel: () => null,
+            title: null,
+            drawerItemStyle: { height: 0 },
+            drawerIcon: () => null,
+          }}
+          name="Edit Equipement"
+          component={EditEquipement}
+        />
         <Drawer.Screen name="Forum2" component={Forum2} />
         <Drawer.Screen name="ForumPost" component={ForumPost} />
         <Drawer.Screen name="AddBlog" component={AddBlog} />
@@ -168,6 +180,15 @@ const Router = () => {
           name="SignUpEquipementsProvider"
           component={SignUpEquipementsProvider}
         />
+                <Drawer.Screen name="userEquipements" component={userEquipements} 
+                    options={{
+                      drawerLabel: () => null,
+                      title: null,
+                      drawerItemStyle: { height: 0 },
+                      drawerIcon: () => null,
+                    }}
+                />
+
         <Drawer.Screen options={{
             drawerLabel: () => null,
             title: null,
