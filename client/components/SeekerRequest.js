@@ -1,7 +1,7 @@
 
 import React, { useState,useEffect } from "react";
 import axios from 'axios';
-import { View, Button,StyleSheet,Image,Alert} from "react-native";
+import { View, Button,StyleSheet,Image,Alert,SafeAreaView, Text} from "react-native";
 import { CredentialsContext } from './Authentification/CredentialsContext.js';
 import { useNavigation } from "@react-navigation/native"
 import { storage } from "../.firebase_config.js";
@@ -9,6 +9,8 @@ import * as ImagePicker from "expo-image-picker";
 import { FormControl,Icon,NativeBaseProvider,Center,Spinner,Input  } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { TextInput } from 'react-native-element-textinput';
+import CalendarPicker from 'react-native-calendar-picker';
+
 
 
 
@@ -24,6 +26,10 @@ const  userData = storedCredentials.userData;
   const receiverId = props.route.params
   const [text, setText] = React.useState('');
   const [address, setAddress] = React.useState('');
+  const [selectedStartDate, setSelectedStartDate] = useState(null);
+  const [selectedEndDate, setSelectedEndDate] = useState(null);
+  // const [formData, setData] = React.useState({});
+
   const [Prescription, setPrescription] = React.useState("");
   
   const [errors, setErrors] = React.useState({});
@@ -43,6 +49,15 @@ const  userData = storedCredentials.userData;
     
 
   }
+  const onDateChange = (date, type) => {
+    //function to handle the date change
+    if (type === 'END_DATE') {
+      setSelectedEndDate(date);
+    } else {
+      setSelectedEndDate(null);
+      setSelectedStartDate(date);
+    }
+  };
   
   const simpleAlertHandler = () => {
     alert('Your request has been sended');
@@ -56,11 +71,11 @@ const  userData = storedCredentials.userData;
 
     const picked =  "file:///" + result.uri.split("file:/").join("");
 console.log(picked)
-    if (!result.cancelled) {
+  
       setPrescription(picked);
       console.log(Prescription)
         uploadFile();
-    }
+    
 };
 
 const uploadFile = async () => {
@@ -93,7 +108,9 @@ const uploadFile = async () => {
             snapshot.snapshot.ref.getDownloadURL().then((url) => {
               setUploading(false);
              
-              setPrescription({ Prescription:url })
+              setPrescription(url )
+                    console.log(Prescription)
+
             });
         }
   );
@@ -115,7 +132,7 @@ const uploadFile = async () => {
           // label=" your request ..."
           placeholder=" your request ..."
           placeholderTextColor="gray"
-          focusColor="blue"
+          // focusColor="blue"
           onChangeText={text => {
             setText(text);
           }}
@@ -130,13 +147,73 @@ const uploadFile = async () => {
           // label="your address..."
           placeholder="your address..."
           placeholderTextColor="gray"
-          focusColor="blue"
+          // focusColor="blue"
           onChangeText={address => {
             setAddress(address);
           }}
         />
       </View>
-      <View>
+          <View>
+          <SafeAreaView style={styles.ss}>
+      <View >
+      
+        <CalendarPicker
+          startFromMonday={true}
+          allowRangeSelection={true}
+          minDate={new Date(2018, 1, 1)}
+          maxDate={new Date(2050, 6, 3)}
+          weekdays={
+            [
+              'Mon', 
+              'Tue', 
+              'Wed', 
+              'Thur', 
+              'Fri', 
+              'Sat', 
+              'Sun'
+            ]}
+          months={[
+            'January',
+            'Febraury',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+          ]}
+          previousTitle="Previous"
+          nextTitle="Next"
+          todayBackgroundColor="#e6ffe6"
+          selectedDayColor="#66ff33"
+          selectedDayTextColor="#000000"
+          scaleFactor={375}
+          textStyle={{
+            fontFamily: 'Cochin',
+            color: '#000000',
+          }}
+          onDateChange={onDateChange}
+        />
+        <View style={styles.textStyle}>
+          <Text style={styles.textStyle}>
+            Selected Start Date :
+          </Text>
+          <Text style={styles.textStyle}>
+            {selectedStartDate ? selectedStartDate.toString() : ''}
+          </Text>
+          <Text style={styles.textStyle}>
+            Selected End Date :
+          </Text>
+          <Text style={styles.textStyle}>
+            {selectedEndDate ? selectedEndDate.toString() : ''}
+          </Text>
+        </View>
+      </View>
+    </SafeAreaView>
   
           
         
@@ -218,8 +295,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
     marginLeft: -4,
   },
+
   placeholderStyle: { fontSize: 16 },
   textErrorStyle: { fontSize: 16 },
+  textStyle: {
+    marginTop: 10,
+  },
+  container: {
+    flex: 1,
+    paddingTop: 30,
+    backgroundColor: '#ffffff',
+    padding: 16,
+  },
+  titleStyle: {
+    textAlign: 'center',
+    fontSize: 20,
+    margin: 20,
+  },
 });
 
 
