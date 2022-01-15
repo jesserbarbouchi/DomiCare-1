@@ -62,8 +62,9 @@ const Router = () => {
             linking={linking}
         >
             <Stack.Navigator>
-            <Stack.Screen name="HomeScreen" component={HomeScreen} />
+            
             <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="HomeScreen" component={HomeScreen} />
                 <Stack.Screen
                     name="Equipementsfetch"
                     component={Equipmentsfetch}

@@ -195,11 +195,13 @@ export default HomeScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "white",
+
     },
     sliderContainer: {
         height: 200,
         width: "100%",
-        marginBottom: 70,
+        marginBottom: 50,
         justifyContent: "center",
         alignSelf: "center",
         borderRadius: 8,
