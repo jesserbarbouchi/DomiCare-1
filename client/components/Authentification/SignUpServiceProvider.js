@@ -5,6 +5,7 @@ import {IPAdress} from "@env";
 import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
 import { storage } from "../../.firebase_config.js";
+import * as Google from 'expo-google-app-auth';
 
 import {
     Box,
@@ -21,8 +22,10 @@ import {
     useDisclose,
     Modal,
     Icon,
-    Image,
     Spinner,
+    Select,
+    CheckIcon,
+    Divider,
 } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CredentialsContext } from "./CredentialsContext.js";
@@ -32,7 +35,8 @@ function SignUp() {
     const [formData, setData] = React.useState({});
     const [errors, setErrors] = React.useState({});
     const [file, setFile] = React.useState("");
-    const [uploading, setUploading] = React.useState(false);
+    const [uploading, setUploading] = React.useState("None");
+    
     const { storedCredentials, setStoredCredentials } =
         React.useContext(CredentialsContext);
 
@@ -44,6 +48,7 @@ function SignUp() {
         });
 
         const picked =  "file:///" + result.uri.split("file:/").join("");
+        console.log('picked',picked)
 
         if (!result.cancelled) {
             setFile(picked);
@@ -69,16 +74,16 @@ function SignUp() {
         snapshot.on(
             storage.TaskEvent,
             () => {
-                setUploading(true);
+                setUploading("loading");
             },
             (error) => {
-                setUploading(false);
+                setUploading("none");
                 console.log(error);
                 return;
             },
             () => {
                 snapshot.snapshot.ref.getDownloadURL().then((url) => {
-                    setUploading(false);
+                    setUploading("done");
                     setData({ ...formData, certificate: url })
                 });
             }
@@ -103,6 +108,10 @@ function SignUp() {
             /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
 
         let errors = {};
+        if (formData.city === undefined) {
+            errors.password = "city is required";
+            validation = false;
+        }
         if (formData.certificate === undefined) {
             errors.password = "certificate is required";
             validation = false;
@@ -156,6 +165,31 @@ function SignUp() {
         setErrors(errors);
         return validation;
     };
+    
+    const handleGoogleSignup = () =>{
+        const config ={
+          iosClientId: '477279958073-g64kmtrrh5ut8hbv0ctbggiumiklpgid.apps.googleusercontent.com',
+          androidClientId :  '477279958073-ld24gig53t7i6lo9q4p42ga2ecsg6qvl.apps.googleusercontent.com',
+          scopes : ['profile', 'email']
+        }
+        Google 
+        .logInAsync(config)
+        .then((result)=>{
+          const {type, user}= result
+          if (type== 'success'){
+                navigation.navigate('SPSignUpGoogle',{
+                    email:user.email,
+                    firstName : user.givenName,
+                    lastName : user.familyName,
+                    picture : user.photoUrl})
+          } else {
+            console.log('Google signup was cancelled');
+          }
+        })
+        .catch((error)=>{
+          console.log(error)
+        } )
+      }
 
     const post = () => {
         axios
@@ -181,7 +215,9 @@ function SignUp() {
 
     const onSubmit = () => {
         if (validate()) {
-                post()
+           
+             post()
+          
            
         } else console.log("Validation Failed");
     };
@@ -203,6 +239,15 @@ function SignUp() {
                     <Modal.Body>you have successfully registered</Modal.Body>
                 </Modal.Content>
             </Modal>
+            <Divider my={2} />
+                <Button mt="4" 
+                colorScheme="teal"
+                onPress={handleGoogleSignup}
+                 >
+                     
+                  Sign up with Google
+                </Button>
+                <Divider my={2} />
 
             <Box safeArea p="2" w="120%" maxW="300" py="8">
                 <Heading
@@ -310,6 +355,51 @@ function SignUp() {
                             ""
                         )}
                     </FormControl>
+                    
+                    <FormControl isRequired isInvalid={"city" in errors}>
+        <FormControl.Label>Select City</FormControl.Label>
+        <Select
+          selectedValue={formData.city || 'Tunis'}
+          minWidth={200}
+          accessibilityLabel="Select your City"
+        
+          _selectedItem={{
+            bg: "teal.600",
+            endIcon: <CheckIcon size={5} />,
+          }}
+          mt={1}
+          onValueChange={(itemValue) => {
+            setData({ ...formData, city: itemValue })
+          }}
+        >
+          <Select.Item label="Tunis" value="Tunis" />
+          <Select.Item label="Ariana" value="Ariana"  />
+          <Select.Item label="Ben arous" value="Ben arous" />
+          <Select.Item label="Manouba" value="Manouba" />
+          <Select.Item label="Sousse" value="Sousse" />
+          <Select.Item label="Sfax" value="Sfax" />
+          <Select.Item label="Gabes" value="Gabes"  />
+          <Select.Item label="Medenine" value="Medenine" />
+          <Select.Item label="Mahdia" value="Mahdia" />
+          <Select.Item label="Beja" value="Beja" />
+          <Select.Item label="Bizerte" value="Bizerte" />
+          <Select.Item label="Gafsa" value="Gafsa"  />
+          <Select.Item label="Jendouba" value="Jendouba" />
+          <Select.Item label="Kairouan" value="Kairouan" />
+          <Select.Item label="Kasserine" value="Kasserine" />
+          <Select.Item label="Kef" value="Kef" />
+          <Select.Item label="Monastir" value="Monastir"  />
+          <Select.Item label="Nabeul" value="Nabeul" />
+          <Select.Item label="Sidi Bouzid" value="Sidi Bouzid" />
+          <Select.Item label="Siliana" value="Siliana" />
+          <Select.Item label="Tataouine" value="Tataouine" />
+          <Select.Item label="Tozeur" value="Tozeur"  />
+          <Select.Item label="Zaghouan" value="Zaghouan" />
+          <Select.Item label="Kebili" value="Kebili" />
+        </Select>
+       
+        <FormControl.ErrorMessage>{errors.city}</FormControl.ErrorMessage>
+      </FormControl>
 
                     <FormControl isRequired isInvalid={"password" in errors}>
                         <FormControl.Label>Password</FormControl.Label>
@@ -351,33 +441,40 @@ function SignUp() {
                     </FormControl>
                     <FormControl isRequired isInvalid={"certificate" in errors}>
                         <FormControl.Label>Certificate</FormControl.Label>
-                        {!uploading ? (
-                            <Button
-                                onPress={pickImage}
-                                colorScheme="teal"
-                                leftIcon={
-                                    <Icon
-                                        as={Ionicons}
-                                        name="cloud-upload-outline"
-                                        size="sm"
-                                    />
-                                }
-                            >
-                                Upload
-                            </Button>
-                        ) : (
-                            <Spinner />
-                        )}
+                        
+                        { (uploading==="None")? (
+        <Button
+        onPress={pickImage}
+        colorScheme="teal"
+        leftIcon={
+            <Icon
+                as={Ionicons}
+                name="cloud-upload-outline"
+                size="sm"
+            />
+        }
+    >
+        Upload
+    </Button>
+    )
 
-                        {"certificate" in errors ? (
-                            <FormControl.ErrorMessage>
-                                {errors.certificate}
-                            </FormControl.ErrorMessage>
-                        ) : (
-                            ""
-                        )}
+: (uploading === "loading") ?(
+    (
+        <Spinner />
+    )
+)
+: (
+    (
+        <Button
+   
+        colorScheme="teal"
+        >
+        Uploaded!
+    </Button>
+    )
+)
+}  
                     </FormControl>
-
                     <Button onPress={onSubmit} mt="5" colorScheme="teal">
                         Submit
                     </Button>
