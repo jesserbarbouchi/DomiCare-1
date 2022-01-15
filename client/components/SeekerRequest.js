@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { TextInput } from 'react-native-paper';
 import axios from 'axios';
-import ServiceProvider from '../../server/controllers/ServiceProvider';
+
 import { View, StyleSheet, Button, ScrollView, Alert, Picker, Image, Text, TouchableOpacity } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './Authentification/CredentialsContext.js';
@@ -19,7 +19,7 @@ const  userData = storedCredentials.userData;
   const [text, setText] = React.useState('');
   const senderId = userData._id
   const post=()=>{
-    axios.post(`http://localhost:3000/SeekerRequest/SeekerRequest/`, { text,receiverId,senderId })
+    axios.post(`http://192.168.11.73:3000/SeekerRequest/SeekerRequest/`, { text,receiverId,senderId })
       .then(res => console.log(res)).catch(err => console.log(id))
     console.log(text)
   }

@@ -37,7 +37,7 @@ export default () => {
   const post = () => {
     
     setData({ ...formData, type: "HCSP" });
-    Axios.post("http://localhost:3000/ServiceProvider/shareservice/", {
+    Axios.post("http://192.168.11.73:3000/ServiceProvider/shareservice/", {
       formData,_id:userData._id
     })
       .then(() => {

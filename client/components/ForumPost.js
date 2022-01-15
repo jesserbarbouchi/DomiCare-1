@@ -1,39 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef  } from "react";
 import { PrivateValueStore, useNavigation } from "@react-navigation/native";
-import { View, Text, Button, Image } from "react-native";
+import { StyleSheet,View, Text, Button, Image ,SafeAreaView ,ScrollView,TextInput } from "react-native";
 import { Input, Center, NativeBaseProvider ,IconButton, Icon} from "native-base"
 import { Entypo } from "@expo/vector-icons"
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CredentialsContext } from "./Authentification/CredentialsContext.js";
 import { IPAdress } from "@env";
+import Collapsible from 'react-native-collapsible';
+
 
 const ForumPost = (props) => {
   const [value, setValue] = React.useState("")
-
+  const [shouldShow, setShouldShow] = useState(false);
+  const [shouldshow, setshouldshow] = useState(false)
+  
   const handleChange = (event) => { console.log(value) 
     return(setValue(event.target.value))}
   const navigation = useNavigation();
   const [singlepost, setpost] = useState({});
   const [participants, setparticipants] = useState([]);
   const[comments,setcomments] = useState([])
-  const[newcomment,setnewcomment] = useState({})
+  const[subcomment,setsubcomment] = useState({})
+  const[focus,setfocus]=useState(false)
   const { storedCredentials, setStoredCredentials } =
     React.useContext(CredentialsContext);
   const userData = storedCredentials.userData;
- 
+  
   useEffect( () => {
     
     const fetch=async()=>{
       
+
       const _id = props.route.params._id;
       const post = await axios.get(
-        `http://${IPAdress}:3000/savepost/findpost/${_id}`
+        `http://192.168.11.73:3000/savepost/findpost/${_id}`
       );
       const com = await axios.get(
-        `http://${IPAdress}:3000/savepost/findcomments/${_id}`
+        `http://192.168.11.73:3000/savepost/findcomments/${_id}`
       );
-      console.log('com',com.data)
       setpost(post.data);
       setparticipants(post.data.participants);
       setcomments(com.data)
@@ -43,20 +48,33 @@ const ForumPost = (props) => {
    
   }, []);
   const Comment=async()=>{
-    console.log('edtfrhyui')
+    
     const _id = props.route.params._id;
     
-    const comment = await axios.post(`http://${IPAdress}:3000/savepost/savepost`, {
+    const comment = await axios.post(`http://192.168.11.73:3000/savepost/savepost`, {
       owner:{_id:userData._id,name:userData.firstName},
       postId:singlepost._id,
       content:value,
       type:'comment'
     });
     const recom = await axios.get(
-      `http://${IPAdress}:3000/savepost/findcomments/${_id}`
+      `http://192.168.11.73:3000/savepost/findcomments/${_id}`
     );
 
  setcomments(recom.data)
+  }
+  const replyto =async()=>{
+    const id=subcomment
+    const reply = await axios.post(`http://192.168.11.73:3000/savepost/reply`, {
+      rep:{owner:{_id:userData._id,name:userData.firstName},
+      commentid:id,
+      content:value}
+    });
+    const _id = props.route.params._id;
+    const recomm = await axios.get(
+      `http://192.168.11.73:3000/savepost/findcomments/${_id}`
+    );
+    setcomments(recomm.data)
   }
 
  
@@ -72,7 +90,7 @@ const ForumPost = (props) => {
     } else {
       action = "déc";
     }
-    const post = await axios.put(`http://${IPAdress}:3000/savepost/savepost`, {
+    const post = await axios.put(`http://192.168.11.73:3000/savepost/savepost`, {
       userid,
       postid,
       action,
@@ -83,7 +101,9 @@ const ForumPost = (props) => {
   };
 
   return (
-    <View>
+    
+    <NativeBaseProvider>
+    
       <Image
         source={{
           uri: "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg",
@@ -98,35 +118,108 @@ const ForumPost = (props) => {
       <Text> {participants.length}Likes</Text>
       <Button title="Like" onPress={() => Like()} />
 
-      <Button title="comment" onPress={() => navigation.navigate("Forum")} />
+      <Button title="comment"
+          onPress={() => setShouldShow(!shouldShow)}
+     />
+      {shouldShow ? (
+         <Input  value={value} variant="rounded" placeholder="Round"  onChange={handleChange} w={{
+          width:500,
+          md: "25%",
+        }}
+        
+        
+        InputRightElement={
+          <Button size="xs" rounded="none" w="1/6" h="full" title="Submit" onPress={()=>Comment()}>
+           
+          </Button>
+        }/>
+        ) : null}
+    <View >
+     <View style={{height: 600, width: 500}}>  
+  
+    <SafeAreaView>
+   
+    <ScrollView>
+    <View>
+      
       {comments.map((comment,key)=>{
-          return <View key={key}>
-      <Text> {comment.name} </Text>
+        return(
+          
+          
+          <View key={key} >
+        
+          
+      <Text > {comment.name} </Text>
       <Text> {comment.content} </Text>
       <Text> {comment.createdAt} </Text>
       <Text> {comment.likesCount} </Text>
-      <Button title="Like" onPress={() => Like()} />
-      <Button title="comment" onPress={() => navigation.navigate("Forum")} />
+      
+      <Button title="Reply"
+          onPress={() => {setshouldshow(!shouldshow)
+             setsubcomment(comment._id)}}
+     />
+     {comment.comments.map((reply,key)=>{
+        return(
+          
+          
+          <View key={key} >
+        
+          
+      <Text > {reply.owner.name} </Text>
+      <Text> {reply.content} </Text>
     
+      
       </View>
-      }
-      )}
-      <NativeBaseProvider>
-      <Center flex={1} px="3">
+      
+     
+     )}
+     )}
+      {shouldshow ? (
+         <Input  value={value} variant="rounded" placeholder="..."  onChange={handleChange} w={{
+          width:500,
+          md: "25%",
+        }}
+        
+        
+        InputRightElement={
+          <Button  size="xs" rounded="none" w="1/6" h="full" title="Submit" onPress={()=>replyto()}>
+           
+          </Button>
+        }/>
+        ) : null}
+    
+      
+      </View>
+      
+     
+     )}
+     )}
+     </View>
+       </ScrollView>
+       </SafeAreaView>
+      
+    
+        </View>
+  </View>  
+      
+    
  
-    <Input value={value} variant="rounded" placeholder="Round"  onChange={handleChange} w={{
-        base: "75%",
-        md: "25%",
-      }}
-      InputRightElement={
-        <Button size="xs" rounded="none" w="1/6" h="full" title="Submit"onPress={()=>Comment()}>
-         
-        </Button>
-      }/>
-    </Center>
+    
+   
+    
     
     </NativeBaseProvider>
-    </View>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  scrollView: {
+    flex: 1,
+    backgroundColor: "pink",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
 export default ForumPost;

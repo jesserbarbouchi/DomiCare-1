@@ -42,9 +42,9 @@ module.exports = {
   },
   find_All_Comments: async (req, res, next) => {
     try {
-      console.log(req.params.id)
+      
       const com = await QuestAns.find({ postId : req.params.id}).exec();
-         console.log("com",com)
+         
       res.status(200).json(com);
     } catch (error) {
       next(error);
@@ -64,9 +64,23 @@ module.exports = {
   update_One: async (req, res, next) => {
     console.log("request", req.body);
     try {
-      const event = await QuestAns.findByIdAndUpdate(
+      const event = await QuestAns.findByIUpdate(
         { _id: req.body._id },
         { $push: { comments: req.body.comment } },
+        { new: true }
+      );
+      res.status(200).json(event);
+    } catch (error) {
+      next(error);
+    }
+  },
+  Reply: async (req, res, next) => {
+    console.log("request", req.body.rep);
+    try {
+      const event = await QuestAns.findByIdAndUpdate(
+        
+        { _id: req.body.rep.commentid},
+        { $push: { comments: req.body.rep } },
         { new: true }
       );
       res.status(200).json(event);
