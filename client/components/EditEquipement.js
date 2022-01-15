@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './Authentification/CredentialsContext.js';
 import axios from 'axios'
 
-const EditEquipement = () => {
+const EditEquipement = ({navigation}) => {
   const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
   const [selectedtype, setSelectedtype] = useState("");
@@ -60,9 +60,13 @@ const EditEquipement = () => {
       console.log(res.data)
     setData(res.data)
     })
+    .then(()=>alert("Equipement updated successfully!"))
+    .then(()=>profile())
     .catch(error=>console.log(error))
   }
-
+  var profile = () => {
+    navigation.navigate("EquipementsProviderProfile")
+  };
   return (
     <View>
        <Text>Edit Your Equipement</Text>
