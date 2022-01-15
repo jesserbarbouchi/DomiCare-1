@@ -20,7 +20,9 @@ const serviceProvidersList = ({navigation}) => {
     useEffect(async() => {
       
         try {
-          const result = await axios.get("http://192.168.1.15:3000/serviceProvidersList/serviceProvidersList")
+
+          const result = await axios.get("http://localhost:3000/serviceProvidersList/serviceProvidersList")
+
           setSProviders(result.data)
           setData(result.data)
           console.log(result.data)
