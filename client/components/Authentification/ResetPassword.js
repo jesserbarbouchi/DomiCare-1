@@ -70,7 +70,7 @@ function ResetPassword (){
     
     const post = () =>{
       const pass = formData.password
-      axios.post(`http://${IPAdress}:3000/auth/ResetPassword`,{pass,email} ).then((response)=>{
+      axios.post(`http://192.168.1.15:3000/auth/ResetPassword`,{pass,email} ).then((response)=>{
         const data = response.data
         persistLogin({userData : data});
         navigation.navigate("Home")
@@ -141,7 +141,7 @@ function ResetPassword (){
                     )}
                 </FormControl>
 
-                <Button mt="2" colorScheme="cyan" onPress={onSubmit}>
+                <Button mt="2" colorScheme="teal" onPress={onSubmit}>
                   Reset my Password
                 </Button>
                

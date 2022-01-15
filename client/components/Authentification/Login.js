@@ -14,6 +14,7 @@ import {
   HStack,
   Center,
   NativeBaseProvider,
+  extendTheme,
 } from "native-base"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './CredentialsContext.js';
@@ -50,7 +51,7 @@ function Login (){
     return validation;
     };
     const post = () =>{
-      axios.post(`http://${IPAdress}:3000/auth/Login`,{formData} ).then((response)=>{
+      axios.post(`http://192.168.1.15:3000/auth/Login`,{formData} ).then((response)=>{
         let errors={}
         const data = response.data
         if(response.data === 'Your email and password do not match'){
@@ -76,7 +77,7 @@ function Login (){
     };
     
         return (
-            <NativeBaseProvider>
+            <NativeBaseProvider >
               <Center flex={1} px="3">
               <Box safeArea p="2" py="8" w="120%" maxW="300">
               <Heading
@@ -141,7 +142,9 @@ function Login (){
                     Forget Password?
                   </Link>
                 </FormControl>
-                <Button mt="2" colorScheme="cyan" onPress={onSubmit}>
+                <Button mt="2" 
+                colorScheme="teal"
+                 onPress={onSubmit}>
                   Sign in
                 </Button>
                 <HStack mt="6" justifyContent="center">
@@ -171,6 +174,8 @@ function Login (){
             </NativeBaseProvider>
           )
 }
+
+
 export default function () {
     return (
         <NativeBaseProvider>

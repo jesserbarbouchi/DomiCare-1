@@ -25,24 +25,24 @@ function ResetPassword (){
       let validation = true;
       let errors = {};
       if (formData.email === undefined) {
-        errors.email = "email is required";
+        errors.email = 'email is required';
         validation = false;
-    }
+     }
     setErrors(errors);
     return validation;
     };
     
-    const post = () =>{
-      axios.post(`http://${IPAdress}:3000/auth/ForgetPassword`,{formData} ).then((response)=>{
+    const post = () => {
+      axios.post(`http://192.168.1.15:3000/auth/ForgetPassword`,{formData} ).then((response)=>{
         let errors={}
         let data = response.data
         if(data === "Email address doesn't exist"){
-            errors["email"]= "Email address doesn't exist !";
+            errors.email= "Email address doesn't exist !";
             setErrors(errors);
         }
         else {
           navigation.navigate('VerificationCode', {
-            email:formData.email,
+            email:formData.email
           });
         } 
          }).catch((err)=>{
@@ -89,7 +89,7 @@ function ResetPassword (){
                     )}
                 </FormControl>
 
-                <Button mt="2" colorScheme="cyan" onPress={onSubmit}>
+                <Button mt="2" colorScheme="teal" onPress={onSubmit}>
                   Reset my Password
                 </Button>
                

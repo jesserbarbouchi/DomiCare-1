@@ -96,7 +96,7 @@ const persistLogin =(credentials)=>{
     };
     
     const post=()=>{
-      axios.post(`http://${IPAdress}:3000/auth/EPSignUp`,{formData} ).then((response)=>{
+      axios.post(`http://192.168.1.15:3000/auth/EPSignUp`,{formData} ).then((response)=>{
         let errors={};
         const data = response.data;
         if(response.data === 'email address already exists'){
@@ -291,7 +291,7 @@ const persistLogin =(credentials)=>{
                     )}
                 </FormControl>
 
-                <Button onPress={onSubmit} mt="5" colorScheme="cyan">
+                <Button onPress={onSubmit} mt="5" colorScheme="teal">
                     Submit
                 </Button>
             </VStack>

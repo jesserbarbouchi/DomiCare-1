@@ -102,7 +102,7 @@ function SignUp() {
     
     
     const post=()=>{
-      axios.post(`http://${IPAdress}:3000/auth/SSSignUp`,{formData} ).then((response)=>{
+      axios.post(`http://192.168.1.15:3000/auth/SSSignUp`,{formData} ).then((response)=>{
         let errors={};
         const data = response.data;
         if(response.data === 'email address already exists'){
@@ -312,7 +312,7 @@ function SignUp() {
                     )}
                 </FormControl>
 
-                <Button onPress={onSubmit} mt="5" colorScheme="cyan">
+                <Button onPress={onSubmit} mt="5" colorScheme="teal">
                     Submit
                 </Button>
             </VStack>
