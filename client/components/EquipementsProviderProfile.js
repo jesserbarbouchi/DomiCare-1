@@ -17,10 +17,10 @@ const EquipementsProviderProfile = ({navigation}) => {
   const [formData, setData] = React.useState({});
   const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
   const  userData = storedCredentials;
-  console.log("userData:",userData);
-  console.log(userData.userData._id);
+  // console.log("userData:",userData);
+  // console.log(userData.userData._id);
   useEffect(() => {
-    axios.get(`http://localhost:3000/editprofile/fetch/${userData.userData._id}`)
+    axios.get(`http://192.168.11.73:3000/editprofile/fetch/${userData.userData._id}`)
         .then(res => {
           console.log("res in useEffect",res);
           setData(res.data) 
@@ -31,6 +31,9 @@ const EquipementsProviderProfile = ({navigation}) => {
 }, []);
   var editprofile = () => {
     navigation.navigate("EditProfile");
+};
+var myEquipements = () => {
+  navigation.navigate("userEquipements");
 };
 
     return (
@@ -49,6 +52,15 @@ const EquipementsProviderProfile = ({navigation}) => {
                 <Text onPress={editprofile}>Update</Text>  
                 <Button onPress={editprofile} >Update</Button>
               </TouchableOpacity>
+              {formData.type==="equipementsProvider"?
+              <TouchableOpacity style={styles.buttonContainer}>
+                <View>
+                <Text onPress={myEquipements}>My Equipements</Text> 
+                <Button onPress={myEquipements} >My Equipements</Button>
+                </View>
+                
+                </TouchableOpacity>
+                :null}
             </View>
         </View>
       </View>

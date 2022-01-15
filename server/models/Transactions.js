@@ -2,21 +2,27 @@ const mongoose = require("mongoose");
 
 const Transactions = mongoose.model(
   "Transactions",
-  new mongoose.Schema({
+  mongoose.Schema({
     senderId: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "ServiceSeeker",
     },
-    postId: {
-      type: Schema.Types.ObjectId,
-      ref: "ServiceSeeker",
+    
+    receiverId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ServiceProvider",
     },
+    address: {type: String },
+    
     createdAt: {
       type: Date,
       immutable: true,
       default: () => Date.now(),
     },
     status: {
+      type: String,
+    },
+    details: {
       type: String,
     },
     rating: {
@@ -29,11 +35,11 @@ const Transactions = mongoose.model(
       type: Date,
     },
 
-    prescription_img: {
+    Prescription: {
       type: String,
     },
 
-    adress: { String },
+  
   })
 );
 module.exports = Transactions;

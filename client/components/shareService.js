@@ -21,8 +21,13 @@ import {
   IconButton,
   CloseIcon,
 } from "native-base";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CredentialsContext } from './Authentification/CredentialsContext.js';
 
 export default () => {
+  
+  const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
+    const  userData = storedCredentials.userData;
   const [formData, setData] = React.useState({});
   const [modalVisible, setModalVisible] = React.useState(false);
   const [showS, setShowS] = React.useState(false);
@@ -30,10 +35,15 @@ export default () => {
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
   const post = () => {
+    var reqS=formData
+    reqS.type='HCSP'
+    
+
     setData({ ...formData, type: "HCSP" });
-    Axios.post("http://localhost:3000/ServiceProvider/shareservice", {
-      formData,
+    Axios.post("http://192.168.11.73:3000/ServiceProvider/shareservice/", {
+      formData,_id:userData._id
     })
+
       .then(() => {
         setShowS(true);
       })
@@ -41,6 +51,8 @@ export default () => {
         setShowF(true);
       });
   };
+    
+  
   return (
     <NativeBaseProvider>
       <Center flex={1} px="3">
@@ -286,6 +298,7 @@ export default () => {
                 <HStack alignItems="center">
                   <Button variant="outline"
                     onPress={() => {
+                      console.log(userData)
                       setModalVisible(!modalVisible);
                     }}
                   >
