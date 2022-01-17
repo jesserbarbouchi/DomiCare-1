@@ -1,7 +1,10 @@
 
 import React, { useState,useEffect } from "react";
 import axios from 'axios';
-import { View, Button,StyleSheet,Image,Alert,SafeAreaView, Text} from "react-native";
+
+import { View, StyleSheet, Button, ScrollView, Alert, Picker, Image, Text, TouchableOpacity } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { CredentialsContext } from './Authentification/CredentialsContext.js';
 import { useNavigation } from "@react-navigation/native"
 import { storage } from "../.firebase_config.js";
@@ -38,7 +41,7 @@ const  userData = storedCredentials.userData;
   const post = () => {
    
 
-    axios.post(`http://192.168.1.15:3000/SeekerRequest/SeekerRequest/`, {text,address,Prescription,receiverId,senderId })
+    axios.post(`http://192.168.11.73:3000/SeekerRequest/SeekerRequest/`, {text,address,Prescription,receiverId,senderId })
       .then(res => console.log(res)).catch(err => console.log(id))
     console.log('hello',text,address,Prescription)
   }

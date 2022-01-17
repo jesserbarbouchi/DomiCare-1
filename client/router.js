@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import EquipementsFeed from "./components/EquipementsFeed.js";
-
+import Report from "./components/report.js"
 import Home from "./components/Home.js";
 import Login from "./components/Authentification/Login.js";
 import SignUpServiceSeeker from "./components/Authentification/SignUpServiceSeeker.js";
@@ -12,18 +12,24 @@ import ForumPost from "./components/ForumPost.js";
 import serviceProvidersList from "./components/serviceProvidersList.js";
 import shareservice from "./components/shareService.js";
 import AddBlog from "./components/AddBlog.js";
-import Forum2 from "./components/Forum2.js";
+import Forum2 from "./components/forum2.js";
 import Equipmentsfetch from "./components/Equipementsfetch.js";
 import EquipementsProviderProfile from "./components/EquipementsProviderProfile.js"
 import EditProfile from "./components/EditProfile.js"
 import VerificationCode from "./components/Authentification/VerificationCode.js";
 import ForgetPassword from "./components/Authentification/ForgetPassword.js";
+import SSSignUpGoogle from "./components/Authentification/SSSignUpGoogle.js";
+import SPSignUpGoogle from "./components/Authentification/SPSignUpGoogle.js";
+import EPSignUpGoogle from "./components/Authentification/EPSignUpGoogle.js";
+
 import ResetPassword from "./components/Authentification/ResetPassword.js";
 import { NavigationContainer } from "@react-navigation/native";
 import SeekerRequest  from "./components/SeekerRequest.js";
+import userEquipements from "./components/userEquipements.js"
+import EditEquipement from "./components/EditEquipement.js"
 // import Test from "./components/Collapsibles.js";
+import HomeScreen from "./components/HomeScreen.js"
 
-import { IPAdress } from "@env";
 const Stack = createNativeStackNavigator();
 const Router = () => {
     const linking = {
@@ -59,12 +65,16 @@ const Router = () => {
             linking={linking}
         >
             <Stack.Navigator>
-                <Stack.Screen name="Home" component={Home} />
+            
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="HomeScreen" component={HomeScreen} />
                 <Stack.Screen
                     name="Equipementsfetch"
                     component={Equipmentsfetch}
                 />
+                <Stack.Screen name="Edit Equipement" component={EditEquipement} />
                 <Stack.Screen name="EquipementsProviderProfile" component={EquipementsProviderProfile} />
+                <Stack.Screen name="userEquipements" component={userEquipements} />
                 <Stack.Screen name="EditProfile" component={EditProfile} />
                 <Stack.Screen name="Forum2" component={Forum2} />
                 <Stack.Screen name="ForumPost" component={ForumPost} />
@@ -86,6 +96,19 @@ const Router = () => {
                     name="VerificationCode"
                     component={VerificationCode}
                 />
+                 <Stack.Screen
+                    name="SSSignUpGoogle"
+                    component={SSSignUpGoogle}
+                />
+                  <Stack.Screen
+                    name="SPSignUpGoogle"
+                    component={SPSignUpGoogle}
+                />
+                   <Stack.Screen
+                    name="EPSignUpGoogle"
+                    component={EPSignUpGoogle}
+                />
+           
                 <Stack.Screen name="SignUpAs" component={SignUpType} />
                 <Stack.Screen
                     name="SignUpServiceSeeker"
@@ -102,6 +125,11 @@ const Router = () => {
                   <Stack.Screen
                     name="SeekerRequest"
                     component={SeekerRequest}
+             
+                />
+                   <Stack.Screen
+                    name="Report"
+                    component={Report}
              
                 />
                 {/* <Stack.Screen
