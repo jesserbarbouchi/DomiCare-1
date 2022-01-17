@@ -1,7 +1,7 @@
 import * as React from "react";
 import axios from 'axios';
 import { useNavigation } from "@react-navigation/native";
-import {IPAdress} from "@env";
+// import {IPAdress} from "@env";
 import {
   Box,
 
@@ -32,8 +32,8 @@ function ResetPassword (){
     return validation;
     };
     
-    const post = () => {
-      axios.post(`http://192.168.1.15:3000/auth/ForgetPassword`,{formData} ).then((response)=>{
+    const post = () =>{
+      axios.post(`http://localhost:3000/auth/ForgetPassword`,{formData} ).then((response)=>{
         let errors={}
         let data = response.data
         if(data === "Email address doesn't exist"){

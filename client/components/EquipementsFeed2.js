@@ -7,7 +7,7 @@ import items from "./Equipements.js"
 const EquipementsFeed2 = () => {
   const [Equipements,setEquipements] = useState([])
   useEffect(()=>{
-    axios.get('http://192.168.1.15:19006/Equipements')
+    axios.get('http://192.168.11.73:19006/Equipements')
     .then(res=>{
       console.log("res",res);
       setEquipements(res.data)

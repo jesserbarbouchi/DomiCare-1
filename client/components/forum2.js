@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CredentialsContext } from "./Authentification/CredentialsContext.js";
-import { IPAdress } from "@env";
+// import { IPAdress } from "@env";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -32,7 +32,7 @@ export const Forum2 = (props) => {
 
   const [subjects, setData] = useState([]);
   useEffect(async () => {
-    const result = await axios(`http://192.168.1.15:3000/savepost/savepost`);
+    const result = await axios(`http://localhost:3000/savepost/savepost`);
     setData(result.data);
   }, []);
   console.log("sub", subjects);
