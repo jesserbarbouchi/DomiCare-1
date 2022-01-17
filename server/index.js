@@ -16,6 +16,7 @@ const servicesrequests=require("./routers/servicesrequestsfeed.js")
 
 // **************************************
 const Posts=require("./routers/Posts.js")
+const Transactions=require("./routers/Transactions.js")
 // **************************************
 
 // const ServiceSeekerRequests = require ("./routers/ServiceSeekerRequests.js")
@@ -57,6 +58,7 @@ app.use("/reports",Reports);
 
 // **************************************
 app.use("/Posts",Posts)
+app.use('/Transactions',Transactions)
 // **************************************
 
 /**************** Listening Requests ****************/
