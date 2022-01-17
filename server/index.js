@@ -9,6 +9,7 @@ const ServiceSeeker = require("./routers/ServiceSeeker.js");
 const serviceProvidersList = require("./routers/serviceProvidersList.js")
 const auth = require("./routers/auth-routes");
 const ServiceProvider =  require("./routers/ServiceProvider")
+const admin =  require("./routers/Admin.js")
 const ServiceProviderProfile = require("./routers/users.js")
 const SeekerRequest = require ("./routers/SeekerRequest.js")
 const ServiceSeekerRequests = require ("./routers/ServiceSeekerRequests.js")
@@ -35,6 +36,7 @@ app.use("/Equipements", Equipements);
 app.use("/serviceProvidersList",serviceProvidersList)
 app.use("/ServiceSeeker", ServiceSeeker);
 app.use("/savepost",QuestAns)
+app.use("/admin",admin)
 app.use("/auth", auth);
 app.use("/ServiceProvider", ServiceProvider);
 app.use("/editprofile",ServiceProviderProfile);
