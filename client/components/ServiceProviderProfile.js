@@ -39,7 +39,6 @@ const ServiceProviderProfile = () => {
                 <Text>{sp.phoneNumber}</Text>
                 <Text>{sp.email}</Text>
               </View>
-
               <Card.Actions>
                 <Button>Update Profile</Button>
               </Card.Actions>

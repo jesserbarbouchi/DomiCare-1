@@ -4,6 +4,7 @@ import {Picker} from "@react-native-picker/picker"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './Authentification/CredentialsContext.js';
 import axios from 'axios'
+import {localhost} from "@env";
 
 const EditProfile = ({navigation}) => {
   const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
@@ -15,7 +16,7 @@ const EditProfile = ({navigation}) => {
   console.log({firstName,lastName,phoneNumber,email,adress,city});
 
   useEffect(() => {
-    axios.get(`http://192.168.11.73:3000/editprofile/fetch/${userData.userData._id}`)
+    axios.get(`http://${localhost}:3000/editprofile/fetch/${userData.userData._id}`)
         .then(res => {
           console.log("res in useEffect",res);
           // console.log("res in useEffect2",res.json());
@@ -33,7 +34,7 @@ var profile = () => {
   navigation.navigate("EquipementsProviderProfile")
 };
   const submit = () =>{
-    axios.put(`http://192.168.11.73:3000/editprofile/${userData.userData._id}`,{formData})
+    axios.put(`http://${localhost}:3000/editprofile/${userData.userData._id}`,{formData})
     .then(res=>{
       console.log("res",res);
       var user = res.data

@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, {useState} from 'react';
-import Router from "./routerMenu.js";
+import Router from "./router.js";
 import {StyleSheet}from 'react-native';
 import AppLoading from 'expo-app-loading';
 import AsyncStorage from '@react-native-async-storage/async-storage';
