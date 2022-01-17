@@ -1,7 +1,7 @@
 import * as React from "react";
 import axios from 'axios';
 import { useNavigation, useRoute } from "@react-navigation/native";
-import {IPAdress} from "@env";
+import {localhost} from "@env";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './CredentialsContext.js';
 
@@ -64,7 +64,7 @@ function EPSignUpGoogle (){
           picture : route.params.picture,
           phoneNumber : formData.phoneNumber
         }
-        axios.post(`http:/${IPAdress}:3000/auth/EPSignUpGoogle`,{obj} )
+        axios.post(`http://${localhost}:3000/auth/EPSignUpGoogle`,{obj} )
         .then((res)=>{
           console.log(res.data)
           if(res.data === 'email already exists'){

@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
-import EquipementsFeed from "./components/EquipementsFeed.js";
+import Essai from "./components/Essai.js"
 import Report from "./components/report.js"
 import Home from "./components/Home.js";
 import Login from "./components/Authentification/Login.js";
@@ -27,7 +27,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import SeekerRequest  from "./components/SeekerRequest.js";
 import userEquipements from "./components/userEquipements.js"
 import EditEquipement from "./components/EditEquipement.js"
-// import Test from "./components/Collapsibles.js";
+import ServicesRequests from "./components/ServicesRequests.js";
 import HomeScreen from "./components/HomeScreen.js"
 
 const Stack = createNativeStackNavigator();
@@ -79,6 +79,8 @@ const Router = () => {
                 <Stack.Screen name="Forum2" component={Forum2} />
                 <Stack.Screen name="ForumPost" component={ForumPost} />
                 <Stack.Screen name="AddBlog" component={AddBlog} />
+                <Stack.Screen name="Essai" component={Essai} />
+                <Stack.Screen name="ServicesRequests" component={ServicesRequests} />
                 <Stack.Screen
                     name="serviceProvidersList"
                     component={serviceProvidersList}

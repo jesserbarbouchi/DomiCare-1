@@ -32,9 +32,11 @@ const HomeScreen = ({ navigation }) => {
     const profileType = () => {
         if (!storedCredentials) {
             return;
-        // } else if (storedCredentials.type === "serviceProvider") {
-        //     navigation.navigate("ServiceProviderProfile");
+        } else if (storedCredentials.type === "serviceProvider") {
+            console.log("provider",storedCredentials.type)
+            navigation.navigate("ServiceProviderProfile");
         } else if (storedCredentials.type === "equipementsProvider") {
+            console.log("equipements",storedCredentials.type)
             navigation.navigate("EquipementsProviderProfile");
         } else return;
     };
@@ -107,6 +109,34 @@ const HomeScreen = ({ navigation }) => {
                     </View>
                     <Text style={styles.categoryBtnTxt}>Forum</Text>
                 </TouchableOpacity>
+                
+                <TouchableOpacity style={styles.categoryBtn}>
+                    <View style={styles.categoryIcon}>
+                        <Ionicons
+                            name="chatbubbles-sharp"
+                            size={35}
+                            color="white"
+                            onPress={() =>
+                                navigation.navigate("Essai", userData)
+                            }
+                        />
+                    </View>
+                    <Text style={styles.categoryBtnTxt}>Essai</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.categoryBtn}>
+                    <View style={styles.categoryIcon}>
+                        <Ionicons
+                            name="chatbubbles-sharp"
+                            size={35}
+                            color="white"
+                            onPress={() =>
+                                navigation.navigate("ServicesRequests", userData)
+                            }
+                        />
+                    </View>
+                    <Text style={styles.categoryBtnTxt}>ServicesRequests</Text>
+                </TouchableOpacity>
+                
 
                 <TouchableOpacity style={styles.categoryBtn} onPress={() => {}}>
                     <View style={styles.categoryIcon}>

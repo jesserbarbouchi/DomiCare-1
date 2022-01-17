@@ -1,12 +1,9 @@
 
-import React, { useState,useEffect } from "react";
+import React, { useState} from "react";
 import axios from 'axios';
 import {localhost} from "@env";
-
-
-import { View, StyleSheet,  ScrollView, Alert, Picker, Image, Text, TouchableOpacity ,SafeAreaView} from "react-native";
+import { View, StyleSheet,  Picker, } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import { CredentialsContext } from './Authentification/CredentialsContext.js';
 import { useNavigation } from "@react-navigation/native"
 import { storage } from "../.firebase_config.js";
@@ -18,26 +15,24 @@ import CalendarPicker from 'react-native-calendar-picker';
 const SeekerRequest = (props) => {
   const navigation = useNavigation()
   const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
-const  userData = storedCredentials.userData;
-  const providerId = props.route.params._id
+  const  userData = storedCredentials.userData;
   const [details, setText] = React.useState('');
   const [address, setAddress] = React.useState('');
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
-
   const [file, setFile] = React.useState("");
-  const [Prescription, setPrescription] = React.useState("");
-  
   const [errors, setErrors] = React.useState({});
   const [uploading, setUploading] = React.useState("None");
-  const seekerId = userData._id
+  const[selectedValue, setValue]= React.useState("")
+  const seekerId = userData._id 
   const type='request'
   const post = () => {
    
 
-    axios.post(`http://${localhost}:3000/SeekerRequest/SeekerRequest/`, {type,details,address,file,seekerId,providerId,selectedStartDate, selectedEndDate })
+    axios.post(`http://${localhost}:3000/SeekerRequest/SeekerRequest/`, {type,details,address,file,seekerId
+  ,selectedStartDate, selectedEndDate,selectedValue})
       .then(res => console.log(res)).catch(err => console.log(err))
-    console.log('hello',details,address,Prescription)
+    
   }
   const onSubmit = () => { 
     post()
@@ -75,7 +70,6 @@ const  userData = storedCredentials.userData;
     }
    
 };
-
 const uploadFile = async () => {
     const blob = await new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
@@ -130,21 +124,40 @@ const persistLogin = (credentials) => {
     
       <View >
         <Center>
-        <TextInput
-          value={details}
-          style={styles.input}
-          inputStyle={styles.inputStyle}
-          labelStyle={styles.labelStyle}
-          placeholderStyle={styles.placeholderStyle}
-          textErrorStyle={styles.textErrorStyle}
-          // label=" your request ..."
-          placeholder=" your request ..."
-          placeholderTextColor="gray"
-          // focusColor="blue"
-          onChangeText={text => {
-            setText(text);
-          }}
-        />
+
+        <Picker
+        selectedValue={selectedValue}
+        style={{ height: 50, width: 150 }}
+        onValueChange={(cityValue, cityIndex) => {
+          setValue(selectedValue)
+        }}
+      >
+        <Picker.Item label="select city" value=""/>
+      <Picker.Item label="Ariana" value="Ariana"/>
+      <Picker.Item label="Ben Arous" value="Ben Arous"/>
+      <Picker.Item label="Tunis" value="Tunis"/>
+      <Picker.Item label="Sousse" value="Sousse"/>
+      <Picker.Item label="Monastir" value="Monastir"/>
+      <Picker.Item label="Sfax" value="Sfax"/>
+      <Picker.Item label="Beja" value="Beja"/>
+      <Picker.Item label="Benzart" value="Benzart"/>
+      <Picker.Item label="Mahdia" value="Mahdia"/>
+      <Picker.Item label="kairouan" value="kairouan"/>
+      <Picker.Item label="Sidi Bouzid" value="Sidi Bouzid"/>
+      <Picker.Item label="Zaghouane" value="Zaghouane"/>
+      <Picker.Item label="Mednine" value="Mednine"/>
+      <Picker.Item label="Gabes" value="Gabes"/>
+      <Picker.Item label="Kebili" value="Kebili"/>
+      <Picker.Item label="Gasserine" value="Gasserine"/>
+      <Picker.Item label="Jendouba" value="Jendouba"/>
+      <Picker.Item label="Kef" value="Kef"/>
+      <Picker.Item label="Siliana" value="Siliana"/>
+      <Picker.Item label="Tozeur" value="Tozeur"/>
+      <Picker.Item label="Tataouine" value="Tataouine"/>
+      <Picker.Item label="Manouba" value="Manouba"/>
+      <Picker.Item label="Gafsa" value="Gafsa"/>
+      <Picker.Item label="Nabeul" value="Nabeul"/>
+    </Picker>
           <TextInput
           value={address}
           style={styles.input2}
@@ -158,6 +171,21 @@ const persistLogin = (credentials) => {
           // focusColor="blue"
           onChangeText={address => {
             setAddress(address);
+          }}
+        />
+                <TextInput
+          value={details}
+          style={styles.input}
+          inputStyle={styles.inputStyle}
+          labelStyle={styles.labelStyle}
+          placeholderStyle={styles.placeholderStyle}
+          textErrorStyle={styles.textErrorStyle}
+          // label=" your request ..."
+          placeholder=" your request ..."
+          placeholderTextColor="gray"
+          // focusColor="blue"
+          onChangeText={text => {
+            setText(text);
           }}
         />
         </Center>
@@ -242,20 +270,12 @@ const persistLogin = (credentials) => {
 )
 }  
                     </FormControl>
-        
-        
         </View>
- 
     <Button
-   
    colorScheme="teal" margin={5} onPress={()=>onSubmit()}
    >
-   Send your request
+   Publish
 </Button>
-  
-
-
-
         </View>
         </Center>
       </NativeBaseProvider>
@@ -272,16 +292,16 @@ const styles = StyleSheet.create({
     width:350,
     paddingHorizontal: 12,
     borderRadius: 3,
-    borderWidth: 5,
-    borderColor: '#DDDDDD',
+    borderWidth: 1,
+    borderColor: "teal",
   },
   input2: {
     height:50,
     width:350,
     paddingHorizontal: 12,
     borderRadius: 3,
-    borderWidth: 5,
-    borderColor: '#DDDDDD',
+    borderWidth: 1,
+    borderColor: "teal",
   },
   inputStyle: { fontSize: 16 },
   labelStyle: {
@@ -313,53 +333,3 @@ const styles = StyleSheet.create({
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useState, useEffect } from 'react';
-// import { Button, Image, View, Platform } from 'react-native';
-// import * as ImagePicker from 'expo-image-picker';
-
-// export default function SeekerRequest() {
-//   const [image, setImage] = useState(null);
-
-//   const pickImage = async () => {
-//     let result = await ImagePicker.launchImageLibraryAsync({
-//       mediaTypes: ImagePicker.MediaTypeOptions.All,
-//       allowsEditing: true,
-//       aspect: [4, 3],
-//       quality: 1,
-//     });
-
-//     console.log(result);
-
-//     if (!result.cancelled) {
-//         setImage(result.uri);
-//         console.log(result.uri)
-//     }
-//   };
-
-//   return (
-//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-
-//       <Button title="Pick an image from camera roll" onPress={pickImage} />
-//       {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-//     </View>
-//   );
-// }
