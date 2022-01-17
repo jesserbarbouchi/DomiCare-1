@@ -1,7 +1,7 @@
 import * as React from "react";
 import axios from 'axios';
 import { useNavigation, useRoute } from "@react-navigation/native";
-import {IPAdress} from "@env";
+import {localhost} from "@env";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './CredentialsContext.js';
 import { Ionicons } from "@expo/vector-icons";
@@ -128,7 +128,7 @@ function SPSignUpGoogle (){
           city : formData.city,
           certificate: formData.certificate,
         }
-        axios.post(`http://192.168.11.73:3000/auth/SPSignUpGoogle`,{obj} )
+        axios.post(`http://${localhost}:3000/auth/SPSignUpGoogle`,{obj} )
         .then((res)=>{
             if(res.data === 'email already exists'){
                 onOpen()

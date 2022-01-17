@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
+import {localhost} from "@env";
 import {
   StyleSheet,
   View,
@@ -45,10 +46,10 @@ const ForumPost = (props) => {
     const fetch = async () => {
       const _id = props.route.params._id;
       const post = await axios.get(
-        `http://192.168.11.73:3000/savepost/findpost/${_id}`
+        `http://${localhost}:3000/savepost/findpost/${_id}`
       );
       const com = await axios.get(
-        `http://192.168.11.73:3000/savepost/findcomments/${_id}`
+        `http://${localhost}:3000/savepost/findcomments/${_id}`
       );
       setpost(post.data);
       setparticipants(post.data.participants);
@@ -60,7 +61,7 @@ const ForumPost = (props) => {
     const _id = props.route.params._id;
 
     const comment = await axios.post(
-      `http://192.168.11.73:3000/savepost/savepost`,
+      `http://${localhost}:3000/savepost/savepost`,
       {
         owner: { _id: userData._id, name: userData.firstName },
         postId: singlepost._id,
@@ -69,7 +70,7 @@ const ForumPost = (props) => {
       }
     );
     const recom = await axios.get(
-      `http://192.168.11.73:3000/savepost/findcomments/${_id}`
+      `http://${localhost}:3000/savepost/findcomments/${_id}`
     );
 
     setcomments(recom.data);
@@ -77,7 +78,7 @@ const ForumPost = (props) => {
   const replyto = async () => {
     const id = subcomment;
     const date = moment().startOf("hour").fromNow();
-    const reply = await axios.post(`http://192.168.11.73:3000/savepost/reply`, {
+    const reply = await axios.post(`http://${localhost}:3000/savepost/reply`, {
       rep: {
         owner: { _id: userData._id, name: userData.firstName },
         commentid: id,
@@ -87,7 +88,7 @@ const ForumPost = (props) => {
     });
     const _id = props.route.params._id;
     const recomm = await axios.get(
-      `http://192.168.11.73:3000/savepost/findcomments/${_id}`
+      `http://${localhost}:3000/savepost/findcomments/${_id}`
     );
     setcomments(recomm.data);
   };
@@ -103,7 +104,7 @@ const ForumPost = (props) => {
       action = "déc";
     }
     const post = await axios.put(
-      `http://192.168.11.73:3000/savepost/savepost`,
+      `http://${localhost}:3000/savepost/savepost`,
       {
         userid,
         postid,
@@ -212,9 +213,9 @@ const ForumPost = (props) => {
                           </Stack>
                         </VStack>
                       </Box>
-                      {comment.comments.map((reply,index) => {
+                      {comment.comments.map((reply) => {
                         return (
-                          <View key={index}>
+                          <View >
                             <Text> {reply.owner.name} </Text>
                             <Text> {reply.content} </Text>
                             <Text> {reply.createdAt} </Text>

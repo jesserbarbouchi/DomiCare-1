@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigation, useRoute } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './CredentialsContext.js';
-// import {IPAdress} from "@env";
+import {localhost} from "@env";
 
 import {
   Box,
@@ -70,7 +70,7 @@ function ResetPassword (){
     
     const post = () =>{
       const pass = formData.password
-      axios.post(`http://192.168.11.73:3000/auth/ResetPassword`,{pass,email} ).then((response)=>{
+      axios.post(`http://${localhost}:3000/auth/ResetPassword`,{pass,email} ).then((response)=>{
         const data = response.data
         persistLogin({userData : data});
         navigation.navigate("Home")

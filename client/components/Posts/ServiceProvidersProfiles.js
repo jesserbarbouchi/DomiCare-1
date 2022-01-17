@@ -136,9 +136,7 @@ const serviceProvidersList = ({ navigation }) => {
                   <Text style={styles.name}> City : {u.city}</Text>
                   <Text style={styles.name}> Gender : {u.gender}</Text>
                   <Text style={styles.name}> Services : {u.posts}</Text>
-
                   <AirbnbRating style={styles.airbnbRating} />
-
                   <Button
                     title="Ask for service"
                     onPress={() => navigation.navigate("SeekerRequest", u)}
@@ -186,5 +184,4 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
 });
-
 export default serviceProvidersList;
