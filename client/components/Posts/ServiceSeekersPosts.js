@@ -12,7 +12,7 @@ import {Avatar , NativeBaseProvider} from 'native-base';
     useEffect(() => {
         const fetch = async () => {
           const posts = await axios.get(
-            `http://${localhost}:3000/posts/servicesrequests`
+            `http://${localhost}:3000/Posts/servicesrequests`
           );
         }
         setFeed(posts)
