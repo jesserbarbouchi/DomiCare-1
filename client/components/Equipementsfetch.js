@@ -1,7 +1,8 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios'
 import { View, StyleSheet, Button,ScrollView, Alert, Image, Text, TouchableOpacity,Picker } from 'react-native'
-import items from "./Equipements.js"
+import {localhost} from "@env";
+
 
 const Equipementsfetch = () => {
   const [selectedValue, setSelectedValue] = useState("");
@@ -12,10 +13,10 @@ const Equipementsfetch = () => {
   const [myData,setmyData]=useState([])
 
   useEffect(()=>{
-    axios.get('http://192.168.11.73:3000/Equipements')
+    axios.get(`http://${localhost}:3000/Equipements`)
     .then(res=>{
-      console.log("res",res);
-      console.log("res.data",res.data);
+      // console.log("res",res);
+      // console.log("res.data",res.data);
       setEquipements(res.data)
       setmyData(res.data)
     })
@@ -50,11 +51,11 @@ const Equipementsfetch = () => {
 const availability = (eve)=>{
   var ava
   if(eve==="Available"){
-    ava = Equipements.filter((item)=>item.availability===true) 
+    ava = Equipements.filter((item)=>item.availability==="Available") 
       setEquipements(ava)
   }
   else if (eve==="Not Available"){
-    ava = Equipements.filter((item)=>item.availability===false) 
+    ava = Equipements.filter((item)=>item.availability==="Not Available") 
       setEquipements(ava)
   }
   else{setEquipements(myData)}
@@ -105,7 +106,7 @@ var filterData=(city)=> {
  } 
     }
       var apihandler=()=>{
-        const url = "http://192.168.11.73:3000/Equipements"
+        const url = `http://${localhost}:3000/Equipements`
         fetch(url).then((res)=>res.json())
         .then((resJson)=>{
           console.log("resJson",resJson);
@@ -207,7 +208,10 @@ var filterData=(city)=> {
             <Text>Description : {item.description}</Text>
             <Text>City : {item.city}</Text>
             <Text>Delivery : {item.delivery}</Text>
-            {item.availability===true?<Text>Available</Text>:<Text>Not Available</Text>}
+            <Text>Transaction Type : {item.transactionType}</Text>
+            {item.availability==="Available"?<Text>Available</Text>:<Text>Not Available</Text>}
+              {/* <Button title="Ask for service" onPress={apihandler} /> */}
+  
           </View>
         )})}
 

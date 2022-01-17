@@ -1,6 +1,7 @@
 import React from "react";
 import Axios from "axios";
 import Swal from "sweetalert2";
+import {localhost} from "@env";
 import {
   TextArea,
   
@@ -39,7 +40,7 @@ export default () => {
       });
       var reqS={reason:reprtText,reportedId:'61dd711fdcb65ed8ac17ba1d',reporterId:userData._id}
       userData.type=== undefined ? reqS['onModel']='ServiceSeeker' : reqS['onModel']='ServiceProvider' ;
-    Axios.post("http://localhost:3000/reports", reqS)
+    Axios.post(`http://${localhost}:3000/reports`, reqS)
       .then(() => {
        console.log(userData)
        setTimeout(() => {

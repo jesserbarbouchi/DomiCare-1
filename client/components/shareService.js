@@ -21,6 +21,7 @@ import {
   IconButton,
   CloseIcon,
 } from "native-base";
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './Authentification/CredentialsContext.js';
 
@@ -40,7 +41,7 @@ export default () => {
     
 
     setData({ ...formData, type: "HCSP" });
-    Axios.post("http://192.168.11.73:3000/ServiceProvider/shareservice/", {
+    Axios.post(`http://${localhost}:3000/ServiceProvider/shareservice/`, {
       formData,_id:userData._id
     })
 
