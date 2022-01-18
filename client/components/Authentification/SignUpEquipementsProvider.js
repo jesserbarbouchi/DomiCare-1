@@ -1,7 +1,7 @@
 import React from "react";
 import axios from 'axios';
 import { useNavigation } from "@react-navigation/native";
-// import {IPAdress} from "@env";
+import {localhost} from "@env";
 import * as Google from 'expo-google-app-auth';
 import {
     Box,
@@ -123,7 +123,7 @@ const persistLogin =(credentials)=>{
     };
     
     const post=()=>{
-      axios.post(`http://localhost:3000/auth/EPSignUp`,{formData} ).then((response)=>{
+      axios.post(`http://${localhost}:3000/auth/EPSignUp`,{formData} ).then((response)=>{
         let errors={};
         const data = response.data;
         if(response.data === 'email address already exists'){

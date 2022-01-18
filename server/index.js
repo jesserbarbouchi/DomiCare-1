@@ -12,8 +12,14 @@ const ServiceProvider =  require("./routers/ServiceProvider")
 const admin =  require("./routers/Admin.js")
 const ServiceProviderProfile = require("./routers/users.js")
 const SeekerRequest = require ("./routers/SeekerRequest.js")
+const servicesrequests=require("./routers/servicesrequestsfeed.js")
 
-const ServiceSeekerRequests = require ("./routers/ServiceSeekerRequests.js")
+
+// **************************************
+const Posts=require("./routers/Posts.js")
+// **************************************
+
+// const ServiceSeekerRequests = require ("./routers/ServiceSeekerRequests.js")
 
 const Reports = require ("./routers/reports.js")
 
@@ -45,10 +51,15 @@ app.use("/auth", auth);
 app.use("/ServiceProvider", ServiceProvider);
 app.use("/editprofile",ServiceProviderProfile);
 app.use("/SeekerRequest",SeekerRequest);
+app.use("/posts",servicesrequests)
 
-app.use("/ServiceSeekerRequests",ServiceSeekerRequests);
+// app.use("/ServiceSeekerRequests",ServiceSeekerRequests);
 
 app.use("/reports",Reports);
+
+// **************************************
+app.use("/Posts",Posts)
+// **************************************
 
 /**************** Listening Requests ****************/
 const Port = process.env.PORT||3000;

@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
-// import {IPAdress} from "@env";
+import {localhost} from "@env";
 import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
 import { storage } from "../../.firebase_config.js";
@@ -193,7 +193,7 @@ function SignUp() {
 
     const post = () => {
         axios
-            .post(`http://localhost:3000/auth/SPSignUp`, { formData })
+            .post(`http://${localhost}:3000/auth/SPSignUp`, { formData })
             .then((response) => {
                 let errors = {};
                 const data = response.data;

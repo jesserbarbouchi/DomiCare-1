@@ -4,6 +4,7 @@ import {Picker} from "@react-native-picker/picker"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './Authentification/CredentialsContext.js';
 import axios from 'axios'
+import {localhost} from "@env";
 
 const EditEquipement = ({navigation}) => {
   const [text, onChangeText] = React.useState("Useless Text");
@@ -23,15 +24,12 @@ const EditEquipement = ({navigation}) => {
 
   useEffect(()=>{
     console.log('test1 : ', userData.userData._id)
-    axios.get(`http://localhost:3000/Equipements/${userData.userData._id}`)   ///Equipements/${userData.userData._id}
+    axios.get(`http://${localhost}:3000/Equipements/${userData.userData._id}`)   ///Equipements/${userData.userData._id}
     .then(res => {
       var user = res.data
       setData(res.data)
       setmyData(res.data)
-      console.log('res.data :', res.data)
-      console.log('res.data :', res.data[1]._id)
-      console.log("formData",formData);
-      console.log("myData :",myData);
+     
   
     })
     .catch(err => {
@@ -40,7 +38,7 @@ const EditEquipement = ({navigation}) => {
   }, []);
 
   const fetchData=()=>{
-    axios.get(`http://localhost:3000/Equipements/${userData.userData._id}`)
+    axios.get(`http://${localhost}:3000/Equipements/${userData.userData._id}`)
     .then(res => {
       // console.log("equipement id",res);
       setData(res.data) 
@@ -55,7 +53,7 @@ const EditEquipement = ({navigation}) => {
   const submit = () =>{
     console.log('tesst :', formData._id);
     console.log("test formData :",formData[0]);
-    axios.put(`http://localhost:3000/Equipements/update/${formData[0]._id}`,{formData})
+    axios.put(`http://${localhost}:3000/Equipements/update/${formData[0]._id}`,{formData})
     .then((res)=>{
       console.log(res.data)
     setData(res.data)

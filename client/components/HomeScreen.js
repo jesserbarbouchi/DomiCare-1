@@ -3,8 +3,6 @@ import { View, Text, Button } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './Authentification/CredentialsContext.js';
 
-
-
 const Home = ({navigation}) => {
     const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
     const  userData = storedCredentials;
@@ -40,10 +38,10 @@ const Home = ({navigation}) => {
                      {
                        storedCredentials ?
                        <>
-                         < Button
-                title="My profile"
-                onPress={() => navigation.navigate("EquipementsProviderProfile")}
-                 />
+                <Button
+                      title="Essai"
+                      onPress={() => navigation.navigate("Essai")}
+                  />
                        </>
                        : <>
                         
@@ -53,6 +51,7 @@ const Home = ({navigation}) => {
                       title="Service Providers"
                       onPress={() => navigation.navigate("serviceProvidersList")}
                   />
+                  
                    <Button
                       title="ServiceProviderProfile"
                       onPress={() => navigation.navigate("ServiceProviderProfile")}
