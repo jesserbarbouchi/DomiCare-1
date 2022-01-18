@@ -51,13 +51,10 @@ const Home = ({navigation}) => {
                       title="Service Providers"
                       onPress={() => navigation.navigate("serviceProvidersList")}
                   />
-                  
                    <Button
                       title="ServiceProviderProfile"
                       onPress={() => navigation.navigate("ServiceProviderProfile")}
                   />
-      
-                  
                    <Button
                       title="share service"
                       onPress={() => navigation.navigate("shareservice")}
@@ -68,7 +65,6 @@ const Home = ({navigation}) => {
              )}
             
         </CredentialsContext.Consumer>
-       
     );
 };
 

@@ -11,6 +11,7 @@ module.exports = {
                 .catch((err)=>console.log(err))
       },    
       FindAllServiceSeekerPosts:(req,res)=>{
+        console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
         Posts.find({type:"request"})
                 .then((result)=>{
                   console.log('FindAllServiceSeekerPosts', result)

@@ -11,7 +11,7 @@ const auth = require("./routers/auth-routes");
 const ServiceProvider =  require("./routers/ServiceProvider")
 const ServiceProviderProfile = require("./routers/users.js")
 const SeekerRequest = require ("./routers/SeekerRequest.js")
-const servicesrequests=require("./routers/servicesrequestsfeed.js")
+// const servicesrequests=require("./routers/servicesrequestsfeed.js")
 
 
 // **************************************
@@ -50,7 +50,7 @@ app.use("/auth", auth);
 app.use("/ServiceProvider", ServiceProvider);
 app.use("/editprofile",ServiceProviderProfile);
 app.use("/SeekerRequest",SeekerRequest);
-app.use("/posts",servicesrequests)
+// app.use("/posts",servicesrequests)
 
 // app.use("/ServiceSeekerRequests",ServiceSeekerRequests);
 

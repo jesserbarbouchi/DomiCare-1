@@ -28,7 +28,6 @@ const HomeScreen = ({ navigation }) => {
             })
             .catch((error) => console.log(error));
     };
-
     const profileType = () => {
         if (!storedCredentials) {
             return;
@@ -40,9 +39,7 @@ const HomeScreen = ({ navigation }) => {
             navigation.navigate("EquipementsProviderProfile");
         } else return;
     };
-
     return (
-
         <ScrollView style={styles.container}>
             <View style={styles.sliderContainer}>
                 <Swiper
@@ -82,7 +79,7 @@ const HomeScreen = ({ navigation }) => {
             <View style={styles.categoryContainer}>
                 <TouchableOpacity
                     style={styles.categoryBtn}
-                    onPress={() => navigation.navigate("serviceProvidersList")}
+                    onPress={() => navigation.navigate("ServiceProvidersProfiles",userData)}
                 >
                     <View style={styles.categoryIcon}>
                         <Ionicons
@@ -92,7 +89,7 @@ const HomeScreen = ({ navigation }) => {
                         />
                     </View>
                     <Text style={styles.categoryBtnTxt}>
-                        Services Providers
+                        Services Providers Profiles
                     </Text>
                 </TouchableOpacity>
 
@@ -117,11 +114,11 @@ const HomeScreen = ({ navigation }) => {
                             size={35}
                             color="white"
                             onPress={() =>
-                                navigation.navigate("Essai", userData)
+                                navigation.navigate("ServiceSeekersPosts", userData)
                             }
                         />
                     </View>
-                    <Text style={styles.categoryBtnTxt}>Essai</Text>
+                    <Text style={styles.categoryBtnTxt}>ServiceSeekersPosts</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.categoryBtn}>
                     <View style={styles.categoryIcon}>
@@ -130,15 +127,54 @@ const HomeScreen = ({ navigation }) => {
                             size={35}
                             color="white"
                             onPress={() =>
-                                navigation.navigate("ServicesRequests", userData)
+                                navigation.navigate("ServiceProvidersReceivedRequests", userData)
                             }
                         />
                     </View>
-                    <Text style={styles.categoryBtnTxt}>ServicesRequests</Text>
+                    <Text style={styles.categoryBtnTxt}>ServiceProvidersReceivedRequests</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.categoryBtn}>
+                    <View style={styles.categoryIcon}>
+                        <Ionicons
+                            name="chatbubbles-sharp"
+                            size={35}
+                            color="white"
+                            onPress={() =>
+                                navigation.navigate("ServiceProvidersSendedOffers", userData)
+                            }
+                        />
+                    </View>
+                    <Text style={styles.categoryBtnTxt}>ServiceProvidersSendedOffers</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.categoryBtn}>
+                    <View style={styles.categoryIcon}>
+                        <Ionicons
+                            name="chatbubbles-sharp"
+                            size={35}
+                            color="white"
+                            onPress={() =>
+                                navigation.navigate("ServiceProvidersReceivedOffers", userData)
+                            }
+                        />
+                    </View>
+                    <Text style={styles.categoryBtnTxt}>ServiceProvidersReceivedOffers</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.categoryBtn}>
+                    <View style={styles.categoryIcon}>
+                        <Ionicons
+                            name="chatbubbles-sharp"
+                            size={35}
+                            color="white"
+                            onPress={() =>
+                                navigation.navigate("ServiceSeekerSendedRequests", userData)
+                            }
+                        />
+                    </View>
+                    <Text style={styles.categoryBtnTxt}>ServiceSeekerSendedRequests</Text>
                 </TouchableOpacity>
                 
 
-                <TouchableOpacity style={styles.categoryBtn} onPress={() => {}}>
+                {/* <TouchableOpacity style={styles.categoryBtn} onPress={() => {}}>
                     <View style={styles.categoryIcon}>
                         <Ionicons
                             name="medkit-sharp"
@@ -151,8 +187,8 @@ const HomeScreen = ({ navigation }) => {
                     </View>
                     <Text style={styles.categoryBtnTxt}>Equipements</Text>
                 </TouchableOpacity>
-            </View>
-            <View style={[styles.categoryContainer, { marginTop: 10 }]}>
+            </View> */}
+            {/* <View style={[styles.categoryContainer, { marginTop: 10 }]}>
                 <TouchableOpacity
                     style={styles.categoryBtn}
                     onPress={() => navigation.navigate("shareservice")}
@@ -161,7 +197,7 @@ const HomeScreen = ({ navigation }) => {
                         <Ionicons name="documents" size={35} color="white" />
                     </View>
                     <Text style={styles.categoryBtnTxt}>Posts</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
                 {storedCredentials ? (
                     <>
