@@ -70,4 +70,18 @@ module.exports = {
         res.send(err);
     }
     },
+    GetSendedOffers:async (req,res)=>{
+        try{
+            const offers = await Transactions.find({
+                type:'offer'
+            },
+                {
+                providerId:req.params._id
+            })
+            res.send(offers);
+        }
+     catch (err) {
+        res.send(err);
+    }
+    },
 }
