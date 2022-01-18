@@ -139,7 +139,7 @@ const serviceProvidersList = ({ navigation }) => {
                   <AirbnbRating style={styles.airbnbRating} />
                   <Button
                     title="Ask for service"
-                    onPress={() => navigation.navigate("SeekerRequest", u)}
+                    onPress={() => navigation.navigate("ServiceSeekerSendARequest", u)}
                   />
                 </View>
               );

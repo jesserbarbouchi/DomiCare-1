@@ -4,22 +4,28 @@ import { StyleSheet, Text, View, Button ,ScrollView } from 'react-native';
 import {Card} from 'react-native-shadow-cards';
 import {Avatar , NativeBaseProvider} from 'native-base';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CredentialsContext } from "./Authentification/CredentialsContext.js";
-
+import { CredentialsContext } from "../Authentification/CredentialsContext.js";
+import axios from "axios";
+import {localhost} from "@env";
 
  const ReceivedRequests =()=> {
     const { storedCredentials, setStoredCredentials } =
     React.useContext(CredentialsContext);
   const userData = storedCredentials.userData;
      const[feed, setFeed]=useState([])
-    useEffect(() => {
-        const fetch = async () => {
+    useEffect(async() => {
+      const _id=userData._id
+         try{
           const offers = await axios.get(
-            `http://${localhost}:3000/Transactions/servicerequests/:{_id:userData_id}`
+            `http://${localhost}:3000/Transactions/servicerequests/:${_id}`
           );
+          setFeed(offers.data)
+          }
+        catch(err){
+          console.log(err)
         }
-        setFeed(offers)
-    }
+    },[]
+
     )
     return (
         <NativeBaseProvider>

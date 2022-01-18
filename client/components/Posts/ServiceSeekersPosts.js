@@ -1,26 +1,35 @@
 import React ,{ useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button ,ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button ,ScrollView  } from 'react-native';
 import {Card} from 'react-native-shadow-cards';
 import {Avatar , NativeBaseProvider} from 'native-base';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CredentialsContext } from "./Authentification/CredentialsContext.js";
-
+import { CredentialsContext } from "../Authentification/CredentialsContext.js";
+import { useNavigation } from "@react-navigation/native";
+import axios from 'axios';
+import {localhost} from "@env";
 
  const ServicesRequests =()=> {
      const[feed, setFeed]=useState([])
      const { storedCredentials, setStoredCredentials } =
     React.useContext(CredentialsContext);
   const userData = storedCredentials.userData;
+  const navigation = useNavigation();
 
-    useEffect(() => {
-        const fetch = async () => {
-          const posts = await axios.get(
-            `http://${localhost}:3000/Posts/servicesrequests`
-          );
-        }
-        setFeed(posts)
-    }
-    )
+    useEffect(async() => {
+      console.log('feed',feed)
+      try{
+        const posts = await axios.get(
+          `http://${localhost}:3000/Posts/servicesrequests`
+        );
+        setFeed(posts.data)
+      }
+       catch (err){
+        console.log(err)
+       }
+       
+       
+        
+    },[])
     const OfferMysService= async(e)=>{
       const postid= e._id
       const providerId=userData._id
@@ -33,11 +42,22 @@ import { CredentialsContext } from "./Authentification/CredentialsContext.js";
     }
 
     return (
+
         <NativeBaseProvider>
             <ScrollView>
-      {feed.map((e,key)=>{return(
-      <View style={styles.container} key={key}>
-        <Card style={{padding: 10, margin: 10}}>
+            <Button
+            onPress={() => navigation.navigate("ServiceSeekerAddPost")}
+            title="post an offer request"
+            color="teal"
+            accessibilityLabel="Learn more about this purple button"
+          />
+          
+      {feed.map((e,key)=>{
+        return(
+        <View style={styles.container} >
+
+      
+        <Card style={{padding: 10, margin: 10}} key={key}>
         <Text style={{marginLeft: 270}}> createdAt</Text>
     
         <Avatar
@@ -60,9 +80,14 @@ import { CredentialsContext } from "./Authentification/CredentialsContext.js";
             accessibilityLabel="Learn more about this purple button"
           />
         </Card>
-      </View>)})}
+         </View>
+      )}  )}
+      
+      
       </ScrollView>
       </NativeBaseProvider>
+     
+
     );
 }
 const styles = StyleSheet.create({

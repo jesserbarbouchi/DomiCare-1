@@ -1,14 +1,10 @@
 
-
-
-
-
 import React ,{ useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button ,ScrollView } from 'react-native';
 import {Card} from 'react-native-shadow-cards';
 import {Avatar , NativeBaseProvider} from 'native-base';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CredentialsContext } from "./Authentification/CredentialsContext.js";
+import { CredentialsContext } from "../Authentification/CredentialsContext.js";
 
 
  const ReceivedOffers =()=> {

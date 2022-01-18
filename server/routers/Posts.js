@@ -7,10 +7,9 @@ router.route("/CreateServiceSeekerPost")
   .post(Posts.CreateServiceSeekerPost) 
   
 router.route("/serviceProvidersList")
-  .post(Posts.FindAllServiceProviders) 
+  .get(Posts.FindAllServiceProviders) 
 
 router.route("/servicesrequests")
   .get(Posts.FindAllServiceSeekerPosts) 
- 
 
 module.exports = router;
