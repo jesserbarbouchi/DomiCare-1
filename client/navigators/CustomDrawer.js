@@ -40,7 +40,7 @@ const CustomDrawer = (props) => {
                     source={require("../assets/tealGradiant.jpg")}
                     style={{ padding: 20, marginTop: 0, justifyContent: 'center', alignItems: 'center' }}
                 >
-                    <TouchableOpacity onPress={()=> navigation.navigate('Profile')} style={{  justifyContent: 'center', alignItems: 'center' }}>
+                    <View  style={{  justifyContent: 'center', alignItems: 'center' }}>
                     <Image
                         source={{
                             
@@ -62,7 +62,7 @@ const CustomDrawer = (props) => {
                     >
                         {userData.userData.lastName + ' ' + userData.userData.firstName}
                     </Text>
-                    </TouchableOpacity>
+                    </View>
                     
                 </ImageBackground>
                 <View

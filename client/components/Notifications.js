@@ -8,7 +8,7 @@ import {
   FlatList
 } from 'react-native';
 
-export default class Notifications extends Component {
+export default class NotificationsScreen extends Component {
 
   constructor(props) {
     super(props);

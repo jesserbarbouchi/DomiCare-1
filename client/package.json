@@ -46,6 +46,7 @@
     "react-native-elements": "^3.4.2",
     "react-native-fontawesome": "^7.0.0",
     "react-native-gesture-handler": "~2.1.0",
+    "react-native-image-crop-picker": "^0.37.2",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-nested-scroll-view": "^9.0.0",
     "react-native-paper": "^4.11.1",
@@ -59,6 +60,7 @@
     "react-native-swiper": "^1.6.0",
     "react-native-web": "^0.17.5",
     "react-navigation": "^4.4.4",
+    "reanimated-bottom-sheet": "^1.0.0-alpha.22",
     "sweetalert2": "^11.3.4"
   },
   "devDependencies": {

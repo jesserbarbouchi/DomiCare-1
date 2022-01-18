@@ -11,7 +11,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import EquipementsFeed from "../components/EquipementsFeed.js";
 import Report from "../components/report.js";
-import Home from "../components/Home.js";
+import HomeScreen from "../components/Home.js";
 
 
 import SeekerRequest from "../components/SeekerRequest.js";
@@ -36,13 +36,10 @@ const StackNavigator = () => {
                 headerShown: false,
             }}
         >
-            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Home" component={HomeScreen} />
 
             <Stack.Screen name="Equipementsfetch" component={Equipmentsfetch} />
-            <Stack.Screen
-                name="EquipementsProviderProfile"
-                component={EquipementsProviderProfile}
-            />
+      
             <Stack.Screen name="EditProfile" component={EditProfile} />
             <Stack.Screen name="Forum2" component={Forum2} />
             <Stack.Screen name="ForumPost" component={ForumPost} />

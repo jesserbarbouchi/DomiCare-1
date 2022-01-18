@@ -1,124 +1,142 @@
-import React ,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from "react";
 // import { View, Text , Image , Button , StyleSheet } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { CredentialsContext } from './Authentification/CredentialsContext.js';
-import axios from 'axios'
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { CredentialsContext } from "./Authentification/CredentialsContext.js";
+import axios from "axios";
 import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  Button
-} from 'react-native';
+    StyleSheet,
+    Text,
+    View,
+    Image,
+    TouchableOpacity,
+    TextInput,
+    Button,
+} from "react-native";
 
-const EquipementsProviderProfile = ({navigation}) => {
-  const [formData, setData] = React.useState({});
-  const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
-  const  userData = storedCredentials;
-  console.log("userData:",userData);
-  console.log(userData.userData._id);
-  useEffect(() => {
-    axios.get(`http://192.168.11.73:3000/editprofile/fetch/${userData.userData._id}`)
-        .then(res => {
-          console.log("res in useEffect",res);
-          setData(res.data) 
-        })
-        .catch(err => {
-            console.log(err);
-        })
-}, []);
-  var editprofile = () => {
-    navigation.navigate("EditProfile");
-};
+const EquipementsProviderProfile = ({ navigation }) => {
+    const [formData, setData] = React.useState({});
+    const { storedCredentials, setStoredCredentials } =
+        React.useContext(CredentialsContext);
+    const userData = storedCredentials;
+    console.log("userData:", userData);
+    console.log(userData.userData._id);
+    useEffect(() => {
+        axios
+            .get(
+                `http://192.168.11.124:3000/editprofile/fetch/${userData.userData._id}`
+            )
+            .then((res) => {
+                console.log("res in useEffect", res);
+                setData(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+    var editprofile = () => {
+        navigation.navigate("EditProfile");
+    };
 
     return (
-      <View style={styles.container}>
-          <View style={styles.header}></View>
-          <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
-          <View style={styles.body}>
-            <View style={styles.bodyContent}>
-              <Text style={styles.name}>{formData.firstName} {formData.lastName}</Text>
-              <Text style={styles.info}>{formData.city}/{formData.adress}</Text>
-              <Text style={styles.description}>My Email: {formData.email}</Text>
-              <Text style={styles.description}>My Contact: {formData.phoneNumber}</Text>
-              <Text style={styles.description}>{formData.gender}</Text>
-              <Text style={styles.description}>{formData.dateOfBirth}</Text>
-              <TouchableOpacity style={styles.buttonContainer}>
-                <Text onPress={editprofile}>Update</Text>  
-                <Button onPress={editprofile} >Update</Button>
-              </TouchableOpacity>
+        <View style={styles.container}>
+            <View style={styles.header}></View>
+            <Image
+                style={styles.avatar}
+                source={{
+                    uri: "https://bootdey.com/img/Content/avatar/avatar6.png",
+                }}
+            />
+            <View style={styles.body}>
+                <View style={styles.bodyContent}>
+                    <Text style={styles.name}>
+                        {formData.firstName} {formData.lastName}
+                    </Text>
+                    <Text style={styles.info}>
+                        {formData.city}/{formData.adress}
+                    </Text>
+                    <Text style={styles.description}>
+                        My Email: {formData.email}
+                    </Text>
+                    <Text style={styles.description}>
+                        My Contact: {formData.phoneNumber}
+                    </Text>
+                    <Text style={styles.description}>{formData.gender}</Text>
+                    <Text style={styles.description}>
+                        {formData.dateOfBirth}
+                    </Text>
+                    <TouchableOpacity style={styles.buttonContainer}>
+                        <Text onPress={editprofile}>Update</Text>
+                        <Button onPress={editprofile}>Update</Button>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
-      </View>
     );
-  
-}
+};
 
 const styles = StyleSheet.create({
-  header:{
-    backgroundColor: "#00BFFF",
-    height:200,
-  },
-  avatar: {
-    width: 130,
-    height: 130,
-    borderRadius: 63,
-    borderWidth: 4,
-    borderColor: "white",
-    marginBottom:10,
-    alignSelf:'center',
-    position: 'absolute',
-    marginTop:130
-  },
-  name:{
-    fontSize:22,
-    color:"#FFFFFF",
-    fontWeight:'600',
-  },
-  body:{
-    marginTop:70,
-  },
-  bodyContent: {
-    flex: 1,
-    alignItems: 'center',
-    padding:30,
-  },
-  name:{
-    fontSize:28,
-    color: "#696969",
-    fontWeight: "600"
-  },
-  info:{
-    fontSize:16,
-    color: "#00BFFF",
-    marginTop:10
-  },
-  description:{
-    fontSize:16,
-    color: "#696969",
-    marginTop:22,
-    textAlign: 'center'
-  },
-  buttonContainer: {
-    marginTop:10,
-    height:45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom:70,
-    width:250,
-    borderRadius:30,
-    backgroundColor: "#00BFFF",
-  },
+    header: {
+        backgroundColor: "#00BFFF",
+        height: 200,
+    },
+    avatar: {
+        width: 130,
+        height: 130,
+        borderRadius: 63,
+        borderWidth: 4,
+        borderColor: "white",
+        marginBottom: 10,
+        alignSelf: "center",
+        position: "absolute",
+        marginTop: 130,
+    },
+    name: {
+        fontSize: 22,
+        color: "#FFFFFF",
+        fontWeight: "600",
+    },
+    body: {
+        marginTop: 70,
+    },
+    bodyContent: {
+        flex: 1,
+        alignItems: "center",
+        padding: 30,
+    },
+    name: {
+        fontSize: 28,
+        color: "#696969",
+        fontWeight: "600",
+    },
+    info: {
+        fontSize: 16,
+        color: "#00BFFF",
+        marginTop: 10,
+    },
+    description: {
+        fontSize: 16,
+        color: "#696969",
+        marginTop: 22,
+        textAlign: "center",
+    },
+    buttonContainer: {
+        marginTop: 10,
+        height: 45,
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 70,
+        width: 250,
+        borderRadius: 30,
+        backgroundColor: "#00BFFF",
+    },
 });
 // const EquipementsProviderProfile = () => {
 
 //   const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
 //   const  userData = storedCredentials;
 //   console.log("userData:",userData);
-  
+
 //   return (
 //     <View>
 //     <View style={styles.container}>
@@ -147,7 +165,7 @@ const styles = StyleSheet.create({
 //     width:'50%',
 //     height:100,
 //     resizeMode:'cover'
-  
+
 // },
 // itemVue:{
 //   marginTop:24,
@@ -157,5 +175,4 @@ const styles = StyleSheet.create({
 // }
 // });
 
-
-export default EquipementsProviderProfile
+export default EquipementsProviderProfile;

@@ -1,148 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
-// import { Image, StyleSheet, Text, View } from "react-native";
-// import axios from "axios";
-
-// const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
-
-// export const ProfileServiceSeeker = () => {
-//   const [data, setData] = useState([]);
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const { data: response } = await axios.get("/serviceProvidersList");
-//         setData(response);
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     };
-//   });
-//   return (
-//     <View style={styles.container}>
-//       {data.map((sp, index) => {
-//         return (
-//           <View key={i} style={styles.user}>
-//             <Card>
-//               <Card.Content>
-//                 <Title>Profile</Title>
-//               </Card.Content>
-//               <View style={styles.info}>
-//                 <Image
-//                   style={styles.image}
-//                   resizeMode="cover"
-//                   source={{
-//                     uri: "https://cdn.dribbble.com/users/844597/screenshots/9008058/media/a8bfc3cd2e71a304a02d8729bcffa132.png?compress=1&resize=400x300",
-//                   }}
-//                 />{" "}
-//                 <Title>Sahar Tabka</Title>
-//                 <Text>{sp.speciality}</Text>
-//                 <Text>{sp.phoneNumber}</Text>
-//                 <Text>{sp.email}</Text>
-//               </View>
-
-//               <Card.Actions>
-//                 <Button>Update Profile</Button>
-//               </Card.Actions>
-//             </Card>
-//           </View>
-//         );
-//       })}
-//     </View>
-//   );
-// };
-
-// export const ProfileServiceProvider = () => {
-//     const [data, setData] = useState([]);
-//     useEffect(() => {
-//       const fetchData = async () => {
-//         try {
-//           const { data: response } = await axios.get("/serviceProvidersList");
-//           setData(response);
-//         } catch (error) {
-//           console.log(error);
-//         }
-//       };
-//     });
-//     return (
-//       <View style={styles.container}>
-//         {data.map((sp, index) => {
-//           return (
-//             <View key={i} style={styles.user}>
-//               <Card>
-//                 <Card.Content>
-//                   <Title>Profile</Title>
-//                 </Card.Content>
-//                 <View style={styles.info}>
-//                   <Image
-//                     style={styles.image}
-//                     resizeMode="cover"
-//                     source={{
-//                       uri: "https://cdn.dribbble.com/users/844597/screenshots/9008058/media/a8bfc3cd2e71a304a02d8729bcffa132.png?compress=1&resize=400x300",
-//                     }}
-//                   />{" "}
-//                   <Title>Sahar Tabka</Title>
-//                   <Text>{sp.speciality}</Text>
-//                   <Text>{sp.phoneNumber}</Text>
-//                   <Text>{sp.email}</Text>
-//                 </View>
-
-//                 <Card.Actions>
-//                   <Button>Update Profile</Button>
-//                 </Card.Actions>
-//               </Card>
-//             </View>
-//           );
-//         })}
-//       </View>
-//     );
-//   };
-
-//  export const ProfileEquipementsProvider = () => {
-//     const [data, setData] = useState([]);
-//     useEffect(() => {
-//       const fetchData = async () => {
-//         try {
-//           const { data: response } = await axios.get("/serviceProvidersList");
-//           setData(response);
-//         } catch (error) {
-//           console.log(error);
-//         }
-//       };
-//     });
-//     return (
-//       <View style={styles.container}>
-//         {data.map((sp, index) => {
-//           return (
-//             <View key={i} style={styles.user}>
-//               <Card>
-//                 <Card.Content>
-//                   <Title>Profile</Title>
-//                 </Card.Content>
-//                 <View style={styles.info}>
-//                   <Image
-//                     style={styles.image}
-//                     resizeMode="cover"
-//                     source={{
-//                       uri: "https://cdn.dribbble.com/users/844597/screenshots/9008058/media/a8bfc3cd2e71a304a02d8729bcffa132.png?compress=1&resize=400x300",
-//                     }}
-//                   />{" "}
-//                   <Title>Sahar Tabka</Title>
-//                   <Text>{sp.speciality}</Text>
-//                   <Text>{sp.phoneNumber}</Text>
-//                   <Text>{sp.email}</Text>
-//                 </View>
-
-//                 <Card.Actions>
-//                   <Button>Update Profile</Button>
-//                 </Card.Actions>
-//               </Card>
-//             </View>
-//           );
-//         })}
-//       </View>
-//     );
-//   };
-
 import React from "react";
 import axios from "axios";
 import {
@@ -152,15 +7,12 @@ import {
     Text,
     Image,
     TouchableOpacity,
+    ScrollView
 } from "react-native";
 import { Avatar, Title, Caption, TouchableRipple } from "react-native-paper";
 import { CredentialsContext } from "../components/Authentification/CredentialsContext.js";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import FontAwesome, {
-    SolidIcons,
-    RegularIcons,
-    BrandIcons,
-} from "react-native-fontawesome";
+
 
 export const ProfileServiceSeeker = () => {
     const { storedCredentials, setStoredCredentials } =
@@ -168,6 +20,14 @@ export const ProfileServiceSeeker = () => {
     const userData = storedCredentials.userData;
 
     return (
+        <ScrollView
+        showsVerticalScrollIndicator={false}
+        _contentContainerStyle={{
+            px: "20px",
+            mb: "4",
+            minW: "80",
+        }}
+    >
         <View style={styles.container}>
             <View style={styles.header}></View>
             <Image
@@ -181,6 +41,25 @@ export const ProfileServiceSeeker = () => {
                     <Text style={styles.name}>
                         {userData.lastName + " " + userData.firstName}
                     </Text>
+                </View>
+                
+                <View style={styles.infoBoxWrapper}>
+                    <View
+                        style={[
+                            styles.infoBox,
+                            {
+                                borderRightColor: "#dddddd",
+                                borderRightWidth: 1,
+                            },
+                        ]}
+                    >
+                        <Title>0</Title>
+                        <Caption>Request</Caption>
+                    </View>
+                    <View style={styles.infoBox}>
+                        <Title>0</Title>
+                        <Caption>Post</Caption>
+                    </View>
                 </View>
 
                 <View style={styles.userInfoSection}>
@@ -231,24 +110,7 @@ export const ProfileServiceSeeker = () => {
                     </View>
                 </View>
 
-                <View style={styles.infoBoxWrapper}>
-                    <View
-                        style={[
-                            styles.infoBox,
-                            {
-                                borderRightColor: "#dddddd",
-                                borderRightWidth: 1,
-                            },
-                        ]}
-                    >
-                        <Title>0</Title>
-                        <Caption>Request</Caption>
-                    </View>
-                    <View style={styles.infoBox}>
-                        <Title>0</Title>
-                        <Caption>Post</Caption>
-                    </View>
-                </View>
+            
 
                 <View style={styles.menuWrapper}>
                     <TouchableRipple onPress={() => {}}>
@@ -258,21 +120,12 @@ export const ProfileServiceSeeker = () => {
                         </View>
                     </TouchableRipple>
 
-                    <TouchableRipple onPress={() => {}}>
-                        <View style={styles.menuItem}>
-                            <Icon
-                                name="account-edit"
-                                color="#76becc"
-                                size={25}
-                            />
-                            <Text style={styles.menuItemText}>
-                                Edit Profile
-                            </Text>
-                        </View>
-                    </TouchableRipple>
+               
                 </View>
             </View>
         </View>
+                </ScrollView>
+
     );
 };
 export const ProfileServiceProvider = () => {
@@ -281,6 +134,14 @@ export const ProfileServiceProvider = () => {
     const userData = storedCredentials.userData;
 
     return (
+        <ScrollView
+        showsVerticalScrollIndicator={false}
+        _contentContainerStyle={{
+            px: "20px",
+            mb: "4",
+            minW: "80",
+        }}
+    >
         <View style={styles.container}>
             <View style={styles.header}></View>
             <Image
@@ -386,6 +247,8 @@ export const ProfileServiceProvider = () => {
                 </View>
             </View>
         </View>
+        </ScrollView>
+
     );
 };
 export const ProfileEquipementsProvider = () => {
@@ -394,6 +257,14 @@ export const ProfileEquipementsProvider = () => {
     const userData = storedCredentials.userData;
 
     return (
+        <ScrollView
+        showsVerticalScrollIndicator={false}
+        _contentContainerStyle={{
+            px: "20px",
+            mb: "4",
+            minW: "80",
+        }}
+    >
         <View style={styles.container}>
             <View style={styles.header}></View>
             <Image
@@ -403,10 +274,29 @@ export const ProfileEquipementsProvider = () => {
                 }}
             />
             <View style={styles.body}>
-                <View style={styles.bodyContent}>
+            <View style={styles.bodyContent}>
                     <Text style={styles.name}>
                         {userData.lastName + " " + userData.firstName}
                     </Text>
+                </View>
+                
+                <View style={styles.infoBoxWrapper}>
+                    <View
+                        style={[
+                            styles.infoBox,
+                            {
+                                borderRightColor: "#dddddd",
+                                borderRightWidth: 1,
+                            },
+                        ]}
+                    >
+                        <Title>0</Title>
+                        <Caption>Request</Caption>
+                    </View>
+                    <View style={styles.infoBox}>
+                        <Title>0</Title>
+                        <Caption>Post</Caption>
+                    </View>
                 </View>
 
                 <View style={styles.userInfoSection}>
@@ -457,24 +347,7 @@ export const ProfileEquipementsProvider = () => {
                     </View>
                 </View>
 
-                <View style={styles.infoBoxWrapper}>
-                    <View
-                        style={[
-                            styles.infoBox,
-                            {
-                                borderRightColor: "#dddddd",
-                                borderRightWidth: 1,
-                            },
-                        ]}
-                    >
-                        <Title>0</Title>
-                        <Caption>Request</Caption>
-                    </View>
-                    <View style={styles.infoBox}>
-                        <Title>0</Title>
-                        <Caption>Post</Caption>
-                    </View>
-                </View>
+         
 
                 <View style={styles.menuWrapper}>
                     <TouchableRipple onPress={() => {}}>
@@ -484,25 +357,15 @@ export const ProfileEquipementsProvider = () => {
                         </View>
                     </TouchableRipple>
 
-                    <TouchableRipple onPress={() => {}}>
-                        <View style={styles.menuItem}>
-                            <Icon
-                                name="account-edit"
-                                color="#76becc"
-                                size={25}
-                            />
-                            <Text style={styles.menuItemText}>
-                                Edit Profile
-                            </Text>
-                        </View>
-                    </TouchableRipple>
+                 
                 </View>
             </View>
         </View>
+        </ScrollView>
+
     );
 };
 
-export default ProfileServiceSeeker;
 
 const styles = StyleSheet.create({
     container: {
@@ -510,7 +373,7 @@ const styles = StyleSheet.create({
     },
     userInfoSection: {
         paddingHorizontal: 30,
-        marginTop: 10,
+        marginTop: 30,
         marginBottom: 10,
     },
     title: {
@@ -556,25 +419,25 @@ const styles = StyleSheet.create({
     },
 
     header: {
-        backgroundColor: "#76becc",
-        height: 200,
+        backgroundColor: "#14b8a6",
+        height: 130,
     },
     avatar: {
-        width: 130,
-        height: 130,
-        borderRadius: 63,
+        width: 180,
+        height: 180,
+        borderRadius: 113,
         borderWidth: 4,
         borderColor: "white",
         marginBottom: 10,
         alignSelf: "center",
         position: "absolute",
-        marginTop: 130,
+        marginTop: 30,
     },
-    name: {
-        fontSize: 22,
-        color: "#FFFFFF",
-        fontWeight: "600",
-    },
+    // name: {
+    //     fontSize: 22,
+    //     color: "#FFFFFF",
+    //     fontWeight: "600",
+    // },
     body: {
         marginTop: 40,
     },
