@@ -1,13 +1,14 @@
 import React, { useState,useEffect } from "react";
-import { View, StyleSheet, Button,ScrollView, Alert,Picker, Image, Text, TouchableOpacity } from "react-native";
-import sProvider from "./dummy.js"
+import { View, StyleSheet, Button,ScrollView, Alert, Image, Text, TouchableOpacity } from "react-native";
+import {Picker} from "@react-native-picker/picker"
+
 import axios from 'axios'
 // import { Avatar } from 'react-native-paper';
 import { Card, Icon } from 'react-native-elements';
 import { Rating, AirbnbRating } from 'react-native-ratings';
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import MainScreen from "../navigators/MainScreen";
 
 
 
@@ -64,10 +65,7 @@ const serviceProvidersList = ({navigation}) => {
   }
 
 
-  // componentDidMount() {
-  //     this.getServiceProviders()
-  //     // this.filterData()
-  // }
+
 
   return (
     <View style={styles.container}>
@@ -137,7 +135,7 @@ const serviceProvidersList = ({navigation}) => {
                     style={styles.image}
                     resizeMode="cover"
                     source={{
-                      uri: "https://i.pinimg.com/originals/6e/ff/53/6eff53e82b80fb5dd7614d5ba054f144.jpg",
+                      uri: u.picture,
                     }}
                   />
                   <Text style = {styles.name}> firstName : { u.firstName}</Text>

@@ -56,7 +56,7 @@ function Login (){
     return validation;
     };
     const post = () =>{
-      axios.post(`http://192.168.11.73:3000/auth/Login`,{formData} ).then((response)=>{
+      axios.post(`http://192.168.14.162:3000/auth/Login`,{formData} ).then((response)=>{
         let errors={}
         const data = response.data
         if(response.data === 'Your email and password do not match'){
@@ -64,9 +64,9 @@ function Login (){
             setErrors(errors);
         }
         else {
-       
+       console.log('testtt')
           persistLogin({userData : data});
-          navigation.navigate("Home")
+          // navigation.navigate("Home")
         } 
          }).catch((err)=>{
         console.log(err)
@@ -86,7 +86,7 @@ function Login (){
         const {type, user}= result
         if (type== 'success'){
            const email=user.email
-          axios.post(`http://192.168.11.249:3000/auth/GoogleLogin`, {email} )
+          axios.post(`http://192.168.14.162:3000/auth/GoogleLogin`, {email} )
               .then((response)=>{
             const data = response.data
             console.log('test google login :', data)

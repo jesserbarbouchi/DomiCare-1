@@ -1,5 +1,7 @@
 import React, { useState,useEffect } from "react";
-import { View, StyleSheet, Button,ScrollView, Alert,Picker, Image, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Button,ScrollView, Alert, Image, Text, TouchableOpacity } from "react-native";
+import {Picker} from "@react-native-picker/picker"
+
 import sProvider from "./dummy.js"
 import axios from 'axios'
 const ServiceSeekerRequests = () => {

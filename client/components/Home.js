@@ -39,7 +39,9 @@ const HomeScreen = ({ navigation }) => {
     };
 
     return (
+
         <ScrollView style={styles.container}>
+ 
             <View style={styles.sliderContainer}>
                 <Swiper
                     autoplay
@@ -240,7 +242,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         width: 70,
         height: 70,
-        backgroundColor: "#008080" /* '#FF6347' */,
+        backgroundColor: "#008080" ,
         borderRadius: 50,
     },
     categoryBtnTxt: {

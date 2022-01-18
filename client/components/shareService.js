@@ -27,7 +27,7 @@ import { CredentialsContext } from './Authentification/CredentialsContext.js';
 export default () => {
   
   const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
-    const  userData = storedCredentials.userData;
+    const  userData = storedCredentials;
   const [formData, setData] = React.useState({});
   const [modalVisible, setModalVisible] = React.useState(false);
   const [showS, setShowS] = React.useState(false);
@@ -40,8 +40,8 @@ export default () => {
     
 
     setData({ ...formData, type: "HCSP" });
-    Axios.post("http://192.168.11.73:3000/ServiceProvider/shareservice/", {
-      formData,_id:userData._id
+    Axios.post("http://192.168.11.249:3000/ServiceProvider/shareservice/", {
+      formData,_id:userData.userData._id
     })
 
       .then(() => {
@@ -144,7 +144,7 @@ export default () => {
                 
                 <Image
                   source={{
-                    uri: "https://www.prnfunding.com/wp-content/uploads/2018/03/nursing.jpg",
+                    uri: "https://sharedmed.com/wp-content/uploads/2019/01/SMS-Logo.png",
                   }}
                   alt="image"
                 />

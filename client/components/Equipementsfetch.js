@@ -1,6 +1,8 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios'
-import { View, StyleSheet, Button,ScrollView, Alert, Image, Text, TouchableOpacity,Picker } from 'react-native'
+import { View, StyleSheet, Button,ScrollView, Alert, Image, Text, TouchableOpacity } from 'react-native';
+import {Picker} from "@react-native-picker/picker"
+
 import items from "./Equipements.js"
 
 const Equipementsfetch = () => {

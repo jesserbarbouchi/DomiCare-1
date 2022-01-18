@@ -1,13 +1,7 @@
 const QuestAns = require("../models/Question&Answers");
 
 module.exports = {
-  fetchQuestions:(req,res)=>{
-    QuestAns.find({type:"Quest"})
-            .then((result)=>{
-              console.log('test', result)
-              res.send(result)})
-            .catch((err)=>console.log(err))
-  },
+
   create_One: async (req, res, next) => {
     console.log('hello')
     const { 

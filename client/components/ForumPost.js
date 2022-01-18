@@ -30,19 +30,16 @@ const ForumPost = (props) => {
   useEffect( () => {
     
     const fetch=async()=>{
-      
-
       const _id = props.route.params._id;
       const post = await axios.get(
-        `http://192.168.11.73:3000/savepost/findpost/${_id}`
+        `http://192.168.11.249:3000/savepost/findpost/${_id}`
       );
       const com = await axios.get(
-        `http://192.168.11.73:3000/savepost/findcomments/${_id}`
+        `http://192.168.11.249:3000/savepost/findcomments/${_id}`
       );
       setpost(post.data);
       setparticipants(post.data.participants);
       setcomments(com.data)
-     
     }
     fetch()
    
@@ -51,14 +48,14 @@ const ForumPost = (props) => {
     
     const _id = props.route.params._id;
     
-    const comment = await axios.post(`http://192.168.11.73:3000/savepost/savepost`, {
+    const comment = await axios.post(`http://192.168.11.249:3000/savepost/savepost`, {
       owner:{_id:userData._id,name:userData.firstName},
       postId:singlepost._id,
       content:value,
       type:'comment'
     });
     const recom = await axios.get(
-      `http://192.168.11.73:3000/savepost/findcomments/${_id}`
+      `http://192.168.11.249:3000/savepost/findcomments/${_id}`
     );
 
  setcomments(recom.data)
