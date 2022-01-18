@@ -1,9 +1,8 @@
+
 const Transactions = require("../models/Transactions");
 
 
 module.exports = {
-
- 
       CreateServiceSeekerRequest:async (req, res) => {
         const {
             seekerId,
@@ -13,7 +12,6 @@ module.exports = {
             selectedStartDate,
             selectedEndDate,
             file
-
         }=req.body
         try {
           
@@ -26,9 +24,50 @@ module.exports = {
                 selectedEndDate,
                 file
             })
-            res.send("request sended");
+            res.send(RequestService);
 		} catch (err) {
 			res.send(err);
 		}
+    },
+    GetReceivedOffers:async (req,res)=>{
+        try{
+            const offers = await Transactions.find({
+                type:'offer'
+            },
+                {
+                seekerId:req.params._id
+            })
+            res.send(offers);
+        }
+     catch (err) {
+        res.send(err);
     }
+    },
+    SendServiceOffer:async(req,res)=>{
+        const{
+            type,postid,providerId,seekerId
+        }=req.body
+        try{
+            const offer = await Transactions.create({type,postid,providerId,seekerId})
+            res.send(offer);
+        }
+        
+        catch (err) {
+            res.send(err);
+        }
+    },
+    GetReceivedRequests:async (req,res)=>{
+        try{
+            const offers = await Transactions.find({
+                type:'request'
+            },
+                {
+                providerId:req.params._id
+            })
+            res.send(offers);
+        }
+     catch (err) {
+        res.send(err);
+    }
+    },
 }
