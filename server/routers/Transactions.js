@@ -11,5 +11,6 @@ router.route("/OfferMyService")
   .post(Transactions.SendServiceOffer)
   router.route("/servicerequests")
   .get(Transactions.GetReceivedRequests)
-
+  router.route("/sendedoffers")
+  .get(Transactions.GetSendedOffers)
 module.exports = router;
