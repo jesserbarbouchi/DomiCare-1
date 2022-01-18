@@ -4,9 +4,9 @@ import axios from 'axios';
 import {localhost} from "@env";
 import { View, StyleSheet,  Picker, } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { CredentialsContext } from './Authentification/CredentialsContext.js';
+import { CredentialsContext } from '../Authentification/CredentialsContext.js';
 import { useNavigation } from "@react-navigation/native"
-import { storage } from "../.firebase_config.js";
+import { storage } from "../../.firebase_config.js";
 import * as ImagePicker from "expo-image-picker";
 import { FormControl,Icon,NativeBaseProvider,Center,Spinner,Input,Button  } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
@@ -37,7 +37,7 @@ const SeekerRequest = (props) => {
   const onSubmit = () => { 
     post()
     simpleAlertHandler()
-    navigation.navigate('serviceProvidersList')
+    navigation.navigate('ServiceSeekersPosts')
   }
   const onDateChange = (date, type) => {
     //function to handle the date change

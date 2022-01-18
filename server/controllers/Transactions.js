@@ -84,4 +84,18 @@ module.exports = {
         res.send(err);
     }
     },
+    GetSendedRequests:async (req,res)=>{
+        try{
+            const offers = await Transactions.find({
+                type:'request'
+            },
+                {
+                seekerId:req.params._id
+            })
+            res.send(offers);
+        }
+     catch (err) {
+        res.send(err);
+    }
+    },
 }
