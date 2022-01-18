@@ -2,12 +2,15 @@ import React ,{ useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button ,ScrollView } from 'react-native';
 import {Card} from 'react-native-shadow-cards';
 import {Avatar , NativeBaseProvider} from 'native-base';
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { CredentialsContext } from "./Authentification/CredentialsContext.js";
 
 
  const ServicesRequests =()=> {
      const[feed, setFeed]=useState([])
-
+     const { storedCredentials, setStoredCredentials } =
+    React.useContext(CredentialsContext);
+  const userData = storedCredentials.userData;
 
     useEffect(() => {
         const fetch = async () => {
@@ -18,6 +21,16 @@ import {Avatar , NativeBaseProvider} from 'native-base';
         setFeed(posts)
     }
     )
+    const OfferMysService= async(e)=>{
+      const postid= e._id
+      const providerId=userData._id
+      const seekerId=e.serviceSeeker_id
+      const type='offer'
+
+        const offer =await axios.post(
+          `http://${localhost}:3000/Transactions/OfferMyService`,{ type,postid,providerId,seekerId}
+        )
+    }
 
     return (
         <NativeBaseProvider>
@@ -41,7 +54,7 @@ import {Avatar , NativeBaseProvider} from 'native-base';
           <Text>Requested Date</Text>
           <Text>Details</Text>
           <Button
-            onPress={()=>{}}
+            onPress={()=>{OfferMysService(e)}}
             title="Offer my services"
             color="teal"
             accessibilityLabel="Learn more about this purple button"
