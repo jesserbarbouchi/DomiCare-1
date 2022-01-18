@@ -5,35 +5,20 @@ import {Picker} from "@react-native-picker/picker"
 import sProvider from "./dummy.js"
 import axios from 'axios'
 const ServiceSeekerRequests = () => {
-    const [Data, setData] = useState([]);
-        
-    useEffect(async() => {
-      
-        try {
-          const result = await axios.get("http://192.168.1.15:3000/ServiceSeekerRequests/ServiceSeekerRequests")
-          setSProviders(result.data)
-          setData(result.data)
-          console.log(result.data)
+  const [Data, setData] = useState([]);
 
-          
-        }
-        catch (error) {
-          console.log(error)
-        }
-      
-    
-  
-      
-    },[])
-    
-
-
-
-
-
-}
-
-
-
+  useEffect(async () => {
+    try {
+      const result = await axios.get(
+        `http://${localhost}:3000/ServiceSeekerRequests/ServiceSeekerRequests`
+      );
+      setSProviders(result.data);
+      setData(result.data);
+      console.log(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+};
 
 export default ServiceSeekerRequests;

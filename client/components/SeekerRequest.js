@@ -283,43 +283,50 @@ const SeekerRequest = (props) => {
 
 export default SeekerRequest;
 const styles = StyleSheet.create({
-    container: {
-        padding: 16,
-    },
-    input: {
-        height: 55,
-        width: 300,
-        paddingHorizontal: 12,
-        borderRadius: 3,
-        borderWidth: 5,
-        borderColor: "#DDDDDD",
-    },
-    inputStyle: { fontSize: 16 },
-    labelStyle: {
-        fontSize: 14,
-        position: "absolute",
-        top: -10,
-        backgroundColor: "white",
-        paddingHorizontal: 4,
-        marginLeft: -4,
-    },
+ 
+  input: {
+    height:100,
+    width:350,
+    paddingHorizontal: 12,
+    borderRadius: 3,
+    borderWidth: 5,
+    borderColor: '#DDDDDD',
+  },
+  input2: {
+    height:50,
+    width:350,
+    paddingHorizontal: 12,
+    borderRadius: 3,
+    borderWidth: 5,
+    borderColor: '#DDDDDD',
+  },
+  inputStyle: { fontSize: 16 },
+  labelStyle: {
+    fontSize: 14,
+    position: 'absolute',
+    top: -10,
+    backgroundColor: 'white',
+    paddingHorizontal: 4,
+    marginLeft: -4,
+  },
 
-    placeholderStyle: { fontSize: 16 },
-    textErrorStyle: { fontSize: 16 },
-    textStyle: {
-        marginTop: 10,
-    },
-    container: {
-        flex: 1,
-        paddingTop: 30,
-        backgroundColor: "#ffffff",
-        padding: 16,
-    },
-    titleStyle: {
-        textAlign: "center",
-        fontSize: 20,
-        margin: 20,
-    },
+  placeholderStyle: { fontSize: 16 },
+  textErrorStyle: { fontSize: 16 },
+  textStyle: {
+    marginTop:10,
+  },
+  container: {
+    flex: 1,
+    paddingTop: 30,
+    backgroundColor: '#ffffff',
+    padding: 16,
+  
+  },
+  titleStyle: {
+    textAlign: 'center',
+    fontSize: 20,
+    margin: 20,
+  },
 });
 
 // import React, { useState, useEffect } from 'react';

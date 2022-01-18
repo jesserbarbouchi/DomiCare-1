@@ -1,19 +1,9 @@
-import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, Button } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CredentialsContext } from "./Authentification/CredentialsContext.js";
 import axios from "axios";
 
-const EditProfile = ({ navigation }) => {
-    const { storedCredentials, setStoredCredentials } =
-        React.useContext(CredentialsContext);
-    const userData = storedCredentials;
-    const {
-        firstName,
-        lastName,
-        phoneNumber,
-        email,
         adress,
         city,
         gender,
