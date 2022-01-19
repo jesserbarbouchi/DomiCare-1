@@ -1,52 +1,23 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios'
-import { View, StyleSheet, Button,ScrollView, Alert, Image, Text, TouchableOpacity,Picker } from 'react-native'
-import items from "./Equipements.js"
+import { View, StyleSheet, Button,ScrollView, Alert, Image, Text, TouchableOpacity,Picker,Dimensions } from 'react-native'
 
 const Equipementsfetch = () => {
   const [selectedValue, setSelectedValue] = useState("");
-  const [selectedPrice, setSelectedPrice] = useState("")
-  const [selectedAvailability, setSelectedAvailability] = useState(null)
-  const [itemsList,setitemList]=useState(items);
+  const [selectedprice, setselectedprice] = useState("")
+  const [selectedavailability, setselectedavailability] = useState(null)
   const [Equipements,setEquipements] = useState([])
   const [myData,setmyData]=useState([])
 
   useEffect(()=>{
-    axios.get('http://192.168.11.73:3000/Equipements')
+    axios.get('http://localhost:3000/Equipements')
     .then(res=>{
-      // console.log("res",res);
-      // console.log("res.data",res.data);
       setEquipements(res.data)
       setmyData(res.data)
     })
     .catch(error=>{console.log(error);})
   },[])
-//  var fetchData=()=>{
-//     fetch("http://localhost:3000/Equipements")
-//     .then(response=>{
-//       console.log("response",response,response.json());
-//      response.json()
-//     })
-//     .then(res=>{setEquipements(res)})
-//     .catch(error=>{
-//       console.log("error",error);
-//     })
-// } 
-//  var filterData=(city)=> {
-  
-//     const FiltredData = Equipements.filter((item) => {
-//       if(city!==""){
-        
-//       return item.city === city 
-//     }
-    
-//     else{console.log("im in")
-//     setEquipements(myData)
-//     console.log(myData)
-//     return item.city}
-    
-//     })
-//       }
+
 const availability = (eve)=>{
   var ava
   if(eve==="Available"){
@@ -77,7 +48,6 @@ else if(eve==="more then 500"){
     }
   })
   setEquipements(asc)
-
 }
 else if(eve==="more then 1000"){
   asc = Equipements.filter((item)=>{
@@ -90,56 +60,45 @@ else if(eve==="more then 1000"){
 else if (eve===""){
     setEquipements(myData)
 }
-
 };
+
 var filterData=(city)=> {
   var FiltredData 
  if(city!==''){
   FiltredData= Equipements.filter((item)=>
    item.city===city)
    setEquipements(FiltredData)
-
  }
  else{
    setEquipements(myData)
  } 
     }
-      var apihandler=()=>{
-        const url = "http://192.168.11.73:3000/Equipements"
-        fetch(url).then((res)=>res.json())
-        .then((resJson)=>{
-          console.log("resJson",resJson);
-          setEquipements({data:resJson})
+
+ var apihandler=()=>{
+    const url = "http://localhost:3000/Equipements"
+    fetch(url).then((res)=>res.json())
+    .then((resJson)=>{
+    setEquipements({data:resJson})
         })
       }
-      var filterData2=(city)=> {
-  
-        const FiltredData = Equipements.filter((item) => {
-          if(city!==""){
-          return item.city === city 
+
+ var filterData2=(city)=> {
+   const FiltredData = Equipements.filter((item) => {
+     if(city!==""){
+       return item.city === city 
         }
         else{console.log("im in")
        apihandler}
         })
         setEquipements(FiltredData)
           }
-          
-  var cityOnChange=(e)=>{
-        console.log("e",e.target.value);
-        setCity(e.target.value)
-      }
-  var search=()=>{
-        filterData()
-       
-      }
-      
 
   return (
     <View style={styles.container}>
     <View style = {styles.cities}>
     <Picker
         selectedValue={selectedValue}
-        style={{ height: 50, width: 150 }}
+        style={{ height: 30, width: 140, }}
         onValueChange={(cityValue, cityIndex) => {
           setSelectedValue(cityValue)
           filterData(cityValue)
@@ -173,11 +132,11 @@ var filterData=(city)=> {
     </Picker>
     </View>
      <View>
-     <Picker selectedPrice={selectedPrice}
-        style={{ height: 50, width: 150 }}
+     <Picker selectedprice={selectedprice}
+        style={{ height: 30, width: 140 }}
         onValueChange={(priceValue, cityIndex) => {
           console.log(priceValue);
-          setSelectedPrice(priceValue)
+          setselectedprice(priceValue)
           ascendingSort(priceValue)
         }} >
      <Picker.Item label="select price" value="" />
@@ -185,11 +144,10 @@ var filterData=(city)=> {
       <Picker.Item label="more then 500" value="more then 500" />
       <Picker.Item label="more then 1000" value="more then 1000" />
       </Picker>
-      <Picker selectedAvailability={selectedAvailability}
-        style={{ height: 50, width: 150 }}
+      <Picker selectedavailability={selectedavailability}
+        style={{ height: 30, width: 140 }}
         onValueChange={(AvailabilityValue, cityIndex) => {
-          console.log(AvailabilityValue,typeof AvailabilityValue);
-          setSelectedAvailability(AvailabilityValue); 
+          setselectedavailability(AvailabilityValue); 
           availability(AvailabilityValue)
         }} >
      <Picker.Item label="select availability" value="" />
@@ -202,15 +160,13 @@ var filterData=(city)=> {
         {Equipements.map((item, key) => {
            return ( <View key={key} style={styles.itemVue}>
             <Image style={styles.cardImage} source={{uri:item.picture}} />
-            <Text>Equipement name : {item.name}</Text>
-            <Text>Price : {item.price}</Text>
-            <Text>Description : {item.description}</Text>
-            <Text>City : {item.city}</Text>
-            <Text>Delivery : {item.delivery}</Text>
-            <Text>Transaction Type : {item.transactionType}</Text>
-            {item.availability==="Available"?<Text>Available</Text>:<Text>Not Available</Text>}
-              {/* <Button title="Ask for service" onPress={apihandler} /> */}
-  
+            <Text style={styles.titleStyle} >{item.name}</Text>
+            <Text style={styles.categoryStyle} >Price : {item.price + " TND"}</Text>
+            <Text style={styles.categoryStyle} >Description : {item.description}</Text>
+            <Text style={styles.categoryStyle} >City : {item.city}</Text>
+            <Text style={styles.categoryStyle} >Delivery : {item.delivery}</Text>
+            <Text style={styles.categoryStyle} >Transaction Type : {item.transactionType}</Text>
+            {item.availability==="Available"?<Text style={styles.categoryStyle} >Available</Text>:<Text style={styles.categoryStyle} >Not Available</Text>}
           </View>
         )})}
 
@@ -219,7 +175,8 @@ var filterData=(city)=> {
   </View>
 );
 }
-
+const devicewidth = Math.round(Dimensions.get('window').width)
+const radius = 20
 const styles = StyleSheet.create({
   container: {
     flex:1,
@@ -228,16 +185,44 @@ const styles = StyleSheet.create({
     paddingHorizontal:20
   },
   cardImage:{
-    width:'50%',
-    height:100,
-    resizeMode:'cover'
-  
+    width:devicewidth - 90,
+    height:180,
+    borderTopLeftRadius:radius,
+    borderTopRightRadius:25,
+    opacity:0.9,
+    alignContent:'center',
+    alignSelf:'center'
 },
 itemVue:{
-  marginTop:24,
-  padding: 30,
-  backgroundColor: 'pink',
-  fontSize:24
+  paddingTop:15,
+  marginTop:15,
+  width:devicewidth - 60,
+  backgroundColor:'#B0E0E6',
+  height:332,
+  
+  borderRadius:radius,
+  shadowColor:'#000',
+  shadowOffset:{
+    width:5,
+    height:5
+  },
+  shadowOpacity:0.75,
+  shadowRadius:5,
+  elevation:9
+},titleStyle:{
+  fontSize:17,
+  fontWeight:'700',
+  alignContent:'center',
+    alignSelf:'center'  
+},
+categoryStyle:{
+  fontWeight:'200',
+  alignContent:'center',
+  alignSelf:'center'
+},
+sProvider:{
+  // marginHorizontal:10,
+
 }
 });
 

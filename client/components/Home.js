@@ -30,12 +30,8 @@ const HomeScreen = ({ navigation }) => {
     };
 
     const profileType = () => {
-        if (!storedCredentials) {
-            return;
-        // } else if (storedCredentials.type === "serviceProvider") {
-        //     navigation.navigate("ServiceProviderProfile");
-        } else if (storedCredentials.type === "equipementsProvider") {
-            navigation.navigate("EquipementsProviderProfile");
+       if (userData.userData.type === "equipementsProvider" || userData.userData.type === "serviceProvider" ) {
+           return navigation.navigate("EquipementsProviderProfile");
         } else return;
     };
 
@@ -115,7 +111,7 @@ const HomeScreen = ({ navigation }) => {
                             size={35}
                             color="white"
                             onPress={() =>
-                                navigation.navigate("Equipementsfetch")
+                                navigation.navigate("Equipements Feed")
                             }
                         />
                     </View>
@@ -137,7 +133,7 @@ const HomeScreen = ({ navigation }) => {
                     <>
                         <TouchableOpacity
                             style={styles.categoryBtn}
-                            onPress={profileType}
+                            onPress={profileType }
                         >
                             <View style={styles.categoryIcon}>
                                 <Ionicons

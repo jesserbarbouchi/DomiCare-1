@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
-import EquipementsFeed from "./components/EquipementsFeed.js";
+// import EquipementsFetch2 from "./components/EquipementsFetch2.js"
 import Report from "./components/report.js"
 import Home from "./components/Home.js";
 import Login from "./components/Authentification/Login.js";
@@ -65,11 +65,12 @@ const Router = () => {
             linking={linking}
         >
             <Stack.Navigator>
-            
+            {/* <Stack.Screen name="EquipementsFetch2" component={EquipementsFetch2} /> */}
+
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="HomeScreen" component={HomeScreen} />
                 <Stack.Screen
-                    name="Equipementsfetch"
+                    name="Equipements Feed"
                     component={Equipmentsfetch}
                 />
                 <Stack.Screen name="Edit Equipement" component={EditEquipement} />

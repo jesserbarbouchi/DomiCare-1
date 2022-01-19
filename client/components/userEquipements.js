@@ -39,10 +39,8 @@ const userEquipements = ({navigation}) => {
 useEffect(()=>{
   axios.get(`http://localhost:3000/Equipements/${userData.userData._id}`)
   .then(res => {
-    // console.log("equipement id",res);
     setmyData(res.data) 
     console.log("res.data",res.data);
-    
   })
   .catch(err => {
       console.log(err);
@@ -52,8 +50,6 @@ useEffect(()=>{
 const getEquip =()=>{
   axios.get(`http://localhost:3000/Equipements/equip/${formData._id}`)
   .then(res => {
-    // console.log("equipement id",res);
-    // setmyData(res.data) 
     console.log("getEquip",res.data);
   })
   .then(()=>EditEquip())
@@ -65,7 +61,6 @@ const getEquip =()=>{
 const fetchData=()=>{
   axios.get(`http://localhost:3000/Equipements/${userData.userData._id}`)
   .then(res => {
-    // console.log("equipement id",res);
     setmyData(res.data) 
     console.log("res.data",res.data);
   })
@@ -145,7 +140,7 @@ var profile = () => {
     <View>
       {clicked===false?
       <View>
-      <Button onPress={()=>setClicked(true)}>Add Equipement</Button>
+      <Button  onPress={()=>setClicked(true)} >Add Equipement</Button>
       <View >
         
           {myData.map((item, key) => {
