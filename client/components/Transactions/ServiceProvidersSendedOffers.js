@@ -5,22 +5,22 @@ import {Card} from 'react-native-shadow-cards';
 import {Avatar , NativeBaseProvider} from 'native-base';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CredentialsContext } from "../Authentification/CredentialsContext.js";
-
+import axios from 'axios';
 
  const SendedOffers =()=> {
     const { storedCredentials, setStoredCredentials } =
     React.useContext(CredentialsContext);
   const userData = storedCredentials.userData;
      const[feed, setFeed]=useState([])
-    useEffect(() => {
-        const fetch = async () => {
+    useEffect(async() => {
+      const _id=userData._id
+        
           const offers = await axios.get(
-            `http://${localhost}:3000/Transactions/sendedoffers/:{_id:userData_id}`
+            `http://192.168.161.210:3000/Transactions/sendedoffers/:{_id}`
           );
-        }
-        setFeed(offers)
-    }
-    )
+          setFeed(offers.data)
+        
+    },[])
     return (
         <NativeBaseProvider>
             <ScrollView>

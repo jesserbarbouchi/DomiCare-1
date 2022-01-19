@@ -88,7 +88,7 @@ const saveEquipement = ()=>{
 }
 const myDelete =()=>{
   console.log("ownerId",formData.ownerId);
-  axios.delete(`http://${localhost}:3000/Equipements/${myData.ownerId}`)
+  axios.delete(`http://192.168.161.210:3000/Equipements/${myData.ownerId}`)
   .catch(error=>{console.log(error)})
 }
 

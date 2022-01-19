@@ -29,7 +29,7 @@ const SeekerRequest = (props) => {
   const post = () => {
    
 
-    axios.post(`http://${localhost}:3000/SeekerRequest/SeekerRequest/`, {type,details,address,file,seekerId
+    axios.post(`http://192.168.161.210:3000/SeekerRequest/SeekerRequest/`, {type,details,address,file,seekerId
   ,selectedStartDate, selectedEndDate,selectedValue})
       .then(res => console.log(res)).catch(err => console.log(err))
     

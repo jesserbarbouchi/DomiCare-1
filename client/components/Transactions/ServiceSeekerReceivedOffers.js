@@ -15,10 +15,11 @@ import { CredentialsContext } from "../Authentification/CredentialsContext.js";
     useEffect(() => {
         const fetch = async () => {
           const offers = await axios.get(
-            `http://${localhost}:3000/Transactions/serviceoffers/:{_id:userData_id}`
+            `http://192.168.161.210:3000/Transactions/serviceoffers/:{_id:userData_id}`
           );
+          setFeed(offers)
         }
-        setFeed(offers)
+        
     }
     )
     return (

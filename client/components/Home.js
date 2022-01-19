@@ -153,7 +153,7 @@ const HomeScreen = ({ navigation }) => {
                             size={35}
                             color="white"
                             onPress={() =>
-                                navigation.navigate("ServiceProvidersReceivedOffers", userData)
+                                navigation.navigate("ServiceSeekerReceivedOffers", userData)
                             }
                         />
                     </View>

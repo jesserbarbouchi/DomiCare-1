@@ -33,7 +33,7 @@ function ResetPassword (){
     };
     
     const post = () =>{
-      axios.post(`http://${localhost}:3000/auth/ForgetPassword`,{formData} ).then((response)=>{
+      axios.post(`http://192.168.161.210:3000/auth/ForgetPassword`,{formData} ).then((response)=>{
         let errors={}
         let data = response.data
         if(data === "Email address doesn't exist"){

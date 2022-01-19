@@ -19,7 +19,7 @@ const ServiceSeekerRequests = () => {
   useEffect(async () => {
     try {
       const result = await axios.get(
-        `http://${localhost}:3000/ServiceSeekerRequests/ServiceSeekerRequests`
+        `http://192.168.161.210:3000/ServiceSeekerRequests/ServiceSeekerRequests`
       );
       setSProviders(result.data);
       setData(result.data);
