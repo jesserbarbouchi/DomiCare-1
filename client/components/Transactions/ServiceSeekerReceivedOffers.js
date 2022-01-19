@@ -5,6 +5,7 @@ import {Card} from 'react-native-shadow-cards';
 import {Avatar , NativeBaseProvider} from 'native-base';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CredentialsContext } from "../Authentification/CredentialsContext.js";
+import axios from 'axios'
 
 
  const ReceivedOffers =()=> {
@@ -12,15 +13,26 @@ import { CredentialsContext } from "../Authentification/CredentialsContext.js";
     React.useContext(CredentialsContext);
   const userData = storedCredentials.userData;
      const[feed, setFeed]=useState([])
-    useEffect(() => {
-        const fetch = async () => {
+    useEffect(async() => {
+        
+      try  {  const _id =userData._id
           const offers = await axios.get(
-            `http://${localhost}:3000/Transactions/serviceoffers/:{_id:userData_id}`
+            `http://192.168.161.210:3000/Transactions/serviceoffers/:${_id}`
           );
-        }
-        setFeed(offers)
+          setFeed(offers.data)}
+          catch(error){
+            console.log(error);
+          } 
+    },[])
+    const RejectOffer = async(_id)=>{
+      try{
+        console.log("cancel",_id);  
+        await axios.delete(`http://192.168.161.210:3000/Transactions/deleterequest/${_id}`)
+      }
+      catch(err){
+        console.log(err)
+      }
     }
-    )
     return (
         <NativeBaseProvider>
             <ScrollView>
@@ -47,9 +59,9 @@ import { CredentialsContext } from "../Authentification/CredentialsContext.js";
             accessibilityLabel="Learn more about this purple button"
           />
           <Button
-            onPress={()=>{}}
+            onPress={()=>{RejectOffer(e._id)}}
             title="Decline"
-            color="Red"
+            color="red"
             accessibilityLabel="Learn more about this purple button"
           />
         </Card>

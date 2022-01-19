@@ -1,30 +1,26 @@
 import React, { useState, useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CredentialsContext } from "./Authentification/CredentialsContext.js";
-import { localhost } from "@env";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import {
-    RefreshControl,
-    SafeAreaView,
-    View,
-    StyleSheet,
-    ScrollView,
-    Button,
+  SafeAreaView,
+  View,
+  StyleSheet,
+  ScrollView,
+  Button,
 } from "react-native";
 import {
-    IconButton,
-    Icon,
-    Avatar,
-    Box,
-    Heading,
-    AspectRatio,
-    Image,
-    Text,
-    Center,
-    HStack,
-    Stack,
-    NativeBaseProvider,
+  IconButton,
+  Icon,
+
+  Box,
+  Heading,
+  AspectRatio,
+  Image,
+  Text,
+  Center,
+  HStack,
+  Stack,
+  NativeBaseProvider,
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 export const Forum2 = (props) => {
