@@ -6,22 +6,39 @@ import {Avatar , NativeBaseProvider} from 'native-base';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CredentialsContext } from "../Authentification/CredentialsContext.js";
 import ServicesRequests from '../Posts/ServiceSeekersPosts.js';
-
+import axios from 'axios'
 
  const SendedRequests =()=> {
     const { storedCredentials, setStoredCredentials } =
     React.useContext(CredentialsContext);
   const userData = storedCredentials.userData;
      const[feed, setFeed]=useState([])
-    useEffect(() => {
-        const fetch = async () => {
+    useEffect(async() => {
+       
+         try { console.log("req");
+         const _id=userData._id 
           const offers = await axios.get(
-            `http://${localhost}:3000/Transactions/sendedrequests/:{_id:userData_id}`
+            `http://192.168.161.210:3000/Transactions/sendedrequests/${_id}`
           );
-        }
-        setFeed(offers)
+          setFeed(offers.data)}
+          catch(err){
+            console.log(err);
+            
+          }
+       
+    },[])
+
+    const CancelRequest= async(_id)=>{
+      try{
+        console.log("cancel",_id);
+        
+        await axios.delete(`http://192.168.161.210:3000/Transactions/deleterequest/${_id}`)
+      }
+      catch(err){
+        console.log(err)
+      }
+
     }
-    )
     return (
         <NativeBaseProvider>
             <ScrollView>
@@ -42,17 +59,12 @@ import ServicesRequests from '../Posts/ServiceSeekersPosts.js';
           <Text>Gender</Text>
           <Text>Speciality</Text>
           <Button
-            onPress={()=>{}}
-            title="Accept"
+            onPress={()=>{CancelRequest(e._id)}}
+            title="Cancel the request"
             color="teal"
             accessibilityLabel="Learn more about this purple button"
           />
-          <Button
-            onPress={()=>{}}
-            title="Decline"
-            color="Red"
-            accessibilityLabel="Learn more about this purple button"
-          />
+
         </Card>
       </View>)})}
       </ScrollView>
@@ -67,4 +79,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   }
 });
-export default ServicesRequests;
+export default SendedRequests;

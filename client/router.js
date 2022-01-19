@@ -27,7 +27,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import SeekerRequest  from "./components/SeekerRequest.js";
 import userEquipements from "./components/userEquipements.js"
 import EditEquipement from "./components/EditEquipement.js"
-import ServicesRequests from "./components/ServicesRequests.js";
+// import ServicesRequests from "./components/ServicesRequests.js";
 import HomeScreen from "./components/HomeScreen.js"
 // ***************************************************************
 import ServiceProvidersProfiles from"./components/Posts/ServiceProvidersProfiles.js"
@@ -94,7 +94,7 @@ const Router = () => {
                 <Stack.Screen name="ForumPost" component={ForumPost} />
                 <Stack.Screen name="AddBlog" component={AddBlog} />
                 <Stack.Screen name="Essai" component={Essai} />
-                <Stack.Screen name="ServicesRequests" component={ServicesRequests} />
+                {/* <Stack.Screen name="ServicesRequests" component={ServicesRequests} /> */}
                 <Stack.Screen
                     name="serviceProvidersList"
                     component={serviceProvidersList}
@@ -138,11 +138,11 @@ const Router = () => {
                     name="SignUpEquipementsProvider"
                     component={SignUpEquipementsProvider}
                 />
-                  <Stack.Screen
+                  {/* <Stack.Screen
                     name="SeekerRequest"
                     component={SeekerRequest}
              
-                />
+                /> */}
                    <Stack.Screen
                     name="Report"
                     component={Report}
@@ -187,7 +187,7 @@ const Router = () => {
                 <Stack.Screen
                     name="ServiceSeekerSendARequest"
                     component={ServiceSeekerSendARequest}
-                    ServiceSeekerSendedRequests
+                    
                 />
                 <Stack.Screen
                     name="ServiceSeekerSendedRequests"

@@ -28,15 +28,15 @@ const SeekerRequest = (props) => {
 
   const post = () => {
    
-
-    axios.post(`http://${localhost}:3000/Posts/CreateServiceSeekerPost`, {details,address,file,seekerId
-  ,selectedStartDate, selectedEndDate,selectedValue})
+    console.log("create a post");
+    
+    axios.post(`http://192.168.161.210:3000/Posts/CreateServiceSeekerPost`, {details,address,file,seekerId,selectedStartDate, selectedEndDate,selectedValue})
       .then(res => console.log(res)).catch(err => console.log(err))
     
   }
   const onSubmit = () => { 
     post()
-    simpleAlertHandler()
+    // simpleAlertHandler()
     navigation.navigate('ServiceSeekersPosts')
   }
   const onDateChange = (date, type) => {

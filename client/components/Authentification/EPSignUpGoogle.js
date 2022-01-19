@@ -64,7 +64,7 @@ function EPSignUpGoogle (){
           picture : route.params.picture,
           phoneNumber : formData.phoneNumber
         }
-        axios.post(`http://${localhost}:3000/auth/EPSignUpGoogle`,{obj} )
+        axios.post(`http://192.168.161.210:3000/auth/EPSignUpGoogle`,{obj} )
         .then((res)=>{
           console.log(res.data)
           if(res.data === 'email already exists'){
