@@ -70,7 +70,7 @@ function ResetPassword (){
     
     const post = () =>{
       const pass = formData.password
-      axios.post(`http://${localhost}:3000/auth/ResetPassword`,{pass,email} ).then((response)=>{
+      axios.post(`http://192.168.161.210:3000/auth/ResetPassword`,{pass,email} ).then((response)=>{
         const data = response.data
         persistLogin({userData : data});
         navigation.navigate("Home")

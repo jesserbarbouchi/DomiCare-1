@@ -32,7 +32,9 @@ export const Forum2 = (props) => {
 
   const [subjects, setData] = useState([]);
   useEffect(async () => {
-    const result = await axios(`http://${localhost}:3000/savepost/savepost`);
+    console.log("forum");
+    
+    const result = await axios.get(`http://192.168.161.210:3000/savepost/savepost`);
     setData(result.data);
   }, []);
   console.log("sub", subjects);

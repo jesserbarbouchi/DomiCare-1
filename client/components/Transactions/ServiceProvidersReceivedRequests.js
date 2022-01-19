@@ -13,20 +13,24 @@ import {localhost} from "@env";
     React.useContext(CredentialsContext);
   const userData = storedCredentials.userData;
      const[feed, setFeed]=useState([])
-    useEffect(async() => {
-      const _id=userData._id
-         try{
-          const offers = await axios.get(
-            `http://${localhost}:3000/Transactions/servicerequests/:${_id}`
-          );
-          setFeed(offers.data)
-          }
-        catch(err){
-          console.log(err)
-        }
-    },[]
 
-    )
+    useEffect(async() => {
+      console.log('feed',feed)
+      const _id=userData._id
+      console.log(_id)
+      try {
+        const posts = await axios.get(
+          `http://192.168.161.210:3000/Transactions/servicerequests/${_id}`
+        )
+        setFeed(posts.data)
+      }
+       catch (err){
+        console.log(err)
+       }
+       
+       
+        
+    },[])
     return (
         <NativeBaseProvider>
             <ScrollView>

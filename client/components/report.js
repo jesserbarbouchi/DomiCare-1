@@ -40,7 +40,7 @@ export default () => {
       });
       var reqS={reason:reprtText,reportedId:'61dd711fdcb65ed8ac17ba1d',reporterId:userData._id}
       userData.type=== undefined ? reqS['onModel']='ServiceSeeker' : reqS['onModel']='ServiceProvider' ;
-    Axios.post(`http://${localhost}:3000/reports`, reqS)
+    Axios.post(`http://192.168.161.210:3000/reports`, reqS)
       .then(() => {
        console.log(userData)
        setTimeout(() => {

@@ -193,7 +193,7 @@ function SignUp() {
 
     const post = () => {
         axios
-            .post(`http://${localhost}:3000/auth/SPSignUp`, { formData })
+            .post(`http://192.168.161.210:3000/auth/SPSignUp`, { formData })
             .then((response) => {
                 let errors = {};
                 const data = response.data;
