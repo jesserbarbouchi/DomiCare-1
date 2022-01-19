@@ -52,7 +52,7 @@ const SeekerRequest = (props) => {
     const senderId = userData._id;
     const post = () => {
         axios
-            .post(`http://192.168.11.124:3000/SeekerRequest/SeekerRequest/`, {
+            .post(`http://192.168.119.162:3000/SeekerRequest/SeekerRequest/`, {
                 text,
                 address,
                 Prescription,
@@ -283,50 +283,48 @@ const SeekerRequest = (props) => {
 
 export default SeekerRequest;
 const styles = StyleSheet.create({
- 
-  input: {
-    height:100,
-    width:350,
-    paddingHorizontal: 12,
-    borderRadius: 3,
-    borderWidth: 5,
-    borderColor: '#DDDDDD',
-  },
-  input2: {
-    height:50,
-    width:350,
-    paddingHorizontal: 12,
-    borderRadius: 3,
-    borderWidth: 5,
-    borderColor: '#DDDDDD',
-  },
-  inputStyle: { fontSize: 16 },
-  labelStyle: {
-    fontSize: 14,
-    position: 'absolute',
-    top: -10,
-    backgroundColor: 'white',
-    paddingHorizontal: 4,
-    marginLeft: -4,
-  },
+    input: {
+        height: 100,
+        width: 350,
+        paddingHorizontal: 12,
+        borderRadius: 3,
+        borderWidth: 5,
+        borderColor: "#DDDDDD",
+    },
+    input2: {
+        height: 50,
+        width: 350,
+        paddingHorizontal: 12,
+        borderRadius: 3,
+        borderWidth: 5,
+        borderColor: "#DDDDDD",
+    },
+    inputStyle: { fontSize: 16 },
+    labelStyle: {
+        fontSize: 14,
+        position: "absolute",
+        top: -10,
+        backgroundColor: "white",
+        paddingHorizontal: 4,
+        marginLeft: -4,
+    },
 
-  placeholderStyle: { fontSize: 16 },
-  textErrorStyle: { fontSize: 16 },
-  textStyle: {
-    marginTop:10,
-  },
-  container: {
-    flex: 1,
-    paddingTop: 30,
-    backgroundColor: '#ffffff',
-    padding: 16,
-  
-  },
-  titleStyle: {
-    textAlign: 'center',
-    fontSize: 20,
-    margin: 20,
-  },
+    placeholderStyle: { fontSize: 16 },
+    textErrorStyle: { fontSize: 16 },
+    textStyle: {
+        marginTop: 10,
+    },
+    container: {
+        flex: 1,
+        paddingTop: 30,
+        backgroundColor: "#ffffff",
+        padding: 16,
+    },
+    titleStyle: {
+        textAlign: "center",
+        fontSize: 20,
+        margin: 20,
+    },
 });
 
 // import React, { useState, useEffect } from 'react';

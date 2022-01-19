@@ -26,6 +26,7 @@ function Login() {
     const navigation = useNavigation();
     const [formData, setData] = React.useState({});
     const [errors, setErrors] = React.useState({});
+
     const [googleSubmitting, setGoogleSubmitting] = React.useState(false);
     const { storedCredentials, setStoredCredentials } =
         React.useContext(CredentialsContext);
@@ -57,7 +58,7 @@ function Login() {
     };
     const post = () => {
         axios
-            .post(`http://192.168.11.124:3000/auth/Login`, { formData })
+            .post(`http://192.168.119.162:3000/auth/Login`, { formData })
             .then((response) => {
                 let errors = {};
                 const data = response.data;
@@ -87,7 +88,7 @@ function Login() {
                 if (type == "success") {
                     const email = user.email;
                     axios
-                        .post(`http://192.168.11.124:3000/auth/GoogleLogin`, {
+                        .post(`http://192.168.119.162:3000/auth/GoogleLogin`, {
                             email,
                         })
                         .then((response) => {
@@ -101,7 +102,6 @@ function Login() {
                                 }, 2000);
                             } else {
                                 persistLogin({ userData: data });
-                                navigation.navigate("Home");
                             }
                         })
                         .catch((err) => console.log(err));

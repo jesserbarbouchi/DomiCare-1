@@ -37,20 +37,29 @@ const ProfileStack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 const MainTabScreen = () => {
+   
     return (
-        <Tab.Navigator tabBarOptions={{
-          style: {
-            backgroundColor: "#14b8a6"
-          }
-        }}>
+        <Tab.Navigator
+        barStyle={{backgroundColor : "#14b8a6"}} 
+      >
             <Tab.Screen
                 name="Home"
                 component={HomeStackScreen}
                 options={{
-                    tabBarLabel: "HomeScreen",
-                    tabBarColor: "#14b8a6",
+                    tabBarLabel: "Home",
                     tabBarIcon: ({ color }) => (
                         <Icon name="ios-home" color={color} size={26} />
+                    ),
+                }}
+            />
+            
+            <Tab.Screen
+                name="Profile"
+                component={ProfileStackScreen}
+                options={{
+                    tabBarLabel: "Profile",
+                    tabBarIcon: ({ color }) => (
+                        <Icon name="ios-person" color={color} size={26} />
                     ),
                 }}
             />
@@ -59,24 +68,12 @@ const MainTabScreen = () => {
                 component={NotificationStackScreen}
                 options={{
                     tabBarLabel: "Notifications",
-                    tabBarColor: "#14b8a6",
                     tabBarIcon: ({ color }) => (
                         <Icon
                             name="ios-notifications"
                             color={color}
                             size={26}
                         />
-                    ),
-                }}
-            />
-            <Tab.Screen
-                name="Profile"
-                component={ProfileStackScreen}
-                options={{
-                    tabBarLabel: "Profile",
-                    tabBarColor: "#14b8a6",
-                    tabBarIcon: ({ color }) => (
-                        <Icon name="ios-person" color={color} size={26} />
                     ),
                 }}
             />
@@ -98,13 +95,16 @@ const MainTabScreen = () => {
 export default MainTabScreen;
 
 const HomeStackScreen = ({ navigation }) => {
+    const { storedCredentials, setStoredCredentials } =
+    React.useContext(CredentialsContext);
+const userData = storedCredentials.userData;
     return (
         <HomeStack.Navigator
             screenOptions={{
                 headerStyle: {
                     backgroundColor: "#14b8a6",
-                    shadowColor: "#14b8a6", // iOS
-                    elevation: 0, // Android
+                    shadowColor: "#14b8a6", 
+                    elevation: 0, 
                 },
                 headerTintColor: "white",
                 headerTitleStyle: {
@@ -145,9 +145,9 @@ const HomeStackScreen = ({ navigation }) => {
                             >
                                 <Avatar.Image
                                     source={{
-                                        uri: "https://api.adorable.io/avatars/80/abott@adorable.png",
+                                        uri: userData.picture,
                                     }}
-                                    size={30}
+                                    size={35}
                                 />
                             </TouchableOpacity>
                         </View>
@@ -383,6 +383,18 @@ const ProfileStackScreen = ({ navigation }) => {
                     name="EditProfile"
                     options={{
                         title: "Edit Profile",
+                        headerLeft: () => (
+                            <View style={{ marginLeft: 10 }}>
+                                <Icon.Button
+                                    name="ios-menu"
+                                    size={30}
+                                    backgroundColor="#14b8a6"
+                                    color="white"
+                                    onPress={() => navigation.openDrawer()}
+                                />
+                            </View>
+                        ),
+                       
                     }}
                     component={EditProfileSS}
                 />
@@ -391,6 +403,18 @@ const ProfileStackScreen = ({ navigation }) => {
                     name="EditProfile"
                     options={{
                         title: "Edit Profile",
+                        headerLeft: () => (
+                            <View style={{ marginLeft: 10 }}>
+                                <Icon.Button
+                                    name="ios-menu"
+                                    size={30}
+                                    backgroundColor="#14b8a6"
+                                    color="white"
+                                    onPress={() => navigation.openDrawer()}
+                                />
+                            </View>
+                        ),
+                       
                     }}
                     component={EditProfileSP}
                 />
@@ -399,6 +423,18 @@ const ProfileStackScreen = ({ navigation }) => {
                     name="EditProfile"
                     options={{
                         title: "Edit Profile",
+                        headerLeft: () => (
+                            <View style={{ marginLeft: 10 }}>
+                                <Icon.Button
+                                    name="ios-menu"
+                                    size={30}
+                                    backgroundColor="#14b8a6"
+                                    color="white"
+                                    onPress={() => navigation.openDrawer()}
+                                />
+                            </View>
+                        ),
+                       
                     }}
                     component={EditProfileEP}
                 />

@@ -47,10 +47,10 @@ const ForumPost = (props) => {
         const fetch = async () => {
             const _id = props.route.params._id;
             const post = await axios.get(
-                `http://192.168.11.124:3000/savepost/findpost/${_id}`
+                `http://192.168.119.162:3000/savepost/findpost/${_id}`
             );
             const com = await axios.get(
-                `http://192.168.11.124:3000/savepost/findcomments/${_id}`
+                `http://192.168.119.162:3000/savepost/findcomments/${_id}`
             );
             setpost(post.data);
             setparticipants(post.data.participants);
@@ -62,7 +62,7 @@ const ForumPost = (props) => {
         const _id = props.route.params._id;
 
         const comment = await axios.post(
-            `http://192.168.11.124:3000/savepost/savepost`,
+            `http://192.168.119.162:3000/savepost/savepost`,
             {
                 owner: { _id: userData._id, name: userData.firstName },
                 postId: singlepost._id,
@@ -71,7 +71,7 @@ const ForumPost = (props) => {
             }
         );
         const recom = await axios.get(
-            `http://192.168.11.124:3000/savepost/findcomments/${_id}`
+            `http://192.168.119.162:3000/savepost/findcomments/${_id}`
         );
 
         setcomments(recom.data);
@@ -79,7 +79,7 @@ const ForumPost = (props) => {
     const replyto = async () => {
         const id = subcomment;
         const reply = await axios.post(
-            `http://192.168.11.124:3000/savepost/reply`,
+            `http://192.168.119.162:3000/savepost/reply`,
             {
                 rep: {
                     owner: { _id: userData._id, name: userData.firstName },
@@ -90,7 +90,7 @@ const ForumPost = (props) => {
         );
         const _id = props.route.params._id;
         const recomm = await axios.get(
-            `http://192.168.11.124:3000/savepost/findcomments/${_id}`
+            `http://192.168.119.162:3000/savepost/findcomments/${_id}`
         );
         setcomments(recomm.data);
     };
@@ -106,7 +106,7 @@ const ForumPost = (props) => {
             action = "déc";
         }
         const post = await axios.put(
-            `http://192.168.11.124:3000/savepost/savepost`,
+            `http://192.168.119.162:3000/savepost/savepost`,
             {
                 userid,
                 postid,

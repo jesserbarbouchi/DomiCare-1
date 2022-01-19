@@ -23,7 +23,7 @@ const EquipementsProviderProfile = ({ navigation }) => {
     useEffect(() => {
         axios
             .get(
-                `http://192.168.11.124:3000/editprofile/fetch/${userData.userData._id}`
+                `http://192.168.119.162:3000/editprofile/fetch/${userData.userData._id}`
             )
             .then((res) => {
                 console.log("res in useEffect", res);

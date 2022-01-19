@@ -39,10 +39,13 @@ export default () => {
         reqS.type = "HCSP";
 
         setData({ ...formData, type: "HCSP" });
-        Axios.post("http://192.168.11.124:3000/ServiceProvider/shareservice/", {
-            formData,
-            _id: userData.userData._id,
-        })
+        Axios.post(
+            "http://192.168.119.162:3000/ServiceProvider/shareservice/",
+            {
+                formData,
+                _id: userData.userData._id,
+            }
+        )
 
             .then(() => {
                 setShowS(true);

@@ -1,34 +1,20 @@
 import {
     createDrawerNavigator,
-    DrawerContentScrollView,
-    DrawerItemList,
-    DrawerItem,
+  
 } from "@react-navigation/drawer";
 import {
     StyleSheet,
-    Text,
-    View,
-    TouchableHighlight,
-    TouchableOpacity,
-    Image,
-    ScrollView,
+  
 } from "react-native";
 import React from "react";
 import { CredentialsContext } from "../components/Authentification/CredentialsContext.js";
 import MainTabScreen from "./MainScreen.js";
-import {
-    ProfileServiceSeeker,
-    ProfileServiceProvider,
-    ProfileEquipementsProvider,
-} from "../components/Profile.js";
-
 import ForumPost from "../components/ForumPost.js";
 import serviceProvidersList from "../components/serviceProvidersList.js";
 import shareservice from "../components/shareService.js";
 import AddBlog from "../components/AddBlog.js";
 import Equipmentsfetch from "../components/Equipementsfetch.js";
 import EditProfile from "../components/EditProfile.js";
-import HomeScreen from "../components/Home.js";
 import SeekerRequest from "../components/SeekerRequest.js";
 import Report from "../components/report.js";
 
@@ -75,16 +61,15 @@ const DrawerNav = () => {
                 drawerActiveBackgroundColor: "#14b8a6",
                 drawerActiveTintColor: "#fff",
                 drawerInactiveTintColor: "#333",
+               
                 drawerLabelStyle: {
                     marginLeft: 0,
                     fontSize: 15,
                 },
             }}
-            // initialRouteName="Main"
             drawerContent={(props) => <CustomDrawer {...props} />}
         >
-            <Drawer.Screen name="Main" component={MainTabScreen} />
-            {/* <Drawer.Screen name="Home" component={HomeScreen} />    */}
+            <Drawer.Screen  name="Main" component={MainTabScreen} />
 
             <Drawer.Screen
                 name="Equipementsfetch"
@@ -139,16 +124,7 @@ const DrawerNav = () => {
                     drawerIcon: () => null,
                 }}
             />
-            <Drawer.Screen
-                options={{
-                    drawerLabel: () => null,
-                    title: null,
-                    drawerItemStyle: { height: 0 },
-                    drawerIcon: () => null,
-                }}
-                name="EditProfile"
-                component={EditProfile}
-            />
+         
         </Drawer.Navigator>
     );
 };

@@ -21,6 +21,7 @@ import SSSignUpGoogle from "./components/Authentification/SSSignUpGoogle.js";
 import SPSignUpGoogle from "./components/Authentification/SPSignUpGoogle.js";
 import EPSignUpGoogle from "./components/Authentification/EPSignUpGoogle.js";
 import ResetPassword from "./components/Authentification/ResetPassword.js";
+import {RefreshControl , SafeAreaView, ScrollView} from 'react-native'
 const Auth = createNativeStackNavigator();
 
 
@@ -52,9 +53,13 @@ export default function App() {
   }
   
 
-  return (
 
+  
+
+  return (
+  
     <CredentialsContext.Provider value={{storedCredentials, setStoredCredentials}}>
+  
           <NavigationContainer >
 { (storedCredentials)?(
         <DrawerNav  />
@@ -102,6 +107,7 @@ export default function App() {
 )}
 
       </NavigationContainer>
+ 
     </CredentialsContext.Provider>
 
 
