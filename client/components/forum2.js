@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CredentialsContext } from "./Authentification/CredentialsContext.js";
-import {localhost} from "@env";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import {
-  RefreshControl,
   SafeAreaView,
   View,
   StyleSheet,
@@ -15,7 +11,7 @@ import {
 import {
   IconButton,
   Icon,
-  Avatar,
+
   Box,
   Heading,
   AspectRatio,

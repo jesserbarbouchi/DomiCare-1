@@ -157,7 +157,7 @@ const HomeScreen = ({ navigation }) => {
                             }
                         />
                     </View>
-                    <Text style={styles.categoryBtnTxt}>ServiceProvidersReceivedOffers</Text>
+                    <Text style={styles.categoryBtnTxt}>ServiceSeekerReceivedOffers</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.categoryBtn}>
                     <View style={styles.categoryIcon}>
