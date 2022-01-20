@@ -3,7 +3,7 @@ const QuestAns = require("../models/Question&Answers");
 module.exports = {
 
   create_One: async (req, res, next) => {
-    console.log('hello')
+    console.log('comment req body',req.body)
     const { 
       postId,
       owner,

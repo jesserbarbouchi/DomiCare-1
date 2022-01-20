@@ -9,6 +9,15 @@ import Equipmentsfetch from "../components/Equipementsfetch.js";
 import Report from "../components/report.js";
 
 import CustomDrawer from "../navigators/CustomDrawer";
+import ServiceProvidersProfiles from "../components/Posts/ServiceProvidersProfiles.js"
+import ServiceSeekerAddPosts from "../components/Posts/ServiceSeekerAddPost.js"
+import ServiceSeekersPosts from "../components/Posts/ServiceSeekersPosts.js"
+import ServiceProvidersReceivedRequests from "../components/Transactions/ServiceProvidersReceivedRequests.js"
+import ServiceProvidersSendedOffers from "../components/Transactions/ServiceProvidersSendedOffers.js"
+import ServiceSeekerReceivedOffers from "../components/Transactions/ServiceSeekerReceivedOffers.js"
+import ServiceSeekerSendARequests from "../components/Transactions/ServiceSeekerSendARequest.js"
+import ServiceSeekerSendedRequests from "../components/Transactions/ServiceSeekerSendedRequests.js"
+import Forum2 from "../components/Forum2.js";
 
 const Drawer = createDrawerNavigator();
 
@@ -67,6 +76,19 @@ const DrawerNav = () => {
             />
 
             <Drawer.Screen
+                name="Home Care Agents"
+                component={ServiceProvidersProfiles}
+            />
+
+<Drawer.Screen
+                name="Posts Feed"
+                component={ServiceSeekersPosts}
+            />
+
+
+       
+
+            <Drawer.Screen
                 name="Report"
                 component={Report}
                 options={{
@@ -77,24 +99,14 @@ const DrawerNav = () => {
                 }}
             />
             <Drawer.Screen
-                name="AddBlog"
-                component={AddBlog}
-                options={{
-                    drawerLabel: () => null,
-                    title: null,
-                    drawerItemStyle: { height: 0 },
-                    drawerIcon: () => null,
-                }}
-            />
-            <Drawer.Screen
-                name="ForumPost"
-                component={ForumPost}
-                options={{
-                    drawerLabel: () => null,
-                    title: null,
-                    drawerItemStyle: { height: 0 },
-                    drawerIcon: () => null,
-                }}
+                name="Forum"
+                component={Forum2}
+                // options={{
+                //     drawerLabel: () => null,
+                //     title: null,
+                //     drawerItemStyle: { height: 0 },
+                //     drawerIcon: () => null,
+                // }}
             />
         </Drawer.Navigator>
     );

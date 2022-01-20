@@ -16,7 +16,7 @@ const Equipementsfetch = () => {
     const [selectedValue, setSelectedValue] = useState("");
     const [selectedPrice, setSelectedPrice] = useState("");
     const [selectedAvailability, setSelectedAvailability] = useState(null);
-    const [itemsList, setitemList] = useState(items);
+    const [itemsList, setitemList] = useState([]);
     const [Equipements, setEquipements] = useState([]);
     const [myData, setmyData] = useState([]);
 

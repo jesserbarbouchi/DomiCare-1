@@ -25,7 +25,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CredentialsContext } from "../components/Authentification/CredentialsContext.js";
 
 import BottomSheet from "reanimated-bottom-sheet";
-import Animated from "react-native-reanimated";
+
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { storage } from "../.firebase_config.js";
 
@@ -278,7 +278,7 @@ export const EditProfileEP = () => {
                     initialSnap={1}
                     enabledGestureInteraction={true}
                 />
-                <Animated.View style={{ margin: 20 }}>
+                <View style={{ margin: 20 }}>
                     <View style={{ alignItems: "center" }}>
                         <TouchableOpacity>
                             <View
@@ -618,7 +618,7 @@ export const EditProfileEP = () => {
                     ) : (
                         <></>
                     )}
-                </Animated.View>
+                </View>
             </View>
         </ScrollView>
     );
@@ -873,7 +873,7 @@ export const EditProfileSP = () => {
                     initialSnap={1}
                     enabledGestureInteraction={true}
                 />
-                <Animated.View style={{ margin: 20 }}>
+                <View style={{ margin: 20 }}>
                     <View style={{ alignItems: "center" }}>
                         <TouchableOpacity>
                             <View
@@ -1213,7 +1213,7 @@ export const EditProfileSP = () => {
                     ) : (
                         <></>
                     )}
-                </Animated.View>
+                </View>
             </View>
         </ScrollView>
     );
@@ -1473,7 +1473,7 @@ export const EditProfileSS = () => {
                     initialSnap={1}
                     enabledGestureInteraction={true}
                 />
-                <Animated.View style={{ margin: 20 }}>
+                <View style={{ margin: 20 }}>
                     <View style={{ alignItems: "center" }}>
                         <TouchableOpacity>
                             <View
@@ -1832,7 +1832,7 @@ export const EditProfileSS = () => {
                     ) : (
                         <></>
                     )}
-                </Animated.View>
+                </View>
             </View>
         </ScrollView>
     );
