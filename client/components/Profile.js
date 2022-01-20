@@ -49,13 +49,13 @@ export const ProfileServiceSeeker = () => {
                 <Image
                     style={styles.avatar}
                     source={{
-                        uri: userData.picture,
+                        uri: formData.picture,
                     }}
                 />
                 <View style={styles.body}>
                     <View style={styles.bodyContent}>
                         <Text style={styles.name}>
-                            {userData.lastName + " " + userData.firstName}
+                            {formData.lastName + " " + formData.firstName}
                         </Text>
                     </View>
 
@@ -86,30 +86,30 @@ export const ProfileServiceSeeker = () => {
                                 size={20}
                             />
                             <Text style={{ color: "#777777", marginLeft: 20 }}>
-                                {userData.adress && userData.city
-                                    ? userData.adress + " - " + userData.city
+                                {formData.adress && formData.city
+                                    ? formData.adress + " - " + formData.city
                                     : "N/A"}
                             </Text>
                         </View>
                         <View style={styles.row}>
                             <Icon name="phone" color="#777777" size={20} />
                             <Text style={{ color: "#777777", marginLeft: 20 }}>
-                                {userData.phoneNumber}
+                                {formData.phoneNumber}
                             </Text>
                         </View>
 
                         <View style={styles.row}>
                             <Icon name="email" color="#777777" size={20} />
                             <Text style={{ color: "#777777", marginLeft: 20 }}>
-                                {userData.email}
+                                {formData.email}
                             </Text>
                         </View>
 
                         <View style={styles.row}>
                             <Icon name="cake" color="#777777" size={20} />
                             <Text style={{ color: "#777777", marginLeft: 20 }}>
-                                {userData.dateOfBirth
-                                    ? userData.dateOfBirth
+                                {formData.dateOfBirth
+                                    ? formData.dateOfBirth
                                     : "N/A"}
                             </Text>
                         </View>
@@ -121,7 +121,7 @@ export const ProfileServiceSeeker = () => {
                                 size={20}
                             />
                             <Text style={{ color: "#777777", marginLeft: 20 }}>
-                                {userData.gender ? userData.gender : "N/A"}
+                                {formData.gender ? formData.gender : "N/A"}
                             </Text>
                         </View>
                     </View>
@@ -177,13 +177,13 @@ export const ProfileServiceProvider = () => {
                 <Image
                     style={styles.avatar}
                     source={{
-                        uri: userData.picture,
+                        uri: formData.picture,
                     }}
                 />
                 <View style={styles.body}>
                     <View style={styles.bodyContent}>
                         <Text style={styles.name}>
-                            {userData.lastName + " " + userData.firstName}
+                            {formData.lastName + " " + formData.firstName}
                         </Text>
                     </View>
 
@@ -195,30 +195,30 @@ export const ProfileServiceProvider = () => {
                                 size={20}
                             />
                             <Text style={{ color: "#777777", marginLeft: 20 }}>
-                                {userData.adress && userData.city
-                                    ? userData.adress + " - " + userData.city
+                                {formData.adress && formData.city
+                                    ? formData.adress + " - " + formData.city
                                     : "N/A"}
                             </Text>
                         </View>
                         <View style={styles.row}>
                             <Icon name="phone" color="#777777" size={20} />
                             <Text style={{ color: "#777777", marginLeft: 20 }}>
-                                {userData.phoneNumber}
+                                {formData.phoneNumber}
                             </Text>
                         </View>
 
                         <View style={styles.row}>
                             <Icon name="email" color="#777777" size={20} />
                             <Text style={{ color: "#777777", marginLeft: 20 }}>
-                                {userData.email}
+                                {formData.email}
                             </Text>
                         </View>
 
                         <View style={styles.row}>
                             <Icon name="cake" color="#777777" size={20} />
                             <Text style={{ color: "#777777", marginLeft: 20 }}>
-                                {userData.dateOfBirth
-                                    ? userData.dateOfBirth
+                                {formData.dateOfBirth
+                                    ? formData.dateOfBirth
                                     : "N/A"}
                             </Text>
                         </View>
@@ -230,7 +230,7 @@ export const ProfileServiceProvider = () => {
                                 size={20}
                             />
                             <Text style={{ color: "#777777", marginLeft: 20 }}>
-                                {userData.gender ? userData.gender : "N/A"}
+                                {formData.gender ? formData.gender : "N/A"}
                             </Text>
                         </View>
                     </View>
@@ -318,13 +318,13 @@ export const ProfileEquipementsProvider = () => {
                 <Image
                     style={styles.avatar}
                     source={{
-                        uri: userData.picture,
+                        uri: formData.picture,
                     }}
                 />
                 <View style={styles.body}>
                     <View style={styles.bodyContent}>
                         <Text style={styles.name}>
-                            {userData.lastName + " " + userData.firstName}
+                            {formData.lastName + " " + formData.firstName}
                         </Text>
                     </View>
 
@@ -355,30 +355,30 @@ export const ProfileEquipementsProvider = () => {
                                 size={20}
                             />
                             <Text style={{ color: "#777777", marginLeft: 20 }}>
-                                {userData.adress && userData.city
-                                    ? userData.adress + " - " + userData.city
+                                {formData.adress && formData.city
+                                    ? formData.adress + " - " + formData.city
                                     : "N/A"}
                             </Text>
                         </View>
                         <View style={styles.row}>
                             <Icon name="phone" color="#777777" size={20} />
                             <Text style={{ color: "#777777", marginLeft: 20 }}>
-                                {userData.phoneNumber}
+                                {formData.phoneNumber}
                             </Text>
                         </View>
 
                         <View style={styles.row}>
                             <Icon name="email" color="#777777" size={20} />
                             <Text style={{ color: "#777777", marginLeft: 20 }}>
-                                {userData.email}
+                                {formData.email}
                             </Text>
                         </View>
 
                         <View style={styles.row}>
                             <Icon name="cake" color="#777777" size={20} />
                             <Text style={{ color: "#777777", marginLeft: 20 }}>
-                                {userData.dateOfBirth
-                                    ? userData.dateOfBirth
+                                {formData.dateOfBirth
+                                    ? formData.dateOfBirth
                                     : "N/A"}
                             </Text>
                         </View>
@@ -390,7 +390,7 @@ export const ProfileEquipementsProvider = () => {
                                 size={20}
                             />
                             <Text style={{ color: "#777777", marginLeft: 20 }}>
-                                {userData.gender ? userData.gender : "N/A"}
+                                {formData.gender ? formData.gender : "N/A"}
                             </Text>
                         </View>
                     </View>

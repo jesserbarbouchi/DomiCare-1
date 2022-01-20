@@ -28,9 +28,10 @@ function Login() {
     const [errors, setErrors] = React.useState({});
 
     const [googleSubmitting, setGoogleSubmitting] = React.useState(false);
+    const { isOpen, onOpen, onClose } = useDisclose();
     const { storedCredentials, setStoredCredentials } =
         React.useContext(CredentialsContext);
-    const { isOpen, onOpen, onClose } = useDisclose();
+    
 
     const persistLogin = (credentials) => {
         AsyncStorage.setItem("domicareCredentials", JSON.stringify(credentials))

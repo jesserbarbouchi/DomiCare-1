@@ -1,7 +1,6 @@
 import 'react-native-gesture-handler';
 import React, {useState} from 'react';
 import DrawerNav from "./navigators/DrawerNavigator";
-import Stack from "./navigators/StackNavigator";
 import MainScreen from './navigators/MainScreen';
 import {StyleSheet}from 'react-native';
 import AppLoading from 'expo-app-loading';

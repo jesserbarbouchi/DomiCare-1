@@ -19,10 +19,7 @@ import {
 } from "../components/EditProfiles";
 
 import Report from "../components/report.js";
-import SeekerRequest from "../components/SeekerRequest.js";
 import ForumPost from "../components/ForumPost.js";
-import serviceProvidersList from "../components/serviceProvidersList.js";
-import shareservice from "../components/shareService.js";
 import AddBlog from "../components/AddBlog.js";
 import Forum2 from "../components/forum2.js";
 import Equipmentsfetch from "../components/Equipementsfetch.js";
@@ -35,6 +32,15 @@ const HomeStack = createStackNavigator();
 const NotificationStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
+
+import ServiceProvidersProfiles from"../components/Posts/ServiceProvidersProfiles.js"
+import ServiceSeekerAddPost from "../components/Posts/ServiceSeekerAddPost.js"
+import ServiceSeekersPosts from "../components/Posts/ServiceSeekersPosts.js"
+import ReceivedRequests from "../components/Transactions/ServiceProvidersReceivedRequests.js"
+import ServiceProvidersSendedOffers from "../components/Transactions/ServiceProvidersSendedOffers.js"
+import ServiceSeekerReceivedOffers from "../components/Transactions/ServiceSeekerReceivedOffers.js"
+import ServiceSeekerSendARequest from "../components/Transactions/ServiceSeekerSendARequest.js"
+import ServiceSeekerSendedRequests from "../components/Transactions/ServiceSeekerSendedRequests.js"
 
 const MainTabScreen = () => {
    
@@ -192,36 +198,7 @@ const userData = storedCredentials.userData;
                     headerTintColor: "#fff",
                 })}
             />
-            <HomeStack.Screen
-                name="serviceProvidersList"
-                component={serviceProvidersList}
-                options={({ route }) => ({
-                    headerBackTitleVisible: false,
-                    headerTitle: false,
-                    headerTransparent: true,
-                    headerTintColor: "#fff",
-                })}
-            />
-            <HomeStack.Screen
-                name="shareservice"
-                component={shareservice}
-                options={({ route }) => ({
-                    headerBackTitleVisible: false,
-                    headerTitle: false,
-                    headerTransparent: true,
-                    headerTintColor: "#fff",
-                })}
-            />
-            <HomeStack.Screen
-                name="SeekerRequest"
-                component={SeekerRequest}
-                options={({ route }) => ({
-                    headerBackTitleVisible: false,
-                    headerTitle: false,
-                    headerTransparent: true,
-                    headerTintColor: "#fff",
-                })}
-            />
+
             <HomeStack.Screen
                 name="Report"
                 component={Report}
@@ -232,6 +209,49 @@ const userData = storedCredentials.userData;
                     headerTintColor: "#fff",
                 })}
             />
+            
+            <HomeStack.Screen
+                    name="ServiceProvidersProfiles"
+                    component={ServiceProvidersProfiles}
+             
+                />
+                <HomeStack.Screen
+                    name="ServiceSeekerAddPost"
+                    component={ServiceSeekerAddPost}
+             
+                />
+                
+                <HomeStack.Screen
+                    name="ServiceSeekersPosts"
+                    component={ServiceSeekersPosts}
+             
+                />
+                <HomeStack.Screen
+                    name="ServiceProvidersReceivedRequests"
+                    component={ReceivedRequests}
+             
+                />
+                 <HomeStack.Screen
+                    name="ServiceProvidersSendedOffers"
+                    component={ServiceProvidersSendedOffers}
+                    
+                />
+                 <HomeStack.Screen
+                    name="ServiceSeekerReceivedOffers"
+                    component={ServiceSeekerReceivedOffers}
+                    
+                />
+                <HomeStack.Screen
+                    name="ServiceSeekerSendARequest"
+                    component={ServiceSeekerSendARequest}
+                    
+                />
+                <HomeStack.Screen
+                    name="ServiceSeekerSendedRequests"
+                    component={ServiceSeekerSendedRequests}
+                    
+                />
+            
         </HomeStack.Navigator>
     );
 };

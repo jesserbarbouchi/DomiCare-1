@@ -10,12 +10,8 @@ import React from "react";
 import { CredentialsContext } from "../components/Authentification/CredentialsContext.js";
 import MainTabScreen from "./MainScreen.js";
 import ForumPost from "../components/ForumPost.js";
-import serviceProvidersList from "../components/serviceProvidersList.js";
-import shareservice from "../components/shareService.js";
 import AddBlog from "../components/AddBlog.js";
 import Equipmentsfetch from "../components/Equipementsfetch.js";
-import EditProfile from "../components/EditProfile.js";
-import SeekerRequest from "../components/SeekerRequest.js";
 import Report from "../components/report.js";
 
 import CustomDrawer from "../navigators/CustomDrawer";
@@ -76,23 +72,10 @@ const DrawerNav = () => {
                 component={Equipmentsfetch}
             />
 
-            <Drawer.Screen
-                name="serviceProvidersList"
-                component={serviceProvidersList}
-            />
+           
 
-            <Drawer.Screen name="shareservice" component={shareservice} />
 
-            <Drawer.Screen
-                options={{
-                    drawerLabel: () => null,
-                    title: null,
-                    drawerItemStyle: { height: 0 },
-                    drawerIcon: () => null,
-                }}
-                name="SeekerRequest"
-                component={SeekerRequest}
-            />
+       
 
             <Drawer.Screen
                 name="Report"
