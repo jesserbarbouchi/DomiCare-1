@@ -18,4 +18,7 @@ router
     .route("/ServiceProvider/Update/:userId")
     .put(UsersController.SP_Update_One);
 
+    router
+    .route("/ServiceProvider/UpdatePassword/:userId")
+    .put(UsersController.SP_UpdatePassword);
 module.exports = router;
