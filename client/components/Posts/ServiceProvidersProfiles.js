@@ -1,40 +1,42 @@
-import React, { useState,useEffect } from "react";
-import { View, StyleSheet, Button,ScrollView, Alert,Picker, Image, Text, TouchableOpacity } from "react-native";
-import sProvider from "./dummy.js"
-import axios from 'axios'
-// import { Avatar } from 'react-native-paper';
-import { Card, Icon } from 'react-native-elements';
-import { Rating, AirbnbRating } from 'react-native-ratings';
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, { useState, useEffect } from "react";
+import {localhost} from "@env";
+import {
+  View,
+  StyleSheet,
+  Button,
+  ScrollView,
+  Alert,
+  Picker,
+  Image,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+import axios from "axios";
+import { Card, Icon } from "react-native-elements";
+import { Rating, AirbnbRating } from "react-native-ratings";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-
-
-
-const serviceProvidersList = ({navigation}) => {
-    const [selectedValue, setSelectedValue] = useState("");
-    const [selectedgender, setSelectedGender] = useState("");
+const serviceProvidersList = ({ navigation }) => {
+  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedgender, setSelectedGender] = useState("");
   const [ServiceProviders, setSProviders] = useState([]);
-  const [Data,setData]=useState([]);
-    
-    useEffect(async() => {
-      
-        try {
-          const result = await axios.get("http://192.168.11.73:3000/serviceProvidersList/serviceProvidersList")
-          setSProviders(result.data)
-          setData(result.data)
-          console.log(result.data)
+  const [Data, setData] = useState([]);
 
-          
-        }
-        catch (error) {
-          console.log(error)
-        }
-      
-    
-  
-      
-    },[])
+  useEffect(async () => {
+   
+    try {
+      const result = await axios.get(
+        
+        
+        `http://192.168.161.210:3000/Posts/serviceProvidersList`
+      );
+      setSProviders(result.data);
+      setData(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   const ratingCompleted = (rating) => {
     console.log("Rating is: " + rating);
@@ -60,14 +62,7 @@ const serviceProvidersList = ({navigation}) => {
     } else {
       setSProviders(Data);
     }
-    
-  }
-
-
-  // componentDidMount() {
-  //     this.getServiceProviders()
-  //     // this.filterData()
-  // }
+  };
 
   return (
     <View style={styles.container}>
@@ -114,7 +109,6 @@ const serviceProvidersList = ({navigation}) => {
           style={{ height: 50, width: 150 }}
           onValueChange={(genderValue, genderIndex) => {
             setSelectedGender(genderValue);
-            console.log(genderValue);
             filterData(selectedValue, genderValue);
           }}
         >
@@ -130,7 +124,6 @@ const serviceProvidersList = ({navigation}) => {
             <Card.Title>Service Providers</Card.Title>
             <Card.Divider />
             {ServiceProviders.map((u, i) => {
-              
               return (
                 <View key={i} style={styles.user}>
                   <Image
@@ -140,19 +133,17 @@ const serviceProvidersList = ({navigation}) => {
                       uri: "https://i.pinimg.com/originals/6e/ff/53/6eff53e82b80fb5dd7614d5ba054f144.jpg",
                     }}
                   />
-                  <Text style = {styles.name}> firstName : { u.firstName}</Text>
-                  <Text style = {styles.name}> lastName : { u.lastName}</Text>
-                  <Text style = {styles.name}> Position : {u.speciality}</Text>
-                  <Text style = {styles.name}> City : {u.city}</Text>
-                  <Text style = {styles.name}> Gender : {u.gender}</Text>
-                  <Text style = {styles.name}> Services : {u.posts}</Text>
-               
+                  <Text style={styles.name}> firstName : {u.firstName}</Text>
+                  <Text style={styles.name}> lastName : {u.lastName}</Text>
+                  <Text style={styles.name}> Position : {u.speciality}</Text>
+                  <Text style={styles.name}> City : {u.city}</Text>
+                  <Text style={styles.name}> Gender : {u.gender}</Text>
+                  <Text style={styles.name}> Services : {u.posts}</Text>
                   <AirbnbRating style={styles.airbnbRating} />
-                  
-
-
-              <Button title="Ask for service" onPress={() =>navigation.navigate('SeekerRequest',u._id)} />
-         
+                  <Button
+                    title="Ask for service"
+                    onPress={() => navigation.navigate("ServiceSeekerSendARequest", u)}
+                  />
                 </View>
               );
             })}
@@ -196,5 +187,4 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
 });
-
 export default serviceProvidersList;
