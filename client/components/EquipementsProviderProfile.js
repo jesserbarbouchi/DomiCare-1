@@ -3,6 +3,7 @@ import React ,{useState,useEffect} from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './Authentification/CredentialsContext.js';
 import axios from 'axios'
+import {localhost} from "@env";
 import {
   StyleSheet,
   Text,

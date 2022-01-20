@@ -1,56 +1,48 @@
 
 import React, { useState,useEffect } from "react";
 import axios from 'axios';
+import {localhost} from "@env";
 
-import { View, StyleSheet, Button, ScrollView, Alert, Picker, Image, Text, TouchableOpacity } from "react-native";
+
+import { View, StyleSheet,  ScrollView, Alert, Picker, Image, Text, TouchableOpacity ,SafeAreaView} from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { CredentialsContext } from './Authentification/CredentialsContext.js';
 import { useNavigation } from "@react-navigation/native"
 import { storage } from "../.firebase_config.js";
 import * as ImagePicker from "expo-image-picker";
-import { FormControl,Icon,NativeBaseProvider,Center,Spinner,Input  } from "native-base";
+import { FormControl,Icon,NativeBaseProvider,Center,Spinner,Input,Button  } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { TextInput } from 'react-native-element-textinput';
 import CalendarPicker from 'react-native-calendar-picker';
-
-
-
-
-
-
-
 const SeekerRequest = (props) => {
   const navigation = useNavigation()
-
   const {storedCredentials,setStoredCredentials}=React.useContext(CredentialsContext)
 const  userData = storedCredentials.userData;
-  
-  const receiverId = props.route.params
-  const [text, setText] = React.useState('');
+  const providerId = props.route.params._id
+  const [details, setText] = React.useState('');
   const [address, setAddress] = React.useState('');
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
-  // const [formData, setData] = React.useState({});
 
+  const [file, setFile] = React.useState("");
   const [Prescription, setPrescription] = React.useState("");
   
   const [errors, setErrors] = React.useState({});
-  const [uploading, setUploading] = React.useState(false);
-  const senderId = userData._id
+  const [uploading, setUploading] = React.useState("None");
+  const seekerId = userData._id
+  const type='request'
   const post = () => {
    
 
-    axios.post(`http://192.168.11.73:3000/SeekerRequest/SeekerRequest/`, {text,address,Prescription,receiverId,senderId })
-      .then(res => console.log(res)).catch(err => console.log(id))
-    console.log('hello',text,address,Prescription)
+    axios.post(`http://${localhost}:3000/SeekerRequest/SeekerRequest/`, {type,details,address,file,seekerId,providerId,selectedStartDate, selectedEndDate })
+      .then(res => console.log(res)).catch(err => console.log(err))
+    console.log('hello',details,address,Prescription)
   }
   const onSubmit = () => { 
     post()
     simpleAlertHandler()
     navigation.navigate('serviceProvidersList')
-    
-
   }
   const onDateChange = (date, type) => {
     //function to handle the date change
@@ -60,6 +52,8 @@ const  userData = storedCredentials.userData;
       setSelectedEndDate(null);
       setSelectedStartDate(date);
     }
+    console.log("data",date)
+    
   };
   
   const simpleAlertHandler = () => {
@@ -73,26 +67,26 @@ const  userData = storedCredentials.userData;
     });
 
     const picked =  "file:///" + result.uri.split("file:/").join("");
-console.log(picked)
-  
-      setPrescription(picked);
-      console.log(Prescription)
+   
+
+    if (!result.cancelled) {
+        setFile(picked);
         uploadFile();
-    
+    }
+   
 };
 
 const uploadFile = async () => {
     const blob = await new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.onload = function () {
-          resolve(xhr.response);
-          
+            resolve(xhr.response);
         };
         xhr.onerror = function () {
             reject(new TypeError("Network request failed"));
         };
         xhr.responseType = "blob";
-        xhr.open("GET", Prescription, true);
+        xhr.open("GET", file, true);
         xhr.send(null);
     });
     const ref = storage.ref().child(new Date().toISOString());
@@ -100,23 +94,33 @@ const uploadFile = async () => {
     snapshot.on(
         storage.TaskEvent,
         () => {
-            setUploading(true);
+            setUploading("loading");
         },
         (error) => {
-            setUploading(false);
+            setUploading("none");
             console.log(error);
             return;
         },
         () => {
             snapshot.snapshot.ref.getDownloadURL().then((url) => {
-              setUploading(false);
-             
-              setPrescription(url )
-                    console.log(Prescription)
-
+                setUploading("done");
+                console.log('urlimage',url)
+                setFile(url)
+                setData({ ...formData, certificate: url })
+                
             });
         }
-  );
+    );
+};
+
+const persistLogin = (credentials) => {
+    AsyncStorage.setItem("domicareCredentials", JSON.stringify(credentials))
+        .then(() => {
+            setStoredCredentials(credentials);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 };
 
   return (
@@ -124,9 +128,10 @@ const uploadFile = async () => {
         <Center flex={1} px="3">
     <View>
     
-      <View style={styles.container}>
+      <View >
+        <Center>
         <TextInput
-          value={text}
+          value={details}
           style={styles.input}
           inputStyle={styles.inputStyle}
           labelStyle={styles.labelStyle}
@@ -142,7 +147,7 @@ const uploadFile = async () => {
         />
           <TextInput
           value={address}
-          style={styles.input}
+          style={styles.input2}
           inputStyle={styles.inputStyle}
           labelStyle={styles.labelStyle}
           placeholderStyle={styles.placeholderStyle}
@@ -155,11 +160,9 @@ const uploadFile = async () => {
             setAddress(address);
           }}
         />
+        </Center>
       </View>
           <View>
-          <SafeAreaView style={styles.ss}>
-      <View >
-      
         <CalendarPicker
           startFromMonday={true}
           allowRangeSelection={true}
@@ -196,74 +199,59 @@ const uploadFile = async () => {
           selectedDayTextColor="#000000"
           scaleFactor={375}
           textStyle={{
-            fontFamily: 'Cochin',
+            
             color: '#000000',
           }}
           onDateChange={onDateChange}
         />
-        <View style={styles.textStyle}>
-          <Text style={styles.textStyle}>
-            Selected Start Date :
-          </Text>
-          <Text style={styles.textStyle}>
-            {selectedStartDate ? selectedStartDate.toString() : ''}
-          </Text>
-          <Text style={styles.textStyle}>
-            Selected End Date :
-          </Text>
-          <Text style={styles.textStyle}>
-            {selectedEndDate ? selectedEndDate.toString() : ''}
-          </Text>
-        </View>
-      </View>
-    </SafeAreaView>
-  
-          
-        
-  
+
   <FormControl isRequired isInvalid={"Prescription" in errors}>
                     <FormControl.Label>Prescription</FormControl.Label>
-                    {!uploading ? (
-                        <Button title = "Upload"
-                            onPress={pickImage}
-                            colorScheme="teal"
-                            leftIcon={
-                                <Icon
-                                    as={Ionicons}
-                                    name="cloud-upload-outline"
-                                    size="sm"
-                                />
-                            }
-                        >
-                            
-                        </Button>
-                    ) : (
-                        <Spinner />
-                    )}
+                                 
+                    { (uploading==="None")? (
+        <Button
+        margin={5}
+        onPress={pickImage}
+        colorScheme="teal"
+        leftIcon={
+            <Icon
+                as={Ionicons}
+                name="cloud-upload-outline"
+                size="sm"
+            />
+        }
+    >
+        Upload
+    </Button>
+    )
 
-                    {"Prescription" in errors ? (
-                        <FormControl.ErrorMessage>
-                            {errors.Prescription}
-                        </FormControl.ErrorMessage>
-                    ) : (
-                        ""
-                    )}
-          </FormControl>
-          <Image
-                    style={styles.image}
-                    resizeMode="cover"
-                    source={{
-                      uri: Prescription,
-                    }}
-                  />
+: (uploading === "loading") ?(
+    (
+        <Spinner />
+    )
+)
+: (
+    (
+        <Button
+        margin={5}
+        colorScheme="teal"
+        >
+        Uploaded!
+    </Button>
+    )
+)
+}  
+                    </FormControl>
         
         
         </View>
-  <Button
-onPress={onSubmit}
-title="Send your request"
-// color="#841584"
-    />
+ 
+    <Button
+   
+   colorScheme="teal" margin={5} onPress={()=>onSubmit()}
+   >
+   Send your request
+</Button>
   
 
 
@@ -278,12 +266,18 @@ title="Send your request"
 
 export default SeekerRequest;
 const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
+ 
   input: {
-    height: 55,
-    width:300,
+    height:100,
+    width:350,
+    paddingHorizontal: 12,
+    borderRadius: 3,
+    borderWidth: 5,
+    borderColor: '#DDDDDD',
+  },
+  input2: {
+    height:50,
+    width:350,
     paddingHorizontal: 12,
     borderRadius: 3,
     borderWidth: 5,
@@ -302,13 +296,14 @@ const styles = StyleSheet.create({
   placeholderStyle: { fontSize: 16 },
   textErrorStyle: { fontSize: 16 },
   textStyle: {
-    marginTop: 10,
+    marginTop:10,
   },
   container: {
     flex: 1,
     paddingTop: 30,
     backgroundColor: '#ffffff',
     padding: 16,
+  
   },
   titleStyle: {
     textAlign: 'center',
