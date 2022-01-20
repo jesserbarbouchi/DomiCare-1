@@ -17,7 +17,7 @@ import ServiceProvidersSendedOffers from "../components/Transactions/ServiceProv
 import ServiceSeekerReceivedOffers from "../components/Transactions/ServiceSeekerReceivedOffers.js"
 import ServiceSeekerSendARequests from "../components/Transactions/ServiceSeekerSendARequest.js"
 import ServiceSeekerSendedRequests from "../components/Transactions/ServiceSeekerSendedRequests.js"
-import Forum2 from "../components/Forum2.js";
+import Forum2 from "../components/forum2.js";
 
 const Drawer = createDrawerNavigator();
 

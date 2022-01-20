@@ -1,84 +1,137 @@
-import React from "react";
-import { View, Image, StyleSheet, ScrollView , Text} from "react-native";
+import React from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StatusBar,
+  Image,
+  TextInput,
+  FlatList,
+  TouchableOpacity,
+  ImageBackground
+} from 'react-native';
 
-import Swiper from "react-native-swiper/src";
+import FontAwesome5Icons from 'react-native-vector-icons/FontAwesome5';
+import {Dimensions} from 'react-native';
+const {width, height} = Dimensions.get('window');
 
-const HomeScreen = ({ navigation }) => {
+const SIZES = {
+    base: 10,
+    width,
+    height,
+  };
+
+let exercises = [
+  {
+    title: 'Medical Advices',
+    image: "https://s3-us-east-2.amazonaws.com/maryville/wp-content/uploads/2019/09/16172732/nurse-holds-clipboard.jpg",
+    subTitle:
+      'Live happier and healthier by learning the fundamentals of diet recommendation',
+  },
+  {
+    title: 'Kegel Exercises',
+    image: "https://s3-us-east-2.amazonaws.com/maryville/wp-content/uploads/2019/09/16172732/nurse-holds-clipboard.jpg",    subTitle:
+      'Live happier and healthier by learning the fundamentals of kegel exercises',
+  },
+  {
+    title: 'Meditation',
+    image: "https://s3-us-east-2.amazonaws.com/maryville/wp-content/uploads/2019/09/16172732/nurse-holds-clipboard.jpg",    subTitle:
+      'Live happier and healthier by learning the fundamentals of meditation and mindfulness',
+  },
+  {
+    title: 'Yoga',
+    image: "https://s3-us-east-2.amazonaws.com/maryville/wp-content/uploads/2019/09/16172732/nurse-holds-clipboard.jpg",    subTitle: 'Live happier and healthier by learning the fundamentals of Yoga',
+  },
+];
+
+const HomeScreen = () => {
+  const ExerciseItem = ({exercise}) => {
     return (
-        <ScrollView style={styles.container}>
-            <View>
-                <Text style={styles.welcomeText}>
-                As medical assistants, nurses have the role of complementing the care provided by doctors to a sick or convalescent person. To enable you to benefit from this type of medical support on a one-time or full-time basis, Home Care offers you its nursing services . Your nurse is available every day from 7am to 10pm, and can take care of any type of patient. 
-                </Text>
-            </View>
-            {/* <View style={styles.sliderContainer}>
-                <Swiper
-                    autoplay
-                    horizontal={false}
-                    height={200}
-                    activeDotColor="#008080"
-                >
-                    <View style={styles.slide}>
-                        <Image
-                            source={{
-                                uri: "https://i.pinimg.com/originals/88/55/04/8855045af2589b1353f620b2b1235e10.jpg",
-                            }}
-                            resizeMode="cover"
-                            style={styles.sliderImage}
-                        />
-                    </View>
-                    <View style={styles.slide}>
-                        <Image
-                            source={{
-                                uri: "https://www.konicaminolta.co.th/wp-content/uploads/2019/10/Website_Konica-54.jpg",
-                            }}
-                            resizeMode="cover"
-                            style={styles.sliderImage}
-                        />
-                    </View>
-                    <View style={styles.slide}>
-                        <Image
-                            source={require("../assets/wa.png")}
-                            resizeMode="cover"
-                            style={styles.sliderImage}
-                        />
-                    </View>
-                </Swiper>
-            </View> */}
-        </ScrollView>
+      <TouchableOpacity
+        onPress={() =>{}
+        //   navigation.navigate('ExerciseDetailsScreen', {exercise: exercise})
+        }
+        activeOpacity={0.8}
+        style={{
+          backgroundColor: 'white',
+          width: 0.5 * SIZES.width - 35,
+          margin: 10,
+          height: 180,
+          borderRadius: 10,
+          padding: 15,
+          shadowColor: '#9e9898',
+          elevation: 5,
+        }}>
+        <ImageBackground
+          source={{uri : exercise.image}}
+          style={{
+            width: '100%',
+            resizeMode: 'cover',
+            flex: 1,
+          }}
+        />
+        <Text style={{marginTop: 20, textAlign: 'center', fontSize: 16}}>
+          {exercise.title}
+        </Text>
+      </TouchableOpacity>
     );
+  };
+
+  return (
+    <SafeAreaView style={{flex: 1, position: 'relative'}}>
+      <StatusBar
+        backgroundColor='#008080'
+        barStyle="dark-content"
+        animated={true}
+      />
+      <View
+        style={{
+          width: '100%',
+          height: '30%',
+          padding: 30,
+          backgroundColor: '#008080',
+          position: 'relative',
+        }}>
+        <Image
+          source={{uri : "https://media.nurse.org/cache/b6/53/b6532ae191a90b032909b0964307d60d@2x.webp"}}
+          style={{
+            position: 'absolute',
+            top: 60,
+            left: -50,
+          }}
+        />
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+          }}>
+        
+        </View>
+
+        <Text style={{fontSize: 30, lineHeight: 45 , color :'white'}}>
+          Welcome Home
+        </Text>
+ 
+      </View>
+
+      <FlatList
+        data={exercises}
+        style={{
+          paddingHorizontal: 20,
+          marginTop: -60,
+        }}
+        contentContainerStyle={{
+          flex: 1,
+          alignItems: 'center',
+        }}
+        showsVerticalScrollIndicator={false}
+        numColumns={2}
+        keyExtractor={item => item.title}
+        renderItem={({item}) => <ExerciseItem exercise={item} />}
+      />
+    </SafeAreaView>
+  );
 };
 
-export default HomeScreen;
-
-const styles = StyleSheet.create({
-    welcomeText:{
-        fontSize: 20,
-        color: '#dddddd',
-    },
-    container: {
-        flex: 1,
-        backgroundColor: "white",
-    },
-    sliderContainer: {
-        height: 200,
-        width: "100%",
-        marginBottom: 50,
-        justifyContent: "center",
-        alignSelf: "center",
-        borderRadius: 8,
-    },
-
-    slide: {
-        flex: 1,
-        justifyContent: "center",
-        backgroundColor: "transparent",
-        borderRadius: 8,
-    },
-    sliderImage: {
-        height: "100%",
-        width: "100%",
-        alignSelf: "center",
-        borderRadius: 8,
-    },
-});
+export default HomeScreen
