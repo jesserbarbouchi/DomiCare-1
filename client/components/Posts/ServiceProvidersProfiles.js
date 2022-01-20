@@ -29,7 +29,7 @@ const serviceProvidersList = ({ navigation }) => {
       const result = await axios.get(
         
         
-        `http://192.168.161.210:3000/Posts/serviceProvidersList`
+        `http://192.168.11.61:3000/Posts/serviceProvidersList`
       );
       setSProviders(result.data);
       setData(result.data);

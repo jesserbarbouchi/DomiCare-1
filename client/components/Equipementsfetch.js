@@ -16,13 +16,13 @@ const Equipementsfetch = () => {
     const [selectedValue, setSelectedValue] = useState("");
     const [selectedPrice, setSelectedPrice] = useState("");
     const [selectedAvailability, setSelectedAvailability] = useState(null);
-    const [itemsList, setitemList] = useState(items);
+    const [itemsList, setitemList] = useState([]);
     const [Equipements, setEquipements] = useState([]);
     const [myData, setmyData] = useState([]);
 
     useEffect(() => {
         axios
-            .get("http://192.168.119.162:3000/Equipements")
+            .get("http://192.168.11.14:3000/Equipements")
             .then((res) => {
                 console.log("res", res);
                 console.log("res.data", res.data);
@@ -109,7 +109,7 @@ const Equipementsfetch = () => {
         }
     };
     var apihandler = () => {
-        const url = "http://192.168.119.162:3000/Equipements";
+        const url = "http://192.168.11.14:3000/Equipements";
         fetch(url)
             .then((res) => res.json())
             .then((resJson) => {

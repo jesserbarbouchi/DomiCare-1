@@ -23,7 +23,7 @@ export const ProfileServiceSeeker = () => {
     React.useEffect(() => {
         axios
             .get(
-                `http://192.168.119.162:3000/Users/ServiceSeeker/Fetch/${userData._id}`
+                `http://192.168.11.14:3000/Users/ServiceSeeker/Fetch/${userData._id}`
             )
             .then((res) => {
                 const data = res.data;
@@ -150,7 +150,7 @@ export const ProfileServiceProvider = () => {
     React.useEffect(() => {
         axios
             .get(
-                `http://192.168.119.162:3000/Users/ServiceProvider/Fetch/${userData._id}`
+                `http://192.168.11.14:3000/Users/ServiceProvider/Fetch/${userData._id}`
             )
             .then((res) => {
                 const data = res.data;
@@ -291,7 +291,7 @@ export const ProfileEquipementsProvider = () => {
     React.useEffect(() => {
         axios
             .get(
-                `http://192.168.119.162:3000/Users/ServiceProvider/Fetch/${userData._id}`
+                `http://192.168.11.14:3000/Users/ServiceProvider/Fetch/${userData._id}`
             )
             .then((res) => {
                 const data = res.data;
@@ -463,7 +463,7 @@ const styles = StyleSheet.create({
     },
 
     header: {
-        backgroundColor: "#14b8a6",
+        backgroundColor: "#008080",
         height: 130,
     },
     avatar: {

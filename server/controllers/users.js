@@ -99,7 +99,32 @@ module.exports = {
        
             })
             .catch((err)=> console.log(err))
-        }
-}
+        },
 
+SP_UpdatePassword:(req,res)=>{
+  
+  const data = req.body
+  ServiceProvider.findOne({ _id: req.params.userId })
+  .then((user)=> {
+   console.log(user)
+  
+  console.log(user.password)
+          bcrypt.compare(data.oldPassword ,user.password)
+          .then((success)=>{
+              if(success){
+                const passwordHash = bcrypt.hashSync(
+                  data.password,
+                  10
+              );
+              ServiceProvider.findOneAndUpdate({_id:req.params.userId},{password: passwordHash}, {new : true})
+                                          .then(() => res.send('success'))
+                                          .catch((err) => console.log(err));
+              }
+              else res.send("Wrong Password !!")
+          })
+     
+          })
+          .catch((err)=> console.log(err))
+      }
+}
 

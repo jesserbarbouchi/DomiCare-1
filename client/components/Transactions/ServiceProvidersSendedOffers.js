@@ -18,7 +18,7 @@ import axios from 'axios';
       const _id=userData._id
         
           const offers = await axios.get(
-            `http://192.168.161.210:3000/Transactions/sendedoffers/${_id}`
+            `http://192.168.11.61:3000/Transactions/sendedoffers/${_id}`
           );
           setFeed(offers.data)
         
