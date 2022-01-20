@@ -1,11 +1,5 @@
-import {
-    createDrawerNavigator,
-  
-} from "@react-navigation/drawer";
-import {
-    StyleSheet,
-  
-} from "react-native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { StyleSheet } from "react-native";
 import React from "react";
 import { CredentialsContext } from "../components/Authentification/CredentialsContext.js";
 import MainTabScreen from "./MainScreen.js";
@@ -23,7 +17,7 @@ import ServiceProvidersSendedOffers from "../components/Transactions/ServiceProv
 import ServiceSeekerReceivedOffers from "../components/Transactions/ServiceSeekerReceivedOffers.js"
 import ServiceSeekerSendARequests from "../components/Transactions/ServiceSeekerSendARequest.js"
 import ServiceSeekerSendedRequests from "../components/Transactions/ServiceSeekerSendedRequests.js"
-import Forum2 from "../components/Forum2.js";
+import Forum2 from "../components/forum2.js";
 
 const Drawer = createDrawerNavigator();
 
@@ -64,10 +58,10 @@ const DrawerNav = () => {
         <Drawer.Navigator
             screenOptions={{
                 headerShown: false,
-                drawerActiveBackgroundColor: "#14b8a6",
+                drawerActiveBackgroundColor: "#008080",
                 drawerActiveTintColor: "#fff",
                 drawerInactiveTintColor: "#333",
-               
+
                 drawerLabelStyle: {
                     marginLeft: 0,
                     fontSize: 15,
@@ -75,7 +69,7 @@ const DrawerNav = () => {
             }}
             drawerContent={(props) => <CustomDrawer {...props} />}
         >
-            <Drawer.Screen  name="Main" component={MainTabScreen} />
+            <Drawer.Screen name="Main" component={MainTabScreen} />
 
             <Drawer.Screen
                 name="Equipementsfetch"

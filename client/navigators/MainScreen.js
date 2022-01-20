@@ -21,9 +21,9 @@ import {
 import Report from "../components/report.js";
 import ForumPost from "../components/ForumPost.js";
 import AddBlog from "../components/AddBlog.js";
-import Forum2 from "../components/Forum2.js";
+import Forum2 from "../components/forum2.js";
 import Equipmentsfetch from "../components/Equipementsfetch.js";
-
+// import MyEquipements from "../components/MyEquipements.js"
 import { CredentialsContext } from "../components/Authentification/CredentialsContext.js";
 import { Avatar } from "react-native-paper";
 import { View } from "react-native-animatable";
@@ -33,21 +33,18 @@ const NotificationStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
-import ServiceProvidersProfiles from"../components/Posts/ServiceProvidersProfiles.js"
-import ServiceSeekerAddPost from "../components/Posts/ServiceSeekerAddPost.js"
-import ServiceSeekersPosts from "../components/Posts/ServiceSeekersPosts.js"
-import ReceivedRequests from "../components/Transactions/ServiceProvidersReceivedRequests.js"
-import ServiceProvidersSendedOffers from "../components/Transactions/ServiceProvidersSendedOffers.js"
-import ServiceSeekerReceivedOffers from "../components/Transactions/ServiceSeekerReceivedOffers.js"
-import ServiceSeekerSendARequest from "../components/Transactions/ServiceSeekerSendARequest.js"
-import ServiceSeekerSendedRequests from "../components/Transactions/ServiceSeekerSendedRequests.js"
+import ServiceProvidersProfiles from "../components/Posts/ServiceProvidersProfiles.js";
+import ServiceSeekerAddPost from "../components/Posts/ServiceSeekerAddPost.js";
+import ServiceSeekersPosts from "../components/Posts/ServiceSeekersPosts.js";
+import ReceivedRequests from "../components/Transactions/ServiceProvidersReceivedRequests.js";
+import ServiceProvidersSendedOffers from "../components/Transactions/ServiceProvidersSendedOffers.js";
+import ServiceSeekerReceivedOffers from "../components/Transactions/ServiceSeekerReceivedOffers.js";
+import ServiceSeekerSendARequest from "../components/Transactions/ServiceSeekerSendARequest.js";
+import ServiceSeekerSendedRequests from "../components/Transactions/ServiceSeekerSendedRequests.js";
 
 const MainTabScreen = () => {
-   
     return (
-        <Tab.Navigator
-        barStyle={{backgroundColor : "#14b8a6"}} 
-      >
+        <Tab.Navigator barStyle={{ backgroundColor: "#008080" }}>
             <Tab.Screen
                 name="Home"
                 component={HomeStackScreen}
@@ -58,7 +55,7 @@ const MainTabScreen = () => {
                     ),
                 }}
             />
-            
+
             <Tab.Screen
                 name="Profile"
                 component={ProfileStackScreen}
@@ -102,15 +99,15 @@ export default MainTabScreen;
 
 const HomeStackScreen = ({ navigation }) => {
     const { storedCredentials, setStoredCredentials } =
-    React.useContext(CredentialsContext);
-const userData = storedCredentials.userData;
+        React.useContext(CredentialsContext);
+    const userData = storedCredentials.userData;
     return (
         <HomeStack.Navigator
             screenOptions={{
                 headerStyle: {
-                    backgroundColor: "#14b8a6",
-                    shadowColor: "#14b8a6", 
-                    elevation: 0, 
+                    backgroundColor: "#008080",
+                    shadowColor: "#008080",
+                    elevation: 0,
                 },
                 headerTintColor: "white",
                 headerTitleStyle: {
@@ -118,6 +115,16 @@ const userData = storedCredentials.userData;
                 },
             }}
         >
+            {/* <HomeStack.Screen
+                name="MyEquipements"
+                component={MyEquipements}
+                options={({ route }) => ({
+                    headerBackTitleVisible: false,
+                    headerTitle: false,
+                    headerTransparent: true,
+                    headerTintColor: "#fff",
+                })}
+            /> */}
             <HomeStack.Screen
                 name="Home"
                 component={HomeScreen}
@@ -129,7 +136,7 @@ const userData = storedCredentials.userData;
                                 name="ios-menu"
                                 size={25}
                                 color="white"
-                                backgroundColor="#14b8a6"
+                                backgroundColor="#008080"
                                 onPress={() => navigation.openDrawer()}
                             />
                         </View>
@@ -140,7 +147,7 @@ const userData = storedCredentials.userData;
                                 name="ios-search"
                                 size={25}
                                 color="white"
-                                backgroundColor="#14b8a6"
+                                backgroundColor="#008080"
                                 onPress={() => {}}
                             />
                             <TouchableOpacity
@@ -168,6 +175,7 @@ const userData = storedCredentials.userData;
                     headerBackTitleVisible: false,
                 })}
             />
+
             <HomeStack.Screen
                 name="Forum2"
                 component={Forum2}
@@ -209,49 +217,40 @@ const userData = storedCredentials.userData;
                     headerTintColor: "#fff",
                 })}
             />
-            
+
             <HomeStack.Screen
-                    name="ServiceProvidersProfiles"
-                    component={ServiceProvidersProfiles}
-             
-                />
-                <HomeStack.Screen
-                    name="ServiceSeekerAddPost"
-                    component={ServiceSeekerAddPost}
-             
-                />
-                
-                <HomeStack.Screen
-                    name="ServiceSeekersPosts"
-                    component={ServiceSeekersPosts}
-             
-                />
-                <HomeStack.Screen
-                    name="ServiceProvidersReceivedRequests"
-                    component={ReceivedRequests}
-             
-                />
-                 <HomeStack.Screen
-                    name="ServiceProvidersSendedOffers"
-                    component={ServiceProvidersSendedOffers}
-                    
-                />
-                 <HomeStack.Screen
-                    name="ServiceSeekerReceivedOffers"
-                    component={ServiceSeekerReceivedOffers}
-                    
-                />
-                <HomeStack.Screen
-                    name="ServiceSeekerSendARequest"
-                    component={ServiceSeekerSendARequest}
-                    
-                />
-                <HomeStack.Screen
-                    name="ServiceSeekerSendedRequests"
-                    component={ServiceSeekerSendedRequests}
-                    
-                />
-            
+                name="ServiceProvidersProfiles"
+                component={ServiceProvidersProfiles}
+            />
+            <HomeStack.Screen
+                name="ServiceSeekerAddPost"
+                component={ServiceSeekerAddPost}
+            />
+
+            <HomeStack.Screen
+                name="ServiceSeekersPosts"
+                component={ServiceSeekersPosts}
+            />
+            <HomeStack.Screen
+                name="ServiceProvidersReceivedRequests"
+                component={ReceivedRequests}
+            />
+            <HomeStack.Screen
+                name="ServiceProvidersSendedOffers"
+                component={ServiceProvidersSendedOffers}
+            />
+            <HomeStack.Screen
+                name="ServiceSeekerReceivedOffers"
+                component={ServiceSeekerReceivedOffers}
+            />
+            <HomeStack.Screen
+                name="ServiceSeekerSendARequest"
+                component={ServiceSeekerSendARequest}
+            />
+            <HomeStack.Screen
+                name="ServiceSeekerSendedRequests"
+                component={ServiceSeekerSendedRequests}
+            />
         </HomeStack.Navigator>
     );
 };
@@ -260,7 +259,7 @@ const NotificationStackScreen = ({ navigation }) => (
     <NotificationStack.Navigator
         screenOptions={{
             headerStyle: {
-                backgroundColor: "#14b8a6",
+                backgroundColor: "#008080",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -276,7 +275,7 @@ const NotificationStackScreen = ({ navigation }) => (
                     <Icon.Button
                         name="ios-menu"
                         size={25}
-                        backgroundColor="#14b8a6"
+                        backgroundColor="#008080"
                         onPress={() => navigation.openDrawer()}
                     />
                 ),
@@ -293,11 +292,11 @@ const ProfileStackScreen = ({ navigation }) => {
         <ProfileStack.Navigator
             screenOptions={{
                 headerStyle: {
-                    backgroundColor: "#14b8a6",
-                    shadowColor: "#14b8a6", // iOS
+                    backgroundColor: "#008080",
+                    shadowColor: "#008080", // iOS
                     elevation: 0, // Android
                 },
-                headerTintColor: "#14b8a6",
+                headerTintColor: "#008080",
             }}
         >
             {userType === "serviceSeeker" ? (
@@ -311,7 +310,7 @@ const ProfileStackScreen = ({ navigation }) => {
                                 <Icon.Button
                                     name="ios-menu"
                                     size={30}
-                                    backgroundColor="#14b8a6"
+                                    backgroundColor="#008080"
                                     color="white"
                                     onPress={() => navigation.openDrawer()}
                                 />
@@ -322,7 +321,7 @@ const ProfileStackScreen = ({ navigation }) => {
                                 <MaterialCommunityIcons.Button
                                     name="account-edit"
                                     size={30}
-                                    backgroundColor="#14b8a6"
+                                    backgroundColor="#008080"
                                     color="white"
                                     onPress={() =>
                                         navigation.navigate("EditProfile")
@@ -343,7 +342,7 @@ const ProfileStackScreen = ({ navigation }) => {
                                 <Icon.Button
                                     name="ios-menu"
                                     size={30}
-                                    backgroundColor="#14b8a6"
+                                    backgroundColor="#008080"
                                     color="white"
                                     onPress={() => navigation.openDrawer()}
                                 />
@@ -354,7 +353,7 @@ const ProfileStackScreen = ({ navigation }) => {
                                 <MaterialCommunityIcons.Button
                                     name="account-edit"
                                     size={30}
-                                    backgroundColor="#14b8a6"
+                                    backgroundColor="#008080"
                                     color="white"
                                     onPress={() =>
                                         navigation.navigate("EditProfile")
@@ -375,7 +374,7 @@ const ProfileStackScreen = ({ navigation }) => {
                                 <Icon.Button
                                     name="ios-menu"
                                     size={30}
-                                    backgroundColor="#14b8a6"
+                                    backgroundColor="#008080"
                                     color="white"
                                     onPress={() => navigation.openDrawer()}
                                 />
@@ -386,7 +385,7 @@ const ProfileStackScreen = ({ navigation }) => {
                                 <MaterialCommunityIcons.Button
                                     name="account-edit"
                                     size={30}
-                                    backgroundColor="#14b8a6"
+                                    backgroundColor="#008080"
                                     color="white"
                                     onPress={() =>
                                         navigation.navigate("EditProfile")
@@ -408,13 +407,12 @@ const ProfileStackScreen = ({ navigation }) => {
                                 <Icon.Button
                                     name="ios-menu"
                                     size={30}
-                                    backgroundColor="#14b8a6"
+                                    backgroundColor="#008080"
                                     color="white"
                                     onPress={() => navigation.openDrawer()}
                                 />
                             </View>
                         ),
-                       
                     }}
                     component={EditProfileSS}
                 />
@@ -428,13 +426,12 @@ const ProfileStackScreen = ({ navigation }) => {
                                 <Icon.Button
                                     name="ios-menu"
                                     size={30}
-                                    backgroundColor="#14b8a6"
+                                    backgroundColor="#008080"
                                     color="white"
                                     onPress={() => navigation.openDrawer()}
                                 />
                             </View>
                         ),
-                       
                     }}
                     component={EditProfileSP}
                 />
@@ -448,13 +445,12 @@ const ProfileStackScreen = ({ navigation }) => {
                                 <Icon.Button
                                     name="ios-menu"
                                     size={30}
-                                    backgroundColor="#14b8a6"
+                                    backgroundColor="#008080"
                                     color="white"
                                     onPress={() => navigation.openDrawer()}
                                 />
                             </View>
                         ),
-                       
                     }}
                     component={EditProfileEP}
                 />
