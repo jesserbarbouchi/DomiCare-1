@@ -37,7 +37,7 @@ const userEquipements = ({navigation}) => {
   };
   
 useEffect(()=>{
-  axios.get(`http://192.168.161.210:3000/Equipements/${userData.userData._id}`)
+  axios.get(`http://192.168.11.56:3000/Equipements/${userData.userData._id}`)
   .then(res => {
     setmyData(res.data) 
     console.log("res.data",res.data);
@@ -48,7 +48,7 @@ useEffect(()=>{
 }, []);
 
 const getEquip =()=>{
-  axios.get(`http://192.168.161.210:3000/Equipements/equip/${formData._id}`)
+  axios.get(`http://192.168.11.56:3000/Equipements/equip/${formData._id}`)
   .then(res => {
     console.log("getEquip",res.data);
   })
@@ -59,7 +59,7 @@ const getEquip =()=>{
 }
 
 const fetchData=()=>{
-  axios.get(`http://192.168.161.210:3000/Equipements/${userData.userData._id}`)
+  axios.get(`http://192.168.11.56:3000/Equipements/${userData.userData._id}`)
   .then(res => {
     setmyData(res.data) 
     console.log("res.data",res.data);
@@ -72,7 +72,7 @@ const fetchData=()=>{
 const saveEquipement = ()=>{
   console.log("ownerId",formData.ownerId);
   console.log("formData",formData);
-  axios.post(`http://192.168.161.210:3000/Equipements/saveEquip`,{formData})
+  axios.post(`http://192.168.11.56:3000/Equipements/saveEquip`,{formData})
   .then(response=>{
     console.log("saveEquipement",response);
     console.log("response.data",response.data);
@@ -83,7 +83,7 @@ const saveEquipement = ()=>{
 }
 const myDelete =()=>{
   console.log("ownerId",formData.ownerId);
-  axios.delete(`http://${localhost}:3000/Equipements/${myData.ownerId}`)
+  axios.delete(`http://192.168.11.56:3000/Equipements/${myData.ownerId}`)
   .catch(error=>{console.log(error)})
 }
 

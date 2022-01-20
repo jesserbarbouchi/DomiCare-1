@@ -28,7 +28,7 @@ import SeekerRequest  from "./components/SeekerRequest.js";
 import userEquipements from "./components/userEquipements.js"
 import EditEquipement from "./components/EditEquipement.js"
 import ServicesRequests from "./components/ServicesRequests.js";
-import HomeScreen from "./components/HomeScreen.js"
+// import HomeScreen from "./components/HomeScreen.js"
 // ***************************************************************
 import ServiceProvidersProfiles from"./components/Posts/ServiceProvidersProfiles.js"
 import ServiceSeekerAddPost from "./components/Posts/ServiceSeekerAddPost.js"
@@ -82,7 +82,7 @@ const Router = () => {
             {/* <Stack.Screen name="EquipementsFetch2" component={EquipementsFetch2} /> */}
 
             <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="HomeScreen" component={HomeScreen} />
+            {/* <Stack.Screen name="HomeScreen" component={HomeScreen} /> */}
                 <Stack.Screen
                     name="Equipements Feed"
                     component={Equipmentsfetch}

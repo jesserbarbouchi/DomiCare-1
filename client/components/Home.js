@@ -90,17 +90,30 @@ const HomeScreen = ({ navigation }) => {
                 <TouchableOpacity style={styles.categoryBtn}>
                     <View style={styles.categoryIcon}>
                         <Ionicons
-                            name="chatbubbles-sharp"
+                            name="medical-sharp"
                             size={35}
                             color="white"
                             onPress={() =>
-                                navigation.navigate("Forum2", userData)
+                                navigation.navigate("Equipements Feed", userData)
                             }
                         />
                     </View>
                     <Text style={styles.categoryBtnTxt}>Forum</Text>
                 </TouchableOpacity>
                 
+                <TouchableOpacity style={styles.categoryBtn}>
+                    <View style={styles.categoryIcon}>
+                        <Ionicons
+                            name="chatbubbles-sharp"
+                            size={35}
+                            color="white"
+                            onPress={() =>
+                                navigation.navigate("ServiceSeekersPosts", userData)
+                            }
+                        />
+                    </View>
+                    <Text style={styles.categoryBtnTxt}>ServiceSeekersPosts</Text>
+                </TouchableOpacity>
                 <TouchableOpacity style={styles.categoryBtn}>
                     <View style={styles.categoryIcon}>
                         <Ionicons
