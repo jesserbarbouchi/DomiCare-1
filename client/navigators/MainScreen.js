@@ -21,7 +21,7 @@ import {
 import Report from "../components/report.js";
 import ForumPost from "../components/ForumPost.js";
 import AddBlog from "../components/AddBlog.js";
-import Forum2 from "../components/forum2.js";
+import Forum2 from "../components/Forum2.js";
 import Equipmentsfetch from "../components/Equipementsfetch.js";
 
 import { CredentialsContext } from "../components/Authentification/CredentialsContext.js";

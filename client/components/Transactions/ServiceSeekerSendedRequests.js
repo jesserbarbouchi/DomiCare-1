@@ -18,7 +18,7 @@ import axios from 'axios'
          try { console.log("req");
          const _id=userData._id 
           const offers = await axios.get(
-            `http://192.168.161.210:3000/Transactions/sendedrequests/${_id}`
+            `http://192.168.11.61:3000/Transactions/sendedrequests/${_id}`
           );
           setFeed(offers.data)}
           catch(err){
@@ -32,7 +32,7 @@ import axios from 'axios'
       try{
         console.log("cancel",_id);
         
-        await axios.delete(`http://192.168.161.210:3000/Transactions/deleterequest/${_id}`)
+        await axios.delete(`http://192.168.11.61:3000/Transactions/deleterequest/${_id}`)
       }
       catch(err){
         console.log(err)

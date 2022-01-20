@@ -11,7 +11,6 @@ import {
 import {
   IconButton,
   Icon,
-
   Box,
   Heading,
   AspectRatio,
@@ -28,11 +27,15 @@ export const Forum2 = (props) => {
 
     const [subjects, setData] = useState([]);
     useEffect(async () => {
-        const result = await axios(
-            `http://192.168.119.162:3000/savepost/savepost`
+        try{const result = await axios(
+            `http://192.168.11.61:3000/savepost/savepost`
         );
         setData(result.data);
-    }, []);
+      console.log("first", result.data);}
+        catch(err){
+          console.log(err);
+        }
+    },[]);
     console.log("sub", subjects);
     return (
         <View>
