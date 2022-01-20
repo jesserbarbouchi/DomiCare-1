@@ -30,7 +30,7 @@ const SeekerRequest = (props) => {
    
     console.log("create a post");
     
-    axios.post(`http://192.168.161.210:3000/Posts/CreateServiceSeekerPost`, {details,address,file,seekerId,selectedStartDate, selectedEndDate,selectedValue})
+    axios.post(`http://192.168.11.61:3000/Posts/CreateServiceSeekerPost`, {details,address,file,seekerId,selectedStartDate, selectedEndDate,selectedValue})
       .then(res => console.log(res)).catch(err => console.log(err))
     
   }
