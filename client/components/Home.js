@@ -1,17 +1,22 @@
 import React from "react";
-import { View, Image, StyleSheet, ScrollView } from "react-native";
+import { View, Image, StyleSheet, ScrollView , Text} from "react-native";
 
 import Swiper from "react-native-swiper/src";
 
 const HomeScreen = ({ navigation }) => {
     return (
         <ScrollView style={styles.container}>
-            <View style={styles.sliderContainer}>
+            <View>
+                <Text style={styles.welcomeText}>
+                As medical assistants, nurses have the role of complementing the care provided by doctors to a sick or convalescent person. To enable you to benefit from this type of medical support on a one-time or full-time basis, Home Care offers you its nursing services . Your nurse is available every day from 7am to 10pm, and can take care of any type of patient. 
+                </Text>
+            </View>
+            {/* <View style={styles.sliderContainer}>
                 <Swiper
                     autoplay
                     horizontal={false}
                     height={200}
-                    activeDotColor="#14b8a6"
+                    activeDotColor="#008080"
                 >
                     <View style={styles.slide}>
                         <Image
@@ -39,7 +44,7 @@ const HomeScreen = ({ navigation }) => {
                         />
                     </View>
                 </Swiper>
-            </View>
+            </View> */}
         </ScrollView>
     );
 };
@@ -47,6 +52,10 @@ const HomeScreen = ({ navigation }) => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
+    welcomeText:{
+        fontSize: 20,
+        color: '#dddddd',
+    },
     container: {
         flex: 1,
         backgroundColor: "white",
