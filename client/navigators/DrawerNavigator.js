@@ -58,7 +58,8 @@ const DrawerNav = () => {
             },
         },
     };
-
+    
+    if(userType==="service Provider"){
     return (
         <Drawer.Navigator
             screenOptions={{
@@ -86,13 +87,10 @@ const DrawerNav = () => {
                 component={ServiceProvidersProfiles}
             />
 
-<Drawer.Screen
+            <Drawer.Screen
                 name="Posts Feed"
                 component={ServiceSeekersPosts}
             />
-
-
-       
 
             <Drawer.Screen
                 name="Report"
@@ -114,10 +112,149 @@ const DrawerNav = () => {
                 //     drawerIcon: () => null,
                 // }}
             />
-           
-         
+            <Drawer.Screen
+                name="Received Requests"
+                component={ServiceProvidersReceivedRequests}
+            />
+            <Drawer.Screen
+                name="Sended Offers"
+                component={ServiceProvidersSendedOffers}
+            />
         </Drawer.Navigator>
-    );
+        
+
+
+    )}
+    if(userType==="serviceSeeker"){
+        return (
+            <Drawer.Navigator
+                screenOptions={{
+                    headerShown: false,
+                    drawerActiveBackgroundColor: "#14b8a6",
+                    drawerActiveTintColor: "#fff",
+                    drawerInactiveTintColor: "#333",
+                   
+                    drawerLabelStyle: {
+                        marginLeft: 0,
+                        fontSize: 15,
+                    },
+                }}
+                drawerContent={(props) => <CustomDrawer {...props} />}
+            >
+                <Drawer.Screen  name="Main" component={MainTabScreen} />
+    
+                <Drawer.Screen
+                    name="Equipementsfetch"
+                    component={Equipmentsfetch}
+                />
+    
+                <Drawer.Screen
+                    name="Home Care Agents"
+                    component={ServiceProvidersProfiles}
+                />
+    
+                <Drawer.Screen
+                    name="Posts Feed"
+                    component={ServiceSeekersPosts}
+                />
+    
+                <Drawer.Screen
+                    name="Report"
+                    component={Report}
+                    options={{
+                        drawerLabel: () => null,
+                        title: null,
+                        drawerItemStyle: { height: 0 },
+                        drawerIcon: () => null,
+                    }}
+                />
+                <Drawer.Screen
+                    name="Forum"
+                    component={Forum2}
+                    // options={{
+                    //     drawerLabel: () => null,
+                    //     title: null,
+                    //     drawerItemStyle: { height: 0 },
+                    //     drawerIcon: () => null,
+                    // }}
+                />
+                <Drawer.Screen
+                    name="Received Offers"
+                    component={ServiceSeekerReceivedOffers}
+                />
+                <Drawer.Screen
+                    name="My requests"
+                    component={ServiceSeekerSendedRequests}
+                />
+            </Drawer.Navigator>
+            
+    
+    
+        )}
+        if(userType==="equipementsProvider"){
+            return (
+                <Drawer.Navigator
+                    screenOptions={{
+                        headerShown: false,
+                        drawerActiveBackgroundColor: "#14b8a6",
+                        drawerActiveTintColor: "#fff",
+                        drawerInactiveTintColor: "#333",
+                       
+                        drawerLabelStyle: {
+                            marginLeft: 0,
+                            fontSize: 15,
+                        },
+                    }}
+                    drawerContent={(props) => <CustomDrawer {...props} />}
+                >
+                    <Drawer.Screen  name="Main" component={MainTabScreen} />
+        
+                    <Drawer.Screen
+                        name="Equipementsfetch"
+                        component={Equipmentsfetch}
+                    />
+        
+                    <Drawer.Screen
+                        name="Home Care Agents"
+                        component={ServiceProvidersProfiles}
+                    />
+        
+                    <Drawer.Screen
+                        name="Posts Feed"
+                        component={ServiceSeekersPosts}
+                    />
+        
+                    {/* <Drawer.Screen
+                        name="Report"
+                        component={Report}
+                        options={{
+                            drawerLabel: () => null,
+                            title: null,
+                            drawerItemStyle: { height: 0 },
+                            drawerIcon: () => null,
+                        }}
+                    /> */}
+                    <Drawer.Screen
+                        name="Forum"
+                        component={Forum2}
+                        // options={{
+                        //     drawerLabel: () => null,
+                        //     title: null,
+                        //     drawerItemStyle: { height: 0 },
+                        //     drawerIcon: () => null,
+                        // }}
+                    />
+                    {/* <Drawer.Screen
+                        name="My requests"
+                        component={ServiceSeekerSendedRequests}
+                    /> */}
+                </Drawer.Navigator>
+                
+        
+        
+            )}
+
+
 };
 export default DrawerNav;
 
