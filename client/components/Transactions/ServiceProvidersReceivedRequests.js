@@ -20,7 +20,7 @@ import {localhost} from "@env";
       console.log(_id)
       try {
         const posts = await axios.get(
-          `http://192.168.161.210:3000/Transactions/servicerequests/${_id}`
+          `http://192.168.11.61:3000/Transactions/servicerequests/${_id}`
         )
         setFeed(posts.data)
       }
@@ -31,7 +31,7 @@ import {localhost} from "@env";
     const DeclineRequest = async(_id)=>{
       try{
         console.log("cancel",_id);  
-        await axios.delete(`http://192.168.161.210:3000/Transactions/deleterequest/${_id}`)
+        await axios.delete(`http://192.168.11.61:3000/Transactions/deleterequest/${_id}`)
       }
       catch(err){
         console.log(err)

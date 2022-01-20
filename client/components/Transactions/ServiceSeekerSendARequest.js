@@ -35,7 +35,7 @@ const  userData = storedCredentials.userData;
   const post = () => {
    
 
-    axios.post(`http://192.168.161.210:3000/Transactions/seekersendrequest`, {type,details,address,file,seekerId,providerId,selectedStartDate, selectedEndDate })
+    axios.post(`http://192.168.11.61:3000/Transactions/seekersendrequest`, {type,details,address,file,seekerId,providerId,selectedStartDate, selectedEndDate })
       .then(res => console.log(res)).catch(err => console.log(err))
     console.log('hello',details,address,Prescription)
   }
