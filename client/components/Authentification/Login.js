@@ -31,7 +31,6 @@ function Login() {
     const { isOpen, onOpen, onClose } = useDisclose();
     const { storedCredentials, setStoredCredentials } =
         React.useContext(CredentialsContext);
-    
 
     const persistLogin = (credentials) => {
         AsyncStorage.setItem("domicareCredentials", JSON.stringify(credentials))
@@ -59,7 +58,7 @@ function Login() {
     };
     const post = () => {
         axios
-            .post(`http://192.168.119.162:3000/auth/Login`, { formData })
+            .post(`http://192.168.11.61:3000/auth/Login`, { formData })
             .then((response) => {
                 let errors = {};
                 const data = response.data;
@@ -89,7 +88,7 @@ function Login() {
                 if (type == "success") {
                     const email = user.email;
                     axios
-                        .post(`http://192.168.119.162:3000/auth/GoogleLogin`, {
+                        .post(`http://192.168.11.61:3000/auth/GoogleLogin`, {
                             email,
                         })
                         .then((response) => {
