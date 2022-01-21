@@ -199,10 +199,7 @@ const ForumPost = (props) => {
                                                         <View key={key}>
                                                             <Text>
                                                                 {" "}
-                                                                {
-                                                                    reply.owner
-                                                                        .name
-                                                                }{" "}
+                                                                {reply.owner.name}{" "}
                                                             </Text>
                                                             <Text>
                                                                 {" "}
