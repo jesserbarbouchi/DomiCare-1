@@ -9,14 +9,14 @@ import Equipmentsfetch from "../components/Equipementsfetch.js";
 import Report from "../components/report.js";
 
 import CustomDrawer from "../navigators/CustomDrawer";
-import ServiceProvidersProfiles from "../components/Posts/ServiceProvidersProfiles.js"
-import ServiceSeekerAddPosts from "../components/Posts/ServiceSeekerAddPost.js"
-import ServiceSeekersPosts from "../components/Posts/ServiceSeekersPosts.js"
-import ServiceProvidersReceivedRequests from "../components/Transactions/ServiceProvidersReceivedRequests.js"
-import ServiceProvidersSendedOffers from "../components/Transactions/ServiceProvidersSendedOffers.js"
-import ServiceSeekerReceivedOffers from "../components/Transactions/ServiceSeekerReceivedOffers.js"
-import ServiceSeekerSendARequests from "../components/Transactions/ServiceSeekerSendARequest.js"
-import ServiceSeekerSendedRequests from "../components/Transactions/ServiceSeekerSendedRequests.js"
+import ServiceProvidersProfiles from "../components/Posts/ServiceProvidersProfiles.js";
+import ServiceSeekerAddPosts from "../components/Posts/ServiceSeekerAddPost.js";
+import ServiceSeekersPosts from "../components/Posts/ServiceSeekersPosts.js";
+import ServiceProvidersReceivedRequests from "../components/Transactions/ServiceProvidersReceivedRequests.js";
+import ServiceProvidersSendedOffers from "../components/Transactions/ServiceProvidersSendedOffers.js";
+import ServiceSeekerReceivedOffers from "../components/Transactions/ServiceSeekerReceivedOffers.js";
+import ServiceSeekerSendARequests from "../components/Transactions/ServiceSeekerSendARequest.js";
+import ServiceSeekerSendedRequests from "../components/Transactions/ServiceSeekerSendedRequests.js";
 import Forum2 from "../components/forum2.js";
 
 const Drawer = createDrawerNavigator();
@@ -68,10 +68,10 @@ const DrawerNav = () => {
             }}
             drawerContent={(props) => <CustomDrawer {...props} />}
         >
-            <Drawer.Screen name="Main" component={MainTabScreen} />
+            <Drawer.Screen name="HomeScreen" component={MainTabScreen} />
 
             <Drawer.Screen
-                name="Equipementsfetch"
+                name="Equipements"
                 component={Equipmentsfetch}
             />
 
@@ -80,13 +80,7 @@ const DrawerNav = () => {
                 component={ServiceProvidersProfiles}
             />
 
-<Drawer.Screen
-                name="Posts Feed"
-                component={ServiceSeekersPosts}
-            />
-
-
-       
+            <Drawer.Screen name="Posts Feed" component={ServiceSeekersPosts} />
 
             <Drawer.Screen
                 name="Report"

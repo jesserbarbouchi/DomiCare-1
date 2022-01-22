@@ -31,7 +31,7 @@ const ForumPost = (props) => {
 
     const handleChange = (event) => {
         console.log(event.target.value);
-         setValue(event.target.value);
+        setValue(event.target.value);
     };
     const navigation = useNavigation();
     const [singlepost, setpost] = useState({});
@@ -43,92 +43,93 @@ const ForumPost = (props) => {
         React.useContext(CredentialsContext);
     const userData = storedCredentials;
 
-    useEffect(async() => {
-        
-           try {const _id = props.route.params._id;
+    useEffect(async () => {
+        try {
+            const _id = props.route.params._id;
             const post = await axios.get(
-                `http://192.168.11.61:3000/savepost/findpost/${_id}`
+                `http://192.168.11.137:3000/savepost/findpost/${_id}`
             );
             const com = await axios.get(
-                `http://192.168.11.61:3000/savepost/findcomments/${_id}`
+                `http://192.168.11.137:3000/savepost/findcomments/${_id}`
             );
             console.log(com.data);
             setpost(post.data);
             setparticipants(post.data.participants);
-            setcomments(com.data);}
-      catch(err){
-        console.log(err);
-      }
-        
+            setcomments(com.data);
+        } catch (err) {
+            console.log(err);
+        }
     }, []);
     const Comment = async () => {
-       try {const _id = props.route.params._id;
+        try {
+            const _id = props.route.params._id;
 
-        const comment = await axios.post(
-            `http://192.168.11.61:3000/savepost/savepost`,
-            {
-                owner: { _id: userData._id, name: userData.firstName },
-                postId: singlepost._id,
-                content: value,
-                type: "comment",
-            }
-        );
-        const recom = await axios.get(
-            `http://192.168.11.61:3000/savepost/findcomments/${_id}`
-        );
+            const comment = await axios.post(
+                `http://192.168.11.137:3000/savepost/savepost`,
+                {
+                    owner: { _id: userData._id, name: userData.firstName },
+                    postId: singlepost._id,
+                    content: value,
+                    type: "comment",
+                }
+            );
+            const recom = await axios.get(
+                `http://192.168.11.137:3000/savepost/findcomments/${_id}`
+            );
 
-        setcomments(recom.data);}
-        catch(err){
-          console.log(err);
+            setcomments(recom.data);
+        } catch (err) {
+            console.log(err);
         }
     };
     const replyto = async () => {
-        try{const id = subcomment;
-        const reply = await axios.post(
-            `http://192.168.11.61:3000/savepost/reply`,
-            {
-                rep: {
-                    owner: { _id: userData._id, name: userData.firstName },
-                    commentid: id,
-                    content: value,
-                },
-            }
-        );
-        const _id = props.route.params._id;
-        const recomm = await axios.get(
-            `http://192.168.11.61:3000/savepost/findcomments/${_id}`
-        );
-        setcomments(recomm.data);}
-        catch(err){
-          console.log(err);
+        try {
+            const id = subcomment;
+            const reply = await axios.post(
+                `http://192.168.11.137:3000/savepost/reply`,
+                {
+                    rep: {
+                        owner: { _id: userData._id, name: userData.firstName },
+                        commentid: id,
+                        content: value,
+                    },
+                }
+            );
+            const _id = props.route.params._id;
+            const recomm = await axios.get(
+                `http://192.168.11.137:3000/savepost/findcomments/${_id}`
+            );
+            setcomments(recomm.data);
+        } catch (err) {
+            console.log(err);
         }
     };
 
     const Like = async () => {
-      console.log("first");
-      try { const userid = userData._id;
-        const postid = singlepost._id;
-        let action = "";
-        var index = singlepost.participants.indexOf(userid);
-        if (index == -1) {
-            action = "inc";
-
-        } else {
-            action = "déc";
-        }
-        const post = await axios.put(
-            `http://192.168.11.61:3000/savepost/savepost`,
-            {
-                userid,
-                postid,
-                action,
+        console.log("first");
+        try {
+            const userid = userData._id;
+            const postid = singlepost._id;
+            let action = "";
+            var index = singlepost.participants.indexOf(userid);
+            if (index == -1) {
+                action = "inc";
+            } else {
+                action = "déc";
             }
-        );
+            const post = await axios.put(
+                `http://192.168.11.137:3000/savepost/savepost`,
+                {
+                    userid,
+                    postid,
+                    action,
+                }
+            );
 
-        setpost(post.data);
-        setparticipants(post.data.participants);}
-        catch(err){
-          console.log(err);
+            setpost(post.data);
+            setparticipants(post.data.participants);
+        } catch (err) {
+            console.log(err);
         }
     };
 
@@ -157,9 +158,8 @@ const ForumPost = (props) => {
                     value={value}
                     variant="rounded"
                     placeholder="Round"
-                    onChange={(event)=>handleChange(event)}
+                    onChange={(event) => handleChange(event)}
                     w={{
-                       
                         md: "25%",
                     }}
                     InputRightElement={

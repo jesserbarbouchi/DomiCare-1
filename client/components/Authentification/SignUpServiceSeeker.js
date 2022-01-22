@@ -17,6 +17,7 @@ import {
     useDisclose,
     Modal,
     Divider,
+    Image
 } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CredentialsContext } from "./CredentialsContext.js";
@@ -144,7 +145,6 @@ function SignUp() {
                     setErrors(errors);
                 } else {
                     persistLogin({ userData: data });
-                    navigation.navigate("Home");
                 }
             })
             .catch((err) => {
@@ -175,8 +175,15 @@ function SignUp() {
                     <Modal.Body>you have successfully registered</Modal.Body>
                 </Modal.Content>
             </Modal>
-
-            <Box safeArea p="2" w="120%" maxW="300" py="8">
+            <Image source={require('../../assets/categories/logo_small.png')}  style={{
+                        width: 300,
+                        height: 60,
+                        position: "absolute",
+                        top: 80,
+                        left: 15,
+                    }} alt="logo"/>
+            <Box safeArea p="2" w="120%" maxW="300" py="8" marginTop={79}>
+           
                 <Heading
                     size="lg"
                     color="coolGray.800"
