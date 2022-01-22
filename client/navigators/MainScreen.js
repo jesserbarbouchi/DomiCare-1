@@ -8,14 +8,14 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import HomeScreen from "../components/Home.js";
 import NotificationsScreen from "../components/Notifications.js";
 import {
-  ProfileServiceSeeker,
-  ProfileServiceProvider,
-  ProfileEquipementsProvider,
+    ProfileServiceSeeker,
+    ProfileServiceProvider,
+    ProfileEquipementsProvider,
 } from "../components/Profile";
 import {
-  EditProfileSS,
-  EditProfileSP,
-  EditProfileEP,
+    EditProfileSS,
+    EditProfileSP,
+    EditProfileEP,
 } from "../components/EditProfiles";
 
 import Report from "../components/report.js";
@@ -31,7 +31,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 const HomeStack = createStackNavigator();
 const NotificationStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
+const QAStack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
+
 
 import ServiceProvidersProfiles from "../components/Posts/ServiceProvidersProfiles.js";
 import ServiceSeekerAddPost from "../components/Posts/ServiceSeekerAddPost.js";
@@ -43,397 +45,467 @@ import ServiceSeekerSendARequest from "../components/Transactions/ServiceSeekerS
 import ServiceSeekerSendedRequests from "../components/Transactions/ServiceSeekerSendedRequests.js";
 
 const MainTabScreen = () => {
-  return (
-    <Tab.Navigator barStyle={{ backgroundColor: "#14b8a6" }}>
-      <Tab.Screen
-        name="Home"
-        component={HomeStackScreen}
-        options={{
-          tabBarLabel: "Home",
-          tabBarIcon: ({ color }) => (
-            <Icon name="ios-home" color={color} size={26} />
-          ),
-        }}
-      />
+    return (
+        <Tab.Navigator barStyle={{ backgroundColor: "#008080" }}>
+            <Tab.Screen
+                name="Home Screen"
+                component={HomeStackScreen}
+                options={{
+                    tabBarLabel: "Home",
+                    tabBarIcon: ({ color }) => (
+                        <Icon name="ios-home" color={color} size={26} />
+                    ),
+                }}
+            />
 
-      <Tab.Screen
-        name="Profile"
-        component={ProfileStackScreen}
-        options={{
-          tabBarLabel: "Profile",
-          tabBarIcon: ({ color }) => (
-            <Icon name="ios-person" color={color} size={26} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Notifications"
-        component={NotificationStackScreen}
-        options={{
-          tabBarLabel: "Notifications",
-          tabBarIcon: ({ color }) => (
-            <Icon name="ios-notifications" color={color} size={26} />
-          ),
-        }}
-      />
-      {/* <Tab.Screen
-      name="Explore"
-      component={ExploreScreen}
+            <Tab.Screen
+                name="Profile Screen"
+                component={ProfileStackScreen}
+                options={{
+                    tabBarLabel: "Profile",
+                    tabBarIcon: ({ color }) => (
+                        <Icon name="ios-person" color={color} size={26} />
+                    ),
+                }}
+            />
+ 
+            <Tab.Screen
+      name="Q/A"
+      component={QAStackScreen}
       options={{
-        tabBarLabel: 'Explore',
-        tabBarColor: '#d02860',
+        tabBarLabel: 'Forum',
+        tabBarColor: '#008080',
         tabBarIcon: ({color}) => (
-          <Icon name="ios-aperture" color={color} size={26} />
+          <Icon name="chatbubbles" color={color} size={26} />
         ),
       }}
-    /> */}
-    </Tab.Navigator>
-  );
+    />
+               <Tab.Screen
+                name="Notifications Screen"
+                component={NotificationStackScreen}
+                options={{
+                    tabBarLabel: "Notifications",
+                    tabBarIcon: ({ color }) => (
+                        <Icon
+                            name="ios-notifications"
+                            color={color}
+                            size={26}
+                        />
+                    ),
+                }}
+            />
+        </Tab.Navigator>
+    );
 };
 
 export default MainTabScreen;
 
 const HomeStackScreen = ({ navigation }) => {
-  const { storedCredentials, setStoredCredentials } =
-    React.useContext(CredentialsContext);
-  const userData = storedCredentials.userData;
-  return (
-    <HomeStack.Navigator
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: "#14b8a6",
-          shadowColor: "#14b8a6",
-          elevation: 0,
-        },
-        headerTintColor: "white",
-        headerTitleStyle: {
-          fontWeight: "bold",
-        },
-      }}
-    >
-      <HomeStack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          title: "Home",
-          headerLeft: () => (
-            <View style={{ marginLeft: 10 }}>
-              <Icon.Button
-                name="ios-menu"
-                size={25}
-                color="white"
-                backgroundColor="#14b8a6"
-                onPress={() => navigation.openDrawer()}
-              />
-            </View>
-          ),
-          headerRight: () => (
-            <View style={{ flexDirection: "row", marginRight: 10 }}>
-              <Icon.Button
-                name="ios-search"
-                size={25}
-                color="white"
-                backgroundColor="#14b8a6"
-                onPress={() => {}}
-              />
-              <TouchableOpacity
-                style={{ paddingHorizontal: 10, marginTop: 5 }}
-                onPress={() => {
-                  navigation.navigate("Profile");
+    const { storedCredentials, setStoredCredentials } =
+        React.useContext(CredentialsContext);
+    const userData = storedCredentials.userData;
+    return (
+        <HomeStack.Navigator
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: "#008080",
+                    shadowColor: "#008080",
+                    elevation: 0,
+                },
+                headerTintColor: "white",
+                headerTitleStyle: {
+                    fontWeight: "bold",
+                },
+            }}
+        >
+        
+            <HomeStack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                    title: "Home",
+                    headerLeft: () => (
+                        <View style={{ marginLeft: 10 }}>
+                            <Icon.Button
+                                name="ios-menu"
+                                size={25}
+                                color="white"
+                                backgroundColor="#008080"
+                                onPress={() => navigation.openDrawer()}
+                            />
+                        </View>
+                    ),
+                    headerRight: () => (
+                        <View style={{ flexDirection: "row", marginRight: 10 }}>
+                            {/* <Icon.Button
+                                name="ios-search"
+                                size={25}
+                                color="white"
+                                backgroundColor="#008080"
+                                onPress={() => {}}
+                            /> */}
+                            <TouchableOpacity
+                                style={{ paddingHorizontal: 10, marginTop: 5 }}
+                                onPress={() => {
+                                    navigation.navigate("Profile Screen");
+                                }}
+                            >
+                                <Avatar.Image
+                                    source={{
+                                        uri: userData.picture,
+                                    }}
+                                    size={35}
+                                />
+                            </TouchableOpacity>
+                        </View>
+                    ),
                 }}
-              >
-                <Avatar.Image
-                  source={{
-                    uri: userData.picture,
-                  }}
-                  size={35}
-                />
-              </TouchableOpacity>
-            </View>
-          ),
-        }}
-      />
-      <HomeStack.Screen
-        name="Equipementsfetch"
-        component={Equipmentsfetch}
-        options={({ route }) => ({
-          title: route.params.title,
-          headerBackTitleVisible: false,
-        })}
-      />
-      <HomeStack.Screen
-        name="Forum2"
-        component={forum2}
-        options={({ route }) => ({
-          headerBackTitleVisible: false,
-          headerTitle: false,
-          headerTransparent: true,
-          headerTintColor: "#fff",
-        })}
-      />
-      <HomeStack.Screen
-        name="ForumPost"
-        component={ForumPost}
-        options={({ route }) => ({
-          headerBackTitleVisible: false,
-          headerTitle: false,
-          headerTransparent: true,
-          headerTintColor: "#fff",
-        })}
-      />
-      <HomeStack.Screen
-        name="AddBlog"
-        component={AddBlog}
-        options={({ route }) => ({
-          headerBackTitleVisible: false,
-          headerTitle: false,
-          headerTransparent: true,
-          headerTintColor: "#fff",
-        })}
-      />
+            />
+            <HomeStack.Screen
+                name="Equipementsfetch"
+                component={Equipmentsfetch}
+                options={({ route }) => ({
+                    title: route.params.title,
+                    headerBackTitleVisible: false,
+                })}
+            />
 
-      <HomeStack.Screen
-        name="Report"
-        component={Report}
-        options={({ route }) => ({
-          headerBackTitleVisible: false,
-          headerTitle: false,
-          headerTransparent: true,
-          headerTintColor: "#fff",
-        })}
-      />
+            <HomeStack.Screen
+                name="forum2"
+                component={forum2}
+                options={({ route }) => ({
+                    headerBackTitleVisible: false,
+                    headerTitle: false,
+                    headerTransparent: true,
+                    headerTintColor: "#fff",
+                })}
+            />
+            <HomeStack.Screen
+                name="ForumPost"
+                component={ForumPost}
+                options={({ route }) => ({
+                    headerBackTitleVisible: false,
+                    headerTitle: false,
+                    headerTransparent: true,
+                    headerTintColor: "#fff",
+                })}
+            />
+            <HomeStack.Screen
+                name="AddBlog"
+                component={AddBlog}
+                options={({ route }) => ({
+                    headerBackTitleVisible: false,
+                    headerTitle: false,
+                    headerTransparent: true,
+                    headerTintColor: "#fff",
+                })}
+            />
 
-      <HomeStack.Screen
-        name="ServiceProvidersProfiles"
-        component={ServiceProvidersProfiles}
-      />
-      <HomeStack.Screen
-        name="ServiceSeekerAddPost"
-        component={ServiceSeekerAddPost}
-      />
+            <HomeStack.Screen
+                name="Report"
+                component={Report}
+                options={({ route }) => ({
+                    headerBackTitleVisible: false,
+                    headerTitle: false,
+                    headerTransparent: true,
+                    headerTintColor: "#fff",
+                })}
+            />
 
-      <HomeStack.Screen
-        name="ServiceSeekersPosts"
-        component={ServiceSeekersPosts}
-      />
-      <HomeStack.Screen
-        name="ServiceProvidersReceivedRequests"
-        component={ReceivedRequests}
-      />
-      <HomeStack.Screen
-        name="ServiceProvidersSendedOffers"
-        component={ServiceProvidersSendedOffers}
-      />
-      <HomeStack.Screen
-        name="ServiceSeekerReceivedOffers"
-        component={ServiceSeekerReceivedOffers}
-      />
-      <HomeStack.Screen
-        name="ServiceSeekerSendARequest"
-        component={ServiceSeekerSendARequest}
-      />
-      <HomeStack.Screen
-        name="ServiceSeekerSendedRequests"
-        component={ServiceSeekerSendedRequests}
-      />
-    </HomeStack.Navigator>
-  );
+            <HomeStack.Screen
+                name="ServiceProvidersProfiles"
+                component={ServiceProvidersProfiles}
+            />
+            <HomeStack.Screen
+                name="ServiceSeekerAddPost"
+                component={ServiceSeekerAddPost}
+            />
+
+            <HomeStack.Screen
+                name="ServiceSeekersPosts"
+                component={ServiceSeekersPosts}
+            />
+            <HomeStack.Screen
+                name="ServiceProvidersReceivedRequests"
+                component={ReceivedRequests}
+            />
+            <HomeStack.Screen
+                name="ServiceProvidersSendedOffers"
+                component={ServiceProvidersSendedOffers}
+            />
+            <HomeStack.Screen
+                name="ServiceSeekerReceivedOffers"
+                component={ServiceSeekerReceivedOffers}
+            />
+            <HomeStack.Screen
+                name="ServiceSeekerSendARequest"
+                component={ServiceSeekerSendARequest}
+            />
+            <HomeStack.Screen
+                name="ServiceSeekerSendedRequests"
+                component={ServiceSeekerSendedRequests}
+            />
+        </HomeStack.Navigator>
+    );
 };
 
 const NotificationStackScreen = ({ navigation }) => (
-  <NotificationStack.Navigator
-    screenOptions={{
-      headerStyle: {
-        backgroundColor: "#14b8a6",
-      },
-      headerTintColor: "#fff",
-      headerTitleStyle: {
-        fontWeight: "bold",
-      },
-    }}
-  >
-    <NotificationStack.Screen
-      name="Notifications"
-      component={NotificationsScreen}
-      options={{
-        headerLeft: () => (
-          <Icon.Button
-            name="ios-menu"
-            size={25}
-            backgroundColor="#14b8a6"
-            onPress={() => navigation.openDrawer()}
-          />
-        ),
-      }}
-    />
-  </NotificationStack.Navigator>
+    <NotificationStack.Navigator
+        screenOptions={{
+            headerStyle: {
+                backgroundColor: "#008080",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+                fontWeight: "bold",
+            },
+        }}
+    >
+        <NotificationStack.Screen
+            name="Notifications"
+            component={NotificationsScreen}
+            options={{
+                headerLeft: () => (
+                    <Icon.Button
+                        name="ios-menu"
+                        size={25}
+                        backgroundColor="#008080"
+                        onPress={() => navigation.openDrawer()}
+                    />
+                ),
+            }}
+        />
+    </NotificationStack.Navigator>
 );
 
 const ProfileStackScreen = ({ navigation }) => {
-  const { storedCredentials, setStoredCredentials } =
-    React.useContext(CredentialsContext);
-  const userType = storedCredentials.userData.type;
-  return (
-    <ProfileStack.Navigator
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: "#14b8a6",
-          shadowColor: "#14b8a6", // iOS
-          elevation: 0, // Android
-        },
-        headerTintColor: "#14b8a6",
-      }}
-    >
-      {userType === "serviceSeeker" ? (
-        <ProfileStack.Screen
-          name="Profile"
-          component={ProfileServiceSeeker}
-          options={{
-            title: "Profile",
-            headerLeft: () => (
-              <View style={{ marginLeft: 10 }}>
-                <Icon.Button
-                  name="ios-menu"
-                  size={30}
-                  backgroundColor="#14b8a6"
-                  color="white"
-                  onPress={() => navigation.openDrawer()}
+    const { storedCredentials, setStoredCredentials } =
+        React.useContext(CredentialsContext);
+    const userType = storedCredentials.userData.type;
+    return (
+        <ProfileStack.Navigator
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: "#008080",
+                    shadowColor: "#008080", // iOS
+                    elevation: 0, // Android
+                },
+                headerTintColor: "#008080",
+            }}
+        >
+            {userType === "serviceSeeker" ? (
+                <ProfileStack.Screen
+                    name="Profile"
+                    component={ProfileServiceSeeker}
+                    options={{
+                        title: "Profile",
+                        headerLeft: () => (
+                            <View style={{ marginLeft: 10 }}>
+                                <Icon.Button
+                                    name="ios-menu"
+                                    size={30}
+                                    backgroundColor="#008080"
+                                    color="white"
+                                    onPress={() => navigation.openDrawer()}
+                                />
+                            </View>
+                        ),
+                        headerRight: () => (
+                            <View style={{ marginRight: 10 }}>
+                                <MaterialCommunityIcons.Button
+                                    name="account-edit"
+                                    size={30}
+                                    backgroundColor="#008080"
+                                    color="white"
+                                    onPress={() =>
+                                        navigation.navigate("EditProfile")
+                                    }
+                                />
+                            </View>
+                        ),
+                    }}
                 />
-              </View>
-            ),
-            headerRight: () => (
-              <View style={{ marginRight: 10 }}>
-                <MaterialCommunityIcons.Button
-                  name="account-edit"
-                  size={30}
-                  backgroundColor="#14b8a6"
-                  color="white"
-                  onPress={() => navigation.navigate("EditProfile")}
+            ) : userType === "serviceProvider" ? (
+                <ProfileStack.Screen
+                    name="Profile"
+                    component={ProfileServiceProvider}
+                    options={{
+                        title: "Profile",
+                        headerLeft: () => (
+                            <View style={{ marginLeft: 10 }}>
+                                <Icon.Button
+                                    name="ios-menu"
+                                    size={30}
+                                    backgroundColor="#008080"
+                                    color="white"
+                                    onPress={() => navigation.openDrawer()}
+                                />
+                            </View>
+                        ),
+                        headerRight: () => (
+                            <View style={{ marginRight: 10 }}>
+                                <MaterialCommunityIcons.Button
+                                    name="account-edit"
+                                    size={30}
+                                    backgroundColor="#008080"
+                                    color="white"
+                                    onPress={() =>
+                                        navigation.navigate("EditProfile")
+                                    }
+                                />
+                            </View>
+                        ),
+                    }}
                 />
-              </View>
-            ),
-          }}
-        />
-      ) : userType === "serviceProvider" ? (
-        <ProfileStack.Screen
-          name="Profile"
-          component={ProfileServiceProvider}
-          options={{
-            title: "Profile",
-            headerLeft: () => (
-              <View style={{ marginLeft: 10 }}>
-                <Icon.Button
-                  name="ios-menu"
-                  size={30}
-                  backgroundColor="#14b8a6"
-                  color="white"
-                  onPress={() => navigation.openDrawer()}
+            ) : (
+                <ProfileStack.Screen
+                    name="Profile"
+                    component={ProfileEquipementsProvider}
+                    options={{
+                        title: "",
+                        headerLeft: () => (
+                            <View style={{ marginLeft: 10 }}>
+                                <Icon.Button
+                                    name="ios-menu"
+                                    size={30}
+                                    backgroundColor="#008080"
+                                    color="white"
+                                    onPress={() => navigation.openDrawer()}
+                                />
+                            </View>
+                        ),
+                        headerRight: () => (
+                            <View style={{ marginRight: 10 }}>
+                                <MaterialCommunityIcons.Button
+                                    name="account-edit"
+                                    size={30}
+                                    backgroundColor="#008080"
+                                    color="white"
+                                    onPress={() =>
+                                        navigation.navigate("EditProfile")
+                                    }
+                                />
+                            </View>
+                        ),
+                    }}
                 />
-              </View>
-            ),
-            headerRight: () => (
-              <View style={{ marginRight: 10 }}>
-                <MaterialCommunityIcons.Button
-                  name="account-edit"
-                  size={30}
-                  backgroundColor="#14b8a6"
-                  color="white"
-                  onPress={() => navigation.navigate("EditProfile")}
-                />
-              </View>
-            ),
-          }}
-        />
-      ) : (
-        <ProfileStack.Screen
-          name="Profile"
-          component={ProfileEquipementsProvider}
-          options={{
-            title: "",
-            headerLeft: () => (
-              <View style={{ marginLeft: 10 }}>
-                <Icon.Button
-                  name="ios-menu"
-                  size={30}
-                  backgroundColor="#14b8a6"
-                  color="white"
-                  onPress={() => navigation.openDrawer()}
-                />
-              </View>
-            ),
-            headerRight: () => (
-              <View style={{ marginRight: 10 }}>
-                <MaterialCommunityIcons.Button
-                  name="account-edit"
-                  size={30}
-                  backgroundColor="#14b8a6"
-                  color="white"
-                  onPress={() => navigation.navigate("EditProfile")}
-                />
-              </View>
-            ),
-          }}
-        />
-      )}
+            )}
 
-      {userType === "serviceSeeker" ? (
-        <ProfileStack.Screen
-          name="EditProfile"
-          options={{
-            title: "Edit Profile",
-            headerLeft: () => (
-              <View style={{ marginLeft: 10 }}>
-                <Icon.Button
-                  name="ios-menu"
-                  size={30}
-                  backgroundColor="#14b8a6"
-                  color="white"
-                  onPress={() => navigation.openDrawer()}
+            {userType === "serviceSeeker" ? (
+                <ProfileStack.Screen
+                    name="EditProfile"
+                    options={{
+                        title: "Edit Profile",
+                        headerLeft: () => (
+                            <View style={{ marginLeft: 10 }}>
+                                <Icon.Button
+                                    name="ios-menu"
+                                    size={30}
+                                    backgroundColor="#008080"
+                                    color="white"
+                                    onPress={() => navigation.openDrawer()}
+                                />
+                            </View>
+                        ),
+                    }}
+                    component={EditProfileSS}
                 />
-              </View>
-            ),
-          }}
-          component={EditProfileSS}
-        />
-      ) : userType === "serviceProvider" ? (
-        <ProfileStack.Screen
-          name="EditProfile"
-          options={{
-            title: "Edit Profile",
-            headerLeft: () => (
-              <View style={{ marginLeft: 10 }}>
-                <Icon.Button
-                  name="ios-menu"
-                  size={30}
-                  backgroundColor="#14b8a6"
-                  color="white"
-                  onPress={() => navigation.openDrawer()}
+            ) : userType === "serviceProvider" ? (
+                <ProfileStack.Screen
+                    name="EditProfile"
+                    options={{
+                        title: "Edit Profile",
+                        headerLeft: () => (
+                            <View style={{ marginLeft: 10 }}>
+                                <Icon.Button
+                                    name="ios-menu"
+                                    size={30}
+                                    backgroundColor="#008080"
+                                    color="white"
+                                    onPress={() => navigation.openDrawer()}
+                                />
+                            </View>
+                        ),
+                    }}
+                    component={EditProfileSP}
                 />
-              </View>
-            ),
-          }}
-          component={EditProfileSP}
-        />
-      ) : (
-        <ProfileStack.Screen
-          name="EditProfile"
-          options={{
-            title: "Edit Profile",
-            headerLeft: () => (
-              <View style={{ marginLeft: 10 }}>
-                <Icon.Button
-                  name="ios-menu"
-                  size={30}
-                  backgroundColor="#14b8a6"
-                  color="white"
-                  onPress={() => navigation.openDrawer()}
+            ) : (
+                <ProfileStack.Screen
+                    name="EditProfile"
+                    options={{
+                        title: "Edit Profile",
+                        headerLeft: () => (
+                            <View style={{ marginLeft: 10 }}>
+                                <Icon.Button
+                                    name="ios-menu"
+                                    size={30}
+                                    backgroundColor="#008080"
+                                    color="white"
+                                    onPress={() => navigation.openDrawer()}
+                                />
+                            </View>
+                        ),
+                    }}
+                    component={EditProfileEP}
                 />
-              </View>
-            ),
-          }}
-          component={EditProfileEP}
-        />
-      )}
-    </ProfileStack.Navigator>
-  );
+            )}
+        </ProfileStack.Navigator>
+    );
 };
+const QAStackScreen = ({ navigation }) => (
+    <QAStack.Navigator
+        screenOptions={{
+            headerStyle: {
+                backgroundColor: "#008080",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+                fontWeight: "bold",
+            },
+        }}
+    >
+
+         <QAStack.Screen
+                name="Forum2"
+                component={Forum2}
+                options={{
+                    headerLeft: () => (
+                        <Icon.Button
+                            name="ios-menu"
+                            size={25}
+                            backgroundColor="#008080"
+                            onPress={() => navigation.openDrawer()}
+                        />
+                    ),
+                }}
+            />
+            <QAStack.Screen
+                name="ForumPost"
+                component={ForumPost}
+                options={{
+                    headerLeft: () => (
+                        <Icon.Button
+                            name="ios-menu"
+                            size={25}
+                            backgroundColor="#008080"
+                            onPress={() => navigation.openDrawer()}
+                        />
+                    ),
+                }}
+            />
+            <QAStack.Screen
+                name="AddBlog"
+                component={AddBlog}
+                options={{
+                    headerLeft: () => (
+                        <Icon.Button
+                            name="ios-menu"
+                            size={25}
+                            backgroundColor="#008080"
+                            onPress={() => navigation.openDrawer()}
+                        />
+                    ),
+                }}
+            />
+    </QAStack.Navigator>
+);

@@ -20,6 +20,10 @@ import ServiceSeekerSendedRequests from "../components/Transactions/ServiceSeeke
 import forum2 from "../components/forum2.js";
 import MyEquipements from "../components/MyEquipements.js";
 import EditEquipement from "../components/EditEquipement.js";
+import AServiceSeekerPosts from "../components/Posts/AServiceSeekerPosts.js";
+import Push from "../components/PushNotification.js"
+
+
 
 const Drawer = createDrawerNavigator();
 const DrawerNav = () => {
@@ -35,74 +39,198 @@ const DrawerNav = () => {
           code: (code) => code.replace(/^@/, ""),
           email: (email) => email.replace(/^@/, ""),
         },
-        stringify: {
-          code: (code) => `@{code}`,
-          email: (email) => `@{email}`,
-        },
-      },
-      VerificationCode: {
-        path: "VerificationCode/:code/:email",
-        parse: {
-          email: (email) => "",
-          code: (code) => "",
-        },
-        stringify: {
-          code: (code) => "",
-          email: (email) => "",
-        },
-      },
-    },
-  };
+    }
+  }
+}
+ 
+    return (
+        
+            (userType === 'serviceSeeker') ? (
+                <SS.Navigator
+                screenOptions={{
+                    headerShown: false,
+                    drawerActiveBackgroundColor: "#14b8a6",
+                    drawerActiveTintColor: "#fff",
+                    drawerInactiveTintColor: "#333",
+                    drawerLabelStyle: {
+                        marginLeft: 0,
+                        fontSize: 15,
+                    },
+                }}
+                drawerContent={(props) => <CustomDrawer {...props} />}
+            >
 
-  return (
-    <Drawer.Navigator
-      screenOptions={{
-        headerShown: false,
-        drawerActiveBackgroundColor: "#14b8a6",
-        drawerActiveTintColor: "#fff",
-        drawerInactiveTintColor: "#333",
+<Drawer.Screen  name="Main" component={MainTabScreen} />
+<Drawer.Screen
+                name="Push"
+                component={Push}
+            />
+            <Drawer.Screen
+                name="Equipements"
+                component={Equipmentsfetch}
+            />
+            <Drawer.Screen
+                name="Home Care Agents"
+                component={ServiceProvidersProfiles}
+            />
+            <Drawer.Screen
+                name="Posts Feed"
+                component={ServiceSeekersPosts}
+            />
+            <Drawer.Screen
+                name="Report"
+                component={Report}
+                options={{
+                    drawerLabel: () => null,
+                    title: null,
+                    drawerItemStyle: { height: 0 },
+                    drawerIcon: () => null,
+                }}
+            />
+            <Drawer.Screen
+                name="Forum"
+                component={Forum2}
+                // options={{
+                //     drawerLabel: () => null,
+                //     title: null,
+                //     drawerItemStyle: { height: 0 },
+                //     drawerIcon: () => null,
+                // }}
+            />
+            <Drawer.Screen
+                name="My Requests"
+                component={ServiceSeekerSendedRequests}
+            />
+            <Drawer.Screen
+                name="Recieved Offers"
+                component={ServiceSeekerReceivedOffers}
+            />
+            <Drawer.Screen
+                name="My Posts"
+                component={AServiceSeekerPosts}
+            />
+            </SS.Navigator> 
+               
+            
+            ):(userType==='serviceProvider')?(
 
-        drawerLabelStyle: {
-          marginLeft: 0,
-          fontSize: 15,
-        },
-      }}
-      drawerContent={(props) => <CustomDrawer {...props} />}
-    >
-      <Drawer.Screen name="Main" component={MainTabScreen} />
+                <SP.Navigator
+                screenOptions={{
+                    headerShown: false,
+                    drawerActiveBackgroundColor: "#14b8a6",
+                    drawerActiveTintColor: "#fff",
+                    drawerInactiveTintColor: "#333",
+                    drawerLabelStyle: {
+                        marginLeft: 0,
+                        fontSize: 15,
+                    },
+                }}
+                drawerContent={(props) => <CustomDrawer {...props} />}
+            >
 
-      <Drawer.Screen name="Equipements Feed" component={Equipmentsfetch} />
-      <Drawer.Screen name="My Equipements" component={MyEquipements} />
-      <Drawer.Screen name="Edit Equipement" component={EditEquipement} />
-      <Drawer.Screen
-        name="Home Care Agents"
-        component={ServiceProvidersProfiles}
-      />
+<SP.Screen  name="Main" component={MainTabScreen} />
+            <SP.Screen
+                name="Equipementsfetch"
+                component={Equipmentsfetch}
+            />
+            <SP.Screen
+                name="Home Care Agents"
+                component={ServiceProvidersProfiles}
+            />
+            <SP.Screen
+                name="Posts Feed"
+                component={ServiceSeekersPosts}
+            />
+            <SP.Screen
+                name="Report"
+                component={Report}
+                options={{
+                    drawerLabel: () => null,
+                    title: null,
+                    drawerItemStyle: { height: 0 },
+                    drawerIcon: () => null,
+                }}
+            />
+            <SP.Screen
+                name="forum"
+                component={orum2}
+                // options={{
+                //     drawerLabel: () => null,
+                //     title: null,
+                //     drawerItemStyle: { height: 0 },
+                //     drawerIcon: () => null,
+                // }}
+            />
+            <SP.Screen
+                name="Received Requests"
+                component={ServiceProvidersReceivedRequests}
+            />
+            <SP.Screen
+                name="Sended Offers"
+                component={ServiceProvidersSendedOffers}
+            />
+            </SP.Navigator> 
 
-      <Drawer.Screen name="Posts Feed" component={ServiceSeekersPosts} />
+            ):(userType==='equipementProvider')?(
+                <EP.Navigator
+                screenOptions={{
+                    headerShown: false,
+                    drawerActiveBackgroundColor: "#14b8a6",
+                    drawerActiveTintColor: "#fff",
+                    drawerInactiveTintColor: "#333",
+                    drawerLabelStyle: {
+                        marginLeft: 0,
+                        fontSize: 15,
+                    },
+                }}
+                drawerContent={(props) => <CustomDrawer {...props} />}
+            >
 
-      <Drawer.Screen
-        name="Report"
-        component={Report}
-        options={{
-          drawerLabel: () => null,
-          title: null,
-          drawerItemStyle: { height: 0 },
-          drawerIcon: () => null,
-        }}
-      />
-      <Drawer.Screen
-        name="Forum"
-        component={forum2}
-        // options={{
-        //     drawerLabel: () => null,
-        //     title: null,
-        //     drawerItemStyle: { height: 0 },
-        //     drawerIcon: () => null,
-        // }}
-      />
-    </Drawer.Navigator>
-  );
+<EP.Screen  name="Main" component={MainTabScreen} />
+            <EP.Screen
+                name="Equipementsfetch"
+                component={Equipmentsfetch}
+            />
+            <EP.Screen
+                name="Home Care Agents"
+                component={ServiceProvidersProfiles}
+            />
+            <EP.Screen
+                name="Posts Feed"
+                component={ServiceSeekersPosts}
+            />
+            <EP.Screen
+                name="Report"
+                component={Report}
+                options={{
+                    drawerLabel: () => null,
+                    title: null,
+                    drawerItemStyle: { height: 0 },
+                    drawerIcon: () => null,
+                }}
+            />
+            <EP.Screen
+                name="Forum"
+                component={Forum2}
+                // options={{
+                //     drawerLabel: () => null,
+                //     title: null,
+                //     drawerItemStyle: { height: 0 },
+                //     drawerIcon: () => null,
+                // }}
+            />
+            <EP.Screen
+                name="My Equipements"
+                component={Equipmentsfetch}
+            />
+           
+            </EP.Navigator> 
+            ):(null)
+         
+    
+    
+    )
+
 };
 export default DrawerNav;
 

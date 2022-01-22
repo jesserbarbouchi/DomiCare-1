@@ -9,17 +9,17 @@ import {
     Button,
 } from "react-native";
 import {
-  IconButton,
-  Icon,
-  Box,
-  Heading,
-  AspectRatio,
-  Image,
-  Text,
-  Center,
-  HStack,
-  Stack,
-  NativeBaseProvider,
+    IconButton,
+    Icon,
+    Box,
+    Heading,
+    AspectRatio,
+    Image,
+    Text,
+    Center,
+    HStack,
+    Stack,
+    NativeBaseProvider,
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 export const Forum2 = (props) => {

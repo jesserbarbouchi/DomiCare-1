@@ -26,20 +26,26 @@ export default () => {
   const post = () => {
     console.log(reprtText);
     Swal.fire({
-        title: "report send with succes",
-        showConfirmButton: false,
-        timer: 1800,
-        icon: 'success',
-        showClass: {
-          popup: "animate__animated animate__fadeInDown",
-        },
-        hideClass: {
-          popup: "animate__animated animate__fadeOutUp",
-        },
-      });
-      var reqS={reason:reprtText,reportedId:'61dd711fdcb65ed8ac17ba1d',reporterId:userData.userData._id}
-      userData.userData.type=== undefined ? reqS['onModel']='ServiceSeeker' : reqS['onModel']='ServiceProvider' ;
-    Axios.post("http://192.168.11.61:3000/reports", reqS)
+      title: "report send with succes",
+      showConfirmButton: false,
+      timer: 1800,
+      icon: "success",
+      showClass: {
+        popup: "animate__animated animate__fadeInDown",
+      },
+      hideClass: {
+        popup: "animate__animated animate__fadeOutUp",
+      },
+    });
+    var reqS = {
+      reason: reprtText,
+      reportedId: "61dd711fdcb65ed8ac17ba1d",
+      reporterId: userData.userData._id,
+    };
+    userData.userData.type === undefined
+      ? (reqS["onModel"] = "ServiceSeeker")
+      : (reqS["onModel"] = "ServiceProvider");
+    Axios.post("http://192.168.11.203:3000/reports", reqS)
       .then(() => {
         console.log(userData);
         setTimeout(() => {

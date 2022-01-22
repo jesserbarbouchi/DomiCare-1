@@ -207,7 +207,6 @@ function SignUp() {
                     setErrors(errors);
                 } else {
                     persistLogin({ userData: data });
-                    navigation.navigate("Home");
                 }
             })
             .catch((err) => {

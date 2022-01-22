@@ -6,7 +6,6 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CredentialsContext } from "./Authentification/CredentialsContext.js";
 
-
 const AddBlog = (props) => {
   const { storedCredentials, setStoredCredentials } =
     React.useContext(CredentialsContext);
@@ -32,7 +31,11 @@ const AddBlog = (props) => {
         placeholder="Text Area Placeholder"
         w={400}
         onChange={(e) =>
-          setpost({ owner: userData, content: e.target.value, type: "post" })
+          setpost({
+            owner: userData,
+            content: e.target.value,
+            type: "post",
+          })
         }
       />
       <Button title="Post" onPress={() => SavePost(post)} />

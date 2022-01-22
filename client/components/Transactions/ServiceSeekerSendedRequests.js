@@ -35,35 +35,41 @@ const SendedRequests = () => {
     } catch (err) {
       console.log(err);
     }
-    return (
-        <NativeBaseProvider>
-            <ScrollView>
-      {feed.map((e,key)=>{
-        console.log("req",e);
-        return(
-      <View style={styles.container} key={key}>
-        <Card style={{padding: 10, margin: 10}}>
-        
-        <Avatar
-          bg="green.500"
-          size="md"
-          source={{
-            uri: e.providerId.picture,
-          }}
-        >
-            </Avatar>
-            <Text> Request sent to: {e.providerId.firstName} {e.providerId.lastName}</Text>
-          <Text>Speciality</Text>
-          <Text>Sent At:{e.createdAt}</Text>
-          <Button
-            onPress={()=>{CancelRequest(e._id)}}
-            title="Cancel the request"
-            color="teal"
-            accessibilityLabel="Learn more about this purple button"
-          />
-
-        </Card>
-      </View>)})}
+  };
+  return (
+    <NativeBaseProvider>
+      <ScrollView>
+        {feed.map((e, key) => {
+          console.log("req", e);
+          return (
+            <View style={styles.container} key={key}>
+              <Card style={{ padding: 10, margin: 10 }}>
+                <Avatar
+                  bg="green.500"
+                  size="md"
+                  source={{
+                    uri: e.providerId.picture,
+                  }}
+                ></Avatar>
+                <Text>
+                  {" "}
+                  Request sent to: {e.providerId.firstName}{" "}
+                  {e.providerId.lastName}
+                </Text>
+                <Text>Speciality</Text>
+                <Text>Sent At:{e.createdAt}</Text>
+                <Button
+                  onPress={() => {
+                    CancelRequest(e._id);
+                  }}
+                  title="Cancel the request"
+                  color="teal"
+                  accessibilityLabel="Learn more about this purple button"
+                />
+              </Card>
+            </View>
+          );
+        })}
       </ScrollView>
     </NativeBaseProvider>
   );
@@ -76,5 +82,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-}
-export default SendedRequests
+export default SendedRequests;
