@@ -68,22 +68,22 @@ function ResetPassword() {
     return validation;
   };
 
-  const post = () => {
-    const pass = formData.password;
-    axios
-      .post(`http://192.168.11.203:3000/auth/ResetPassword`, {
-        pass,
-        email,
-      })
-      .then((response) => {
-        const data = response.data;
-        persistLogin({ userData: data });
-        navigation.navigate("Home");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+    const post = () => {
+        const pass = formData.password;
+        axios
+            .post(`http://192.168.11.203:3000/auth/ResetPassword`, {
+                pass,
+                email,
+            })
+            .then((response) => {
+                const data = response.data;
+                persistLogin({ userData: data });
+                navigation.navigate("Home");
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
   const onSubmit = () => {
     validate() ? post() : console.log("Validation Failed");

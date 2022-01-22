@@ -588,7 +588,7 @@ const styles = StyleSheet.create({
     height: 460,
     borderRadius: radius,
     alignContent: "center",
-    alignSelf: "center",
+    alignSelf:"center",
   },
   titleStyle: {
     fontSize: 17,

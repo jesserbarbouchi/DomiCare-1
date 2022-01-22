@@ -23,7 +23,7 @@ import ForumPost from "../components/ForumPost.js";
 import AddBlog from "../components/AddBlog.js";
 import forum2 from "../components/forum2.js";
 import Equipmentsfetch from "../components/Equipementsfetch.js";
-
+// import MyEquipements from "../components/MyEquipements.js"
 import { CredentialsContext } from "../components/Authentification/CredentialsContext.js";
 import { Avatar } from "react-native-paper";
 import { View } from "react-native-animatable";

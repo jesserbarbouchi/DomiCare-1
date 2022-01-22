@@ -20,20 +20,20 @@ export const ProfileServiceSeeker = () => {
   const userData = storedCredentials.userData;
   const [formData, setData] = React.useState({});
 
-  React.useEffect(() => {
-    axios
-      .get(
-        `http://192.168.11.203:3000/Users/ServiceSeeker/Fetch/${userData._id}`
-      )
-      .then((res) => {
-        const data = res.data;
-        console.log("test", data);
-        setData(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+    React.useEffect(() => {
+        axios
+            .get(
+                `http://192.168.11.61:3000/Users/ServiceSeeker/Fetch/${userData._id}`
+            )
+            .then((res) => {
+                const data = res.data;
+                console.log("test", data);
+                setData(data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
   return (
     <ScrollView
@@ -139,21 +139,21 @@ export const ProfileServiceProvider = () => {
   const userData = storedCredentials.userData;
   const [formData, setData] = React.useState({});
 
-  React.useEffect(() => {
-    axios
-      .get(
-        `http://192.168.11.203:3000/Users/ServiceProvider/Fetch/${userData._id}`
-      )
-      .then((res) => {
-        const data = res.data;
-        console.log("res.data", res.data);
-        setData(data);
-        console.log("test", formData);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+    React.useEffect(() => {
+        axios
+            .get(
+                `http://192.168.11.61:3000/Users/ServiceProvider/Fetch/${userData._id}`
+            )
+            .then((res) => {
+                const data = res.data;
+                console.log("res.data", res.data);
+                setData(data);
+                console.log("test", formData);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
   return (
     <ScrollView
@@ -261,10 +261,26 @@ export const ProfileServiceProvider = () => {
   );
 };
 export const ProfileEquipementsProvider = () => {
-  const { storedCredentials, setStoredCredentials } =
-    React.useContext(CredentialsContext);
-  const userData = storedCredentials.userData;
-  const [formData, setData] = React.useState({});
+    const { storedCredentials, setStoredCredentials } =
+        React.useContext(CredentialsContext);
+    const userData = storedCredentials.userData;
+    const [formData, setData] = React.useState({});
+
+    React.useEffect(() => {
+        axios
+            .get(
+                `http://192.168.11.61:3000/Users/ServiceProvider/Fetch/${userData._id}`
+            )
+            .then((res) => {
+                const data = res.data;
+                console.log("res.data", res.data);
+                setData(data);
+                console.log("test", formData);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
   React.useEffect(() => {
     axios
@@ -432,37 +448,37 @@ const styles = StyleSheet.create({
     lineHeight: 26,
   },
 
-  header: {
-    backgroundColor: "#14b8a6",
-    height: 130,
-  },
-  avatar: {
-    width: 180,
-    height: 180,
-    borderRadius: 113,
-    borderWidth: 4,
-    borderColor: "white",
-    marginBottom: 10,
-    alignSelf: "center",
-    position: "absolute",
-    marginTop: 30,
-  },
-  // name: {
-  //     fontSize: 22,
-  //     color: "#FFFFFF",
-  //     fontWeight: "600",
-  // },
-  body: {
-    marginTop: 40,
-  },
-  bodyContent: {
-    flex: 1,
-    alignItems: "center",
-    padding: 30,
-  },
-  name: {
-    fontSize: 28,
-    color: "#696969",
-    fontWeight: "600",
-  },
+    header: {
+        backgroundColor: "#008080",
+        height: 130,
+    },
+    avatar: {
+        width: 180,
+        height: 180,
+        borderRadius: 113,
+        borderWidth: 4,
+        borderColor: "white",
+        marginBottom: 10,
+        alignSelf: "center",
+        position: "absolute",
+        marginTop: 30,
+    },
+    // name: {
+    //     fontSize: 22,
+    //     color: "#FFFFFF",
+    //     fontWeight: "600",
+    // },
+    body: {
+        marginTop: 40,
+    },
+    bodyContent: {
+        flex: 1,
+        alignItems: "center",
+        padding: 30,
+    },
+    name: {
+        fontSize: 28,
+        color: "#696969",
+        fontWeight: "600",
+    },
 });

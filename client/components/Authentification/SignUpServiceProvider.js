@@ -193,27 +193,27 @@ function SignUp() {
       });
   };
 
-  const post = () => {
-    axios
-      .post(`http://192.168.11.203:3000/auth/SPSignUp`, { formData })
-      .then((response) => {
-        let errors = {};
-        const data = response.data;
-        if (response.data === "email address already exists") {
-          errors["email"] = "email address already exists";
-          setErrors(errors);
-        } else if (response.data === "Username already exists") {
-          errors["userName"] = "Username already exists";
-          setErrors(errors);
-        } else {
-          persistLogin({ userData: data });
-          navigation.navigate("Home");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+    const post = () => {
+        axios
+            .post(`http://192.168.11.203:3000/auth/SPSignUp`, { formData })
+            .then((response) => {
+                let errors = {};
+                const data = response.data;
+                if (response.data === "email address already exists") {
+                    errors["email"] = "email address already exists";
+                    setErrors(errors);
+                } else if (response.data === "Username already exists") {
+                    errors["userName"] = "Username already exists";
+                    setErrors(errors);
+                } else {
+                    persistLogin({ userData: data });
+                    navigation.navigate("Home");
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
   const onSubmit = () => {
     if (validate()) {

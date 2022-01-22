@@ -1,22 +1,14 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { localhost } from "@env";
 
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Alert,
-  Picker,
-  Image,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useState,useEffect } from "react";
+import axios from 'axios';
 
-import { CredentialsContext } from "../Authentification/CredentialsContext.js";
-import { useNavigation } from "@react-navigation/native";
+
+
+import { View, StyleSheet,  ScrollView, Alert, Picker, Image, Text, TouchableOpacity ,SafeAreaView} from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { CredentialsContext } from '../Authentification/CredentialsContext.js';
+import { useNavigation } from "@react-navigation/native"
 import { storage } from "../../.firebase_config.js";
 import * as ImagePicker from "expo-image-picker";
 import {
