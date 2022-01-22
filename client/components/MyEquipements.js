@@ -635,7 +635,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.2,
     borderBottomColor: "#696969",
     paddingBottom: 5,
-  },
+  }
 });
 
 export default myEquipements;
