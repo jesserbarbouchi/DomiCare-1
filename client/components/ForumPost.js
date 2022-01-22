@@ -29,9 +29,9 @@ const ForumPost = (props) => {
     const [shouldShow, setShouldShow] = useState(false);
     const [shouldshow, setshouldshow] = useState(false);
 
-    const handleChange = (event) => {
-        console.log(event.target.value);
-         setValue(event.target.value);
+    const handleChange = (text) => {
+        console.log((text));
+         setValue(text);
     };
     const navigation = useNavigation();
     const [singlepost, setpost] = useState({});
@@ -44,6 +44,7 @@ const ForumPost = (props) => {
     const userData = storedCredentials;
 
     useEffect(async() => {
+        console.log('useeffect',userData);
         
            try {const _id = props.route.params._id;
             const post = await axios.get(
@@ -104,9 +105,12 @@ const ForumPost = (props) => {
     };
 
     const Like = async () => {
-      console.log("first");
-      try { const userid = userData._id;
-        const postid = singlepost._id;
+      
+      const userid = userData.userData._id;
+      const postid = singlepost._id;
+      console.log("first",userid);
+      try { 
+         
         let action = "";
         var index = singlepost.participants.indexOf(userid);
         if (index == -1) {
@@ -156,7 +160,7 @@ const ForumPost = (props) => {
                     value={value}
                     variant="rounded"
                     placeholder="Round"
-                    onChange={handleChange}
+                    onChangeText={(text)=>handleChange(text)}
                     w={{
                     
                         md: "25%",
@@ -198,14 +202,14 @@ const ForumPost = (props) => {
                                                     return (
                                                         <View key={key}>
                                                             <Text>
-                                                                {" "}
-                                                                {reply.owner.name}{" "}
+                                                                
+                                                                {reply.owner.name}
                                                             </Text>
                                                             <Text>
-                                                                {" "}
+                                                               
                                                                 {
                                                                     reply.content
-                                                                }{" "}
+                                                                }
                                                             </Text>
                                                         </View>
                                                     );
@@ -216,11 +220,12 @@ const ForumPost = (props) => {
                                                     value={value}
                                                     variant="rounded"
                                                     placeholder="..."
-                                                    onChange={handleChange}
+                                                    onChange={()=>handleChange(value)}
                                                     w={{
-                                                        width: 500,
+                    
                                                         md: "25%",
                                                     }}
+                                                    
                                                     InputRightElement={
                                                         <Button
                                                             size="xs"

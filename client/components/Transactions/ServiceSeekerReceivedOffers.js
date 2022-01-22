@@ -24,10 +24,11 @@ import axios from 'axios'
             console.log(error);
           } 
     },[])
-    const RejectOffer = async(_id)=>{
+    const RejectOffer = async(e)=>{
+        
       try{
         console.log("cancel",_id);  
-        await axios.delete(`http://192.168.11.61:3000/Transactions/deleterequest/${_id}`)
+        await axios.delete(`http://192.168.11.61:3000/Transactions/deleterequest/${e._id}`,{e})
       }
       catch(err){
         console.log(err)
@@ -59,7 +60,7 @@ import axios from 'axios'
             accessibilityLabel="Learn more about this purple button"
           />
           <Button
-            onPress={()=>{RejectOffer(e._id)}}
+            onPress={()=>{RejectOffer(e)}}
             title="Decline"
             color="red"
             accessibilityLabel="Learn more about this purple button"

@@ -25,6 +25,7 @@ import ServiceSeekerSendARequests from "../components/Transactions/ServiceSeeker
 import ServiceSeekerSendedRequests from "../components/Transactions/ServiceSeekerSendedRequests.js"
 import Forum2 from "../components/forum2.js";
 import AServiceSeekerPosts from "../components/Posts/AServiceSeekerPosts.js";
+import Push from "../components/PushNotification.js"
 
 
 
@@ -83,6 +84,10 @@ const DrawerNav = () => {
             >
 
 <Drawer.Screen  name="Main" component={MainTabScreen} />
+<Drawer.Screen
+                name="Push"
+                component={Push}
+            />
             <Drawer.Screen
                 name="Equipementsfetch"
                 component={Equipmentsfetch}
