@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
-import { IPAdress } from "@env";
+
 import {
     Box,
     Heading,
@@ -17,7 +17,7 @@ import {
     useDisclose,
     Modal,
     Divider,
-    Image
+    Image,
 } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CredentialsContext } from "./CredentialsContext.js";
@@ -48,7 +48,7 @@ function SignUp() {
             /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
 
         let errors = {};
-      
+
         if (formData.password === undefined) {
             errors.password = "Password is required";
             validation = false;
@@ -133,7 +133,7 @@ function SignUp() {
 
     const post = () => {
         axios
-            .post(`http://localhost:3000/auth/SSSignUp`, { formData })
+            .post(`http://192.168.11.137:3000/auth/SSSignUp`, { formData })
             .then((response) => {
                 let errors = {};
                 const data = response.data;
@@ -175,15 +175,18 @@ function SignUp() {
                     <Modal.Body>you have successfully registered</Modal.Body>
                 </Modal.Content>
             </Modal>
-            <Image source={require('../../assets/categories/logo_small.png')}  style={{
-                        width: 300,
-                        height: 60,
-                        position: "absolute",
-                        top: 80,
-                        left: 15,
-                    }} alt="logo"/>
+            <Image
+                source={require("../../assets/categories/logo_small.png")}
+                style={{
+                    width: 300,
+                    height: 60,
+                    position: "absolute",
+                    top: 80,
+                    left: 15,
+                }}
+                alt="logo"
+            />
             <Box safeArea p="2" w="120%" maxW="300" py="8" marginTop={79}>
-           
                 <Heading
                     size="lg"
                     color="coolGray.800"

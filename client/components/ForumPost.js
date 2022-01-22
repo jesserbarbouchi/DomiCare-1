@@ -29,9 +29,9 @@ const ForumPost = (props) => {
     const [shouldShow, setShouldShow] = useState(false);
     const [shouldshow, setshouldshow] = useState(false);
 
-    const handleChange = (event) => {
-        console.log(event.target.value);
-        setValue(event.target.value);
+    const handleChange = (text) => {
+        console.log(text);
+        setValue(text);
     };
     const navigation = useNavigation();
     const [singlepost, setpost] = useState({});
@@ -44,6 +44,8 @@ const ForumPost = (props) => {
     const userData = storedCredentials;
 
     useEffect(async () => {
+        console.log("useeffect", userData);
+
         try {
             const _id = props.route.params._id;
             const post = await axios.get(
@@ -52,7 +54,7 @@ const ForumPost = (props) => {
             const com = await axios.get(
                 `http://192.168.11.137:3000/savepost/findcomments/${_id}`
             );
-            console.log(com.data);
+
             setpost(post.data);
             setparticipants(post.data.participants);
             setcomments(com.data);
@@ -76,7 +78,6 @@ const ForumPost = (props) => {
             const recom = await axios.get(
                 `http://192.168.11.137:3000/savepost/findcomments/${_id}`
             );
-
             setcomments(recom.data);
         } catch (err) {
             console.log(err);
@@ -106,10 +107,10 @@ const ForumPost = (props) => {
     };
 
     const Like = async () => {
-        console.log("first");
+        const userid = userData.userData._id;
+        const postid = singlepost._id;
+        console.log("first", userid);
         try {
-            const userid = userData._id;
-            const postid = singlepost._id;
             let action = "";
             var index = singlepost.participants.indexOf(userid);
             if (index == -1) {
@@ -158,7 +159,7 @@ const ForumPost = (props) => {
                     value={value}
                     variant="rounded"
                     placeholder="Round"
-                    onChange={(event) => handleChange(event)}
+                    onChangeText={(text) => handleChange(text)}
                     w={{
                         md: "25%",
                     }}
@@ -199,17 +200,13 @@ const ForumPost = (props) => {
                                                     return (
                                                         <View key={key}>
                                                             <Text>
-                                                                {" "}
                                                                 {
                                                                     reply.owner
                                                                         .name
-                                                                }{" "}
+                                                                }
                                                             </Text>
                                                             <Text>
-                                                                {" "}
-                                                                {
-                                                                    reply.content
-                                                                }{" "}
+                                                                {reply.content}
                                                             </Text>
                                                         </View>
                                                     );
@@ -220,9 +217,10 @@ const ForumPost = (props) => {
                                                     value={value}
                                                     variant="rounded"
                                                     placeholder="..."
-                                                    onChange={handleChange}
+                                                    onChange={() =>
+                                                        handleChange(value)
+                                                    }
                                                     w={{
-                                                        width: 500,
                                                         md: "25%",
                                                     }}
                                                     InputRightElement={

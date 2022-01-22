@@ -8,8 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import moment from "moment";
 
-
-const ServicesRequests = () => {
+const AServiceSeekerPosts = () => {
     const [feed, setFeed] = useState([]);
     const { storedCredentials, setStoredCredentials } =
         React.useContext(CredentialsContext);
@@ -18,23 +17,20 @@ const ServicesRequests = () => {
 
     useEffect(async () => {
         console.log("feed", feed);
+        const _id = userData._id;
         try {
             const posts = await axios.get(
-                `http://192.168.11.137:3000/Posts/servicesrequests`
+                `http://192.168.11.137:3000/Posts/AServiceSeekerPosts/${_id}`
             );
             setFeed(posts.data);
         } catch (err) {
             console.log(err);
         }
     }, []);
-    const OfferMysService = async (e) => {
-        const postid = e._id;
-        const providerId = userData._id;
-        const seekerId = e.serviceSeeker_id;
-        const type = "offer";
-
-        const offer = await axios.post(
-            `http://192.168.11.137:3000/Transactions/OfferMyService`,
+    const Delete = async (e) => {
+        const _id = e._id;
+        const offer = await axios.delete(
+            `http://192.168.11.137:3000/Transactions/deleteapost/${_id}`,
             { type, postid, providerId, seekerId }
         );
     };
@@ -50,30 +46,22 @@ const ServicesRequests = () => {
                 />
 
                 {feed.map((e, key) => {
+                    console.log("e", e);
                     return (
                         <View style={styles.container} key={key}>
                             <Card style={{ padding: 10, margin: 10 }}>
-                                <Text style={{ marginLeft: 270 }}>
-                                    {" "}
-                                    createdAt
+                                <Text>createdAt:{e.createdAT}</Text>
+                                <Text>city:{e.city}</Text>
+                                <Text>city:{e.adress}</Text>
+                                <Text>
+                                    Date:{e.startDate}-{e.endDate}
                                 </Text>
-
-                                <Avatar
-                                    bg="green.500"
-                                    size="md"
-                                    source={{
-                                        uri: "https://us.123rf.com/450wm/tuktukdesign/tuktukdesign1606/tuktukdesign160600119/59070200-user-icon-man-profil-homme-d-affaires-avatar-personne-ic%C3%B4ne-illustration-vectorielle.jpg?ver=6",
-                                    }}
-                                ></Avatar>
-                                <Text> By:</Text>
-                                <Text>Adress city</Text>
-                                <Text>Requested Date</Text>
-                                <Text>Details</Text>
+                                <Text>Details:{e.content}</Text>
                                 <Button
                                     onPress={() => {
-                                        OfferMysService(e);
+                                        Delete(e);
                                     }}
-                                    title="Offer my services"
+                                    title="Delete"
                                     color="teal"
                                     accessibilityLabel="Learn more about this purple button"
                                 />
@@ -93,4 +81,4 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
 });
-export default ServicesRequests;
+export default AServiceSeekerPosts;
