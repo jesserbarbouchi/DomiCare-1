@@ -60,7 +60,7 @@ import axios from "axios";
           <Text>Gender</Text>
           <Text>Speciality</Text>
           <Button
-            onPress={()=>{}}
+            onPress={()=>{AcceptRequest(e._id)}}
             title="Accept"
             color="teal"
             accessibilityLabel="Learn more about this purple button"
