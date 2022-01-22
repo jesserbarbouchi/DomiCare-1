@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {localhost} from "@env";
+import { localhost } from "@env";
 import {
   View,
   StyleSheet,
@@ -26,7 +26,7 @@ const serviceProvidersList = ({ navigation }) => {
   useEffect(async () => {
     try {
       const result = await axios.get(
-        `http://${localhost}:3000/Posts/serviceProvidersList`
+        `http://192.168.11.203:3000/Posts/serviceProvidersList`
       );
       setSProviders(result.data);
       setData(result.data);
@@ -139,7 +139,9 @@ const serviceProvidersList = ({ navigation }) => {
                   <AirbnbRating style={styles.airbnbRating} />
                   <Button
                     title="Ask for service"
-                    onPress={() => navigation.navigate("ServiceSeekerSendARequest", u)}
+                    onPress={() =>
+                      navigation.navigate("ServiceSeekerSendARequest", u)
+                    }
                   />
                 </View>
               );

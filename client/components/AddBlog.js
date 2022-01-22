@@ -5,7 +5,7 @@ import { TextArea, Center, NativeBaseProvider } from "native-base";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CredentialsContext } from "./Authentification/CredentialsContext.js";
-import {localhost} from "@env";
+import { localhost } from "@env";
 
 const AddBlog = (props) => {
   const { storedCredentials, setStoredCredentials } =
@@ -15,7 +15,7 @@ const AddBlog = (props) => {
 
   const SavePost = (post) => {
     axios
-      .post(`http://${localhost}:3000/savepost/savepost`, { post })
+      .post(`http://192.168.11.203:3000/savepost/savepost`, { post })
       .then((err, res) => {
         if (err) {
           console.log(err);
@@ -31,7 +31,9 @@ const AddBlog = (props) => {
         h={500}
         placeholder="Text Area Placeholder"
         w={400}
-        onChange={(e) => setpost({ owner: userData, content: e.target.value , type:'post'})}
+        onChange={(e) =>
+          setpost({ owner: userData, content: e.target.value, type: "post" })
+        }
       />
       <Button title="Post" onPress={() => SavePost(post)} />
     </View>

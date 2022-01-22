@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CredentialsContext } from "./Authentification/CredentialsContext.js";
-import {localhost} from "@env";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import {
-  RefreshControl,
   SafeAreaView,
   View,
   StyleSheet,
@@ -15,7 +11,6 @@ import {
 import {
   IconButton,
   Icon,
-  Avatar,
   Box,
   Heading,
   AspectRatio,
@@ -32,8 +27,15 @@ export const Forum2 = (props) => {
 
   const [subjects, setData] = useState([]);
   useEffect(async () => {
-    const result = await axios(`http://${localhost}:3000/savepost/savepost`);
-    setData(result.data);
+    try {
+      const result = await axios(
+        `http://192.168.11.203:3000/savepost/savepost`
+      );
+      setData(result.data);
+      console.log("first", result.data);
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
   console.log("sub", subjects);
   return (

@@ -21,7 +21,7 @@ const EquipementsProviderProfile = ({navigation}) => {
   // console.log("userData:",userData);
   // console.log(userData.userData._id);
   useEffect(() => {
-    axios.get(`http://192.168.11.56:3000/editprofile/fetch/${userData.userData._id}`)
+    axios.get(`http://localhost:3000/editprofile/fetch/${userData.userData._id}`)
         .then(res => {
           console.log("res in useEffect",res);
           setData(res.data) 

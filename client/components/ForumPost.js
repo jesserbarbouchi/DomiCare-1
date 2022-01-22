@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { useNavigation } from "@react-navigation/native";
-import {localhost} from "@env";
+import React, { useState, useEffect, useRef } from "react";
+import { PrivateValueStore, useNavigation } from "@react-navigation/native";
 import {
   StyleSheet,
   View,
   Text,
   Button,
+  Image,
   SafeAreaView,
   ScrollView,
-  Pressable,
+  TextInput,
 } from "react-native";
 import {
   Input,
+  Center,
   NativeBaseProvider,
-  Image,
-  Box,
-  Stack,
-  VStack,
+  IconButton,
+  Icon,
 } from "native-base";
-
+import { Entypo } from "@expo/vector-icons";
 import axios from "axios";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CredentialsContext } from "./Authentification/CredentialsContext.js";
-import moment from "moment";
+import { IPAdress } from "@env";
+import Collapsible from "react-native-collapsible";
 
 const ForumPost = (props) => {
   const [value, setValue] = React.useState("");
@@ -30,143 +30,133 @@ const ForumPost = (props) => {
   const [shouldshow, setshouldshow] = useState(false);
 
   const handleChange = (event) => {
-    console.log(value);
-    return setValue(event.target.value);
+    console.log(event.target.value);
+    setValue(event.target.value);
   };
   const navigation = useNavigation();
   const [singlepost, setpost] = useState({});
   const [participants, setparticipants] = useState([]);
   const [comments, setcomments] = useState([]);
   const [subcomment, setsubcomment] = useState({});
+  const [focus, setfocus] = useState(false);
   const { storedCredentials, setStoredCredentials } =
     React.useContext(CredentialsContext);
-  const userData = storedCredentials.userData;
+  const userData = storedCredentials;
 
-  useEffect(() => {
-    const fetch = async () => {
+  useEffect(async () => {
+    try {
       const _id = props.route.params._id;
       const post = await axios.get(
-        `http://${localhost}:3000/savepost/findpost/${_id}`
+        `http://192.168.11.203:3000/savepost/findpost/${_id}`
       );
       const com = await axios.get(
-        `http://${localhost}:3000/savepost/findcomments/${_id}`
+        `http://192.168.11.203:3000/savepost/findcomments/${_id}`
       );
+      console.log(com.data);
       setpost(post.data);
       setparticipants(post.data.participants);
       setcomments(com.data);
-    };
-    fetch();
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
   const Comment = async () => {
-    const _id = props.route.params._id;
+    try {
+      const _id = props.route.params._id;
 
-    const comment = await axios.post(
-      `http://${localhost}:3000/savepost/savepost`,
-      {
-        owner: { _id: userData._id, name: userData.firstName },
-        postId: singlepost._id,
-        content: value,
-        type: "comment",
-      }
-    );
-    const recom = await axios.get(
-      `http://${localhost}:3000/savepost/findcomments/${_id}`
-    );
+      const comment = await axios.post(
+        `http://192.168.11.203:3000/savepost/savepost`,
+        {
+          owner: { _id: userData._id, name: userData.firstName },
+          postId: singlepost._id,
+          content: value,
+          type: "comment",
+        }
+      );
+      const recom = await axios.get(
+        `http://192.168.11.203:3000/savepost/findcomments/${_id}`
+      );
 
-    setcomments(recom.data);
+      setcomments(recom.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
   const replyto = async () => {
-    const id = subcomment;
-    const date = moment().startOf("hour").fromNow();
-    const reply = await axios.post(`http://${localhost}:3000/savepost/reply`, {
-      rep: {
-        owner: { _id: userData._id, name: userData.firstName },
-        commentid: id,
-        content: value,
-        createdAt: date,
-      },
-    });
-    const _id = props.route.params._id;
-    const recomm = await axios.get(
-      `http://${localhost}:3000/savepost/findcomments/${_id}`
-    );
-    setcomments(recomm.data);
+    try {
+      const id = subcomment;
+      const reply = await axios.post(
+        `http://192.168.11.203:3000/savepost/reply`,
+        {
+          rep: {
+            owner: { _id: userData._id, name: userData.firstName },
+            commentid: id,
+            content: value,
+          },
+        }
+      );
+      const _id = props.route.params._id;
+      const recomm = await axios.get(
+        `http://192.168.11.203:3000/savepost/findcomments/${_id}`
+      );
+      setcomments(recomm.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const Like = async () => {
-    const userid = userData._id;
-    const postid = singlepost._id;
-    let action = "";
-    var index = singlepost.participants.indexOf(userid);
-    if (index == -1) {
-      action = "inc";
-    } else {
-      action = "déc";
-    }
-    const post = await axios.put(
-      `http://${localhost}:3000/savepost/savepost`,
-      {
-        userid,
-        postid,
-        action,
+    console.log("first");
+    try {
+      const userid = userData._id;
+      const postid = singlepost._id;
+      let action = "";
+      var index = singlepost.participants.indexOf(userid);
+      if (index == -1) {
+        action = "inc";
+      } else {
+        action = "déc";
       }
-    );
+      const post = await axios.put(
+        `http://192.168.11.203:3000/savepost/savepost`,
+        {
+          userid,
+          postid,
+          action,
+        }
+      );
 
-    setpost(post.data);
-    setparticipants(post.data.participants);
+      setpost(post.data);
+      setparticipants(post.data.participants);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <NativeBaseProvider>
-      <Text> {singlepost.title}</Text>
-      <Box>
-        <VStack space="2.5" mt="4">
-          <Stack direction="row" mb="2.5" mt="1.5" space={0.5}>
-            <Image
-              size={30}
-              alt="fallback text"
-              borderRadius={100}
-              source={{
-                uri: "https://-page-icon.png",
-              }}
-              fallbackSource={{
-                uri: "https://www.w3schools.com/css/img_lights.jpg",
-              }}
-            />
-            <Text> By:{singlepost.owner}</Text>
-          </Stack>
-        </VStack>
-      </Box>
+      <Image
+        source={{
+          uri: "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg",
+        }}
+        alt="image"
+      />
 
+      <Text> {singlepost.title}</Text>
+      <Text> By:{singlepost.owner}</Text>
       <Text>Posted At : {singlepost.createdAt}</Text>
       <Text> {singlepost.content}</Text>
       <Text> {participants.length}Likes</Text>
-      <Box>
-        <VStack space="2.5" mt="4">
-          <Stack direction="row" mb="2.5" mt="1.5" space={0.5}>
-            <Pressable style={styless.button}>
-              <Text style={styless.text}></Text>
-            </Pressable>
-            <Pressable style={styless.button} onPress={() => Like()}>
-              <Text style={styless.text}>Like</Text>
-            </Pressable>
-            <Pressable
-              style={styless.button}
-              onPress={() => setShouldShow(!shouldShow)}
-            >
-              <Text style={styless.text}>Comment</Text>
-            </Pressable>
-          </Stack>
-        </VStack>
-      </Box>
+      <Button title="Like" onPress={() => Like()} />
+
+      <Button title="comment" onPress={() => setShouldShow(!shouldShow)} />
       {shouldShow ? (
         <Input
           value={value}
           variant="rounded"
           placeholder="Round"
-          onChange={handleChange}
+          onChange={(event) => handleChange(event)}
           w={{
-            width: 500,
             md: "25%",
           }}
           InputRightElement={
@@ -181,7 +171,6 @@ const ForumPost = (props) => {
           }
         />
       ) : null}
-
       <View>
         <View style={{ height: 600, width: 500 }}>
           <SafeAreaView>
@@ -193,32 +182,20 @@ const ForumPost = (props) => {
                       <Text> {comment.name} </Text>
                       <Text> {comment.content} </Text>
                       <Text> {comment.createdAt} </Text>
-                      {/* <Text> {comment.likesCount} </Text> */}
-                      <Box>
-                        <VStack space="2.5" mt="4">
-                          <Stack direction="row" mb="2.5" mt="1.5" space={0.5}>
-                            <Pressable style={styless.button}>
-                              <Text style={styless.text}></Text>
-                            </Pressable>
+                      <Text> {comment.likesCount} </Text>
 
-                            <Pressable
-                              style={styless.button}
-                              onPress={() => {
-                                setshouldshow(!shouldshow);
-                                setsubcomment(comment._id);
-                              }}
-                            >
-                              <Text style={styless.text}>Reply</Text>
-                            </Pressable>
-                          </Stack>
-                        </VStack>
-                      </Box>
-                      {comment.comments.map((reply) => {
+                      <Button
+                        title="Reply"
+                        onPress={() => {
+                          setshouldshow(!shouldshow);
+                          setsubcomment(comment._id);
+                        }}
+                      />
+                      {comment.comments.map((reply, key) => {
                         return (
-                          <View >
+                          <View key={key}>
                             <Text> {reply.owner.name} </Text>
                             <Text> {reply.content} </Text>
-                            <Text> {reply.createdAt} </Text>
                           </View>
                         );
                       })}
@@ -255,23 +232,15 @@ const ForumPost = (props) => {
     </NativeBaseProvider>
   );
 };
-
-const styless = StyleSheet.create({
-  button: {
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  scrollView: {
+    flex: 1,
+    backgroundColor: "pink",
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    backgroundColor: "transparent",
-  },
-  text: {
-    fontSize: 16,
-    lineHeight: 21,
-    fontWeight: "bold",
-    letterSpacing: 0.25,
-    color: "blue",
   },
 });
 
